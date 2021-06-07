@@ -28,7 +28,7 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 ## General guidelines for genome skimming data collection
 About 1-3% of the reads from genome skimming (low-coverage genome sequencing) are from plastids. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell. 
 
-![plastic_perc_equation](/images/plastid_perc.png)
+![plastic_perc_equation](/images/plastid_perc.png)Format: ![Alt Text](url)
 
 ## Step 1: Filter adapters with blastn
 Choose a taxonID for each data set. This taxonID will be used throughout the analysis. Use short taxonIDs with no special characters.
