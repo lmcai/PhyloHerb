@@ -8,11 +8,21 @@ We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusia
 ## Prerequisites
 To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, and phylogenetic reconstruction.
 
-1. Assembler: [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle)
+### Assembly
+1. [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle)
 2. [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
 3. [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
 4. Assembly viewer: [Bandage](https://rrwick.github.io/Bandage/)
 5. Optional assembly viewer: [Geneious](https://www.geneious.com/) (the complementary version is sufficient)
+
+### Alignment
+6. [Biopython](https://biopython.org/)
+7. Aligner: 
+	[Pasta](https://github.com/smirarab/pasta) accurate profile aligner for highly variable regions such as the ITS sequences
+	[MAFFT](https://mafft.cbrc.jp/alignment/software/)
+
+### Phylogeny
+8. [IQ-TREE](http://www.iqtree.org/)
 
 ## General guidelines for genome skimming data collection
 
