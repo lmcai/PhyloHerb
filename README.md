@@ -26,11 +26,17 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 8. [IQ-TREE](http://www.iqtree.org/)
 
 ## General guidelines for genome skimming data collection
+
+**For the impatient people:**
+
+**In more detail:**
+
 About 1-3% of the reads from genome skimming (low-coverage genome sequencing) are from plastids. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell. 
 
 <img src="/images/plastid_perc.png" width="300" height="40">
 
-But we found the relative amount of plastid reads are generally consistent across flowering plant species with dramatically different nuclear genome size. 
+But we found the relative amount of plastid reads are generally consistent across flowering plant species with dramatically different nuclear genome sizes (200 Mb to 3Gb). Below is a table of what you can expect from certain amount of input data.
+ 
 
 ## Step 1: Filter adapters with blastn
 Choose a taxonID for each data set. This taxonID will be used throughout the analysis. Use short taxonIDs with no special characters.
