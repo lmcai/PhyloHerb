@@ -18,6 +18,7 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 ### Alignment
 6. [Biopython](https://biopython.org/)
 7. Aligner: 
+
 	[Pasta](https://github.com/smirarab/pasta) for highly variable regions such as the ITS sequences
 	
 	[MAFFT](https://mafft.cbrc.jp/alignment/software/) for less variable regions or long alignments (>5 kb) that pasta may not be able to handle when the number of species is high (>500 sp)
@@ -29,15 +30,16 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 
 **For the impatient:**
 
-If interested in phylogeny alone, up to 384 (4 * 96) samples can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. The NovaSeq plastform generates more data for less cost, but currently the maximum number of multiplexed samples per lane is 384. So if using NovaSeq, one is more likely to get more complete genome per species, but cannot include more species in a single flow cell.
+If interested in phylogeny alone, up to 384 (4 * 96) samples can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. Using the NovaSeq plastform can generate more complete genome per species due to its larger output, but currently no more than 384 multiplexed samples can be sequenced per lane due to the limitation of the barcodes.
 
-*IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genome, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected coverage of plastid genome
+*IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genome, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected coverage of plastid genome:
+
+<img src="/images/plastid_perc.png" width="300" height="80">
+
 
 **In more detail:**
 
 About 1-3% of the reads from genome skimming (low-coverage genome sequencing) are from plastids. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell. 
-
-<img src="/images/plastid_perc.png" width="300" height="40">
 
 But we found the relative amount of plastid reads are generally consistent across flowering plant species with dramatically different nuclear genome sizes (200 Mb to 3Gb). Below is a table of what you can expect from certain amount of input data.
  
