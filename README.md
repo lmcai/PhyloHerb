@@ -70,7 +70,8 @@ Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unz
 
 The commands for running assembly with pair end data is as follows:
 
-```#To assemble plant plastome
+```
+#To assemble plant plastome
 get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <plastome_output> -R 15 -k 21,45,65,85,95,105 -F embplant_pt
 
 #To assemble plant nuclear ribosomal RNA
