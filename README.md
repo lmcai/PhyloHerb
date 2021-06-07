@@ -1,7 +1,7 @@
 # PhyloHerb
 **Phylo**genomic Analysis Pipeline for **Herb**arium Specimens
 
-This bioinformatic pipeline provides detailed guidance to process genome skimming data collected from herbarium specimens. The outcomes include plastid genome assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+25S), alignments of gene and intergenic regions, and a species tree. On the other hand, herbarium specimens provides unparalleled opportunity to collect molecular data, morphology, and distribution with nearly complete taxon sampling. Thus this approach has tremendous potential in taxonomy, biogeography, and macroevolution.
+This bioinformatic pipeline provides detailed guidance to process genome skimming data collected from herbarium specimens. The outcomes include plastid genome assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+25S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study taxonomy, biogeography, and macroevolution with nearly complete taxon sampling.
 
 Using the Barbados Cherry family Malpighiaceae as an example, our genome skimming approach provides ample data to resolve both the recent radiation in *Bunchosia* (>135 sp within 10 Myr) as well as the early divergence history of the family in the late Cretaceous. 
 
