@@ -59,7 +59,27 @@ About 1-3% of the reads from genome skimming are plastid. Theoretically this val
 <img src="/images/coverage.png" width="400" height="130">
 
 ## III. Assembly
-Choose a taxonID for each data set. This taxonID will be used throughout the analysis. Use short taxonIDs with no special characters.
+
+We will use [GetOrganelle](https://github.com/Kinggerm/GetOrganelle) to assemble the plastome, the mitochondrial genome, and the ribosomal regions. It requires minimal tweak for various types of data. I highly recommend [installing it using conda](https://github.com/Kinggerm/GetOrganelle#installation--initialization) so that all its dependencies are in your environment.
+
+Input:
+
+Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unzipped. Do not filter the reads or trim adapters, GetOrganelle will take care of it.
+
+To assemble plant plastome:
+
+```get_organelle_from_reads.py -1 forward.fq -2 reverse.fq -o plastome_output -R 15 -k 21,45,65,85,95,105 -F embplant_pt```
+
+To assemble plant nuclear ribosomal RNA (18S-ITS1-5.8S-ITS2-26S):
+
+```get_organelle_from_reads.py -1 forward.fq -2 reverse.fq -o nr_output -R 10 -k 35,85,105,115 -F embplant_nr```
+
+To assemble plant mitochondria:
+
+```get_organelle_from_reads.py -1 forward.fq -2 reverse.fq -o mitochondria_output -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt```
+
+# 1. please use the FASTG file as the final output for downstream manual processing. until further updates, the FASTA output of plant mitochondria genome of numerous repeats may be error-prone
+# 2. embplant_mt mode was not tested in the GetOrganelle paper due to the complexity of plant mitogenomes and the defects of short reads
 
 Remove adapters for paired end reads:
 
@@ -71,5 +91,7 @@ Alternatively, if sequences are single end reads:
 
 The output files are taxonID_1.fq.filtered and taxonID_2.fq.filtered for paired end reads, and taxonID.fq.filtered for single end reads. I use filter_fastq.py only for sequences downloaded from SRA with adapter sequences and phred score offset unknown. For data sets with known adapter and phred scores I use Trimmomatic instead (see below). Trimmomatic is much faster but would not give an error message if you the adapter or phred score offset were misspedified.
 
-## Step 2: 
+## VI. Phylogenomic data assembly
+
+## V. Alignment 
 
