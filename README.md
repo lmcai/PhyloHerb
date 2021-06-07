@@ -6,12 +6,13 @@ This bioinformatic pipeline provides detailed guidance to process genome skimmin
 We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea at hundreds of millions of years ago). 
 
 ## Prerequisites
-To process large datasets (>20 sp), high performance cluster is recommended. Mac and PX can suffer from insufficient memory during the assembly, alignment, and phylogenetic reconstruction.
+To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, and phylogenetic reconstruction.
 
-1. [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle)
+1. Assembler: [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle)
 2. [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
 3. [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
-4. [Bandage](https://rrwick.github.io/Bandage/)
+4. Assembly viewer: [Bandage](https://rrwick.github.io/Bandage/)
+5. Optional assembly viewer: [Geneious](https://www.geneious.com/) The complementary version (free trial) is sufficient.
 
 ## General guidelines for genome skimming data collection
 
