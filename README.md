@@ -19,7 +19,8 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 6. [Biopython](https://biopython.org/)
 7. Aligner: 
 	[Pasta](https://github.com/smirarab/pasta) accurate profile aligner for highly variable regions such as the ITS sequences
-	[MAFFT](https://mafft.cbrc.jp/alignment/software/)
+	
+	[MAFFT](https://mafft.cbrc.jp/alignment/software/) for less variable regions or long alignments (>5 kb) that pasta may not be able to handle when the number of species is high (>500 sp)
 
 ### Phylogeny
 8. [IQ-TREE](http://www.iqtree.org/)
