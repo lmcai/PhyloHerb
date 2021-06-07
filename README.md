@@ -54,7 +54,7 @@ We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-soluti
 
 4. Where are the limits?
 
-About 1-3% of the reads from genome skimming are plastid. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell, but we found the relative amount of plastid reads are generally consistent across flowering plant species with dramatically different nuclear genome sizes (200 Mb to 3Gb). Below is a very general summary of what you can expect from certain amount of input data.
+About 1-3% of the reads from genome skimming are plastid. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their nuclear genome sizes (200 Mb to 3Gb). Below is a **very general** summary of what you can expect from certain amount of input data.
 
 <img src="/images/coverage.png" width="400" height="130">
 
