@@ -78,7 +78,8 @@ get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <plastome_output>
 get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <nr_output> -R 10 -k 35,85,105,115 -F embplant_nr
 
 #To assemble plant mitochondria:
-get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt```
+get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
+```
 
 These assemblies can submitted to the clusters as batch jobs if you are dealing with large number of species. An example bash file 
 
