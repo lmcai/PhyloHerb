@@ -30,11 +30,11 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 
 **For the impatient:**
 
-If interested in phylogeny alone, up to 384 samples (4 plates * 96 samples/plate) can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. Using the NovaSeq plastform can generate more complete genome per species due to its larger output, but currently no more than 384 barcodes can be used per lane. If circularized plastid genomes are needed, >2 Gb data per species can usually get you there, which translates to ~60 samples per lane.
+If interested in phylogeny alone, up to 384 samples (4 plates * 96 samples/plate) can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. Using the NovaSeq plastform can generate more complete genomes due to its larger output, but currently we cannot put more than 384 multiplexed samples due to the barcode limitation. If circularized plastid genomes are needed, >2 Gb data per species can usually get you there, which translates to ~60 samples per lane.
 
-*IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genome, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected coverage of plastid genome:
+*IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genomes, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected coverage of plastid genome:
 
-<img src="/images/plastid_perc.png" width="400" height="80">
+<img src="/images/plastid_perc.png" width="600" height="100">
 
 Minimally, you want the plastid coverage to be larger than 10%.
 
@@ -42,9 +42,9 @@ Minimally, you want the plastid coverage to be larger than 10%.
 
 1. DNA extraction from herbarium specimens? How?!
 
-We have successfully extracted DNA from 200-year-old specimens. Age matters less than the preservation method of the specimen (see [this paper](https://www.frontiersin.org/articles/10.3389/fevo.2019.00439/full)). Standard commercial DNA extraction kits are frequently used (e.g, Tiangen DNAsecure Plant Kit, Qiagen DNeasy Plant Mini Kit). We used a [Promega Maxwell](https://www.promega.com/products/lab-automation/maxwell-instruments/maxwell-rsc-instrument/?catNum=AS4500) instrument that can process 16 DNA samples and extract their DNAs within an hour. This automatic approach is certainly more labour efficient, but for delicate precious samples manual extractions have more guaranteed yields.
+We have successfully extracted DNA from 200-year-old specimens. Age matters less than the preservation methods (see [this paper](https://www.frontiersin.org/articles/10.3389/fevo.2019.00439/full)). Standard commercial DNA extraction kits are frequently used to obtain DNA (e.g, Tiangen DNAsecure Plant Kit, Qiagen DNeasy Plant Mini Kit). We used a [Promega Maxwell](https://www.promega.com/products/lab-automation/maxwell-instruments/maxwell-rsc-instrument/?catNum=AS4500) instrument that can process 16 DNA samples simultaneously and extract their DNAs within an hour. This automatic approach is certainly more labour efficient, but manual extractions have more guaranteed yields for delicate precious samples.
 
-2. Where can I found the genome sizes of my species?
+2. Where can I find the genome sizes of my species?
 
 In addition to searching through the literature or conduct your own flow cytometry experiments, you could also check the [Plant DNA C-value database](https://cvalues.science.kew.org/) put together by Kew.
 
@@ -54,17 +54,19 @@ We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-soluti
 
 4. Where are the limits?
 
-About 1-3% of the reads from genome skimming are plastid. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their nuclear genome sizes (200 Mb to 3Gb). Below is a **very general** summary of what you can expect from certain amount of input data.
+About 1-3% of the reads from genome skimming are from plastomes. Theoretically this value vary with the size of the nuclear genome and the abundance of plastids within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very general** summary of what you can expect from certain amount of input data.
 
 <img src="/images/coverage.png" width="400" height="130">
 
 ## III. Assembly
 
-We will use [GetOrganelle](https://github.com/Kinggerm/GetOrganelle) to assemble the plastome, the mitochondrial genome, and the ribosomal regions. It requires minimal tweak for various types of data. I highly recommend [installing it using conda](https://github.com/Kinggerm/GetOrganelle#installation--initialization) so that all its dependencies are in your environment.
+We will use [GetOrganelle](https://github.com/Kinggerm/GetOrganelle) to assemble the plastome, mitochondrial genome, and ribosomal regions. It requires minimal tweak for various types of data. I highly recommend [installing it using conda](https://github.com/Kinggerm/GetOrganelle#installation--initialization) so that all its dependencies are in your environment.
 
-Input:
+1. Input:
 
 Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unzipped. Do not filter the reads or trim adapters, GetOrganelle will take care of it.
+
+2. How to:
 
 To assemble plant plastome:
 
