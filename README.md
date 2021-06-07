@@ -7,9 +7,9 @@ Using the Barbados Cherry family Malpighiaceae as an example, our genome skimmin
 
 Citation: ###
 
-##General guidelines for genome skimming data collection
+## General guidelines for genome skimming data collection
 
-##Step 1: Filter adapters with blastn
+## Step 1: Filter adapters with blastn
 Choose a taxonID for each data set. This taxonID will be used throughout the analysis. Use short taxonIDs with no special characters.
 
 Remove adapters for paired end reads:
