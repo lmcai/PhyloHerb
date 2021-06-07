@@ -30,7 +30,7 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 
 **For the impatient:**
 
-If interested in phylogeny alone, up to 384 (4 * 96) samples can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. Using the NovaSeq plastform can generate more complete genome per species due to its larger output, but currently no more than 384 multiplexed samples can be sequenced per lane due to the limitation of the barcodes.
+If interested in phylogeny alone, up to 384 samples (4 plates * 96 samples/plate) can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. Using the NovaSeq plastform can generate more complete genome per species due to its larger output, but currently no more than 384 barcodes can be used per lane. If circularized plastid genomes are needed, >2 Gb data per species can usually get you there, which translates to ~60 samples per lane.
 
 *IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genome, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected coverage of plastid genome:
 
@@ -42,7 +42,7 @@ Minimally, you want the plastid coverage to be larger than 10%.
 
 1. DNA extraction from herbarium specimens? How?!
 
-We have successfully extracted DNA from 200-year-old specimens. Age matters less than the preservation method of the specimen (see [this paper](https://www.frontiersin.org/articles/10.3389/fevo.2019.00439/full)). Standard commercial DNA extraction kits are frequently used (e.g, Tiangen DNAsecure Plant Kit, Qiagen DNeasy Plant Mini Kit). We used a [Promega Maxwell](https://www.promega.com/products/lab-automation/maxwell-instruments/maxwell-rsc-instrument/?catNum=AS4500) instrument that can process 16 DNA samples and extract their DNAs within an hour. This automatic approach is certainly more labour efficient, but for delicate precious samples I trust myself more.
+We have successfully extracted DNA from 200-year-old specimens. Age matters less than the preservation method of the specimen (see [this paper](https://www.frontiersin.org/articles/10.3389/fevo.2019.00439/full)). Standard commercial DNA extraction kits are frequently used (e.g, Tiangen DNAsecure Plant Kit, Qiagen DNeasy Plant Mini Kit). We used a [Promega Maxwell](https://www.promega.com/products/lab-automation/maxwell-instruments/maxwell-rsc-instrument/?catNum=AS4500) instrument that can process 16 DNA samples and extract their DNAs within an hour. This automatic approach is certainly more labour efficient, but for delicate precious samples manual extractions have more guaranteed yields.
 
 2. Where can I found the genome sizes of my species?
 
@@ -50,7 +50,7 @@ In addition to searching through the literature or conduct your own flow cytomet
 
 3. NGS library preparation and multiplexing
 
-We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-solutions/products/sample-preparation/dna-reagents/library-preparation/kapa-hyperplus.html) for NGS library. 
+We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-solutions/products/sample-preparation/dna-reagents/library-preparation/kapa-hyperplus.html) for NGS library. Many institutes provided services for NGS library preparation with robots. We have used quarter reaction (1/4 of all reagents) for our NGS libraries, and it works just fine.
 
 4. Where are the limits?
 
