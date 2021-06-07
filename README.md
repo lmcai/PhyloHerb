@@ -82,7 +82,9 @@ get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 
 ```
 
 These assemblies can submitted to the clusters as batch jobs if you are dealing with large number of species. An example bash file is provided in `/utilities/getorg.sh`. You can submit your job by typing
-```sbatch getorg.sh [forward reads] [backward reads] [output prefix]
+
+```
+sbatch getorg.sh [forward reads] [backward reads] [output prefix]
 ```
 
 After demultiplexing, your raw reads are likely to have complicated long names, so we could use short informative prefixes for the assembly
