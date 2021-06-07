@@ -28,6 +28,9 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 ## II. General guidelines for genome skimming data collection
 
 **For the impatient people:**
+If interested in phylogeny alone, up to 384 (4 * 96) samples can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. The NovaSeq plastform generates more data for less cost, but currently the maximum number of multiplexed samples per lane is 384. So if using NovaSeq, one is more likely to get more complete genome per species, but cannot include more species in a single flow cell.
+
+*IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genome, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected coverage of plastid genome
 
 **In more detail:**
 
