@@ -81,13 +81,18 @@ get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <nr_output> -R 10
 get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
 ```
 
-These assemblies can submitted to the clusters as batch jobs if you are dealing with large number of species. An example bash file is provided in `/utilities/getorg.sh`. After demultiplexing, your raw reads are likely to have complicated long names, so we could use short informative prefixes for the assembly. You can submit your job by typing
+If you want to use your own reference sequences for assembly, you can provide the seed fasta file by adding `-s <reference.fas>`.
+
+### 3. Large dataset and batch submission to cluster
+
+If you are dealing with large number of species, running them one by one is too slow. Here, we will submit individual assembly task to the cluster and run them simultaneously. An example bash file is provided in `/utilities/getorg.sh`. We will also use short and informative output prefix for each species. You can submit your job by typing
 
 ```
-sbatch getorg.sh [forward reads] [backward reads] [output prefix]
+sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ```
+*IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data (`export DATA_DIR=` in `getorg.sh`) if they are not in the current directory. Instructions for single-end data can be found in `getorg.sh`.
 
-### Notes:
+### 4. Output
 
 1. please use the FASTG file as the final output for downstream manual processing. until further updates, the FASTA output of plant mitochondria genome of numerous repeats may be error-prone
 
