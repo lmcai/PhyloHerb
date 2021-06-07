@@ -13,7 +13,7 @@
 #module load Anaconda
 #source activate getorg
 
-#export DATA_DIR=[absolute path to input data]
+#export DATA_DIR=<absolute path to input data>
 
 #To assemble plant plastome
 get_organelle_from_reads.py -1 $1 -2 $2 -o chl/$3 -R 15 -k 21,45,65,85,95,105 -F embplant_pt

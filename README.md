@@ -1,7 +1,7 @@
 # PhyloHerb
 **Phylo**genomic Analysis Pipeline for **Herb**arium Specimens
 
-This bioinformatic pipeline provides detailed guidance to process **genome skimming** data collected from herbarium specimens. The outcomes include plastid genome assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+25S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
+This bioinformatic tutorial provides detailed guidance to process **genome skimming** data collected from herbarium specimens. The outcomes include plastid genome assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+25S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
 
 We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea at hundreds of millions of years ago). 
 
@@ -22,9 +22,10 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 	[Pasta](https://github.com/smirarab/pasta) for highly variable regions such as the ITS sequences
 	
 	[MAFFT](https://mafft.cbrc.jp/alignment/software/) for less variable regions or long alignments (>5 kb) that pasta may not be able to handle when the number of species is high (>500 sp)
+8. Manual assembly examination: [Geneious](https://www.geneious.com/) (the licensed version are required)
 
 ### Phylogeny
-8. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
+9. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
 
 ## II. General guidelines for genome skimming data collection
 
@@ -94,9 +95,7 @@ sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 
 ### 4. Output
 
-1. please use the FASTG file as the final output for downstream manual processing. until further updates, the FASTA output of plant mitochondria genome of numerous repeats may be error-prone
-
-2. embplant_mt mode was not tested in the GetOrganelle paper due to the complexity of plant mitogenomes and the defects of short reads
+The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/` in the current directory, each containing Getorganelle output for all species.
 
 ## VI. Annotation and organelle structure variarion
 
