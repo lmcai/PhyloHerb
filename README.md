@@ -34,7 +34,7 @@ If interested in phylogeny alone, up to 384 (4 * 96) samples can be multiplexed 
 
 *IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genome, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected coverage of plastid genome:
 
-<img src="/images/plastid_perc.png" width="300" height="80">
+<img src="/images/plastid_perc.png" width="400" height="80">
 
 
 **In more detail:**
