@@ -68,17 +68,18 @@ Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unz
 
 2. How to:
 
-To assemble plant plastome:
+The commands for running assembly with pair end data is as follows:
 
-```get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <plastome_output> -R 15 -k 21,45,65,85,95,105 -F embplant_pt```
+```#To assemble plant plastome
+get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <plastome_output> -R 15 -k 21,45,65,85,95,105 -F embplant_pt
 
-To assemble plant nuclear ribosomal RNA (18S-ITS1-5.8S-ITS2-26S):
+#To assemble plant nuclear ribosomal RNA
+get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <nr_output> -R 10 -k 35,85,105,115 -F embplant_nr
 
-```get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <nr_output> -R 10 -k 35,85,105,115 -F embplant_nr```
+#To assemble plant mitochondria:
+get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt```
 
-To assemble plant mitochondria:
-
-```get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt```
+These assemblies can submitted to the clusters as batch jobs if you are dealing with large number of species. An example bash file 
 
 # 1. please use the FASTG file as the final output for downstream manual processing. until further updates, the FASTA output of plant mitochondria genome of numerous repeats may be error-prone
 # 2. embplant_mt mode was not tested in the GetOrganelle paper due to the complexity of plant mitogenomes and the defects of short reads
