@@ -5,7 +5,7 @@ This bioinformatic pipeline provides detailed guidance to process **genome skimm
 
 We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea at hundreds of millions of years ago). 
 
-## Prerequisites
+## I. Prerequisites
 To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, and phylogenetic reconstruction.
 
 ### Assembly
@@ -25,7 +25,7 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 ### Phylogeny
 8. [IQ-TREE](http://www.iqtree.org/)
 
-## General guidelines for genome skimming data collection
+## II. General guidelines for genome skimming data collection
 
 **For the impatient people:**
 
@@ -38,7 +38,7 @@ About 1-3% of the reads from genome skimming (low-coverage genome sequencing) ar
 But we found the relative amount of plastid reads are generally consistent across flowering plant species with dramatically different nuclear genome sizes (200 Mb to 3Gb). Below is a table of what you can expect from certain amount of input data.
  
 
-## Step 1: Filter adapters with blastn
+## III. Assembly
 Choose a taxonID for each data set. This taxonID will be used throughout the analysis. Use short taxonIDs with no special characters.
 
 Remove adapters for paired end reads:
