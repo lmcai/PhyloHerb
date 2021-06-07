@@ -53,7 +53,7 @@ In addition to searching through the literature or conduct your own flow cytomet
 
 4. Where are the limits?
 
-<img src="/images/coverage.png" width="400" height="80">
+<img src="/images/coverage.png" width="400" height="160">
 
 About 1-3% of the reads from genome skimming (low-coverage genome sequencing) are from plastids. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell. 
 
