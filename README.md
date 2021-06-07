@@ -36,10 +36,19 @@ If interested in phylogeny alone, up to 384 (4 * 96) samples can be multiplexed 
 
 <img src="/images/plastid_perc.png" width="400" height="80">
 
+Minimally, you want the plastid coverage to be larger than 10%.
 
 **In more detail:**
 
-About 1-3% of the reads from genome skimming (low-coverage genome sequencing) are from plastids. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell. 
+1. DNA extraction from herbarium specimens? How?!
+
+We have successfully extracted DNA from 200-year-old specimens. Age matters less than the preservation method of the specimen (see [this paper](https://www.frontiersin.org/articles/10.3389/fevo.2019.00439/full)). Standard commercial DNA extraction kits are frequently used (e.g, Tiangen DNAsecure Plant Kit, Qiagen DNeasy Plant Mini Kit). We 
+
+2. Where can I found the genome sizes of my species?
+
+In addition to searching through the literature or conduct your own flow cytometry experiments, you could also check the [Plant DNA C-value database](https://cvalues.science.kew.org/) put together by Kew.
+
+3. About 1-3% of the reads from genome skimming (low-coverage genome sequencing) are from plastids. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell. 
 
 But we found the relative amount of plastid reads are generally consistent across flowering plant species with dramatically different nuclear genome sizes (200 Mb to 3Gb). Below is a table of what you can expect from certain amount of input data.
  
