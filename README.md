@@ -12,7 +12,7 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 2. [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
 3. [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
 4. Assembly viewer: [Bandage](https://rrwick.github.io/Bandage/)
-5. Optional assembly viewer: [Geneious](https://www.geneious.com/) (the complementary version (free trial) is sufficient)
+5. Optional assembly viewer: [Geneious](https://www.geneious.com/) (the complementary version is sufficient)
 
 ## General guidelines for genome skimming data collection
 
