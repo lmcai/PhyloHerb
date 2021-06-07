@@ -1,2 +1,2 @@
 # PhyloHerb
-*Phylo*genomic Analysis Pipeline for *Herb*arium Specimens
+**Phylo**genomic Analysis Pipeline for **Herb**arium Specimens
