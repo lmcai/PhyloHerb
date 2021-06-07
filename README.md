@@ -62,13 +62,13 @@ About 1-3% of the reads from genome skimming are from plastomes. Theoretically t
 
 We will use [GetOrganelle](https://github.com/Kinggerm/GetOrganelle) to assemble the plastome, mitochondrial genome, and ribosomal regions. It requires minimal tweak for various types of data. I highly recommend [installing it using conda](https://github.com/Kinggerm/GetOrganelle#installation--initialization) so that all its dependencies are in your environment.
 
-1. Input:
+### 1. Input:
 
 Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unzipped. Do not filter the reads or trim adapters, GetOrganelle will take care of it.
 
-2. How to:
+### 2. How to:
 
-The basic commands for running assembly with pair end data is as follows:
+After loading GetOrganelle to your environment, the basic commands for running assembly with pair end data is as follows:
 
 ```
 #To assemble plant plastome
@@ -81,16 +81,17 @@ get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <nr_output> -R 10
 get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
 ```
 
-These assemblies can submitted to the clusters as batch jobs if you are dealing with large number of species. An example bash file is provided in `/utilities/getorg.sh`. You can submit your job by typing
+These assemblies can submitted to the clusters as batch jobs if you are dealing with large number of species. An example bash file is provided in `/utilities/getorg.sh`. After demultiplexing, your raw reads are likely to have complicated long names, so we could use short informative prefixes for the assembly. You can submit your job by typing
 
 ```
 sbatch getorg.sh [forward reads] [backward reads] [output prefix]
 ```
 
-After demultiplexing, your raw reads are likely to have complicated long names, so we could use short informative prefixes for the assembly
+### Notes:
 
-# 1. please use the FASTG file as the final output for downstream manual processing. until further updates, the FASTA output of plant mitochondria genome of numerous repeats may be error-prone
-# 2. embplant_mt mode was not tested in the GetOrganelle paper due to the complexity of plant mitogenomes and the defects of short reads
+1. please use the FASTG file as the final output for downstream manual processing. until further updates, the FASTA output of plant mitochondria genome of numerous repeats may be error-prone
+
+2. embplant_mt mode was not tested in the GetOrganelle paper due to the complexity of plant mitogenomes and the defects of short reads
 
 ## VI. Annotation and organelle structure variarion
 
