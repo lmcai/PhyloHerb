@@ -24,7 +24,7 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 	[MAFFT](https://mafft.cbrc.jp/alignment/software/) for less variable regions or long alignments (>5 kb) that pasta may not be able to handle when the number of species is high (>500 sp)
 
 ### Phylogeny
-8. [IQ-TREE](http://www.iqtree.org/)
+8. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
 
 ## II. General guidelines for genome skimming data collection
 
@@ -68,7 +68,7 @@ Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unz
 
 2. How to:
 
-The commands for running assembly with pair end data is as follows:
+The basic commands for running assembly with pair end data is as follows:
 
 ```
 #To assemble plant plastome
@@ -81,7 +81,11 @@ get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <nr_output> -R 10
 get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
 ```
 
-These assemblies can submitted to the clusters as batch jobs if you are dealing with large number of species. An example bash file 
+These assemblies can submitted to the clusters as batch jobs if you are dealing with large number of species. An example bash file is provided in `/utilities/getorg.sh`. You can submit your job by typing
+```sbatch getorg.sh [forward reads] [backward reads] [output prefix]
+```
+
+After demultiplexing, your raw reads are likely to have complicated long names, so we could use short informative prefixes for the assembly
 
 # 1. please use the FASTG file as the final output for downstream manual processing. until further updates, the FASTA output of plant mitochondria genome of numerous repeats may be error-prone
 # 2. embplant_mt mode was not tested in the GetOrganelle paper due to the complexity of plant mitogenomes and the defects of short reads
