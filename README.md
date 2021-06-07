@@ -50,15 +50,13 @@ In addition to searching through the literature or conduct your own flow cytomet
 
 3. NGS library preparation and multiplexing
 
+We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-solutions/products/sample-preparation/dna-reagents/library-preparation/kapa-hyperplus.html) for NGS library. 
 
 4. Where are the limits?
 
-<img src="/images/coverage.png" width="400" height="160">
+About 1-3% of the reads from genome skimming are plastid. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell, but we found the relative amount of plastid reads are generally consistent across flowering plant species with dramatically different nuclear genome sizes (200 Mb to 3Gb). Below is a very general summary of what you can expect from certain amount of input data.
 
-About 1-3% of the reads from genome skimming (low-coverage genome sequencing) are from plastids. Theoretically this value should vary with the size of the nuclear genome and the abundance of plastids within a cell. 
-
-But we found the relative amount of plastid reads are generally consistent across flowering plant species with dramatically different nuclear genome sizes (200 Mb to 3Gb). Below is a table of what you can expect from certain amount of input data.
- 
+<img src="/images/coverage.png" width="400" height="130">
 
 ## III. Assembly
 Choose a taxonID for each data set. This taxonID will be used throughout the analysis. Use short taxonIDs with no special characters.
@@ -73,5 +71,5 @@ Alternatively, if sequences are single end reads:
 
 The output files are taxonID_1.fq.filtered and taxonID_2.fq.filtered for paired end reads, and taxonID.fq.filtered for single end reads. I use filter_fastq.py only for sequences downloaded from SRA with adapter sequences and phred score offset unknown. For data sets with known adapter and phred scores I use Trimmomatic instead (see below). Trimmomatic is much faster but would not give an error message if you the adapter or phred score offset were misspedified.
 
-##Step 2: 
+## Step 2: 
 
