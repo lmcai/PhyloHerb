@@ -96,7 +96,7 @@ sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ### 4. Output
 
 The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes.
-ghewgfyqilw
+
 ## VI. Annotation and organelle structure variarion
 
 ## V. Alignment generation
