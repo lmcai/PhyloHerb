@@ -86,17 +86,17 @@ If you want to use your own reference sequences for assembly, you can provide th
 
 ### 3. Large dataset and batch submission to cluster
 
-If you are dealing with large number of species, running them one by one is too slow. Here, we will submit individual assembly task to the cluster and run them simultaneously. An example bash file is provided in `/utilities/getorg.sh`. We will also use short and informative output prefix for each species. You can submit your job by typing
+If you are dealing with large number of species, running them one by one is too tedious. Here, we will submit individual assembly task to the cluster and run them simultaneously. An example bash file is provided in `/utilities/getorg.sh`. We will also use short and informative output prefix for each species. You can submit your job by typing
 
 ```
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ```
-*IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data (`export DATA_DIR=` in `getorg.sh`) if they are not in the current directory. Instructions for single-end data can be found in `getorg.sh`.
+*IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data if they are not in the current directory by modifying relavant variables in `getorg.sh`. Instructions for single-end data can also be found in `getorg.sh`.
 
 ### 4. Output
 
-The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/` in the current directory, each containing Getorganelle output for all species.
-
+The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes.
+ghewgfyqilw
 ## VI. Annotation and organelle structure variarion
 
 ## V. Alignment generation
