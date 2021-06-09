@@ -76,7 +76,7 @@ For this dataset, each plastome assembly takes ~600MB memory, and ~60s CPU time.
 
 ### 3. Large dataset and batch submission to cluster
 
-If you are working with a high performance computing cluster with slurm workload manager. You can modify the [bash file](/utilities/getorg.sh) and submit jobs to your cluster simultaneously.
+If you are working with a high performance computing cluster with slurm workload manager. You can modify the [bash file getorg.sh](/utilities/getorg.sh) and submit jobs to your cluster simultaneously.
 
 The bash job looks like this:
 ```
@@ -107,7 +107,7 @@ get_organelle_from_reads.py -1 $1 -2 $2 -o ITS/$3 -R 10 -k 35,85,105,115 -F embp
 get_organelle_from_reads.py -1 $1 -2 $2 -o mito/$3 -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
 
 ```
-*IMPORTANT*: Make sure you modify the above bash file to provide correct path to the data, request correct resources, etc (marked by "<>").
+*IMPORTANT*: Make sure you modify the above bash file to load correct environment, provide full path to the data, request correct resources, etc (marked by "<>").
 
 To submit the job, you can provide a tab-delimited text file [sample_sheet.tsv](/example/sample_sheet.tsv). The `sp_prefix` will be used throughout and  in the final phylogeny.
 ```
@@ -136,7 +136,7 @@ sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ```
 ### 4. Output
 
-The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes.
+The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes. For detailed descriptions of the output, see [Getorganellel instructions](https://github.com/Kinggerm/GetOrganelle#Instruction)
 
 ### 5. Assembly QC and visualization with Bandage
 
