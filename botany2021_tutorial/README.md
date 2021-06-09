@@ -119,9 +119,10 @@ sp4	sp4.100m.R1.fq.gz	sp4.100m.R2.fq.gz
 sp5	sp5.100m.R1.fq.gz	sp5.100m.R2.fq.gz
 ```
 
-Then generate a batch file
+Then generate a batch file using the submission function of phyloherb
 ```
-python assembly_submission.py -b getorg.sh -i sample_sheet.tsv -o submitter.sh
+#python phyloherb.py -a submision -b <batch file name> -s <sample sheet> -o <output>
+python phyloherb.py -a submision -b getorg.sh -s sample_sheet.tsv -o submitter.sh
 
 #submit jobs
 sh submitter.sh
@@ -136,6 +137,15 @@ sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ### 4. Output
 
 The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes.
+
+### 5. Assembly QC and visualization with Bandage
+
+After the assemblies are completed, you can summarize the results using the QC function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, the total length of the assembly, GC%, average base coverage, and whether the assembly is circularized. 
+
+```
+python phyloherb.py -a qc -s sample_sheet.tsv -d ./ -o assembly_sum.tsv
+```
+
 
 ## VI. Annotation and organelle structure variarion
 
