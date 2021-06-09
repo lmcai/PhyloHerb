@@ -138,16 +138,27 @@ sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 
 The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes. For detailed descriptions of the output, see [Getorganellel instructions](https://github.com/Kinggerm/GetOrganelle#Instruction)
 
-### 5. Assembly QC and visualization with Bandage
+### 5. Assembly visualization with Bandage
 
-After the assemblies are completed, you can summarize the results using the QC function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, the total length of the assembly, GC%, average base coverage, and whether the assembly is circularized. 
+
+### 6. Assembly QC 
+
+After the assemblies are completed, you can summarize the results using the QC function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
 
 ```
-python phyloherb.py -a qc -s sample_sheet.tsv -d ./ -o assembly_sum.tsv
+python phyloherb.py -a qc -s sample_sheet.tsv -d ./chl -o assembly_sum.tsv
 ```
-
-
-## VI. Annotation and organelle structure variarion
+The resulting file `assembly_sum.tsv` will look like this
+```
+sp_prefix	Total_reads	Reads_in_target_region	Average_base_coverage	Length	GC%	Circularized
+sp1	sp1.100m.R1.fq.gz	sp1.100m.R2.fq.gz
+sp2	sp2.100m.R1.fq.gz	sp2.100m.R2.fq.gz
+sp3	sp3.100m.R1.fq.gz	sp3.100m.R2.fq.gz
+sp4	sp4.100m.R1.fq.gz	sp4.100m.R2.fq.gz
+sp5	sp5.100m.R1.fq.gz	sp5.100m.R2.fq.gz
+```
+## VI. Annotation and organelle structure variations
+Annotation is optional if you are interested in phylogeny alone, but if you want to submit your circularized assemblies to GenBank, it is a must.
 
 ## V. Alignment generation
-
+Depends on the genetic distance of your target group, you might want to use genes along or genes + intergenic regions for your phylogeny.
