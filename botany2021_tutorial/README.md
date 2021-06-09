@@ -85,7 +85,7 @@ The bash job looks like this:
 #SBATCH -n 8                 # Number of cores
 #SBATCH -N 1                 # Number of nodes for the cores
 #SBATCH -t 0-10:00           # Runtime in D-HH:MM format
-#SBATCH -p serial_requeue    # Partition to submit to
+#SBATCH -p <name of the partition>    # Partition to submit to
 #SBATCH --mem=8000            # Memory pool for all CPUs
 #SBATCH -o getorg.out      # File to which standard out will be written
 #SBATCH -e getorg.err      # File to which standard err will be written
@@ -107,13 +107,32 @@ get_organelle_from_reads.py -1 $1 -2 $2 -o ITS/$3 -R 10 -k 35,85,105,115 -F embp
 get_organelle_from_reads.py -1 $1 -2 $2 -o mito/$3 -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
 
 ```
+*IMPORTANT*: Make sure you modify the above bash file to provide correct path to the data, request correct resources, etc (marked by "<>").
 
-You can submit your job by typing
+To submit the job, you can provide a tab-delimited text file [sample_sheet.tsv](/example/sample_sheet.tsv). The `sp_prefix` will be used throughout and  in the final phylogeny.
+```
+sp_prefix	Forward_reads	Reverse_reads
+sp1	sp1.100m.R1.fq.gz	sp1.100m.R2.fq.gz
+sp2	sp2.100m.R1.fq.gz	sp2.100m.R2.fq.gz
+sp3	sp3.100m.R1.fq.gz	sp3.100m.R2.fq.gz
+sp4	sp4.100m.R1.fq.gz	sp4.100m.R2.fq.gz
+sp5	sp5.100m.R1.fq.gz	sp5.100m.R2.fq.gz
+```
+
+Then generate a batch file
+```
+python assembly_submission.py -b getorg.sh -i sample_sheet.tsv -o submitter.sh
+
+#submit jobs
+sh submitter.sh
+```
+
+Or you can submit your job one by one:
 
 ```
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
-```
 
+```
 ### 4. Output
 
 The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes.
