@@ -8,31 +8,24 @@ Install the following software
 
 1. [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle), [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml), and [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
 
-Install Anaconda or miniconda (see https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
+Install Anaconda or miniconda for all platforms (see https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
 
-Install GetOrganelle and its dependencies under a conda environment
+Create a conda environment and install GetOrganelle and its dependencies (may take a while)
 ```
 conda create --name getorg
 #answer promt questions 
 #proceed ([y]/n)?
 #y
 conda install -c bioconda getorganelle
+conda install -c conda-forge biopython
 ```
-2. [Bandage](https://rrwick.github.io/Bandage/) has a graphical user interface. Can be downloaded and installed based on the instruction .
+2. [Bandage](https://rrwick.github.io/Bandage/) has a graphical user interface. Can be downloaded and installed based on the instruction online.
 
-3. Optional [Geneious](https://www.geneious.com/): the free trial lasts for 14 days, after that some functions are restricted. Some institutes purchased licenses.
+3. Optional [Geneious](https://www.geneious.com/): the free trial version lasts for 14 days. After that some functions are restricted. Your institute may have purchased a license for you.
 
-### Alignment
-6. [Biopython](https://biopython.org/)
-7. Aligner: 
+4. [Pasta](https://github.com/smirarab/pasta) or [MAFFT](https://mafft.cbrc.jp/alignment/software/).
 
-	[Pasta](https://github.com/smirarab/pasta) for highly variable regions such as the ITS sequences
-	
-	[MAFFT](https://mafft.cbrc.jp/alignment/software/) for less variable regions or long alignments (>5 kb) that pasta may not be able to handle when the number of species is high (>500 sp)
-8. Manual assembly examination: [Geneious](https://www.geneious.com/) (the licensed version are required)
-
-### Phylogeny
-9. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
+5. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
 
 ## II. Assembly
 
@@ -46,7 +39,10 @@ Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unz
 
 Load dependencies (assuming installing GetOrganelle under the conda environment)
 ```
-module
+#load Anaconda
+module load Anaconda
+#load GetOrganelle
+source activate getorg
 ```
 Create a working directory for assembly and enter it
 
