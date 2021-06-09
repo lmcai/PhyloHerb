@@ -86,7 +86,7 @@ If you want to use your own reference sequences for assembly, you can provide th
 
 ### 3. Large dataset and batch submission to cluster
 
-If you are dealing with large number of species, running them one by one is too tedious. Here, we will submit individual assembly task to the cluster and run them simultaneously. An example bash file is provided in `/utilities/getorg.sh`. We will also use short and informative output prefix for each species. You can submit your job by typing
+If you are dealing with large number of species, running them one by one is too tedious. Here, we will submit individual assembly task to the cluster and run them simultaneously. An example bash file is provided in `/phyloherbLib/getorg.sh`. We will also use short and informative output prefix for each species. You can submit your job by typing
 
 ```
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>

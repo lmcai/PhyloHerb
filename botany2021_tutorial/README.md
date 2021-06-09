@@ -76,7 +76,7 @@ For this dataset, each plastome assembly takes ~600MB memory, and ~60s CPU time.
 
 ### 3. Large dataset and batch submission to cluster
 
-If you are working with a high performance computing cluster with slurm workload manager. You can modify the [bash file getorg.sh](/utilities/getorg.sh) and submit jobs to your cluster simultaneously.
+If you are working with a high performance computing cluster with slurm workload manager. You can modify the [bash file getorg.sh](/phyloherbLib/getorg.sh) and submit jobs to your cluster simultaneously.
 
 The bash job looks like this:
 ```
@@ -163,6 +163,5 @@ Annotation is not necessary if you are interested in phylogeny alone, but if you
 The most convenient tool I have used is the web-based tool [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). I have concatenated 100 plastomes and annotated them all at once on GeSeq. But if you are annotating hundreds of plastomes, command-line based tools like [PGA](https://github.com/quxiaojian/PGA) might be a better option.
 
 ## V. Alignment generation
-Depends on the genetic distance of your target groups, you might want to use genes alone or genes + intergenic regions for your phylogeny. If only genes are targeted 
+Depends on the genetic distance of your target groups, you might want to use genes alone or genes + intergenic regions for your phylogeny. If you do not want to use your own reference sequences, we provide build-in database to extract plastid genes for angiosperms. 
 
-1. We provide build-in plastid database for 

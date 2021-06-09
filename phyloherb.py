@@ -2,7 +2,7 @@ from Bio import AlignIO
 from Bio.Alphabet import IUPAC, Gapped
 import fnmatch, os, argparse
 from Bio import SeqIO
-import utilities
+import phyloherbLib
 
 parser = argparse.ArgumentParser(description='PhyloHerb is a bioinfomatic utility wrappepr to process genome skimming data for phylogenomics studies.')
 parser.add_argument('-a', help='working mode, options include[submision, qc]', required=True)
