@@ -37,7 +37,7 @@ Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unz
 
 ### 2. How to:
 
-Load dependencies (assuming installing GetOrganelle under the conda environment)
+Load dependencies (assuming installing GetOrganelle under the conda environment named 'getorg')
 ```
 #load Anaconda
 module load Anaconda
@@ -49,28 +49,70 @@ Create a working directory for assembly and enter it
 ```
 mkidr 1_getorg
 cd 1_getorg
+mkdir chl
+mkdir ITS
+mkdir mito
 ```
-After loading GetOrganelle to your environment, the basic commands for running assembly with pair end data is as follows:
+Download example datasets
+```
+wget 
+```
+
+The basic commands for running assembly with pair end data is as follows:
 
 ```
 #To assemble plant plastome
-get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <plastome_output> -R 15 -k 21,45,65,85,95,105 -F embplant_pt
+get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o chl/<output prefix> -R 15 -k 21,45,65,85,95,105 -F embplant_pt
 
 #To assemble plant nuclear ribosomal RNA
-get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <nr_output> -R 10 -k 35,85,105,115 -F embplant_nr
+get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o ITS/<output prefix> -R 10 -k 35,85,105,115 -F embplant_nr
 
 #To assemble plant mitochondria:
-get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
+get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o mito/<output prefix> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
 ```
+
+For this dataset, each plastome assembly takes ~600MB memory, and ~60s CPU time.
+
 
 ### 3. Large dataset and batch submission to cluster
 
-If you are dealing with large number of species, running them one by one is too tedious. Here, we will submit individual assembly task to the cluster and run them simultaneously. An example bash file is provided in `/utilities/getorg.sh`. We will also use short and informative output prefix for each species. You can submit your job by typing
+If you are working with a high performance computing cluster with slurm workload manager. You can modify the [bash file](/utilities/getorg.sh) and submit jobs to your cluster simultaneously.
+
+The bash job looks like this:
+```
+#!/bin/bash
+#
+#SBATCH -n 8                 # Number of cores
+#SBATCH -N 1                 # Number of nodes for the cores
+#SBATCH -t 0-10:00           # Runtime in D-HH:MM format
+#SBATCH -p serial_requeue    # Partition to submit to
+#SBATCH --mem=8000            # Memory pool for all CPUs
+#SBATCH -o getorg.out      # File to which standard out will be written
+#SBATCH -e getorg.err      # File to which standard err will be written
+
+
+#Activate conda environment, assuming the name of the conda environment is 'getorg'
+#module load Anaconda
+#source activate getorg
+
+#export DATA_DIR=<absolute path to input data>
+
+#To assemble plant plastome
+get_organelle_from_reads.py -1 $1 -2 $2 -o chl/$3 -R 15 -k 21,45,65,85,95,105 -F embplant_pt
+
+#To assemble plant nuclear ribosomal RNA
+get_organelle_from_reads.py -1 $1 -2 $2 -o ITS/$3 -R 10 -k 35,85,105,115 -F embplant_nr
+
+#To assemble plant mitochondria:
+get_organelle_from_reads.py -1 $1 -2 $2 -o mito/$3 -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
+
+```
+
+You can submit your job by typing
 
 ```
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ```
-*IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data if they are not in the current directory by modifying relavant variables in `getorg.sh`. Instructions for single-end data can also be found in `getorg.sh`.
 
 ### 4. Output
 
