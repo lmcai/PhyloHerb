@@ -8,7 +8,7 @@ Install the following software
 
 1. Install [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle), [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml), and [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) all at once with conda
 
-Install Anaconda or miniconda for all platforms (see https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
+Install Anaconda or miniconda for Linux, Mac, or PC (see https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
 
 Create a conda environment and install GetOrganelle and its dependencies (may take a while)
 ```
@@ -23,9 +23,9 @@ conda install -c conda-forge biopython
 
 3. Optional [Geneious](https://www.geneious.com/): the free trial version lasts for 14 days. After that some functions are restricted. Your institute may have purchased a license for you.
 
-4. [Pasta](https://github.com/smirarab/pasta) or [MAFFT](https://mafft.cbrc.jp/alignment/software/). Pasta is highly recommended for distantly related taxa and large datasets. I recommend installing it with Docker image. Installation can be somewhat difficult. If you plan to use it during the workshop, please make sure you have successfully installed it prior to the workshop.
+4. [Pasta](https://github.com/smirarab/pasta) or [MAFFT](https://mafft.cbrc.jp/alignment/software/). Pasta is highly recommended for distantly related taxa and large datasets. I recommend installing it with Docker image. Installation from source can be somewhat difficult and may require root permissions. If you plan to use it during the workshop, please make sure you have successfully installed it prior to the workshop.
 
-5. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
+5. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html). Choose your favorite one!
 
 ## II. Assembly
 
