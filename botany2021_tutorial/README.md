@@ -170,6 +170,6 @@ We will upload the assembly fasta files to the web-based annnotator [GeSeq](http
 
 The genbank files can be imported to Geneious for visualization and manual curation.
 
-## V. Alignment generation
-Phyloherb will identify the best-matching region of each gene/intergenic region in the assemblly using BLAST. We provide a build-in database of plastid genes from 100 angiosperm species. 
+## V. Ortholog identification
+Phyloherb will identify the best-matching region of each gene/intergenic region in the assemblly using BLAST. We provide a build-in database of plastid genes from 100 angiosperm species. This database is sufficient for getting genes for most angiosperms 
 

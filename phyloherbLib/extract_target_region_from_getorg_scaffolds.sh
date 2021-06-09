@@ -7,3 +7,9 @@ python extract_blast_hits.py $1
 
 rm tem.*
 rm $1.*.blast.out
+
+
+import os
+S = "blastp -query P05480.fasta -out\
+    blast_output -db nr.00"
+os.system(S)
