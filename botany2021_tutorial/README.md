@@ -158,9 +158,10 @@ sp4	sp4.100m.R1.fq.gz	sp4.100m.R2.fq.gz
 sp5	sp5.100m.R1.fq.gz	sp5.100m.R2.fq.gz
 ```
 ## VI. Annotation and organelle structure variations
-Annotation is not necessary if you are interested in phylogeny alone, but if you want to submit your circularized assemblies to GenBank or extract intergenic regions from your spcecies, it is a must.
 
-The most convenient tool I have used is the web-based tool [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). I have concatenated 100 plastomes and annotated them all at once on GeSeq. But if you are annotating hundreds of plastomes, command-line based tools like [PGA](https://github.com/quxiaojian/PGA) might be a better option.
+We will upload the assembly fasta files to the web-based annnotator [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). The annotations will be returned as genbank files, graphics, and alignments.
+
+The genbank files can be imported to Geneious for visualization and manual curation.
 
 ## V. Alignment generation
 Depends on the genetic distance of your target groups, you might want to use genes alone or genes + intergenic regions for your phylogeny. If you do not want to use your own reference sequences, we provide build-in database to extract plastid genes for angiosperms. 

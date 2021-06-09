@@ -98,6 +98,9 @@ sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes.
 
 ## VI. Annotation and organelle structure variarion
+Annotation is not necessary if you are interested in phylogeny alone, but if you want to submit your circularized assemblies to GenBank or extract intergenic regions from your spcecies, it is a must.
+
+The most convenient tool I have used is the web-based tool [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). I have concatenated 100 plastomes and annotated them all at once on GeSeq. But if you are annotating hundreds of plastomes, command-line based tools like [PGA](https://github.com/quxiaojian/PGA) might be a better option.
 
 ## V. Alignment generation
 
