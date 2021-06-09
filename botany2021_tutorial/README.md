@@ -146,9 +146,9 @@ The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mit
 After the assemblies are completed, you can summarize the results using the QC function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
 
 ```
-python phyloherb.py -a qc -s sample_sheet.tsv -d ./chl -o assembly_sum.tsv
+python phyloherb.py -a qc -s sample_sheet.tsv -i ./chl -o ../2_assemblies/chl
 ```
-The resulting file `assembly_sum.tsv` will look like this
+This command will copy all of the assemblies under the input directory `./chl` to a new directory `../2_assemblies/chl` and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` that looks like this
 ```
 sp_prefix	Total_reads	Reads_in_target_region	Average_base_coverage	Length	GC%	Circularized
 sp1	sp1.100m.R1.fq.gz	sp1.100m.R2.fq.gz
@@ -157,6 +157,13 @@ sp3	sp3.100m.R1.fq.gz	sp3.100m.R2.fq.gz
 sp4	sp4.100m.R1.fq.gz	sp4.100m.R2.fq.gz
 sp5	sp5.100m.R1.fq.gz	sp5.100m.R2.fq.gz
 ```
+
+For nuclear ribosomal regions and mitochondrial assemblies:
+```
+python phyloherb.py -a qc -s sample_sheet.tsv -i ./ITS -o ../2_assemblies/ITS
+python phyloherb.py -a qc -s sample_sheet.tsv -i ./mito -o ../2_assemblies/mito
+```
+
 ## VI. Annotation and organelle structure variations
 
 We will upload the assembly fasta files to the web-based annnotator [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). The annotations will be returned as genbank files, graphics, and alignments.
@@ -164,5 +171,5 @@ We will upload the assembly fasta files to the web-based annnotator [GeSeq](http
 The genbank files can be imported to Geneious for visualization and manual curation.
 
 ## V. Alignment generation
-Depends on the genetic distance of your target groups, you might want to use genes alone or genes + intergenic regions for your phylogeny. If you do not want to use your own reference sequences, we provide build-in database to extract plastid genes for angiosperms. 
+Phyloherb will identify the best-matching region of each gene/intergenic region in the assemblly using BLAST. We provide a build-in database of plastid genes from 100 angiosperm species. 
 
