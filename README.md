@@ -234,4 +234,4 @@ After a second manual check, your alignments is ready for re-alignment in `pasta
 run_pasta.py -i <input sequence> -a -t <reference tree> -o <output directory>
 ```
 
-To submit batch job to the cluster, you can modify this batch file. Make sure you have loaded the correct environment.
+To submit batch job to the cluster, you can modify [this](phyloherbLib/pasta_rnd2.sh) batch file. Make sure you have loaded the correct environment.
