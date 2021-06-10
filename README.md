@@ -151,9 +151,11 @@ In the output directory, orthologous genes will be written to separate fasta fil
 
 4. Alignment
 
-I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. This is a potentially time consuming step so I recommend running it on the cluster by submitting batch jobs [mafft_pasta.sh](phyloherbLib/mafft_pasta.sh).
+I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. It first generates a guidance tree, then align among closely-related species, finally merge the alignments to produce the output.
 
-In the same directory where the gene sequences are located, the batch job can be submitted to the cluster by typing
+This is a potentially time consuming step so I recommend running it on the cluster using the example batch file [mafft_pasta.sh](phyloherbLib/mafft_pasta.sh).
+
+Copy `mafft_pasta.sh` to the same directory where the gene sequences are located. Modify the file to include appropriate environmental parameters. Then the batch job can be submitted to the cluster by typing
 ```
 sbatch mafft_pasta.sh <gene_1>
 sbatch mafft_pasta.sh <gene_2>
@@ -161,7 +163,7 @@ sbatch mafft_pasta.sh <gene_2>
 
 5. Nuclear ribosomal and mitochondrial regions
 
-The nuclear ribosomal data requires a slightly different curation strategy. The highly variable nature of this sequence determines that it requires more manual curation than the plastome. The nuclear ribosomal region exists as tandem repeats on multiple chromosomes.
+The nuclear ribosomal data requires a slightly different curation strategy. The highly variable sequence requires more manual curation than the plastome. The nuclear ribosomal region exists as tandem repeats on multiple chromosomes.
 
 <img src="/images/ITS.png" width="400" height="400">
 
@@ -178,11 +180,21 @@ For most plant groups, mitochondria are not phylogenetically informative because
 
 At this point, it is recommended to take a initial look at your alignments. **Initial** means be prepared to complete the alignment-manual check-phylogeny cycle for at least two rounds to get publication quality data.
 
-The purpose of the initial check is to remove obvious low-quality sequences. Do not conduct any site-based filtering yet! For example, the two sequences highlighted in red below contain too many SNPs. They should be removed.
+The purpose of the initial check is to remove obvious low-quality sequences. Do not conduct any site-based filtering yet! For example, the two sequences highlighted in red below contain too many SNPs (marked in black). They should be removed.
 
 <img src="/images/Geneious.png" width="600" height="400">
 
-Geneious is the best tool for this task. You can view statistics of your alignments, delete sequences, and concatenate alignments. Alternative automatic tools include [trimAL](http://trimal.cgenomics.org/getting_started_with_trimal_v1.2). But I highly recommend visualizing your data.
+Geneious is the best tool for this task. You can view statistics of your alignments, delete sequences, and concatenate alignments. The down side is that it is not free. Alternative automatic tools include [trimAL](http://trimal.cgenomics.org/getting_started_with_trimal_v1.2). But I highly recommend visualizing your data.
 
 
 ## VI. Phylogeny reconstruction
+
+1. Concatenation
+
+Many tools are available for concatenating alignments. I recommend Geneious or the `conc` function of phyloherb. I have applied both tools to dataset with 1000 sp x 100 genes. The `conc` function of phyloherb will also output a gene delineation file useful for `PartitionFinder`.
+
+
+2. Maximum likehood phylogeny
+
+3. Second round of alignment manual curation
+
