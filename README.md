@@ -112,7 +112,7 @@ This command will copy all of the assemblies under the input directory to a new 
 sp_prefix	Total_reads	Reads_in_target_region	Average_base_coverage	Length	GC%	Circularized
 ```
 
-## VI. Annotation and organelle structure variarion
+## IV. Annotation and organelle structure variarion
 Annotation is not necessary if you are interested in phylogeny alone, but if you want to submit your circularized assemblies to GenBank or extract intergenic regions from your spcecies, it is a must.
 
 The most convenient tool I have used is the web-based tool [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). I have concatenated 100 plastomes and annotated them all at once on GeSeq. But if you are annotating hundreds of plastomes, command-line based tools like [PGA](https://github.com/quxiaojian/PGA) might be a better option.
@@ -149,13 +149,27 @@ In the output directory, orthologous genes will be written to separate fasta fil
 3. Intergenic regions
 
 4. Alignment
-I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. 
- 
+I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. This is a potentially time consuming step so I recommend running it on the cluster by submitting batch jobs [mafft_pasta.sh](phyloherbLib/mafft_pasta.sh).
+
+In the same directory where the gene sequences are located, the batch job can be submitted to the cluster by typing
+```
+sbatch mafft_pasta.sh <gene name 1>
+sbatch mafft_pasta.sh <gene name 2>
+```
+
 5. Nuclear ribosomal and mitochondrial regions
 
-The ITS data requires a slightly different curation strategy. The nuclear ribosomal region exists as tandem repeats on multiple chromosomes.
+The nuclear ribosomal data requires a slightly different curation strategy. The highly variable nature of this sequence determines that it requires more manual curation than the plastome. The nuclear ribosomal region exists as tandem repeats on multiple chromosomes.
+
 <img src="/images/ITS.png" width="400" height="400">
 
-6. mitochondrial regions
-For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So we will only extract mitochondrial genes for comparative purposes.
+Based on our experiences, NTS is not alignable even between closely related taxa. The entire rDNA region (18S+ITS1+5.8S+ITS2+25S) and some portion of ETS can be aligned at family level. 
 
+We will try to align the entire region using MAFFT first.   
+
+6. mitochondrial regions
+For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So we will only extract mitochondrial genes for comparative purposes. The methods is similar to plastid genes.
+
+7. Manual curation in Geneious
+
+## VI. Phylogeny reconstruction
