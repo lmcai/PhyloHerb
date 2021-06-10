@@ -1,6 +1,6 @@
 sp_prefix	Forward_reads	Reverse_reads
-sp1	sp1.100m.R1.fq.gz	sp1.100m.R2.fq.gz
-sp2	sp2.100m.R1.fq.gz	sp2.100m.R2.fq.gz
-sp3	sp3.100m.R1.fq.gz	sp3.100m.R2.fq.gz
-sp4	sp4.100m.R1.fq.gz	sp4.100m.R2.fq.gz
-sp5	sp5.100m.R1.fq.gz	sp5.100m.R2.fq.gz
+sp1	SP1_R1.100m.1.fastq.gz	SP1_R2.100m.1.fastq.gz
+sp2	SP2_R1.100m.1.fastq.gz	SP2_R2.100m.1.fastq.gz
+sp3	SP3_R1.100m.1.fastq.gz	SP3_R2.100m.1.fastq.gz
+sp4	SP4_R1.100m.1.fastq.gz	SP4_R2.100m.1.fastq.gz
+sp5	SP5_R1.100m.1.fastq.gz	SP5_R2.100m.1.fastq.gz
