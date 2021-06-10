@@ -18,6 +18,7 @@ conda create --name getorg
 #y
 conda install -c bioconda getorganelle
 conda install -c conda-forge biopython
+conda install -c etetoolkit ete3
 ```
 2. [Bandage](https://rrwick.github.io/Bandage/): Assembly graph viewer with a graphical user interface. Can be downloaded and installed based on the instruction online.
 

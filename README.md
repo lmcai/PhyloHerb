@@ -191,10 +191,29 @@ Geneious is the best tool for this task. You can view statistics of your alignme
 
 1. Concatenation
 
-Many tools are available for concatenating alignments. I recommend Geneious or the `conc` function of phyloherb. I have applied both tools to dataset with 1000 sp x 100 genes. The `conc` function of phyloherb will also output a gene delineation file useful for `PartitionFinder`.
+Many tools are available for concatenating alignments. I recommend the `conc` function of phyloherb or Geneious. I have applied both tools to dataset with 1000 sp x 100 genes. The `conc` function of phyloherb will also output a gene delineation file required by `PartitionFinder`.
 
+To use the `conc` function of phyloherb, use the following commands
+```
+python phyloherb.py -a conc -i <directory containing assemblies> -o <output directory>
+```
+This command will concatenate all of the fasta sequences in the input directory with the specified suffix. Again, if you only want to use a subset of the genes or want the genes to appear in a specific order, you can supply a gene order file by adding `-g gene_subset.txt`.
 
 2. Maximum likehood phylogeny
 
-3. Second round of alignment manual curation
+For an initial quick and dirty phylogeny, I recommend ExaML with unpartitioned alignment. IQTREE or RAxML generates more accurate estimations of the phylogeny and substitution paramters, but may not accomodate thousands of species with millions of sites.
 
+3. Second round of manual alignment curation
+
+It can be a quite satisfying experience as you browse through a well-curated alignment. To get us there, we need to conduct a second round of alignment curation and remove spurious regions arising from assembly errors or false positive BLAST hits. 
+
+First, using a reference ExaML species tree (newick format), we will order the sequences based on their phylogenetic affinity. This can be done using the `order` function of phyloherb. If you want to additionally filter sequences based on missing data, using the optional `--missing` flag
+```
+python phyloherb.py -a order -t <reference.tre> -i <directory containing assemblies> -o <output directory> --missing <float number 0 to 1>
+```
+
+This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene. You will need this tree for the second round of pasta alignment after manual curation.
+
+Now lets load the ordered alignments to Geneious for some fine tuning. This time we will delete blocks of problematic sequences. They usually appears as a cluster of SNPs highlighted in red below. These SNPs are not conserved in their close relatives (autapomorphies). So they are not phylogenetic informative. Regardless of the causes, we can safely delete them. 
+
+<img src="/images/Geneious2.png" width="300" height="250">
