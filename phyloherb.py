@@ -193,7 +193,7 @@ elif mode =='ortho':
 		python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list>')
 elif mode =='conc':
 	try:
-		
+		concatenation(input_dir,files,output)
 	except:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
