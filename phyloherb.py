@@ -4,9 +4,10 @@ import os, argparse, sys, gzip, shutil
 from Bio import SeqIO
 import phyloherbLib
 from ete3 import Tree
+from Bio.SeqRecord import SeqRecord
 
 parser = argparse.ArgumentParser(description='PhyloHerb is a bioinfomatic utility wrappepr to process genome skimming data for phylogenomics studies.')
-parser.add_argument('-a', help='execution mode, options include[submision, qc, ortho, ]', required=True)
+parser.add_argument('-m', help='execution mode, options include[submision, qc, ortho, ]', required=True)
 parser.add_argument('--suffix',  help='suffix of alignment files', required=True)
 parser.add_argument('--output',  help='output directory', required=True)
 parser.add_argument('--loci_order',  help='(optional) a file containing the order of the loci in the concatenation')
@@ -41,7 +42,7 @@ def qc(sample_sheet,input_dir,output_dir):
 				elif 'base-coverage =' in l:
 					base_cov=l.split()[-1]
 				elif 'Result status' in l:
-					if l.split(': ')[-1]=='circular genome':circ='Yes'
+					if l.split(': ')[-1]=='circular genome\n':circ='Yes'
 			#get number of reads in target reagion
 			target_reads=open(input_dir+'/'+sp+'/seed/embplant_pt.initial.fq').readlines()
 			target_reads=len(target_reads)/4
@@ -70,6 +71,39 @@ def qc(sample_sheet,input_dir,output_dir):
 			except IOError:
 				out.write('\t'.join([sp,'NA','NA','NA','NA','NA','NA'])+'\n')
 	
+def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes):
+	print('processing species '+sp)
+	lib_ID=sp
+	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +'.assembly.fas -dbtype nucl -out '+lib_ID
+	os.system(S)
+	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + ' -outfmt 6 -evalue 1e-20 -out '+ lib_ID +'.blast.out'
+	os.system(S)
+	x=open(lib_ID+'.blast.out').readlines()
+	y=SeqIO.index(input_dir+'/'+lib_ID+'.assembly.fas','fasta')
+	a={}
+	for g in gene:
+		#print g
+		best=0
+		a[g]=(r for r in x if g+'_' in r)
+		min_evalue=1
+		length=1
+		for rec in a[g]:
+			#print rec
+			if float(rec.split('\t')[10])<=min_evalue and float(rec.split('\t')[3])>length:
+				min_evalue=float(rec.split('\t')[10])
+				length=float(rec.split('\t')[3])
+				best=rec
+		#best is the best match
+		try:
+			hit=best.split('\t')[1]
+			start=min(int(best.split('\t')[8]),int(best.split('\t')[9]))
+			end=max(int(best.split('\t')[8]),int(best.split('\t')[9]))
+			if end-start>60:
+				seq=y[hit].seq[(start-1):(end-1)]
+				SeqIO.write(SeqRecord(seq,lib_ID, '', ''),open(output_dir+'/'+g+'.fas','a'),'fasta')
+		except (NameError,AttributeError):continue
+
+
 
 def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 	t=Tree(sptree)
@@ -93,3 +127,5 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
     	t.prune(list(set(total_taxa) & set(sp2preserve))) 
     	t.write(format=1, outfile=output_dir+'/'+g+".pasta_ref.tre")
 
+
+gene=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","trnK-UUU","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","trnV-UAC","rps3","petB","trnL-UAA","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","trnA-UGC","petL","petN"]

@@ -90,7 +90,7 @@ If you are working with a high performance computing cluster with slurm workload
 
 Copy the example `getorg.sh` to current directory
 ```
-cp <path_to_PhyloHerb>/phyloherbLib/getorg.sh .
+cp $PH/phyloherbLib/getorg.sh .
 ```
 
 The bash job looks like this:
@@ -137,7 +137,7 @@ sp5	SP5_R1.100m.1.fastq.gz	SP5_R2.100m.1.fastq.gz
 Then generate a batch file using the submission function of phyloherb
 ```
 cp $DATA_DIR/sample_sheet.tsv .
-python $PH/phyloherb.py -a submision -b getorg.sh -s sample_sheet.tsv -o submitter.sh
+python $PH/phyloherb.py -m submision -b getorg.sh -s sample_sheet.tsv -o submitter.sh
 
 #submit jobs
 sh submitter.sh
@@ -155,27 +155,24 @@ The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mit
 After the assemblies are completed, you can summarize the results using the QC function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
 
 ```
-python phyloherb.py -a qc -s sample_sheet.tsv -i ./chl -o ../2_assemblies/chl
+python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i ./chl -o ../2_assemblies/chl
 ```
 This command will copy all of the assemblies under the input directory `./chl` to a new directory `../2_assemblies/chl` and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` that looks like this
 ```
-sp_prefix	Total_reads	Reads_in_target_region	Average_base_coverage	Length	GC%	Circularized
-sp1	sp1.100m.R1.fq.gz	sp1.100m.R2.fq.gz
-sp2	sp2.100m.R1.fq.gz	sp2.100m.R2.fq.gz
-sp3	sp3.100m.R1.fq.gz	sp3.100m.R2.fq.gz
-sp4	sp4.100m.R1.fq.gz	sp4.100m.R2.fq.gz
-sp5	sp5.100m.R1.fq.gz	sp5.100m.R2.fq.gz
+sp_prefix       Total_reads     Reads_in_target_region  Average_base_coverage   Length  GC%     Circularized
+sp1     666666  30400.0 31.4    159658  0.36851895927545125     Yes
+sp2     666666  48728.0 -246.9  133603  0.3567809106082947      No
 ```
 
 For nuclear ribosomal regions and mitochondrial assemblies:
 ```
-python phyloherb.py -a qc -s sample_sheet.tsv -i ./ITS -o ../2_assemblies/ITS
-python phyloherb.py -a qc -s sample_sheet.tsv -i ./mito -o ../2_assemblies/mito
+python phyloherb.py -m qc -s sample_sheet.tsv -i ./ITS -o ../2_assemblies/ITS
+python phyloherb.py -m qc -s sample_sheet.tsv -i ./mito -o ../2_assemblies/mito
 ```
 
 ## VI. Annotation and organelle structure variations
 
-We will upload the assembly fasta files to the web-based annnotator [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). The annotations will be returned as genbank files, graphics, and alignments.
+We will upload the circularized assembly to the web-based annnotator [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). The annotations will be returned as genbank files, graphics, and alignments.
 
 The genbank files can be imported to Geneious for visualization and manual curation.
 

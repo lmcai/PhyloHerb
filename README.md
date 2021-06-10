@@ -105,7 +105,7 @@ The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mit
 After the assemblies are completed, you can summarize the results using the `qc` function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
 
 ```
-python phyloherb.py -a qc -s sample_sheet.tsv -i <directory containing assemblies> -o <output directory>
+python phyloherb.py -m qc -s sample_sheet.tsv -i <directory containing assemblies> -o <output directory>
 ```
 This command will copy all of the assemblies under the input directory to a new directory and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` with the following header:
 ```
@@ -139,11 +139,11 @@ atcg...
 
 Assuming all of the assemblies are stored in the directory `2_assemblies/chl`, we can  extract the target gene regions using the `ortho` function of phyloherb. 
 ```
-python phyloherb.py -a ortho -i <directory containing assemblies> -o <output directory>
+python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory>
 ```
 You can choose to extract a subset of genes from a subset of the species by supplying a `-g gene_subset.txt` and `-sp species_subset.txt`. Example files can be found in [gene_subset.txt](phyloherbLib/gene_subset.txt) and [species_subset.txt](phyloherbLib/species_subset.txt).
 ```
-python phyloherb.py -a ortho -i <directory containing assemblies> -o <output directory> -g <gene list> -sp <species list>
+python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -g <gene list> -sp <species list>
 ```
 In the output directory, orthologous genes will be written to separate fasta files and the headers will be the species prefixes.
 
@@ -195,7 +195,7 @@ Many tools are available for concatenating alignments. I recommend the `conc` fu
 
 To use the `conc` function of phyloherb, use the following commands
 ```
-python phyloherb.py -a conc -i <directory containing assemblies> -o <output directory>
+python phyloherb.py -m conc -i <directory containing assemblies> -o <output directory>
 ```
 This command will concatenate all of the fasta sequences in the input directory with the specified suffix. Again, if you only want to use a subset of the genes or want the genes to appear in a specific order, you can supply a gene order file by adding `-g gene_subset.txt`.
 
@@ -209,7 +209,7 @@ It can be a quite satisfying experience as you browse through a well-curated ali
 
 First, using a reference ExaML species tree (newick format), we will order the sequences based on their phylogenetic affinity. This can be done using the `order` function of phyloherb. If you want to additionally filter sequences based on missing data, using the optional `--missing` flag
 ```
-python phyloherb.py -a order -t <reference.tre> -i <directory containing assemblies> -o <output directory> --missing <float number 0 to 1>
+python phyloherb.py -m order -t <reference.tre> -i <directory containing assemblies> -o <output directory> --missing <float number 0 to 1>
 ```
 
 This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene. You will need this tree for the second round of pasta alignment after manual curation.
