@@ -214,6 +214,6 @@ python phyloherb.py -a order -t <reference.tre> -i <directory containing assembl
 
 This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene. You will need this tree for the second round of pasta alignment after manual curation.
 
-Now lets load the ordered alignments to Geneious for some fine tuning. This time we will delete blocks of problematic sequences. They usually appears as a cluster of SNPs highlighted in red below. These SNPs are not conserved in their close relatives (autapomorphies). So they are not phylogenetic informative. Regardless of the causes, we can safely delete them. 
+Now let's load the ordered alignments to Geneious for some fine tuning. This time we will delete blocks of problematic sequences. They usually appears as a cluster of SNPs highlighted in red below. These SNPs are not conserved in their close relatives, so they are phylogenetic uninformative autapomorphies. Regardless of the causes, we can safely delete them. 
 
-<img src="/images/Geneious2.png" width="400" height="300">
+<img src="/images/Geneious2.png" width="400" height=250">
