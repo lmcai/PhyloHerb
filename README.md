@@ -43,11 +43,11 @@ Minimally, you want the plastid coverage to be larger than 10X.
 
 1. DNA extraction from herbarium specimens? How?!
 
-We have successfully extracted DNA from 200-year-old specimens. Age matters less than the preservation methods (see [this paper](https://www.frontiersin.org/articles/10.3389/fevo.2019.00439/full)). Standard commercial DNA extraction kits are frequently used to obtain DNA (e.g, Tiangen DNAsecure Plant Kit, Qiagen DNeasy Plant Mini Kit). We used a [Promega Maxwell](https://www.promega.com/products/lab-automation/maxwell-instruments/maxwell-rsc-instrument/?catNum=AS4500) instrument that can process 16 DNA samples simultaneously and extract their DNAs within an hour. This automatic approach is certainly more labour efficient, but manual extractions have more guaranteed yields for delicate precious samples.
+We have successfully extracted DNAs from 200-year-old specimens. Age matters less than the preservation methods (see [this paper](https://www.frontiersin.org/articles/10.3389/fevo.2019.00439/full)). Standard commercial DNA extraction kits are frequently used to obtain DNA (e.g, Tiangen DNAsecure Plant Kit, Qiagen DNeasy Plant Mini Kit). We used a [Promega Maxwell](https://www.promega.com/products/lab-automation/maxwell-instruments/maxwell-rsc-instrument/?catNum=AS4500) instrument that can extract DNA from 16 samples simultaneously within an hour. This automatic approach is certainly more labour efficient, but manual extractions have more guaranteed yields for delicate samples.
 
 2. Where can I find the genome sizes of my species?
 
-In addition to searching through the literature or conduct your own flow cytometry experiments, you could also check the [Plant DNA C-value database](https://cvalues.science.kew.org/) put together by Kew.
+In addition to searching through the literature or conducting your own flow cytometry experiments, you could also check the [Plant DNA C-value database](https://cvalues.science.kew.org/) organized by Kew.
 
 3. NGS library preparation and multiplexing
 
@@ -55,7 +55,7 @@ We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-soluti
 
 4. Where are the limits?
 
-About 1-3% of the reads from genome skimming are from plastomes. The base coverage is roughly half for mitochondria and 2X for nuclear ribosomal regions compared to plastids. Theoretically the base coverage of plastome vary with the size of the nuclear genome and the abundance of plastids within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very rough** guidance of what you may expect from certain amount of input data.
+About 1-3% of the reads from genome skimming are from plastomes. The base coverage is roughly half for mitochondria and 2X for nuclear ribosomal regions compared to plastids. Theoretically the base coverage vary with the size of the nuclear genome and the abundance of these genetic regions within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very rough** estimation of what you may expect for plastome from certain amount of input data.
 
 <img src="/images/coverage.png" width="400" height="130">
 
@@ -86,7 +86,7 @@ If you want to use your own reference sequences for assembly, you can provide th
 
 ### 3. Large dataset and batch submission to cluster
 
-If you are dealing with large number of species, running them one by one is too tedious. Here, we will submit individual assembly task to the cluster and run them simultaneously. An example bash file is provided in `/phyloherbLib/getorg.sh`. We will also use short and informative output prefix for each species. You can submit your job by typing
+If you are dealing with large number of species, running them one by one is too tedious. Here, we will submit individual assembly task to the computing cluster and run them simultaneously. An example bash file is provided in `/phyloherbLib/getorg.sh`. We will also use short and informative output prefix for each species. You can submit your job by typing
 
 ```
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
@@ -102,7 +102,7 @@ The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mit
 
 ### 6. Assembly QC 
 
-After the assemblies are completed, you can summarize the results using the `qc` function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
+After the assemblies are completed, you can summarize the results using the `qc` function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads mapped to the target region, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
 
 ```
 python phyloherb.py -m qc -s sample_sheet.tsv -i <directory containing assemblies> -o <output directory>
@@ -115,7 +115,7 @@ sp_prefix	Total_reads	Reads_in_target_region	Average_base_coverage	Length	GC%	Ci
 ## IV. Annotation and organellar structure variarion
 Annotation is not necessary if you are interested in phylogeny alone, but if you want to submit your circularized assemblies to GenBank or extract intergenic regions from your spcecies, it is a must.
 
-The most convenient tool I have used is the web-based tool [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). I have concatenated 100 plastomes into a single fasta file and annotated them all at once on GeSeq. But if you are annotating hundreds of plastomes, command-line based tools like [PGA](https://github.com/quxiaojian/PGA) might be a better option.
+The most convenient tool I have used is the web-based tool [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). I have concatenated 100 plastomes into a single fasta file and annotated them all at once on GeSeq. But if you are annotating hundreds of plastomes, the command-line based tool [PGA](https://github.com/quxiaojian/PGA) might be a better option.
 
 ## V. Ortholog identification
 
@@ -137,7 +137,10 @@ atcg...
 
 2. Extract orthologous gene or intergenic regions from the assembly
 
-Assuming all of the assemblies are stored in the directory `2_assemblies/chl`, we can  extract the target gene regions using the `ortho` function of phyloherb. 
+We can  extract the target gene regions using the `ortho` function of phyloherb. This function will conduct BLAST search in the assembly, extract the best matching regions, and output them to a directory.
+
+In the output directory, orthologous genes will be written to separate fasta files and the headers will be the species prefixes.
+
 ```
 python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory>
 ```
@@ -145,11 +148,10 @@ You can choose to extract a subset of genes from a subset of the species by supp
 ```
 python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -g <gene list> -sp <species list>
 ```
-In the output directory, orthologous genes will be written to separate fasta files and the headers will be the species prefixes.
 
 3. Alignment
 
-I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. It first generates a guidance tree, then align among closely-related species, finally merge the alignments to produce the output.
+I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. `pasta` first generates a guidance tree, then align among closely-related species, finally merge the alignments to produce the output.
 
 This is a potentially time consuming step so I recommend running it on the cluster using the example batch file [mafft_pasta.sh](phyloherbLib/mafft_pasta.sh).
 
@@ -179,7 +181,7 @@ For most plant groups, mitochondria are not phylogenetically informative because
 
 7. Manual curation in Geneious
 
-At this point, it is recommended to take a initial look at your alignments. **Initial** means be prepared to complete the alignment-manual check-phylogeny cycle for at least two rounds to get publication quality data.
+At this point, it is recommended that you take a initial look at your alignments. **Initial** means be prepared to complete the "alignment-manual check-phylogeny" cycle for at least two rounds to get publication quality data.
 
 The purpose of the initial check is to remove obvious low-quality sequences. Do not conduct any site-based filtering yet! For example, the two sequences highlighted in red below contain too many SNPs (marked in black). They should be removed.
 
