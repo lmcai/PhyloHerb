@@ -138,7 +138,6 @@ atcg...
 Assuming all of the assemblies are stored in the directory `2_assemblies/chl`, we can  extract the target gene regions using the `ortho` function of phyloherb. 
 ```
 python phyloherb.py -a ortho -i <directory containing assemblies> -o <output directory>
-
 ```
 You can choose to extract a subset of genes from a subset of the species by supplying a `-g gene_subset.txt` and `-sp species_subset.txt`. Example files can be found in [gene_subset.txt](phyloherbLib/gene_subset.txt) and [species_subset.txt](phyloherbLib/species_subset.txt).
 ```
@@ -153,8 +152,8 @@ I like to use the `--adjustdirection` function from `MAFFT` to correct reverse c
 
 In the same directory where the gene sequences are located, the batch job can be submitted to the cluster by typing
 ```
-sbatch mafft_pasta.sh <gene name 1>
-sbatch mafft_pasta.sh <gene name 2>
+sbatch mafft_pasta.sh <gene_1>
+sbatch mafft_pasta.sh <gene_2>
 ```
 
 5. Nuclear ribosomal and mitochondrial regions
@@ -171,5 +170,8 @@ We will try to align the entire region using MAFFT first.
 For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So we will only extract mitochondrial genes for comparative purposes. The methods is similar to plastid genes.
 
 7. Manual curation in Geneious
+At this point, it is recommended to take a initial look at your alignments. **Initial** means be prepared to complete the alignment-manual check-phylogeny cycle for at least two rounds to get publication quality data.
+
+The purpose of the initial check is to remove obvious low quality sequences
 
 ## VI. Phylogeny reconstruction
