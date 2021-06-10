@@ -150,7 +150,8 @@ In the output directory, orthologous genes will be written to separate fasta fil
 
 4. Nuclear ribosomal and mitochondrial regions
 
-The ITS data requires a slightly different curation strategy. 
+The ITS data requires a slightly different curation strategy. It exists as tandem repeats on multiple chromosomes.
+<img src="/images/ITS.png" width="600" height="600">
 
 For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So we will only extract mitochondrial genes for comparative purposes.
 
