@@ -162,6 +162,9 @@ This command will copy all of the assemblies under the input directory `./chl` t
 sp_prefix       Total_reads     Reads_in_target_region  Average_base_coverage   Length  GC%     Circularized
 sp1     666666  30400.0 31.4    159658  0.36851895927545125     Yes
 sp2     666666  48728.0 -246.9  133603  0.3567809106082947      No
+sp3     666666  35628.0 43.1    133223  0.35511135464596955     No
+sp4     666666  24956.0 25.4    159410  0.3685026033498526      No
+sp5     666666  20474.0 35.3    131162  0.357679815800308       No
 ```
 
 For nuclear ribosomal regions and mitochondrial assemblies:
