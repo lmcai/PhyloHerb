@@ -1,7 +1,7 @@
 # PhyloHerb
 **Phylo**genomic Analysis Pipeline for **Herb**arium Specimens
 
-This bioinformatic tutorial provides detailed guidance to process **genome skimming** data collected from herbarium specimens. The outcomes include plastid genome assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+25S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
+This bioinformatic tutorial provides detailed guidance to process **genome skimming** data collected from herbarium specimens. The outcomes include plastid genome (plastome) assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+25S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
 
 We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea at hundreds of millions of years ago). 
 
@@ -33,11 +33,11 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 
 If interested in phylogeny alone, up to 384 samples (4 plates * 96 samples/plate) can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. Using the NovaSeq plastform can generate more complete genomes due to its larger output, but currently we cannot put more than 384 multiplexed samples due to the barcode limitation. If circularized plastid genomes are needed, >2 Gb data per species can usually get you there, which translates to ~60 samples per lane.
 
-*IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genomes, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected coverage of plastid genome:
+*IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genomes, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected base coverage of plastid genome:
 
 <img src="/images/plastid_perc.png" width="600" height="100">
 
-Minimally, you want the plastid coverage to be larger than 10%.
+Minimally, you want the plastid coverage to be larger than 10X.
 
 **FAQ**
 
@@ -55,7 +55,7 @@ We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-soluti
 
 4. Where are the limits?
 
-About 1-3% of the reads from genome skimming are from plastomes. Theoretically this value vary with the size of the nuclear genome and the abundance of plastids within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very rough** guidance of what you may expect from certain amount of input data.
+About 1-3% of the reads from genome skimming are from plastomes. The base coverage of mitochondria is roughly half or 1/3 of plastids; and the base coverage of nuclear ribosomal regions is 2X compared to plastids. Theoretically the base coverage of plastome vary with the size of the nuclear genome and the abundance of plastids within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very rough** guidance of what you may expect from certain amount of input data.
 
 <img src="/images/coverage.png" width="400" height="130">
 
@@ -148,6 +148,10 @@ In the output directory, orthologous genes will be written to separate fasta fil
 
 3. Intergenic regions
 
-4. Mitochondrial and nuclear ribosomal regions
+4. Nuclear ribosomal and mitochondrial regions
+
+The ITS data requires a slightly different curation strategy. 
+
+For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So we will only extract mitochondrial genes for comparative purposes.
 
 5. Alignment
