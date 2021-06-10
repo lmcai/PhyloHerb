@@ -187,7 +187,7 @@ The purpose of the initial check is to remove obvious low-quality sequences. Do 
 
 <img src="/images/Geneious.png" width="600" height="400">
 
-Geneious is the best tool for this task. You can view statistics of your alignments, delete sequences, and concatenate alignments. The down side is that it is not free. Alternative automatic tools include [trimAL](http://trimal.cgenomics.org/getting_started_with_trimal_v1.2). But I highly recommend visualizing your data.
+Geneious provides a nice interface to work with alignments. You can view alignment statistics, edit sequences, and concatenate alignments. Alternative automatic tools include [trimAL](http://trimal.cgenomics.org/getting_started_with_trimal_v1.2) and [Seaview](http://doua.prabi.fr/software/seaview).
 
 
 ## VI. Phylogeny reconstruction
@@ -198,21 +198,29 @@ Many tools are available for concatenating alignments. I recommend the `conc` fu
 
 To use the `conc` function of phyloherb, use the following commands
 ```
-python phyloherb.py -m conc -i <directory containing assemblies> -o <output directory>
+python phyloherb.py -m conc -i <directory containing alignments> -o <output directory> -suffix <suffix>
 ```
 This command will concatenate all of the fasta sequences in the input directory with the specified suffix. Again, if you only want to use a subset of the genes or want the genes to appear in a specific order, you can supply a gene order file by adding `-g gene_subset.txt`.
 
 2. Maximum likehood phylogeny
 
-For an initial quick and dirty phylogeny, I recommend ExaML with unpartitioned alignment. IQTREE or RAxML generates more accurate estimations of the phylogeny and substitution paramters, but may not accomodate thousands of species with millions of sites.
+For an initial quick and dirty analysis, I recommend ExaML with unpartitioned alignment. IQTREE or RAxML generates more accurate estimations of the phylogeny and substitution paramters, but may not accomodate thousands of species with millions of sites. The commands I use for ExaML analysis is as follows.
+```
+#generate a parsimony tree with RAxML
+raxmlHPC-SSE3 -y -m GTRGAMMA -s DNA_algnment.fas -n test -p 3256179
+parse-examl -s DNA_aln.phy -n test -m GTRGAMMA
+examl-AVX -S -s test.binary -m GAMMA -n testML -t RAxML_parsimonyTree.test
+```
 
 3. Second round of manual alignment curation
 
-It can be a quite satisfying experience as you browse through a well-curated alignment. To get us there, we need to conduct a second round of alignment curation and remove spurious regions arising from assembly errors or false positive BLAST hits. 
+It can be a quite satisfying experience when you browse through a well-curated alignment. To get us there, we need to conduct a second round of alignment curation and remove spurious regions arising from assembly errors or false positive BLAST hits. 
 
-First, using a reference ExaML species tree (newick format), we will order the sequences based on their phylogenetic affinity. This can be done using the `order` function of phyloherb. If you want to additionally filter sequences based on missing data, using the optional `--missing` flag
+First, using a reference ExaML species tree (newick format), we will order the sequences based on their phylogenetic affinity. This will facilitate manual curation of the alignments in Geneious because you can see shared mutations in closely related species.
+
+The `order` function of phyloherb takes a reference tree and reorders all alignments in the input directory based on the phylogeny. If you want to additionally filter sequences based on missing data, using the optional `-missing` flag. A float number from 0 to 1 is required for `-missing` to indicate the maximum proportion of ambiguous sites allowed for each sequence.
 ```
-python phyloherb.py -m order -t <reference.tre> -i <directory containing assemblies> -o <output directory> --missing <float number 0 to 1>
+python phyloherb.py -m order -t <reference.tre> -i <directory containing alignments> -o <output directory> -suffix <suffix> -missing <float number 0 to 1>
 ```
 
 This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene. You will need this tree for the second round of pasta alignment after manual curation.
