@@ -178,8 +178,11 @@ For most plant groups, mitochondria are not phylogenetically informative because
 
 At this point, it is recommended to take a initial look at your alignments. **Initial** means be prepared to complete the alignment-manual check-phylogeny cycle for at least two rounds to get publication quality data.
 
-The purpose of the initial check is to remove obvious low-quality sequences. Do not conduct any site-based filtering yet! Geneious is the best tool for this task. You can view statistics of your alignments, delete sequences, and concatenate alignments. 
+The purpose of the initial check is to remove obvious low-quality sequences. Do not conduct any site-based filtering yet! For example, the two sequences highlighted in red below contain too many SNPs. They should be removed.
 
 <img src="/images/Geneious.png" width="600" height="400">
+
+Geneious is the best tool for this task. You can view statistics of your alignments, delete sequences, and concatenate alignments. Alternative automatic tools include [trimAL](http://trimal.cgenomics.org/getting_started_with_trimal_v1.2). But I highly recommend visualizing your data.
+
 
 ## VI. Phylogeny reconstruction
