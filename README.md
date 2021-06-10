@@ -235,3 +235,5 @@ run_pasta.py -i <input sequence> -a -t <reference tree> -o <output directory>
 ```
 
 To submit batch job to the cluster, you can modify [this](phyloherbLib/pasta_rnd2.sh) batch file. Make sure you have loaded the correct environment.
+
+When the alignment is done, you can use them to produce your final species tree.
