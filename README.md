@@ -228,3 +228,10 @@ This will generate an ordered alignment `*.ordered.fas` and a companion tree fil
 Now let's load the ordered alignments to Geneious for some fine tuning. This time we will delete blocks of problematic sequences. They usually appears as a cluster of SNPs highlighted in red below. These SNPs are not conserved in their close relatives, so they are phylogenetically uninformative autapomorphies. Regardless of the causes, we can safely delete them. 
 
 <img src="/images/Geneious2.png" width="400" height="250">
+
+After a second manual check, your alignments is ready for re-alignment in `pasta`. This time we will use a reference tree `*.pasta_ref.tre` to guide the alignment for each gene.
+```
+run_pasta.py -i <input sequence> -a -t <reference tree> -o <output directory>
+```
+
+To submit batch job to the cluster, you can modify this batch file. Make sure you have loaded the correct environment.

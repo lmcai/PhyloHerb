@@ -4,8 +4,8 @@
 #SBATCH -t 5-24:00
 #SBATCH -p <partition>
 #SBATCH --mem=30000
-#SBATCH -o lmcai.out
-#SBATCH -e lmcai.err
+#SBATCH -o mafft_pasta.out
+#SBATCH -e mafft_pasta.err
 
 mafft --adjustdirection $1\.fas | sed 's/_R_//g' >$1\.mafft.aln.fas
 mkdir $1\.pasta

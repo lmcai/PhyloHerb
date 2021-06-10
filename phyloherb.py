@@ -119,7 +119,7 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 		y=SeqIO.parse(input_dir+'/'+g,'fasta')
 		out=open(output_dir+'/'+g+'.ordered.fas','a')
 		for rec in y:
-			missing=float(rec.seq.count('-'))/len(rec.seq)
+			missing=float(rec.seq.count('-')+rec.seq.count('N'))/len(rec.seq)
         	if rec.id in total_taxa and missing<max_missing:
                 SeqIO.write(rec,out,'fasta')
                 sp2preserve.append(rec.id)
