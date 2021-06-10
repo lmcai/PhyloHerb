@@ -169,9 +169,12 @@ We will try to align the entire region using MAFFT first.
 6. mitochondrial regions
 For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So we will only extract mitochondrial genes for comparative purposes. The methods is similar to plastid genes.
 
+
 7. Manual curation in Geneious
 At this point, it is recommended to take a initial look at your alignments. **Initial** means be prepared to complete the alignment-manual check-phylogeny cycle for at least two rounds to get publication quality data.
 
-The purpose of the initial check is to remove obvious low quality sequences
+The purpose of the initial check is to remove obvious low-quality sequences. Do not conduct any site-based filtering yet! Geneious is the best tool for this task. You can view statistics of your alignments, delete sequences, and concatenate alignments. 
+
+<img src="/images/Geneious.png" width="600" height="400">
 
 ## VI. Phylogeny reconstruction
