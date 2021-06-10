@@ -147,9 +147,7 @@ python phyloherb.py -m ortho -i <directory containing assemblies> -o <output dir
 ```
 In the output directory, orthologous genes will be written to separate fasta files and the headers will be the species prefixes.
 
-3. Intergenic regions
-
-4. Alignment
+3. Alignment
 
 I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. It first generates a guidance tree, then align among closely-related species, finally merge the alignments to produce the output.
 
@@ -160,6 +158,9 @@ Copy `mafft_pasta.sh` to the same directory where the gene sequences are located
 sbatch mafft_pasta.sh <gene_1>
 sbatch mafft_pasta.sh <gene_2>
 ```
+
+4. Intergenic regions
+
 
 5. Nuclear ribosomal and mitochondrial regions
 
