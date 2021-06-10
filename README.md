@@ -216,4 +216,4 @@ This will generate an ordered alignment `*.ordered.fas` and a companion tree fil
 
 Now lets load the ordered alignments to Geneious for some fine tuning. This time we will delete blocks of problematic sequences. They usually appears as a cluster of SNPs highlighted in red below. These SNPs are not conserved in their close relatives (autapomorphies). So they are not phylogenetic informative. Regardless of the causes, we can safely delete them. 
 
-<img src="/images/Geneious2.png" width="400" height="350">
+<img src="/images/Geneious2.png" width="400" height="300">
