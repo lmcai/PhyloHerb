@@ -5,16 +5,18 @@ from Bio import SeqIO
 import phyloherbLib
 from ete3 import Tree
 from Bio.SeqRecord import SeqRecord
+from Bio.Nexus import Nexus
 
 parser = argparse.ArgumentParser(description='PhyloHerb is a bioinfomatic utility wrappepr to process genome skimming data for phylogenomics studies.')
-parser.add_argument('-m', help='execution mode, options include[submision, qc, ortho, ]', required=True)
-parser.add_argument('--suffix',  help='suffix of alignment files', required=True)
-parser.add_argument('--output',  help='output directory', required=True)
+parser.add_argument('-m', help='execution mode, options include[submision, qc, ortho, conc, order]', required=True)
+parser.add_argument('-i',  help='input directory')
+parser.add_argument('-o',  help='output directory')
+parser.add_argument('-b',  help='[submission mode] path to the bash file')
+parser.add_argument('-s',  help='[submission mode] path to the taxon sampling sheet')
+parser.add_argument('-suffix',  help='suffix of alignment files')
 parser.add_argument('--loci_order',  help='(optional) a file containing the order of the loci in the concatenation')
 
 args = parser.parse_args()
-
-
 
 def submiter_gen(bash_file,sample_sheet,output):
 	sp_sheet=open(sample_sheet).readlines()
@@ -127,5 +129,82 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
     	t.prune(list(set(total_taxa) & set(sp2preserve))) 
     	t.write(format=1, outfile=output_dir+'/'+g+".pasta_ref.tre")
 
+def concatenation(input_dir,files,output):
+	nexus_filenames=[]
+	os.mkdir(output+'_tem')
+	for fn in files:
+    	x=AlignIO.read(input_dir+'/'+fn,'fasta',alphabet=Gapped(IUPAC.protein))
+   		new_filename=output+'_tem'+'/'+'.'.join(fn.split('.')[:-1])+'.nex'
+    	nexus_filenames.append(new_filename)
+    	g = open(new_filename, "w")
+    	d=g.write(x.format("nexus"))
+    	g.close()
+    nexi =  [(fname, Nexus.Nexus(fname)) for fname in nexus_filenames]
+	combined = Nexus.combine(nexi)
+	out=open(output+'.conc.nex', 'w')
+	combined.write_nexus_data(out)
+	out.close()
+	tem=SeqIO.parse(output+'.conc.nex','nexus')
+	out=open(output+'.conc.fas', 'a')
+	for rec in tem:
+		d=SeqIO.write(rec,out,'fasta')
+	out.close()
+	os.rmdir(output+'_tem')
+	out=open(output+'.partition','a')
+	x=open(output+'.conc.nex').readlines()
+	for l in x:
+		begin_write=0
+		if l.startswith('begin sets'):
+			begin_write=1
+		elif l.startswith('charpartition'):
+			begin_write=0
+		if begin_write:out.write(l)
+	out.close()
+		
+mode=args.m
+print('############################################################\nPhyloHerb v1.0\nA bioinformatic pipeline for herbariomics based biodiversity reesearch\n')
+if mode =='submision':
+	try:
+		submiter_gen(args.b,args.s,args.o)
+	except :
+		print('############################################################\n\
+		#ERROR:Insufficient arguments!\n\
+		Usage:\n\
+		python phyloherb.py -m submision -b <bash file> -s <sample sheet> -o <output>')
+elif mode =='qc':
+	try:
+		qc(args.s,args.i,args.o)
+	except:
+		print('############################################################\n\
+		#ERROR:Insufficient arguments!\n\
+		Usage:\n\
+		python phyloherb.py -m qc -s <sample sheet> -i <input directory> -o <output directory>')
+elif mode =='ortho':
+	try:
+		genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","trnK-UUU","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","trnV-UAC","rps3","petB","trnL-UAA","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","trnA-UGC","petL","petN"]
+		
+		if args.g:
+		if args.sp:
+		ortho_extraction(sp,reference_seq,input_dir,output_dir,genes):
+	except:
+		print('############################################################\n\
+		#ERROR:Insufficient arguments!\n\
+		Usage:\n\
+		python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list>')
+elif mode =='conc':
+	try:
+		
+	except:
+		print('############################################################\n\
+		#ERROR:Insufficient arguments!\n\
+		Usage:\n\
+		python phyloherb.py -m conc -i <input directory containing alignments> -o <output directory> -suffix <alignment suffix> [optional] -g <gene list file>')
+elif mode =='order':
+else:
+	print('############################################################\n\
+	#ERROR: Please choose one of the following execution mode using -m: submision, qc, ortho, conc, order\n\
+	')
 
-gene=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","trnK-UUU","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","trnV-UAC","rps3","petB","trnL-UAA","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","trnA-UGC","petL","petN"]
+
+
+
