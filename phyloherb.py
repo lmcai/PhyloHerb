@@ -73,7 +73,8 @@ def qc(sample_sheet,input_dir,output_dir):
 			except IOError:
 				out.write('\t'.join([sp,'NA','NA','NA','NA','NA','NA'])+'\n')
 	
-def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes):
+def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
+	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	print('processing species '+sp)
 	lib_ID=sp
 	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +'.assembly.fas -dbtype nucl -out '+lib_ID
@@ -83,10 +84,10 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes):
 	x=open(lib_ID+'.blast.out').readlines()
 	y=SeqIO.index(input_dir+'/'+lib_ID+'.assembly.fas','fasta')
 	a={}
-	for g in gene:
+	for g in genes:
 		#print g
 		best=0
-		a[g]=(r for r in x if g+'_' in r)
+		a[g]=[r for r in x if g+'_' in r]
 		min_evalue=1
 		length=1
 		for rec in a[g]:
@@ -100,7 +101,7 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes):
 			hit=best.split('\t')[1]
 			start=min(int(best.split('\t')[8]),int(best.split('\t')[9]))
 			end=max(int(best.split('\t')[8]),int(best.split('\t')[9]))
-			if end-start>60:
+			if end-start>min_len:
 				seq=y[hit].seq[(start-1):(end-1)]
 				SeqIO.write(SeqRecord(seq,lib_ID, '', ''),open(output_dir+'/'+g+'.fas','a'),'fasta')
 		except (NameError,AttributeError):continue
@@ -181,11 +182,11 @@ elif mode =='qc':
 		python phyloherb.py -m qc -s <sample sheet> -i <input directory> -o <output directory>')
 elif mode =='ortho':
 	try:
-		genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","trnK-UUU","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","trnV-UAC","rps3","petB","trnL-UAA","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","trnA-UGC","petL","petN"]
-		
+		genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
+		os.path.dirname(__file__)
 		if args.g:
 		if args.sp:
-		ortho_extraction(sp,reference_seq,input_dir,output_dir,genes):
+		ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
 	except:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
