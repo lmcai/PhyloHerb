@@ -133,7 +133,8 @@ def concatenation(input_dir,files,output):
 	nexus_filenames=[]
 	os.mkdir(output+'_tem')
 	for fn in files:
-    	x=AlignIO.read(input_dir+'/'+fn,'fasta')
+		#the alphabet argument will not be used, but not including it will trigger an error
+    	x=AlignIO.read(input_dir+'/'+fn,'fasta',alphabet=Gapped(IUPAC.protein))
    		new_filename=output+'_tem'+'/'+'.'.join(fn.split('.')[:-1])+'.nex'
     	nexus_filenames.append(new_filename)
     	g = open(new_filename, "w")
