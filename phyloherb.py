@@ -2,7 +2,6 @@ from Bio import AlignIO
 from Bio.Alphabet import IUPAC, Gapped
 import os, argparse, sys, gzip, shutil
 from Bio import SeqIO
-import phyloherbLib
 from ete3 import Tree
 from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
@@ -134,7 +133,7 @@ def concatenation(input_dir,files,output):
 	nexus_filenames=[]
 	os.mkdir(output+'_tem')
 	for fn in files:
-    	x=AlignIO.read(input_dir+'/'+fn,'fasta',alphabet=Gapped(IUPAC.protein))
+    	x=AlignIO.read(input_dir+'/'+fn,'fasta')
    		new_filename=output+'_tem'+'/'+'.'.join(fn.split('.')[:-1])+'.nex'
     	nexus_filenames.append(new_filename)
     	g = open(new_filename, "w")
