@@ -1,6 +1,3 @@
-ND2
-ND5
-RNApol
 accD
 atp1
 atp4
@@ -14,8 +11,6 @@ atpF
 atpI
 ccmB
 ccmC
-ccmFC
-ccmFN
 ccmFc
 ccmFn
 ccmb
@@ -26,15 +21,11 @@ cob
 cob2
 cox1
 cox2
-cox2a
-cox2b
 cox3
 cytB
-dpo
 infA
 lhbA
 ltrA
-mat-R
 matK
 matR
 mttB
@@ -81,9 +72,6 @@ psbM
 psbN
 psbT
 rbcL
-rnaseH
-rnl
-rns
 rpl10
 rpl14
 rpl15
