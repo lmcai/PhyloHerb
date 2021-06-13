@@ -7,7 +7,7 @@ We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusia
 
 ## I. Prerequisites
 
-The main `phyloherb.py` provides utility function for data curation, gene extraction, and phylogenomic datasete assembly. We also include an example dataset of five species for practicing. To download PhyloHerb, you can download it as zip or use `git`:
+The main function `phyloherb.py` provides utility functions for data curation, gene extraction, and phylogenomic datasete assembly. We also include an example dataset of five species for practicing. To download PhyloHerb, you can download it as zip or use `git`:
 
 ```
 git clone https://github.com/lmcai/PhyloHerb.git
@@ -173,7 +173,7 @@ sbatch mafft_pasta.sh <gene_2>
 4. Intergenic regions
 
 
-5. Nuclear ribosomal and mitochondrial regions
+5. Nuclear ribosomal regions
 
 The nuclear ribosomal data requires a slightly different curation strategy. The highly variable sequence requires more manual curation than the plastome. The nuclear ribosomal region exists as tandem repeats on multiple chromosomes.
 
@@ -183,7 +183,7 @@ Based on our experiences, NTS is not alignable even between closely related taxa
 
 We will try to align the entire region using MAFFT first.   
 
-6. mitochondrial regions
+6. Mitochondrial regions
 
 For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So we will only extract mitochondrial genes for comparative purposes. The methods is similar to plastid genes.
 
@@ -207,7 +207,7 @@ Many tools are available for concatenating alignments. I recommend the `conc` fu
 
 To use the `conc` function of phyloherb, use the following commands
 ```
-python phyloherb.py -m conc -i <directory containing alignments> -o <output directory> -suffix <suffix>
+python phyloherb.py -m conc -i <directory containing alignments> -o <output prefix> -suffix <suffix>
 ```
 This command will concatenate all of the fasta sequences in the input directory with the specified suffix. Again, if you only want to use a subset of the genes or want the genes to appear in a specific order, you can supply a gene order file by adding `-g gene_subset.txt`.
 

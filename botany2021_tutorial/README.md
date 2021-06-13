@@ -190,22 +190,18 @@ python $PH/phyloherb.py -m ortho -i 2_assemblies/chl -o 3_alignments/chl/ -l 120
 
 In the output directory `3_alignments/chl`, orthologous genes will be written to separate fasta files and the headers will be the species prefixes.
 
-3. Alignment
+2. Alignment
 
-I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. `pasta` first generates a guidance tree, then align among closely-related species, finally merge the alignments to produce the output.
-
-This is a potentially time consuming step so I recommend running it on the cluster using the example batch file [mafft_pasta.sh](phyloherbLib/mafft_pasta.sh).
-
-Copy `mafft_pasta.sh` to the same directory where the gene sequences are located. Modify the file to include appropriate environmental parameters. Then the batch job can be submitted to the cluster by typing
+I will demonstrate the use of `mafft` and `pasta`, but the installation of `pasta` can be tricky though. We may not have enough time troubleshoot it during the workshop. 
 ```
-sbatch mafft_pasta.sh <gene_1>
-sbatch mafft_pasta.sh <gene_2>
+cd 3_alignments/chl
+#cp $PH/phyloherbLib/mafft_pasta.sh .
+mafft --adjustdirection accD.fas | sed 's/_R_//g' >accD.mafft.aln.fas
+mkdir accD.pasta
+run_pasta.py -i ../accD.mafft.aln.fas
 ```
 
-4. Intergenic regions
-
-
-5. Nuclear ribosomal and mitochondrial regions
+3. Nuclear ribosomal regions
 
 The nuclear ribosomal data requires a slightly different curation strategy. The highly variable sequence requires more manual curation than the plastome. The nuclear ribosomal region exists as tandem repeats on multiple chromosomes.
 
@@ -215,31 +211,20 @@ Based on our experiences, NTS is not alignable even between closely related taxa
 
 We will try to align the entire region using MAFFT first.   
 
-6. mitochondrial regions
+4. Manual curation in Geneious
 
-For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So we will only extract mitochondrial genes for comparative purposes. The methods is similar to plastid genes.
-
-
-7. Manual curation in Geneious
-
-At this point, it is recommended that you take a initial look at your alignments. **Initial** means be prepared to complete the "alignment-manual check-phylogeny" cycle for at least two rounds to get publication quality data.
-
-The purpose of the initial check is to remove obvious low-quality sequences. Do not conduct any site-based filtering yet! For example, the two sequences highlighted in red below contain too many SNPs (marked in black). They should be removed.
-
-Geneious provides a nice interface to work with alignments. You can view alignment statistics, edit sequences, and concatenate alignments. Alternative automatic tools include [trimAL](http://trimal.cgenomics.org/getting_started_with_trimal_v1.2) and [Seaview](http://doua.prabi.fr/software/seaview).
-
+The fully functional version of Geneious (trial or subscribed version) is required to edit alignments. Alternative tools to view and edit alignments include [AliView](https://ormbunkar.se/aliview/), [Seaview](http://doua.prabi.fr/software/seaview), and many more.
 
 ## VI. Phylogeny reconstruction
 
 1. Concatenation
 
-Many tools are available for concatenating alignments. I recommend the `conc` function of phyloherb or Geneious. I have applied both tools to dataset with 1000 sp x 100 genes. The `conc` function of phyloherb will also output a gene delineation file required by `PartitionFinder`.
+Many tools are available for concatenating alignments. I recommend the `conc` function of phyloherb or Geneious. I have applied both tools to dataset with 1000 sp x 100 genes. The `conc` function of phyloherb will also output a gene delineation file that you can use to generate the configuration file for `PartitionFinder`.
 
-To use the `conc` function of phyloherb, use the following commands
+To concatenate all of the fasta sequences in the input directory `3_alignments/chl` with the suffix `.mafft.aln.fas`. Use the following commands:
 ```
-python phyloherb.py -m conc -i <directory containing alignments> -o <output directory> -suffix <suffix>
+python $PH/phyloherb.py -m conc -i 3_alignments/chl -o 5sp_chl -suffix .mafft.aln.fas
 ```
-This command will concatenate all of the fasta sequences in the input directory with the specified suffix. Again, if you only want to use a subset of the genes or want the genes to appear in a specific order, you can supply a gene order file by adding `-g gene_subset.txt`.
 
 2. Maximum likehood phylogeny
 
