@@ -3,7 +3,6 @@
 This is a step-by-step tutorial to prossess genome skimming data for phylogeny reconstruction. This tutorial will use the example dataset hosted on the PhyloHerb repository to reconstruct a plastome-based phylogeny for five species.
 
 ## I. Prerequisites
-
 Install the following software
 
 1. Install [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle), [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml), and [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) all at once with conda
@@ -39,7 +38,7 @@ Download PhyloHerb and example datasets from Github
 git clone https://github.com/lmcai/PhyloHerb.git
 mkdir herbariomics_workshop
 cd herbariomics_workshop
-export $PH=../PhyloHerb
+export PH=../PhyloHerb
 ```
 
 Move and rename the example dataset from PhyloHerb to the current working directory

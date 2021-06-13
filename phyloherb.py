@@ -104,6 +104,10 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
 				seq=y[hit].seq[(start-1):(end-1)]
 				SeqIO.write(SeqRecord(seq,lib_ID, '', ''),open(output_dir+'/'+g+'.fas','a'),'fasta')
 		except (NameError,AttributeError):continue
+	os.remove(lib_ID+'.nhr')
+	os.remove(lib_ID+'.nin')
+	os.remove(lib_ID+'.nsq')
+	
 
 
 

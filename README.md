@@ -6,6 +6,13 @@ This bioinformatic tutorial provides detailed guidance to process **genome skimm
 We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea hundreds of millions of years ago). 
 
 ## I. Prerequisites
+
+The main `phyloherb.py` provides utility function for data curation, gene extraction, and phylogenomic datasete assembly. We also include an example dataset of five species for practicing. To download PhyloHerb, you can download it as zip or use `git`:
+
+```
+git clone https://github.com/lmcai/PhyloHerb.git
+```
+
 To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
 
 ### Assembly
