@@ -1,5 +1,5 @@
-# PhyloHerb 		<img src="/images/logo.png" width="50" height="50">
-**Phylo**genomic Analysis Pipeline for **Herb**arium Specimens
+# PhyloHerb
+**Phylo**genomic Analysis Pipeline for **Herb**arium Specimens 		<img src="/images/logo.png" width="100" height="100">
 
 This bioinformatic tutorial provides detailed guidance to process **genome skimming** data collected from herbarium specimens. The outcomes include the plastid genome (plastome) assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+25S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
 
