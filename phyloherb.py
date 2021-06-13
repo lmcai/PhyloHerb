@@ -12,8 +12,9 @@ parser.add_argument('-i',  help='input directory')
 parser.add_argument('-o',  help='output directory')
 parser.add_argument('-b',  help='[submission mode] path to the bash file')
 parser.add_argument('-s',  help='[submission mode] path to the taxon sampling sheet')
-parser.add_argument('-suffix',  help='suffix of alignment files')
-parser.add_argument('--loci_order',  help='(optional) a file containing the order of the loci in the concatenation')
+parser.add_argument('-l',  help='[ortho mode] minimum length of blast hits')
+parser.add_argument('-suffix',  help='[conc mode] suffix of alignment files')
+parser.add_argument('-g',  help='[conc mode] a file containing the order of the loci in the concatenation')
 
 args = parser.parse_args()
 

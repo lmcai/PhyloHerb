@@ -1,0 +1,10 @@
+accD
+atpA
+atpB
+atpE
+atpF
+atpH
+atpI
+atpL
+bspB
+ccsA
