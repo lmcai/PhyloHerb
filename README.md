@@ -153,7 +153,7 @@ In the output directory, orthologous genes will be written to separate fasta fil
 ```
 python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory>
 ```
-You can choose to extract a subset of genes from a subset of the species by supplying a `-g gene_subset.txt` and `-sp species_subset.txt`. Example files can be found in [gene_subset.txt](phyloherbLib/gene_subset.txt) and [species_subset.txt](phyloherbLib/species_subset.txt).
+You can choose to extract a subset of genes from a subset of the species by supplying a `-g gene_subset.txt` and `-sp species_subset.txt`. Example files can be found in [gene_subset.txt](/database/plastid_reference_sp.csv) and [species_subset.txt](/database/plastid_gene.list).
 ```
 python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -g <gene list> -sp <species list>
 ```
