@@ -17,6 +17,13 @@ git clone https://github.com/lmcai/PhyloHerb.git
 ```
 *IMPORTANT*: PhyloHerb is currently only compatible with **Python 3**.
 
+To update your local version for any future updates, `cd` into the `PhyloHerb` directory then type
+```
+git fetch --prune origin
+git reset --hard origin
+git clean -f -d
+```
+
 ### Assembly
 1. [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle)
 2. [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
