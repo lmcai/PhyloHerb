@@ -131,8 +131,8 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 				SeqIO.write(rec,out,'fasta')
 				sp2preserve.append(rec.id)
 		out.close()
-    	t.prune(list(set(total_taxa) & set(sp2preserve))) 
-    	t.write(format=1, outfile=output_dir+'/'+g+".pasta_ref.tre")
+		t.prune(list(set(total_taxa) & set(sp2preserve))) 
+		t.write(format=1, outfile=output_dir+'/'+g+".pasta_ref.tre")
 
 def concatenation(input_dir,files,output):
 	nexus_filenames=[]
