@@ -193,7 +193,7 @@ elif mode =='ortho':
 			pass
 		if args.sp:
 			pass
-		ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
+		ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len)
 	except:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
