@@ -204,7 +204,7 @@ elif mode =='ortho':
 		PH_path=os.path.dirname(__file__)
 		#print(PH_path)
 		#get species list
-		if args.sp:
+		if args.sp is not None:
 			species=open(args.sp).readlines()
 			species=[j.strip() for j in species]
 			print('Using custom species set in '+args.sp+': '+', '.join(species))
@@ -218,17 +218,17 @@ elif mode =='ortho':
 			Usage:\n\
 			python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference genes>')
 		#get minimum length for blast hit
-		if args.l:
+		if args.l is not None:
 			min_len=int(args.l)
 		else:min_len=60
 		print('Using length cutoff ' + min_len+' bp for BLAST result filtering')
 		#get gene list
 		#genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
-		if args.g:
+		if args.g is not None:
 			genes=open(args.g).readlines()
 			genes=[j.strip() for j in genes]
 			print('Using custom gene set')
-		elif args.mito:
+		elif args.mito is not None:
 			genes=open(PH_path+'/database/mito_gene.list').readlines()
 			genes=[j.strip() for j in genes]
 			print('Using build-in mitochondrial gene set')
@@ -237,9 +237,9 @@ elif mode =='ortho':
 			genes=[j.strip() for j in genes]
 			print('Using build-in plastid gene set')
 		#get reference sequences
-		if args.ref:
+		if args.ref is not None:
 			reference=args.ref
-		elif args.mito:
+		elif args.mito is not None:
 			reference=PH_path+'/database/mito_reference.fas'
 		else:
 			reference=PH_path+'/database/plastid_reference.fas'
@@ -248,9 +248,9 @@ elif mode =='ortho':
 			ortho_extraction(sp,reference,args.i,args.o,genes,min_len)			
 	except TypeError:
 			print('############################################################\n\
-			#ERROR:Insufficient arguments!\n\
-			Usage:\n\
-			python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference genes>')
+		#ERROR:Insufficient arguments!\n\
+		Usage:\n\
+		python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference genes>')
 	except IOError as e:print(e.errno)
 elif mode =='conc':
 	try:
