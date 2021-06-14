@@ -246,6 +246,11 @@ elif mode =='ortho':
 		#extract blast hits:				
 		for sp in species:
 			ortho_extraction(sp,reference,args.i,args.o,genes,min_len)			
+	except TypeError:
+			print('############################################################\n\
+			#ERROR:Insufficient arguments!\n\
+			Usage:\n\
+			python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference genes>')
 	except IOError as e:print(e.errno)
 elif mode =='conc':
 	try:
