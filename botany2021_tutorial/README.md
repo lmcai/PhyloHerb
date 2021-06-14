@@ -23,7 +23,7 @@ conda install -c etetoolkit ete3
 
 3. Optional [Geneious](https://www.geneious.com/): the free trial version lasts for 14 days. After that some functions are restricted. Your institute may have purchased a license for you.
 
-4. [Pasta](https://github.com/smirarab/pasta) or [MAFFT](https://mafft.cbrc.jp/alignment/software/). Pasta is highly recommended for distantly related taxa and large datasets. I recommend installing it with Docker image. Installation from source can be somewhat difficult and may require root permissions. If you plan to use it during the workshop, please make sure you have successfully installed it prior to the workshop.
+4. [Pasta](https://github.com/smirarab/pasta) or [MAFFT](https://mafft.cbrc.jp/alignment/software/). `Pasta` is highly recommended for distantly related taxa and large datasets (many species, but **not long alignments**). Installing from Docker image should be the easiest because installation from the source code may require root permissions. If you plan to use it during the workshop, please try to have it ready prior to the workshop.
 
 5. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html). Choose your favorite one!
 
