@@ -29,6 +29,7 @@ def submiter_gen(bash_file,sample_sheet,output):
 
 
 def qc(sample_sheet,input_dir,output_dir):
+	failed=[]
 	sp_sheet=open(sample_sheet).readlines()
 	sp_sheet=[i.split()[0] for i in sp_sheet[1:]]
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
@@ -74,6 +75,8 @@ def qc(sample_sheet,input_dir,output_dir):
 				out.write('\t'.join([sp,str(total_reads),str(target_reads),'NA','NA','NA','NA'])+'\n')
 			except IOError:
 				out.write('\t'.join([sp,'NA','NA','NA','NA','NA','NA'])+'\n')
+				failed.append(sp)
+		print('Cannot find GetOrganelle outputs for the following species: '+', '.join(failed))
 	
 def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
@@ -189,7 +192,7 @@ elif mode =='qc':
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
-		python phyloherb.py -m qc -s <sample sheet> -i <input directory> -o <output directory>')
+		python phyloherb.py -m qc -s <sample sheet> -i <input directory containing Getorganelle output> -o <output directory>')
 elif mode =='ortho':
 	try:
 		genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
