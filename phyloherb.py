@@ -258,9 +258,11 @@ elif mode =='conc':
 		if args.g is not None:
 			files=open(args.g).readlines()
 			files=[j.strip() for j in files]
+			print('Concatenate '+str(len(files))+' alignments based on the custom gene set')
 		else:
-			file=os.listdir(args.i)
+			files=os.listdir(args.i)
 			files=[j for j in files if j.endswith(args.suffix)]
+			print('Concatenate '+str(len(files))+' alignments in the directory '+args.i + 'with suffix '+args.suffix)
 		concatenation(args.i,files,args.o)
 	except TypeError:
 		print('############################################################\n\
