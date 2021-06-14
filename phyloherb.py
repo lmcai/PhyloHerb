@@ -1,7 +1,6 @@
 from Bio import AlignIO
 import os, argparse, sys, gzip, shutil
 from Bio import SeqIO
-#from ete3 import Tree
 from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
 
@@ -159,22 +158,18 @@ def concatenation(input_dir,files,output):
 	out=open(output+'.conc.nex', 'w')
 	combined.write_nexus_data(out)
 	out.close()
-	tem=SeqIO.parse(output+'.conc.nex','nexus')
-	out=open(output+'.conc.fas', 'a')
-	for rec in tem:
-		d=SeqIO.write(rec,out,'fasta')
-	out.close()
+	d=AlignIO.convert(output+'.conc.nex', 'nexus', output+'.conc.fas', 'fasta', molecule_type='DNA')
 	#os.rmdir(output+'_tem')
 	shutil.rmtree(output+'_tem', ignore_errors=True)
 	out=open(output+'.partition','a')
 	x=open(output+'.conc.nex').readlines()
+	begin_write=0
 	for l in x:
-		begin_write=0
-		if l.startswith('begin sets'):
+		if l.startswith('charset'):
 			begin_write=1
 		elif l.startswith('charpartition'):
 			begin_write=0
-		if begin_write:out.write(l)
+		if begin_write==1:out.write(l)
 	out.close()
 		
 mode=args.m
@@ -272,12 +267,19 @@ elif mode =='conc':
 		python phyloherb.py -m conc -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -g <gene list file>')
 elif mode =='order':
 	try:
-		order_aln(args.t,args.i,args.suffix,args.o,args.missing)
+		from ete3 import Tree
+		if args.missing is not None:
+			missing=float(args.missing)
+		else:
+			missing=1
+		order_aln(args.t,args.i,args.suffix,args.o,missing)
+	except ModuleNotFoundError as e:
+		print(e.errno)
 	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
-		python phyloherb.py -m order -t <species tree> -i <input directory containing alignments> -o <output directory> -suffix <alignment suffix> [optional] -missing <missing proportion>')
+		python phyloherb.py -m order -t <species tree> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -missing <missing proportion>')
 else:
 	print('############################################################\n\
 	#ERROR: Please choose one of the following execution mode using -m: submission, qc, ortho, conc, order\n\
