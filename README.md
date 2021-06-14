@@ -25,23 +25,21 @@ git clean -f -d
 ```
 
 ### Assembly
-1. [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle)
-2. [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
-3. [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
-4. Assembly viewer: [Bandage](https://rrwick.github.io/Bandage/)
-5. Optional assembly viewer: [Geneious](https://www.geneious.com/) (the complementary version is sufficient)
+1. Assembler: [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle), [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml), and [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). If you install `GetOrganelle` via conda, all of these three programs will be installed. Otherwise you can install them one by one.
+2. Assembly viewer: [Bandage](https://rrwick.github.io/Bandage/)
+3. Optional assembly viewer: [Geneious](https://www.geneious.com/) (the complementary version is sufficient)
 
 ### Alignment
-6. Python modules: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/)
-7. Aligner: 
+4. Python modules: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/)
+5. Aligner: 
 
 	[Pasta](https://github.com/smirarab/pasta) for highly variable regions such as the ITS sequences
 	
 	[MAFFT](https://mafft.cbrc.jp/alignment/software/) for less variable regions or long alignments (>5 kb) that pasta may not be able to handle when the number of species is high (>500 sp)
-8. Manual assembly examination: [Geneious](https://www.geneious.com/) (the licensed version are required)
+6. Manual assembly examination: [Geneious](https://www.geneious.com/) (the licensed version are required)
 
 ### Phylogeny
-9. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
+7. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
 
 ## II. General guidelines for genome skimming data collection
 
