@@ -1,5 +1,5 @@
 from Bio import AlignIO
-import os, argparse, sys, gzip, shutil
+import os, argparse, sys, shutil
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
@@ -126,7 +126,7 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 		total_taxa.append(leaf.name)
 	genes=os.listdir(input_dir)
 	genes=[i for i in genes if i.endswith(suffix)]
-	
+	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	for g in genes:
 		sp2preserve=[]
 		t=Tree(sptree)
