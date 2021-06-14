@@ -164,7 +164,8 @@ def concatenation(input_dir,files,output):
 	for rec in tem:
 		d=SeqIO.write(rec,out,'fasta')
 	out.close()
-	os.rmdir(output+'_tem')
+	#os.rmdir(output+'_tem')
+	shutil.rmtree(output+'_tem', ignore_errors=True)
 	out=open(output+'.partition','a')
 	x=open(output+'.conc.nex').readlines()
 	for l in x:
@@ -262,13 +263,13 @@ elif mode =='conc':
 		else:
 			files=os.listdir(args.i)
 			files=[j for j in files if j.endswith(args.suffix)]
-			print('Concatenate '+str(len(files))+' alignments in the directory '+args.i + 'with suffix '+args.suffix)
+			print('Concatenate '+str(len(files))+' alignments in the directory '+args.i + ' with suffix '+args.suffix)
 		concatenation(args.i,files,args.o)
 	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
-		python phyloherb.py -m conc -i <input directory containing alignments> -o <output directory> -suffix <alignment suffix> [optional] -g <gene list file>')
+		python phyloherb.py -m conc -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -g <gene list file>')
 elif mode =='order':
 	try:
 		order_aln(args.t,args.i,args.suffix,args.o,args.missing)
