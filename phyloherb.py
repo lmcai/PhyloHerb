@@ -260,6 +260,7 @@ elif mode =='conc':
 			files=[j for j in files if j.endswith(args.suffix)]
 			print('Concatenate '+str(len(files))+' alignments in the directory '+args.i + ' with suffix '+args.suffix)
 		concatenation(args.i,files,args.o)
+		print('Done.')
 	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
@@ -274,6 +275,7 @@ elif mode =='order':
 			missing=1
 		print('Reorder alignments based on the species tree '+args.t)
 		order_aln(args.t,args.i,args.suffix,args.o,missing)
+		print('Done.')
 	except ModuleNotFoundError as e:
 		print('############################################################\n\
 		#ERROR:Module not correctly loaded:')
