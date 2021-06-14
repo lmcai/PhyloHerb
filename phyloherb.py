@@ -128,9 +128,9 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 		for rec in y:
 			missing=float(rec.seq.count('-')+rec.seq.count('N'))/len(rec.seq)
 			if rec.id in total_taxa and missing<max_missing:
-        		SeqIO.write(rec,out,'fasta')
-        		sp2preserve.append(rec.id)
-        out.close()
+				SeqIO.write(rec,out,'fasta')
+				sp2preserve.append(rec.id)
+		out.close()
     	t.prune(list(set(total_taxa) & set(sp2preserve))) 
     	t.write(format=1, outfile=output_dir+'/'+g+".pasta_ref.tre")
 
