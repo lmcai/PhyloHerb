@@ -264,7 +264,7 @@ elif mode =='conc':
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
-		python phyloherb.py -m conc -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -g <gene list file>')
+		python phyloherb.py -m conc -i <input directory> -o <output prefix> -suffix <alignment suffix> [optional] -g <gene list file>')
 elif mode =='order':
 	try:
 		from ete3 import Tree
