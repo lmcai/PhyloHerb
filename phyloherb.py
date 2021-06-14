@@ -1,5 +1,4 @@
 from Bio import AlignIO
-from Bio.Alphabet import IUPAC, Gapped
 import os, argparse, sys, gzip, shutil
 from Bio import SeqIO
 from ete3 import Tree
@@ -139,12 +138,13 @@ def concatenation(input_dir,files,output):
 	os.mkdir(output+'_tem')
 	for fn in files:
 		#the alphabet argument will not be used, but not including it will trigger an error
-		x=AlignIO.read(input_dir+'/'+fn,'fasta',alphabet=Gapped(IUPAC.protein))
+		#x=AlignIO.read(input_dir+'/'+fn,'fasta',alphabet=Gapped(IUPAC.protein))
 		new_filename=output+'_tem'+'/'+'.'.join(fn.split('.')[:-1])+'.nex'
 		nexus_filenames.append(new_filename)
-		g = open(new_filename, "w")
-		d=g.write(x.format("nexus"))
-		g.close()
+		#g = open(new_filename, "w")
+		#d=g.write(x.format("nexus"))
+		#g.close()
+		AlignIO.convert(input_dir+'/'+fn, 'fasta', new_filename, 'nexus', molecule_type='DNA')
 	nexi =  [(fname, Nexus.Nexus(fname)) for fname in nexus_filenames]
 	combined = Nexus.combine(nexi)
 	out=open(output+'.conc.nex', 'w')
