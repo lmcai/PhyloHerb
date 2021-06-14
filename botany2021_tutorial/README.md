@@ -11,7 +11,7 @@ Install Anaconda or miniconda for Linux, Mac, or PC (see https://conda.io/projec
 
 Create a conda environment and install GetOrganelle and its dependencies (may take a while)
 ```
-conda create --name getorg
+conda create --name getorg python=3
 #answer promt questions 
 #proceed ([y]/n)?
 #y

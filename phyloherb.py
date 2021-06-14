@@ -50,7 +50,9 @@ def qc(sample_sheet,input_dir,output_dir):
 				elif 'Result status' in l:
 					if l.split(': ')[-1]=='circular genome\n':circ='Yes'
 			#get number of reads in target reagion
-			target_reads=open(input_dir+'/'+sp+'/seed/embplant_pt.initial.fq').readlines()
+			target_reads_file=os.listdir(input_dir+'/'+sp+'/seed/')
+			target_reads_file=[j for j in target_reads_file if j.endswith('.fq')]
+			target_reads=open(target_reads_file[0]).readlines()
 			target_reads=len(target_reads)/4
 			#get info from the assembly
 			assem=os.listdir(input_dir+'/'+sp)
@@ -71,7 +73,9 @@ def qc(sample_sheet,input_dir,output_dir):
 					if 'Reads used =' in l:
 						two_reads=l.split()[-1]
 						total_reads=sum([int(i) for i in two_reads.split('+')])
-				target_reads=open(input_dir+'/'+sp+'/seed/embplant_pt.initial.fq').readlines()
+				target_reads_file=os.listdir(input_dir+'/'+sp+'/seed/')
+				target_reads_file=[j for j in target_reads_file if j.endswith('.fq')]
+				target_reads=open(target_reads_file[0]).readlines()
 				target_reads=len(target_reads)/4
 				out.write('\t'.join([sp,str(total_reads),str(target_reads),'NA','NA','NA','NA'])+'\n')
 			except IOError:
