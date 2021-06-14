@@ -127,9 +127,9 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 		out=open(output_dir+'/'+g+'.ordered.fas','a')
 		for rec in y:
 			missing=float(rec.seq.count('-')+rec.seq.count('N'))/len(rec.seq)
-        	if rec.id in total_taxa and missing<max_missing:
-                SeqIO.write(rec,out,'fasta')
-                sp2preserve.append(rec.id)
+			if rec.id in total_taxa and missing<max_missing:
+        		SeqIO.write(rec,out,'fasta')
+        		sp2preserve.append(rec.id)
         out.close()
     	t.prune(list(set(total_taxa) & set(sp2preserve))) 
     	t.write(format=1, outfile=output_dir+'/'+g+".pasta_ref.tre")
@@ -139,13 +139,13 @@ def concatenation(input_dir,files,output):
 	os.mkdir(output+'_tem')
 	for fn in files:
 		#the alphabet argument will not be used, but not including it will trigger an error
-    	x=AlignIO.read(input_dir+'/'+fn,'fasta',alphabet=Gapped(IUPAC.protein))
-   		new_filename=output+'_tem'+'/'+'.'.join(fn.split('.')[:-1])+'.nex'
-    	nexus_filenames.append(new_filename)
-    	g = open(new_filename, "w")
-    	d=g.write(x.format("nexus"))
-    	g.close()
-    nexi =  [(fname, Nexus.Nexus(fname)) for fname in nexus_filenames]
+		x=AlignIO.read(input_dir+'/'+fn,'fasta',alphabet=Gapped(IUPAC.protein))
+		new_filename=output+'_tem'+'/'+'.'.join(fn.split('.')[:-1])+'.nex'
+		nexus_filenames.append(new_filename)
+		g = open(new_filename, "w")
+		d=g.write(x.format("nexus"))
+		g.close()
+	nexi =  [(fname, Nexus.Nexus(fname)) for fname in nexus_filenames]
 	combined = Nexus.combine(nexi)
 	out=open(output+'.conc.nex', 'w')
 	combined.write_nexus_data(out)
