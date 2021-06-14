@@ -272,9 +272,12 @@ elif mode =='order':
 			missing=float(args.missing)
 		else:
 			missing=1
+		print('Reorder alignments based on the species tree '+args.t)
 		order_aln(args.t,args.i,args.suffix,args.o,missing)
 	except ModuleNotFoundError as e:
-		print(e.errno)
+		print('############################################################\n\
+		#ERROR:Module not correctly loaded:')
+		print(e)
 	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
