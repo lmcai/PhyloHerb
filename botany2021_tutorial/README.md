@@ -228,23 +228,19 @@ python $PH/phyloherb.py -m conc -i 3_alignments/chl -o 5sp_chl -suffix .mafft.al
 
 2. Maximum likehood phylogeny
 
-For an initial quick and dirty analysis, I recommend ExaML with unpartitioned alignment. IQTREE or RAxML generates more accurate estimations of the phylogeny and substitution paramters, but may not accomodate thousands of species with millions of sites. The commands I use for ExaML analysis is as follows.
+For this small dataset, we will use IQTREE to generate the maximum likelihood tree. After loading IQTREE to your environment, the example command is:
 ```
-#generate a parsimony tree with RAxML
-raxmlHPC-SSE3 -y -m GTRGAMMA -s DNA_algnment.fas -n test -p 3256179
-parse-examl -s DNA_aln.phy -n test -m GTRGAMMA
-examl-AVX -S -s test.binary -m GAMMA -n testML -t RAxML_parsimonyTree.test
+iqtree2 -m GTR+G -s 5sp_chl.conc.fas --prefix 5sp_chl.rnd1
 ```
 
 3. Second round of manual alignment curation
 
-It can be a quite satisfying experience when you browse through a well-curated alignment. To get us there, we need to conduct a second round of alignment curation and remove spurious regions arising from assembly errors or false positive BLAST hits. 
+We will conduct a second round of alignment curation and remove spurious regions arising from assembly errors or false positive BLAST hits. 
 
-First, using a reference ExaML species tree (newick format), we will order the sequences based on their phylogenetic affinity. This will facilitate manual curation of the alignments in Geneious because you can see shared mutations in closely related species.
+First, using a reference species tree (newick format), we will order the sequences based on their phylogenetic affinity using the `order` function of phyloherb. We will also remove sequences with >50% missing data.
 
-The `order` function of phyloherb takes a reference tree and reorders all alignments in the input directory based on the phylogeny. If you want to additionally filter sequences based on missing data, using the optional `-missing` flag. A float number from 0 to 1 is required for `-missing` to indicate the maximum proportion of ambiguous sites allowed for each sequence.
 ```
-python phyloherb.py -m order -t <reference.tre> -i <directory containing alignments> -o <output directory> -suffix <suffix> -missing <float number 0 to 1>
+python $PH/phyloherb.py -m order -t 5sp_chl.rnd1.treefile -i 3_alignments/chl -o 3_alignments/chl_ordered -suffix .mafft.aln.fas -missing 0.5
 ```
 
 This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene. You will need this tree for the second round of pasta alignment after manual curation.
@@ -255,9 +251,7 @@ Now let's load the ordered alignments to Geneious for some fine tuning. This tim
 
 After a second manual check, your alignments is ready for re-alignment in `pasta`. This time we will use a reference tree `*.pasta_ref.tre` to guide the alignment for each gene.
 ```
-run_pasta.py -i <input sequence> -a -t <reference tree> -o <output directory>
+run_pasta.py -i accD.ordered.fas -a -t accD.pasta_ref.tre -o accD.pasta
 ```
 
-To submit batch job to the cluster, you can modify [this](phyloherbLib/pasta_rnd2.sh) batch file. Make sure you have loaded the correct environment.
-
-When the alignment is done, you can use them to produce your final species tree.
+After the alignment is done, repeat VI.1 to VI.2 to get your final species tree.
