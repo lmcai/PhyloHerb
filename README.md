@@ -7,13 +7,15 @@ We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusia
 
 ## I. Prerequisites
 
+To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
+
+### PhyloHerb
 The main function `phyloherb.py` provides utility functions for data curation, gene extraction, and phylogenomic datasete assembly. We also include an example dataset of five species for practicing. To download PhyloHerb, you can download it as zip or use `git`:
 
 ```
 git clone https://github.com/lmcai/PhyloHerb.git
 ```
-
-To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
+*IMPORTANT*: PhyloHerb is currently only compatible with **Python 3**.
 
 ### Assembly
 1. [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle)
