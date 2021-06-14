@@ -208,6 +208,7 @@ elif mode =='conc':
 		Usage:\n\
 		python phyloherb.py -m conc -i <input directory containing alignments> -o <output directory> -suffix <alignment suffix> [optional] -g <gene list file>')
 elif mode =='order':
+	pass
 else:
 	print('############################################################\n\
 	#ERROR: Please choose one of the following execution mode using -m: submision, qc, ortho, conc, order\n\
