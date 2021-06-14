@@ -1,7 +1,7 @@
 from Bio import AlignIO
 import os, argparse, sys, gzip, shutil
 from Bio import SeqIO
-from ete3 import Tree
+#from ete3 import Tree
 from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
 
@@ -14,6 +14,7 @@ parser.add_argument('-s',  metavar='file', help='[submission mode] path to the t
 parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing a list of species')
 parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
+parser.add_argument('-ref',  metavar='file', help='[ortho mode] custom reference sequences')
 parser.add_argument('-suffix', metavar='string', help='[conc mode] suffix of alignment files')
 parser.add_argument('-t', metavar='file', help='[order mode] newick tree file to order alignments based on phylogeny')
 parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum proportion of missing data allowed for each species')
@@ -24,7 +25,7 @@ def submiter_gen(bash_file,sample_sheet,output):
 	sp_sheet=open(sample_sheet).readlines()
 	out=open(output,'a')
 	for l in sp_sheet[1:]:
-		out.write('sbatch '+bash_file+' '+l.split()[1]+' '+l.split()[2]+' '+l.split()[0]+'\n')
+		d=out.write('sbatch '+bash_file+' '+l.split()[1]+' '+l.split()[2]+' '+l.split()[0]+'\n')
 	out.close()
 
 
@@ -76,7 +77,8 @@ def qc(sample_sheet,input_dir,output_dir):
 			except IOError:
 				out.write('\t'.join([sp,'NA','NA','NA','NA','NA','NA'])+'\n')
 				failed.append(sp)
-	print('Cannot find GetOrganelle outputs in the directory '+input_dir+' for the following species: '+', '.join(failed))
+	if len(failed)>0:
+		print('Cannot find GetOrganelle outputs in the directory '+input_dir+' for the following species: '+', '.join(failed))
 	
 def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
@@ -177,13 +179,15 @@ mode=args.m
 print('############################################################\nPhyloHerb v1.0\nA bioinformatic pipeline for herbariomics based biodiversity reesearch\n')
 if mode =='submission':
 	try:
+		print('Generating submission commands for '+str(len(open(args.s).readlines())-1)+' species...')
 		submiter_gen(args.b,args.s,args.o)
+		print('Done.\nTo submit the jobs to the cluster, type:\nsh <output file name>')
 	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
-		python phyloherb.py -m submision -b <bash file> -s <sample sheet> -o <output>')
-	except IOError as e:print(e.errno):
+		python phyloherb.py -m submision -b <bash file> -s <sample sheet> -o <output file name>')
+	except IOError as e:print(e.errno)
 elif mode =='qc':
 	try:
 		print('processing '+str(len(open(args.s).readlines())-1)+' species for QC analysis...')
@@ -196,18 +200,45 @@ elif mode =='qc':
 		python phyloherb.py -m qc -s <sample sheet> -i <input directory containing Getorganelle output> -o <output directory>')
 elif mode =='ortho':
 	try:
-		genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
-		os.path.dirname(__file__)
-		if args.g:
-			pass
+		PH_path=os.path.dirname(__file__)
+		#get species list
 		if args.sp:
-			pass
-		ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len)
+			species=open(args.sp).readlines()
+			species=[i.strip() for i in species]
+		else:
+			species=os.listdir(args.i)
+			species=[i.split('.')[0] for i in species if i.endswith('.assembly.fas')]
+		#get minimum length for blast hit
+		if args.l:
+			min_len=int(args.l)
+		else:min_len=60
+		#get gene list
+		#genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
+		if args.g:
+			genes=open(args.g).readlines()
+			genes=[i.strip() for i in genes]
+		elif args.mito:
+			genes=open(PH_path+'/database/mito_gene.list').readlines()
+			genes=[i.strip() for i in genes]
+		else:
+			genes=open(PH_path+'/database/plastid_gene.list').readlines()
+			genes=[i.strip() for i in genes]
+		#get reference sequences
+		if args.ref:
+			reference=args.ref
+		elif args.mito:
+			reference=PH_path+'/database/mito_reference.fas'
+		else:
+			reference=PH_path+'/database/plastid_reference.fas'
+		#extract blast hits:				
+		for sp in species:
+			ortho_extraction(sp,reference,args.i,args.o,genes,min_len)			
 	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
-		python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list>')
+		python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference genes>')
+	except IOError as e:print(e.errno)
 elif mode =='conc':
 	try:
 		concatenation(input_dir,files,output)
