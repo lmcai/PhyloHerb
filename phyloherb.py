@@ -255,13 +255,13 @@ elif mode =='ortho':
 	except IOError as e:print(e.errno)
 elif mode =='conc':
 	try:
-		if argv.g is not None:
-			files=open(argv.g).readlines()
+		if args.g is not None:
+			files=open(args.g).readlines()
 			files=[j.strip() for j in files]
 		else:
-			file=os.listdir(argv.i)
-			files=[j for j in files if j.endswith(argv.suffix)]
-		concatenation(argv.i,files,argv.o)
+			file=os.listdir(args.i)
+			files=[j for j in files if j.endswith(args.suffix)]
+		concatenation(args.i,files,args.o)
 	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
