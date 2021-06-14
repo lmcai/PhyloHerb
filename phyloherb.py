@@ -76,7 +76,7 @@ def qc(sample_sheet,input_dir,output_dir):
 			except IOError:
 				out.write('\t'.join([sp,'NA','NA','NA','NA','NA','NA'])+'\n')
 				failed.append(sp)
-		print('Cannot find GetOrganelle outputs for the following species: '+', '.join(failed))
+	print('Cannot find GetOrganelle outputs in the directory '+input_dir+' for the following species: '+', '.join(failed))
 	
 def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
@@ -178,11 +178,12 @@ print('############################################################\nPhyloHerb v
 if mode =='submission':
 	try:
 		submiter_gen(args.b,args.s,args.o)
-	except :
+	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
 		python phyloherb.py -m submision -b <bash file> -s <sample sheet> -o <output>')
+	except IOError as e:print(e.errno):
 elif mode =='qc':
 	try:
 		print('processing '+str(len(open(args.s).readlines())-1)+' species for QC analysis...')
