@@ -25,7 +25,7 @@ git clone https://github.com/lmcai/PhyloHerb.git
 5. Optional assembly viewer: [Geneious](https://www.geneious.com/) (the complementary version is sufficient)
 
 ### Alignment
-6. [Biopython](https://biopython.org/)
+6. Python modules: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/)
 7. Aligner: 
 
 	[Pasta](https://github.com/smirarab/pasta) for highly variable regions such as the ITS sequences
