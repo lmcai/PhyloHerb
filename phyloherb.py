@@ -6,7 +6,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
 
 parser = argparse.ArgumentParser(description='PhyloHerb is a bioinfomatic utility wrappepr to process genome skimming data for phylogenomics studies.')
-parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following [submision, qc, ortho, conc, order]', required=True)
+parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following [submission, qc, ortho, conc, order]', required=True)
 parser.add_argument('-i', metavar='dir', help='input directory')
 parser.add_argument('-o', metavar='dir', help='output directory')
 parser.add_argument('-b', metavar='file', help='[submission mode] path to the bash file')
@@ -15,6 +15,8 @@ parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing
 parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
 parser.add_argument('-suffix', metavar='string', help='[conc mode] suffix of alignment files')
+parser.add_argument('-t', metavar='file', help='[order mode] newick tree file to order alignments based on phylogeny')
+parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum proportion of missing data allowed for each species')
 
 args = parser.parse_args()
 
@@ -170,7 +172,7 @@ def concatenation(input_dir,files,output):
 		
 mode=args.m
 print('############################################################\nPhyloHerb v1.0\nA bioinformatic pipeline for herbariomics based biodiversity reesearch\n')
-if mode =='submision':
+if mode =='submission':
 	try:
 		submiter_gen(args.b,args.s,args.o)
 	except :
@@ -180,8 +182,10 @@ if mode =='submision':
 		python phyloherb.py -m submision -b <bash file> -s <sample sheet> -o <output>')
 elif mode =='qc':
 	try:
+		print('processing '+str(len(open(args.s).readlines())-1)+' species for QC analysis...')
 		qc(args.s,args.i,args.o)
-	except:
+		print('Done.')
+	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
@@ -195,7 +199,7 @@ elif mode =='ortho':
 		if args.sp:
 			pass
 		ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len)
-	except:
+	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
@@ -203,16 +207,22 @@ elif mode =='ortho':
 elif mode =='conc':
 	try:
 		concatenation(input_dir,files,output)
-	except:
+	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
 		python phyloherb.py -m conc -i <input directory containing alignments> -o <output directory> -suffix <alignment suffix> [optional] -g <gene list file>')
 elif mode =='order':
-	pass
+	try:
+		order_aln(args.t,args.i,args.suffix,args.o,args.missing)
+	except TypeError:
+		print('############################################################\n\
+		#ERROR:Insufficient arguments!\n\
+		Usage:\n\
+		python phyloherb.py -m order -t <species tree> -i <input directory containing alignments> -o <output directory> -suffix <alignment suffix> [optional] -missing <missing proportion>')
 else:
 	print('############################################################\n\
-	#ERROR: Please choose one of the following execution mode using -m: submision, qc, ortho, conc, order\n\
+	#ERROR: Please choose one of the following execution mode using -m: submission, qc, ortho, conc, order\n\
 	')
 
 
