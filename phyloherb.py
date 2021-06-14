@@ -144,7 +144,7 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 
 def concatenation(input_dir,files,output):
 	nexus_filenames=[]
-	os.mkdir(output+'_tem')
+	if not os.path.isdir(output+'_tem'):os.mkdir(output+'_tem')
 	for fn in files:
 		#the alphabet argument will not be used, but not including it will trigger an error
 		#x=AlignIO.read(input_dir+'/'+fn,'fasta',alphabet=Gapped(IUPAC.protein))
