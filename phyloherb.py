@@ -6,15 +6,15 @@ from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
 
 parser = argparse.ArgumentParser(description='PhyloHerb is a bioinfomatic utility wrappepr to process genome skimming data for phylogenomics studies.')
-parser.add_argument('-m', help='execution mode, choose one of the following [submision, qc, ortho, conc, order]', required=True)
-parser.add_argument('-i',  help='input directory')
-parser.add_argument('-o',  help='output directory')
-parser.add_argument('-b',  help='[submission mode] path to the bash file')
-parser.add_argument('-s',  help='[submission mode] path to the taxon sampling sheet')
-parser.add_argument('-sp',  help='[ortho mode] a file containing a list of species')
-parser.add_argument('-l',  help='[ortho mode] minimum length of blast hits')
-parser.add_argument('-g',  help='[ortho and conc mode] a file containing a list of loci')
-parser.add_argument('-suffix',  help='[conc mode] suffix of alignment files')
+parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following [submision, qc, ortho, conc, order]', required=True)
+parser.add_argument('-i', metavar='dir', help='input directory')
+parser.add_argument('-o', metavar='dir', help='output directory')
+parser.add_argument('-b', metavar='file', help='[submission mode] path to the bash file')
+parser.add_argument('-s',  metavar='file', help='[submission mode] path to the taxon sampling sheet')
+parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing a list of species')
+parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
+parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
+parser.add_argument('-suffix', metavar='string', help='[conc mode] suffix of alignment files')
 
 args = parser.parse_args()
 
