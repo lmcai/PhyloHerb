@@ -177,7 +177,7 @@ def concatenation(input_dir,files,output):
 	out.close()
 		
 mode=args.m
-print('############################################################\nPhyloHerb v1.0\nA bioinformatic pipeline for herbariomics based biodiversity reesearch\n')
+print('############################################################\nPhyloHerb v1.0\nA bioinformatic pipeline for herbariomics based biodiversity research\n')
 if mode =='submission':
 	try:
 		print('Generating submission commands for '+str(len(open(args.s).readlines())-1)+' species...')
@@ -202,6 +202,7 @@ elif mode =='qc':
 elif mode =='ortho':
 	try:
 		PH_path=os.path.dirname(__file__)
+		print(PH_path)
 		#get species list
 		if args.sp:
 			species=open(args.sp).readlines()
@@ -209,6 +210,7 @@ elif mode =='ortho':
 		else:
 			species=os.listdir(args.i)
 			species=[i.split('.')[0] for i in species if i.endswith('.assembly.fas')]
+		print(species)
 		#get minimum length for blast hit
 		if args.l:
 			min_len=int(args.l)
@@ -224,6 +226,7 @@ elif mode =='ortho':
 		else:
 			genes=open(PH_path+'/database/plastid_gene.list').readlines()
 			genes=[i.strip() for i in genes]
+		print(genes)
 		#get reference sequences
 		if args.ref:
 			reference=args.ref
@@ -231,6 +234,7 @@ elif mode =='ortho':
 			reference=PH_path+'/database/mito_reference.fas'
 		else:
 			reference=PH_path+'/database/plastid_reference.fas'
+		print(reference)
 		#extract blast hits:				
 		for sp in species:
 			ortho_extraction(sp,reference,args.i,args.o,genes,min_len)			
