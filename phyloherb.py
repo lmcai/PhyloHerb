@@ -206,10 +206,10 @@ elif mode =='ortho':
 		#get species list
 		if args.sp:
 			species=open(args.sp).readlines()
-			species=[i.strip() for i in species]
+			species=[j.strip() for j in species]
 		else:
 			species=os.listdir(args.i)
-			species=[i.split('.')[0] for i in species if i.endswith('.assembly.fas')]
+			species=[j.split('.')[0] for j in species if j.endswith('.assembly.fas')]
 		print(species)
 		#get minimum length for blast hit
 		if args.l:
@@ -219,13 +219,13 @@ elif mode =='ortho':
 		#genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
 		if args.g:
 			genes=open(args.g).readlines()
-			genes=[i.strip() for i in genes]
+			genes=[j.strip() for j in genes]
 		elif args.mito:
 			genes=open(PH_path+'/database/mito_gene.list').readlines()
-			genes=[i.strip() for i in genes]
+			genes=[j.strip() for j in genes]
 		else:
 			genes=open(PH_path+'/database/plastid_gene.list').readlines()
-			genes=[i.strip() for i in genes]
+			genes=[j.strip() for j in genes]
 		print(genes)
 		#get reference sequences
 		if args.ref:
