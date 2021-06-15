@@ -188,7 +188,7 @@ Let's assume that there are seven genes G1-7 on a scaffold.
 
 The `gene` mode will extract all annotated gene features from all genbank files in the input directory
 ```
-python phyloherb.py -m getseq -i <input directory> -suffix <genbank suffix> -o <output directory>
+python phyloherb.py -m getseq -f gene -i <input directory> -suffix <genbank suffix> -o <output directory>
 ```
 <img src="/images/gene.png" width="400" height="90">
 
