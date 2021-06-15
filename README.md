@@ -198,7 +198,7 @@ sbatch mafft_pasta.sh <gene_2>
 
 4. Intergenic regions
 
-Intergenic regions are mostly useful for phylogenetic research among closely related species. In addition, some plastid genes are very short, we can combine several adjacent gene and intergenic region to produce a longer genetic block for downstream analyses. Combining short genetic blocks into long ones has the benefit of higher blast accuracy, but you should make sure the target regions do not have **structural variations** among different species. `PhyloHerb` offers three modes for genetic region extraction.
+Intergenic regions are mostly useful for phylogenetic research among closely related species. In addition, some plastid genes are very short, we can combine several adjacent gene and intergenic region to produce a longer genetic block for downstream analyses. Combining short genetic blocks into long ones has the benefit of higher blast accuracy, but you should make sure the target regions do not have **structural variations** among different species. `PhyloHerb` offers three modes for genetic region extraction **from Genbank annotation**. The results can be used as reference sequences for ortholog extraction using the `ortho` function of PhyloHerb.
 
 Let's assume that there are seven genes G1-7 on a scaffold.
 
