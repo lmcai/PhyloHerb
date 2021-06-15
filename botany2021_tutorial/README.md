@@ -38,7 +38,7 @@ Download PhyloHerb and example datasets from Github
 git clone https://github.com/lmcai/PhyloHerb.git
 mkdir herbariomics_workshop
 cd herbariomics_workshop
-export PH=../PhyloHerb
+export PH=$(pwd)/../PhyloHerb
 ```
 
 Move and rename the example dataset from PhyloHerb to the current working directory
@@ -69,7 +69,7 @@ mkdir mito
 The basic commands for running assembly with pair end data is as follows:
 
 ```
-export DATA_DIR=../0_fastq
+export DATA_DIR=$(pwd)/../0_fastq
 #To assemble plant plastome
 get_organelle_from_reads.py -1 $DATA_DIR/SP1_R1.100m.1.fastq.gz -2 $DATA_DIR/SP1_R2.100m.1.fastq.gz -o chl/sp1 -R 15 -k 21,45,65,85,95,105 -F embplant_pt
 
