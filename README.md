@@ -190,7 +190,7 @@ The `gene` mode will extract all annotated gene features from all genbank files 
 ```
 python phyloherb.py -m getseq -i <input directory> -suffix <genbank suffix> -o <output directory>
 ```
-<img src="/images/gene.png" width="400" height="100">
+<img src="/images/gene.png" width="400" height="90">
 
 The `genetic_block` mode will take a genetic block delimitation file, and 
 
