@@ -180,7 +180,7 @@ def concatenation(input_dir,files,output):
 	out.close()
 
 def gene_extra(input_dir,suffix,output_dir):
-	filenames=os.listdir(input_dir):
+	filenames=os.listdir(input_dir)
 	filenames=[j for j in filenames if j.endswith(suffix)]
 	f not os.path.isdir(output_dir):os.mkdir(output_dir)
 	for f in filenames:
@@ -220,7 +220,7 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
 				output_handle.close()
 			except KeyError:
-				print('Cannot find one or both of the following gene(s): '+l)
+				print('Cannot find the following genes in the Genbank annotation: '+l)
 
 	
 	
