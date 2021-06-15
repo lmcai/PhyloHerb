@@ -116,6 +116,7 @@ The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mit
 [Bandage](https://rrwick.github.io/Bandage/) is a program for visualising de novo assembly graphs. The assembly graph files *.fastg and *.gfa generated from our previous assembly step could be visualized in Bandage and exported into sequences. You can find a more detailed introduction about Bandage here.
 
 The key output files generated from assembly include
+
 •	*.path_sequence.fasta, each fasta file represents one type of genome structure 
 
 •	*.selected_graph.gfa, the assembly graph only with true contigs of organelle genome.
