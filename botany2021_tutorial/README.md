@@ -38,6 +38,9 @@ Download PhyloHerb and example datasets from Github
 git clone https://github.com/lmcai/PhyloHerb.git
 mkdir herbariomics_workshop
 cd herbariomics_workshop
+#get current path
+pwd
+#define path to PhyloHerb
 export PH=$(pwd)/../PhyloHerb
 ```
 
