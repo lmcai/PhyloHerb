@@ -178,6 +178,53 @@ def concatenation(input_dir,files,output):
 			begin_write=0
 		if begin_write==1:out.write(l)
 	out.close()
+
+def gene_extra(input_dir,suffix,output_dir):
+	filenames=os.listdir(input_dir):
+	filenames=[j for j in filenames if j.endswith(suffix)]
+	f not os.path.isdir(output_dir):os.mkdir(output_dir)
+	for f in filenames:
+		gb_recs=SeqIO.read(f,'genbank')
+		for feature in gb_recs.features:
+			if feature.type=='gene':
+				output_handle=open(output_dir+'/'+feature.qualifiers['gene'][0]+'.gene.fas','a')
+				d=output_handle.write(">%s\n%s\n" % (feature.qualifiers['gene'][0]+'_'+f.split('.')[0],feature.extract(gb_recs).seq))
+				output_handle.close()
+
+def geneblock_extra(input_dir,suffix,output_dir,gene_def):
+	filenames=os.listdir(input_dir):
+	filenames=[j for j in filenames if j.endswith(suffix)]
+	f not os.path.isdir(output_dir):os.mkdir(output_dir)
+	genes=open(gene_def).readlines()
+	for f in filenames:
+		gb_recs=SeqIO.read(f,'genbank')
+		gene_pos={}
+		for feature in gb_recs.features:
+			if feature.type=='gene':
+				try:
+					gene_pos[feature.qualifiers['gene'][0]]=gene_pos[feature.qualifiers['gene'][0]]+[int(feature.location.start),int(feature.location.end)]
+				except KeyError:
+					gene_pos[feature.qualifiers['gene'][0]]=[int(feature.location.start),int(feature.location.end)]
+		for l in genes:
+			loci=l.split()[0]
+			start_g=l.split()[1]
+			end_g=l.split()[2]
+			try:
+				combined_block=gene_pos[start_g]+gene_pos[end_g]
+				if len(combined_block)=4:
+					start=min(combined_block)
+					end=max(combined_block)
+				elif 
+				seq=gb_recs.seq[(start-1):(end-1)]
+				output_handle=open(loci+'.geneblock.fas','a')
+				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
+				output_handle.close()
+			except KeyError:
+				print('Cannot find one or both of the following gene(s): '+l)
+
+	
+	
+	
 		
 mode=args.m
 print('############################################################\nPhyloHerb v1.0\nA bioinformatic pipeline for herbariomics based biodiversity research\n')
