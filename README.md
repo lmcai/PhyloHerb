@@ -204,13 +204,13 @@ Let's assume that there are seven genes G1-7 on a scaffold.
 
 <img src="/images/seven_genes_black.png" width="400" height="80">
 
-The `gene` mode will extract all annotated gene features from all genbank files in the input directory
+The `-f gene` mode will extract all annotated gene features from all genbank files in the input directory
 ```
 python phyloherb.py -m getseq -f gene -i <input directory> -suffix <genbank suffix> -o <output directory>
 ```
 <img src="/images/gene.png" width="400" height="90">
 
-Both the `genetic_block` and `intergenic` mode will take a genetic block definition file supplied by `-gene_def`, and extract corresponding regions. This tab-delimited file have three columns: genetic region name, start gene, and end gene. An example can be found [here](/example/gene_def.txt).
+Both the `-f genetic_block` and `-f intergenic` mode will take a genetic block definition file supplied by `-gene_def`, and extract corresponding regions. This tab-delimited file have three columns: genetic region name, start gene, and end gene. An example can be found [here](/example/gene_def.txt).
 ```
 name	start	end
 INT1	G1	G2
@@ -218,14 +218,14 @@ INT2	G3	G7
 ...
 ```
 
-The `genetic_block` mode will extract the coding regions of the start and end genes as well as everything in between. It is good for combining multiple short genes.
+The `-f genetic_block` mode will extract the coding regions of the start and end genes as well as everything in between. It is good for combining multiple short genes.
 ```
 python phyloherb.py -m getseq -f genetic_block -i <input directory> -suffix <genbank suffix> -o <output directory> -gene_def <gene definition file>
 ```
 
 <img src="/images/genetic_block.png" width="400" height="90">
 
-Finally, the `intergenic` mode generates similar outcomes, but does not include the genes on both ends. It is good for extracting longer intergenic regions.
+Finally, the `-f intergenic` mode generates similar outcomes, but does not include the genes on both ends. It is good for extracting longer intergenic regions.
 ```
 python phyloherb.py -m getseq -f intergenic -i <input directory> -suffix <genbank suffix> -o <output directory> -gene_def <gene definition file>
 ```
