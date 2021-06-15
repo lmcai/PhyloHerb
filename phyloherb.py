@@ -182,7 +182,7 @@ def concatenation(input_dir,files,output):
 def gene_extra(input_dir,suffix,output_dir):
 	filenames=os.listdir(input_dir)
 	filenames=[j for j in filenames if j.endswith(suffix)]
-	f not os.path.isdir(output_dir):os.mkdir(output_dir)
+	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	for f in filenames:
 		gb_recs=SeqIO.read(f,'genbank')
 		for feature in gb_recs.features:
@@ -192,9 +192,9 @@ def gene_extra(input_dir,suffix,output_dir):
 				output_handle.close()
 
 def geneblock_extra(input_dir,suffix,output_dir,gene_def):
-	filenames=os.listdir(input_dir):
+	filenames=os.listdir(input_dir)
 	filenames=[j for j in filenames if j.endswith(suffix)]
-	f not os.path.isdir(output_dir):os.mkdir(output_dir)
+	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	genes=open(gene_def).readlines()
 	for f in filenames:
 		gb_recs=SeqIO.read(f,'genbank')
