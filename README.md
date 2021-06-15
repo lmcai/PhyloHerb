@@ -150,6 +150,7 @@ atcg...
 atcg...
 >gene2_sp2
 ```
+If you have annotated plastid assemblies (from GeqSeq for example) in genbank format, you can use the `getseq` function of PhyloHerb to obtain gene and intergenic regions (see section V.4 below).
 
 2. Extract orthologous gene or intergenic regions from the assembly
 
@@ -162,7 +163,7 @@ python phyloherb.py -m ortho -i <directory containing assemblies> -o <output dir
 ```
 You can choose to extract a subset of genes from a subset of the species by supplying a `-g gene_subset.txt` and `-sp species_subset.txt`. Example files can be found in [gene_subset.txt](/example/gene_subset.txt) and [species_subset.txt](/example/species_subset.txt). You can also set a minimum length limit for gene region extraction via `-l <lower limit>`. Blast hits shorter than this will not be use.
 ```
-python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -g <gene list> -sp <species list> -l 
+python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -g <gene list> -sp <species list> -l <length limit>
 ```
 
 3. Alignment
@@ -179,6 +180,16 @@ sbatch mafft_pasta.sh <gene_2>
 
 4. Intergenic regions
 
+Intergenic regions are mostly useful for phylogenetic research among closely related species. In addition, some plastid genes are very short, we can combine several adjacent gene and intergenic region to produce a longer genetic block for downstream analyses. Combining short genetic blocks into long ones has the benefit of higher blast accuracy, but you should make sure the target regions do not have **structural variations** among different species. `PhyloHerb` offers three modes for genetic region extraction. Assuming seven genes G1-7 on a scaffold:
+<img src="/images/seven_genes_black.png" width="400" height="150">
+
+The `gene` mode will extract all annotated gene features from the genbank files
+```
+python phyloherb.py -m getseq -i <input directory> -suffix <genbank suffix> -o <output directory>
+```
+<img src="/images/gene.png" width="400" height="150">
+
+The `genetic_block` mode will take a genetic block delimitation file, and 
 
 5. Nuclear ribosomal regions
 
@@ -192,8 +203,10 @@ We will try to align the entire region using MAFFT first.
 
 6. Mitochondrial regions
 
-For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So we will only extract mitochondrial genes for comparative purposes. The methods is similar to plastid genes.
-
+For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So I recommend using mitochondrial genes only. If you want to use our build-in mitochondrial gene sequence database, invoke the `-mito` flag under the `ortho` mode 
+```
+python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -g <gene list> -sp <species list> -l <length limit> -mito
+```
 
 7. Manual curation in Geneious
 

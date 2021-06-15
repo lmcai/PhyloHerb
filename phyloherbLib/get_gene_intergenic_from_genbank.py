@@ -1,17 +1,9 @@
-import fnmatch
 import os
 from Bio import SeqIO
 
-filenames=list()
-for file in os.listdir('.'):
-	 if fnmatch.fnmatch(file, '*.gb'):filenames.append(file)
-
-#gene=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","trnK-UUU","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","trnV-UAC","rps3","petB","trnL-UAA","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","trnA-UGC","rrn4.5","petL","petN"]
-
-########################################
-#get several additional gene sequences
-gene2write=['trnE-UUC', 'trnS-CGA', 'pbf1', 'psbT', 'psbM', 'rrn4.5', 'petL', 'petN']
-
+filenames=[]
+filenames=os.listdir('.'):
+filenames=[j for j in filenames if j.endswith('*.gb')]
 
 for f in filenames:
 	gb_recs=SeqIO.read(f,'genbank')
