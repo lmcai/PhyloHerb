@@ -215,8 +215,14 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 					start=min(combined_block)
 					end=max(combined_block)
 				elif len(combined_block)>4:
-					print('At least on of the genes in '+l.strip()+' have multiple copies in the current assembly (most likely inverted repeats).\nPhyloHerb is trying to resolving this...\nMake sure you check '+loci+' manually afterwards.')
-					
+					print('At least on of the genes in ['+', '.join(l.strip()[1:2])+'] have multiple copies in the current assembly (most likely inverted repeats).\nPhyloHerb is trying to resolving this...\nMake sure you check '+loci+' manually afterwards.')
+					combined_block=gene_pos[start_g][0:1]
+					if abs(gene_pos[end_g][0]-gene_pos[start_g][0]) < abs(gene_pos[end_g][2]-gene_pos[start_g][0]):
+						combined_block=combined_block+gene_pos[end_g][0:1]
+					else:
+						combined_block=combined_block+gene_pos[end_g][2:3]
+					start=min(combined_block)
+					end=max(combined_block)
 				seq=gb_recs.seq[(start-1):(end-1)]
 				output_handle=open(loci+'.geneblock.fas','a')
 				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
