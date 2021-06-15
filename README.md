@@ -200,7 +200,13 @@ INT2	G3	G7
 ...
 ```
 
-The `genetic_block` mode will extract 
+The `genetic_block` mode will extract the coding regions of the start and end genes as well as everything in between. It is good for combining multiple short genes.
+
+<img src="/images/genetic_block.png" width="400" height="90">
+
+Finally, the `intergenic` mode generates similar outcomes, but does not include the genes on both ends.
+
+<img src="/images/intergenetic.png" width="400" height="90">
 
 5. Nuclear ribosomal regions
 
