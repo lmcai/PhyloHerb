@@ -192,7 +192,15 @@ python phyloherb.py -m getseq -f gene -i <input directory> -suffix <genbank suff
 ```
 <img src="/images/gene.png" width="400" height="90">
 
-The `genetic_block` mode will take a genetic block delimitation file, and 
+Both the `genetic_block` and `intergenic` mode will take a genetic block definition file supplied by `-gene_def`, and extract corresponding regions. This tab-delimited file have three columns: genetic region name, start gene, and end gene. An example can be found [here](/example/gene_def.txt).
+```
+name	start	end
+INT1	G1	G2
+INT2	G3	G7
+...
+```
+
+The `genetic_block` mode will extract 
 
 5. Nuclear ribosomal regions
 

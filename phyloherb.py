@@ -18,6 +18,9 @@ parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes usi
 parser.add_argument('-suffix', metavar='string', help='[conc mode] suffix of alignment files')
 parser.add_argument('-t', metavar='file', help='[order mode] newick tree file to order alignments based on phylogeny')
 parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum proportion of missing data allowed for each species')
+parser.add_argument('-f',  metavar='file', help='[getseq mode] how to extract loci, choose one of the following [gene, genetic_block, intergenic]')
+parser.add_argument('-gene_def',  metavar='file', help='[getseq mode] a gene delimitation file that defines genetic blocks')
+
 
 args = parser.parse_args()
 
