@@ -202,9 +202,9 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 		for feature in gb_recs.features:
 			if feature.type=='gene':
 				try:
-					gene_pos[feature.qualifiers['gene'][0]]=gene_pos[feature.qualifiers['gene'][0]]+[int(feature.location.start),int(feature.location.end)]
+					gene_pos[feature.qualifiers['gene'][0]] = gene_pos[feature.qualifiers['gene'][0]] + [int(feature.location.start),int(feature.location.end)]
 				except KeyError:
-					gene_pos[feature.qualifiers['gene'][0]]=[int(feature.location.start),int(feature.location.end)]
+					gene_pos[feature.qualifiers['gene'][0]] = [int(feature.location.start),int(feature.location.end)]
 		for l in genes:
 			loci=l.split()[0]
 			start_g=l.split()[1]
@@ -214,7 +214,9 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 				if len(combined_block)=4:
 					start=min(combined_block)
 					end=max(combined_block)
-				elif 
+				elif len(combined_block)>4:
+					print('At least on of the genes in '+l.strip()+' have multiple copies in the current assembly (most likely inverted repeats).\nPhyloHerb is trying to resolving this...\nMake sure you check '+loci+' manually afterwards.')
+					
 				seq=gb_recs.seq[(start-1):(end-1)]
 				output_handle=open(loci+'.geneblock.fas','a')
 				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
@@ -227,7 +229,9 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 	
 		
 mode=args.m
-print('############################################################\nPhyloHerb v1.0\nA bioinformatic pipeline for herbariomics based biodiversity research\n')
+print('############################################################\n\
+PhyloHerb v1.0\n\
+A bioinformatic pipeline for herbariomics based biodiversity research\n')
 if mode =='submission':
 	try:
 		print('Generating submission commands for '+str(len(open(args.s).readlines())-1)+' species...')
