@@ -201,12 +201,20 @@ INT2	G3	G7
 ```
 
 The `genetic_block` mode will extract the coding regions of the start and end genes as well as everything in between. It is good for combining multiple short genes.
+```
+python phyloherb.py -m getseq -f genetic_block -i <input directory> -suffix <genbank suffix> -o <output directory> -gene_def <gene definition file>
+```
 
 <img src="/images/genetic_block.png" width="400" height="90">
 
-Finally, the `intergenic` mode generates similar outcomes, but does not include the genes on both ends.
+Finally, the `intergenic` mode generates similar outcomes, but does not include the genes on both ends. It is good for extracting longer intergenic regions.
+```
+python phyloherb.py -m getseq -f intergenic -i <input directory> -suffix <genbank suffix> -o <output directory> -gene_def <gene definition file>
+```
 
 <img src="/images/intergenetic.png" width="400" height="90">
+
+
 
 5. Nuclear ribosomal regions
 
