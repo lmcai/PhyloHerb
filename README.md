@@ -212,7 +212,7 @@ Finally, the `intergenic` mode generates similar outcomes, but does not include 
 python phyloherb.py -m getseq -f intergenic -i <input directory> -suffix <genbank suffix> -o <output directory> -gene_def <gene definition file>
 ```
 
-<img src="/images/intergenetic.png" width="400" height="90">
+<img src="/images/intergenic.png" width="400" height="90">
 
 
 
