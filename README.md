@@ -113,6 +113,18 @@ The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mit
 
 ### 5. Assembly visualization with Bandage
 
+[Bandage](https://rrwick.github.io/Bandage/) is a program for visualising de novo assembly graphs. The assembly graph files *.fastg and *.gfa generated from our previous assembly step could be visualized in Bandage and exported into sequences. You can find a more detailed introduction about Bandage here.
+
+The key output files generated from assembly include
+•	*.path_sequence.fasta, each fasta file represents one type of genome structure 
+•	*.selected_graph.gfa, the assembly graph only with true contigs of organelle genome.
+•	extended_K*.assembly_graph.fastg, the raw assembly graph
+•	extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.fastg, a simplified assembly graph
+•	extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.csv, a tab-format contig label file for bandage visualization
+•	get_org.log.txt, the log file
+
+The *.path_sequence.fasta files do not always navigate the right paths for organelle genomes, especially the ones with complicated structures. [Here](https://www.youtube.com/watch?v=cXUV7k-F26w) is an video introducing how to generate complete (if possible) and accurate sequences from Bandage with different examples. We will also practice with our own data during the workshop.
+
 
 ### 6. Assembly QC 
 
