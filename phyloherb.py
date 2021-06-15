@@ -230,10 +230,39 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 			except KeyError:
 				print('Cannot find the following genes in the Genbank annotation: '+l)
 
+def intergenic_extra(input_dir,suffix,output_dir,gene_def):
+	filenames=os.listdir(input_dir)
+	filenames=[j for j in filenames if j.endswith(suffix)]
+	if not os.path.isdir(output_dir):os.mkdir(output_dir)
+	genes=open(gene_def).readlines()
+	for f in filenames:
+		gb_recs=SeqIO.read(f,'genbank')
+		#get all gene positions. for genes in the IR region, this will be the position in the second IR.
+		gene_start={}
+		gene_end={}
+		for feature in gb_recs.features:
+			if feature.type=='gene':
+				try:
+					gene_name=feature.qualifiers['gene'][0]
+					gene_start[gene_name]=int(feature.location.start)
+					gene_end[gene_name]=int(feature.location.end)
+				except KeyError:pass
+		#get intergenic regions and write to file
+		for l in genes:
+			loci=l.split()[0]
+			start_g=l.split()[1]
+			end_g=l.split()[2]
+			two_gene_pos=[]
+			try:
+				two_gene_pos=[gene_start[start_g],gene_end[start_g],gene_start[end_g],gene_end[end_g]]
+				two_gene_pos.sort()
+				seq=gb_recs.seq[(two_gene_pos[1]-1):(two_gene_pos[2]-1)]
+				output_handle=open(k+'.fas','a')
+				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
+				output_handle.close()
+			except KeyError:pass
+
 	
-	
-	
-		
 mode=args.m
 print('############################################################\n\
 PhyloHerb v1.0\n\
