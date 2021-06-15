@@ -211,7 +211,7 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 			end_g=l.split()[2]
 			try:
 				combined_block=gene_pos[start_g]+gene_pos[end_g]
-				if len(combined_block)=4:
+				if len(combined_block)==4:
 					start=min(combined_block)
 					end=max(combined_block)
 				elif len(combined_block)>4:
