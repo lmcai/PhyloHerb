@@ -187,9 +187,12 @@ def gene_extra(input_dir,suffix,output_dir):
 		gb_recs=SeqIO.read(input_dir+'/'+f,'genbank')
 		for feature in gb_recs.features:
 			if feature.type=='gene':
-				output_handle=open(output_dir+'/'+feature.qualifiers['gene'][0]+'.gene.fas','a')
-				d=output_handle.write(">%s\n%s\n" % (feature.qualifiers['gene'][0]+'_'+f.split('.')[0],feature.extract(gb_recs).seq))
-				output_handle.close()
+				try:
+					output_handle=open(output_dir+'/'+feature.qualifiers['gene'][0]+'.gene.fas','a')
+					d=output_handle.write(">%s\n%s\n" % (feature.qualifiers['gene'][0]+'_'+f.split('.')[0],feature.extract(gb_recs).seq))
+					output_handle.close()
+				except KeyError:
+					print(feature.qualifiers)
 
 def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 	filenames=os.listdir(input_dir)
@@ -383,10 +386,13 @@ elif mode =='getseq':
 		print('Extracting gene and/or intergenic regions under the '+args.f+' mode from the Genbank files in '+args.i)
 		if args.f=='gene':
 			gene_extra(args.i,args.suffix,args.o)
+			print('Done!')
 		elif args.f=='genetic_block':
 			geneblock_extra(args.i,args.suffix,args.o,args.gene_def)
+			print('Done!')
 		elif args.f=='intergenetic':
 			intergenic_extra(args.i,args.suffix,args.o,args.gene_def)
+			print('Done!')
 		else:
 			print('############################################################\n\
 		#ERROR:Argument error!\n\
