@@ -210,7 +210,7 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 					gene_start[gene_name]=int(feature.location.start)
 					gene_end[gene_name]=int(feature.location.end)
 				except KeyError:pass
-		for l in genes:
+		for l in genes[1:]:
 			loci=l.split()[0]
 			start_g=l.split()[1]
 			end_g=l.split()[2]
@@ -245,7 +245,7 @@ def intergenic_extra(input_dir,suffix,output_dir,gene_def):
 					gene_end[gene_name]=int(feature.location.end)
 				except KeyError:pass
 		#get intergenic regions and write to file
-		for l in genes:
+		for l in genes[1:]:
 			loci=l.split()[0]
 			start_g=l.split()[1]
 			end_g=l.split()[2]
