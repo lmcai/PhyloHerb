@@ -1,3 +1,4 @@
 name	start	end
-INT1	G1	G2
-INT2	G3	G7
+INT1	psbA	matK
+INT2	rps16	atpA
+INT3	rpoC2	rpoB
