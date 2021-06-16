@@ -184,7 +184,7 @@ def gene_extra(input_dir,suffix,output_dir):
 	filenames=[j for j in filenames if j.endswith(suffix)]
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	for f in filenames:
-		gb_recs=SeqIO.read(f,'genbank')
+		gb_recs=SeqIO.read(input_dir+'/'+f,'genbank')
 		for feature in gb_recs.features:
 			if feature.type=='gene':
 				output_handle=open(output_dir+'/'+feature.qualifiers['gene'][0]+'.gene.fas','a')
