@@ -5,7 +5,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
 
 parser = argparse.ArgumentParser(description='PhyloHerb is a bioinfomatic utility wrappepr to process genome skimming data for phylogenomics studies.')
-parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following [submission, qc, ortho, conc, order]', required=True)
+parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following [submission, qc, ortho, conc, order, getseq]', required=True)
 parser.add_argument('-i', metavar='dir', help='input directory')
 parser.add_argument('-o', metavar='dir', help='output directory')
 parser.add_argument('-b', metavar='file', help='[submission mode] path to the bash file')
@@ -388,11 +388,10 @@ elif mode =='getseq':
 		elif args.f=='intergenetic':
 			intergenic_extra(args.i,args.suffix,args.o,args.gene_def)
 		else:
-			print(print('############################################################\n\
+			print('############################################################\n\
 		#ERROR:Argument error!\n\
 		Usage:\n\
 		python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -gene_def <gene definition file>')
-
 	except TypeError:
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
@@ -401,7 +400,7 @@ elif mode =='getseq':
 	except IOError as e:print(e)
 else:
 	print('############################################################\n\
-	#ERROR: Please choose one of the following execution mode using -m: submission, qc, ortho, conc, order\n\
+	#ERROR: Please choose one of the following execution mode using -m: submission, qc, ortho, conc, order, getseq\n\
 	')
 
 
