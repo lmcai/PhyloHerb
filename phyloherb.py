@@ -138,7 +138,7 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 		sp2preserve=[]
 		t=Tree(sptree)
 		y=SeqIO.parse(input_dir+'/'+g,'fasta')
-		out=open(output_dir+'/'+g+'.ordered.fas','a')
+		out=open(output_dir+'/'+'.'.join(g.split('.')[:-1])+'.ordered.fas','a')
 		for rec in y:
 			missing=float(rec.seq.count('-')+rec.seq.count('N'))/len(rec.seq)
 			if rec.id in total_taxa and missing<max_missing:
@@ -146,7 +146,7 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 				sp2preserve.append(rec.id)
 		out.close()
 		t.prune(list(set(total_taxa) & set(sp2preserve))) 
-		t.write(format=1, outfile=output_dir+'/'+g+".pasta_ref.tre")
+		t.write(format=1, outfile=output_dir+'/'+'.'.join(g.split('.')[:-1])+".pasta_ref.tre")
 
 def concatenation(input_dir,files,output):
 	nexus_filenames=[]
