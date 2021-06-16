@@ -220,7 +220,7 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 				two_gene_pos.sort()
 				start=min(two_gene_pos)
 				end=max(two_gene_pos)
-				seq=gb_recs.seq[(start-1):(end-1)]
+				seq=gb_recs.seq[(start-1):end]
 				output_handle=open(output_dir+'/'+loci+'.geneblock.fas','a')
 				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
 				output_handle.close()
@@ -253,7 +253,7 @@ def intergenic_extra(input_dir,suffix,output_dir,gene_def):
 			try:
 				two_gene_pos=[gene_start[start_g],gene_end[start_g],gene_start[end_g],gene_end[end_g]]
 				two_gene_pos.sort()
-				seq=gb_recs.seq[(two_gene_pos[1]-1):(two_gene_pos[2]-1)]
+				seq=gb_recs.seq[(two_gene_pos[1]-1):two_gene_pos[2]]
 				output_handle=open(output_dir+'/'+loci+'.intergenic.fas','a')
 				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
 				output_handle.close()
