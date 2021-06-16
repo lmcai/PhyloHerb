@@ -364,7 +364,9 @@ elif mode =='order':
 			missing=float(args.missing)
 		else:
 			missing=1
-		print('Reorder alignments based on the species tree '+args.t)
+		files=os.listdir(args.i)
+		files=[j for j in files if j.endswith(args.suffix)]
+		print('Reorder ' +str(len(files))+'alignments based on the species tree '+args.t)
 		order_aln(args.t,args.i,args.suffix,args.o,missing)
 		print('Done.')
 	except ModuleNotFoundError as e:
