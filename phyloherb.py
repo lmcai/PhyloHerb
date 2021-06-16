@@ -385,7 +385,7 @@ elif mode =='getseq':
 		elif args.f=='genetic_block':
 			geneblock_extra(args.i,args.suffix,args.o,args.gene_def)
 			print('Done!')
-		elif args.f=='intergenetic':
+		elif args.f=='intergenic':
 			intergenic_extra(args.i,args.suffix,args.o,args.gene_def)
 			print('Done!')
 		else:
