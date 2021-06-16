@@ -200,31 +200,26 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 	genes=open(gene_def).readlines()
 	for f in filenames:
 		gb_recs=SeqIO.read(input_dir+'/'+f,'genbank')
-		gene_pos={}
+		#get all gene positions. for genes in the IR region, this will be the position in the second IR.
+		gene_start={}
+		gene_end={}
 		for feature in gb_recs.features:
 			if feature.type=='gene':
 				try:
-					gene_pos[feature.qualifiers['gene'][0]] = gene_pos[feature.qualifiers['gene'][0]] + [int(feature.location.start),int(feature.location.end)]
-				except KeyError:
-					gene_pos[feature.qualifiers['gene'][0]] = [int(feature.location.start),int(feature.location.end)]
+					gene_name=feature.qualifiers['gene'][0]
+					gene_start[gene_name]=int(feature.location.start)
+					gene_end[gene_name]=int(feature.location.end)
+				except KeyError:pass
 		for l in genes:
 			loci=l.split()[0]
 			start_g=l.split()[1]
 			end_g=l.split()[2]
+			two_gene_pos=[]
 			try:
-				combined_block=gene_pos[start_g]+gene_pos[end_g]
-				if len(combined_block)==4:
-					start=min(combined_block)
-					end=max(combined_block)
-				elif len(combined_block)>4:
-					print('At least on of the genes in ['+', '.join(l.strip()[1:2])+'] have multiple copies in the current assembly (most likely inverted repeats).\nPhyloHerb is trying to resolving this...\nMake sure you check '+loci+' manually afterwards.')
-					combined_block=gene_pos[start_g][0:1]
-					if abs(gene_pos[end_g][0]-gene_pos[start_g][0]) < abs(gene_pos[end_g][2]-gene_pos[start_g][0]):
-						combined_block=combined_block+gene_pos[end_g][0:1]
-					else:
-						combined_block=combined_block+gene_pos[end_g][2:3]
-					start=min(combined_block)
-					end=max(combined_block)
+				two_gene_pos=[gene_start[start_g],gene_end[start_g],gene_start[end_g],gene_end[end_g]]
+				two_gene_pos.sort()
+				start=min(two_gene_pos)
+				end=max(two_gene_pos)
 				seq=gb_recs.seq[(start-1):(end-1)]
 				output_handle=open(loci+'.geneblock.fas','a')
 				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
@@ -262,7 +257,8 @@ def intergenic_extra(input_dir,suffix,output_dir,gene_def):
 				output_handle=open(k+'.fas','a')
 				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
 				output_handle.close()
-			except KeyError:pass
+			except KeyError:
+				print('Cannot find the following genes in the Genbank annotation: '+l)
 
 	
 mode=args.m
