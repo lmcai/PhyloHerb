@@ -378,6 +378,27 @@ elif mode =='order':
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
 		python phyloherb.py -m order -t <species tree> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -missing <missing proportion>')
+elif mode =='getseq':
+	try:
+		print('Extracting gene and/or intergenic regions under the '+args.f+' mode from the Genbank files in '+args.i)
+		if args.f=='gene':
+			gene_extra(args.i,args.suffix,args.o)
+		elif args.f=='genetic_block':
+			geneblock_extra(args.i,args.suffix,args.o,args.gene_def)
+		elif args.f=='intergenetic':
+			intergenic_extra(args.i,args.suffix,args.o,args.gene_def)
+		else:
+			print(print('############################################################\n\
+		#ERROR:Argument error!\n\
+		Usage:\n\
+		python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -gene_def <gene definition file>')
+
+	except TypeError:
+		print('############################################################\n\
+		#ERROR:Insufficient arguments!\n\
+		Usage:\n\
+		python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -gene_def <gene definition file>')
+	except IOError as e:print(e)
 else:
 	print('############################################################\n\
 	#ERROR: Please choose one of the following execution mode using -m: submission, qc, ortho, conc, order\n\
