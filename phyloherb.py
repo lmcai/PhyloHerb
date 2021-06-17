@@ -355,8 +355,8 @@ elif mode =='ortho':
 			reference=PH_path+'/database/rDNA_reference.fas'
 			for sp in species:
 				ortho_extraction(sp,reference,args.i,args.o,genes,min_len)
-			#get ITSs
-			
+				#get ITSs
+				get_ITS(sp,sp+'.blast.out',args.i,args.o,min_len)
 		else:
 			#get gene list
 			if args.g is not None:
