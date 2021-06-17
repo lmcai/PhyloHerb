@@ -5,9 +5,9 @@ This bioinformatic tutorial provides detailed guidance to process **genome skimm
 
 We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea hundreds of millions of years ago). 
 
-License: GNU General Public License
+**License**: GNU General Public License
 
-Citation: TBD; PhyloHerb relies on various dependancies, please cite these works as well.
+**Citation**: TBD; PhyloHerb relies on various dependancies, please cite these works as well.
 
 GetOrganelle: Jin, Jian-Jun, Wen-Bin Yu, Jun-Bo Yang, Yu Song, Claude W. Depamphilis, Ting-Shuang Yi, and De-Zhu Li. "GetOrganelle: a fast and versatile toolkit for accurate de novo assembly of organelle genomes." Genome biology 21, no. 1 (2020): 1-31. 
 
