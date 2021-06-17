@@ -88,7 +88,7 @@ For this dataset, each plastome assembly takes ~5GB memory, and ~120s CPU time.
 
 ### 3. Large dataset and batch submission to cluster
 
-If you are working with a high performance computing cluster with **slurm workload manager**. You can modify the [bash file getorg.sh](/phyloherbLib/getorg.sh) and submit jobs to your cluster simultaneously.
+If you are working with a high performance computing cluster with **slurm workload manager**, you can modify the [bash file getorg.sh](/phyloherbLib/getorg.sh) and submit jobs to your cluster simultaneously.
 
 Copy the example `getorg.sh` to current directory
 ```
