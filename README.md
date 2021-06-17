@@ -5,6 +5,18 @@ This bioinformatic tutorial provides detailed guidance to process **genome skimm
 
 We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea hundreds of millions of years ago). 
 
+License: GNU General Public License
+
+Citation: TBD; PhyloHerb relies on various dependancies, please cite these works as well.
+
+GetOrganelle: Jin, Jian-Jun, Wen-Bin Yu, Jun-Bo Yang, Yu Song, Claude W. Depamphilis, Ting-Shuang Yi, and De-Zhu Li. "GetOrganelle: a fast and versatile toolkit for accurate de novo assembly of organelle genomes." Genome biology 21, no. 1 (2020): 1-31. 
+
+Bandage: Wick, Ryan R., Mark B. Schultz, Justin Zobel, and Kathryn E. Holt. "Bandage: interactive visualization of de novo genome assemblies." Bioinformatics 31, no. 20 (2015): 3350-3352.
+
+pasta: Mirarab, Siavash, Nam Nguyen, Sheng Guo, Li-San Wang, Junhyong Kim, and Tandy Warnow. "PASTA: ultra-large multiple sequence alignment for nucleotide and amino-acid sequences." Journal of Computational Biology 22, no. 5 (2015): 377-386.
+
+MAFFT: Katoh, Kazutaka, and Daron M. Standley. "MAFFT multiple sequence alignment software version 7: improvements in performance and usability." Molecular biology and evolution 30, no. 4 (2013): 772-780.
+
 ## I. Prerequisites
 
 To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
