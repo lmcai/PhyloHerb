@@ -146,7 +146,7 @@ def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 		a[g]=best
 	#extract ITS1
 	if a['18S'].split('\t')[1] == a['5.8S'].split('\t')[1]:
-		ITS1.append([int(a['18S'].split('\t')[8]),int(a['18S'].split('\t')[9]),int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9])])
+		ITS1=[int(a['18S'].split('\t')[8]),int(a['18S'].split('\t')[9]),int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9])]
 		ITS1.sort()
 		start=ITS1[1]
 		end=ITS1[2]
@@ -155,7 +155,7 @@ def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 		d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
 		output_handle.close()
 	if a['5.8S'].split('\t')[1] == a['28S'].split('\t')[1]:
-		ITS2.append([int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9]),int(a['28S'].split('\t')[8]),int(a['28S'].split('\t')[9])])
+		ITS2=[int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9]),int(a['28S'].split('\t')[8]),int(a['28S'].split('\t')[9])]
 		ITS2.sort()
 		start=ITS2[1]
 		end=ITS2[2]
