@@ -162,7 +162,7 @@ The most convenient tool I have used is the web-based tool [GeSeq](https://chlor
 
 ## V. Ortholog identification and alignment
 
-Phyloherb will identify the best-matching region of each gene/intergenic region in the assemblly using BLAST. We provide a build-in database of ## plastid genes from 100 angiosperm species. This database is sufficient for getting genes from species that are not too distantly related to our reference species. You can also supply your own reference in a fasta file following the instructions below. The list of our reference species is [here](/phyloherbLib/reference_sp.list). The list of the genes in the database is [here](/phyloherbLib/gene.list). 
+Phyloherb will identify the best-matching region of each gene/intergenic region in the assemblly using BLAST. We provide a build-in database of plastid genes from 355 seed plant families. This database is sufficient for getting genes from species that are not too distantly related to our reference species. You can also supply your own reference in a fasta file following the instructions below. The list of reference species is [here](/phyloherbLib/reference_sp.list). The list of the genes in the database is [here](/phyloherbLib/gene.list). 
 
 1. Generate reference gene sequences **(optional)**
 
@@ -179,7 +179,8 @@ atcg...
 atcg...
 >gene2_sp2
 ```
-If you have annotated plastid assemblies (from GeqSeq for example) in genbank format, you can use the `getseq` function of PhyloHerb to obtain gene and intergenic regions (see section V.4 below).
+
+*IMPORTANT*: If you have annotated plastid assemblies (e.g., from GeqSeq) in genbank format, you can use the `getseq` function of PhyloHerb to obtain gene and intergenic regions (see section V.4 below).
 
 2. Extract orthologous gene or intergenic regions from the assembly
 
