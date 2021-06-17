@@ -14,8 +14,8 @@ parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing
 parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
 parser.add_argument('-ref',  metavar='file', help='[ortho mode] custom reference sequences')
-parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes using build-in references')
-parser.add_argument('-rdna',  help='[ortho mode] extract nuclear ribosomal regions using build-in references')
+parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes using build-in references',action='store_true')
+parser.add_argument('-rdna',  help='[ortho mode] extract nuclear ribosomal regions using build-in references',action='store_true')
 parser.add_argument('-suffix', metavar='string', help='[conc mode] suffix of alignment files')
 parser.add_argument('-t', metavar='file', help='[order mode] newick tree file to order alignments based on phylogeny')
 parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum proportion of missing data allowed for each species')
@@ -386,7 +386,7 @@ elif mode =='ortho':
 			print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
-		python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference genes>')
+		python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference> -rdna <use build-in rDNA reference>')
 	except IOError as e:print(e.errno)
 elif mode =='conc':
 	try:
