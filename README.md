@@ -251,7 +251,7 @@ python phyloherb.py -m getseq -f intergenic -i <input directory> -suffix <genban
 PhyloHerb can extract the coding regions of the rDNA repeat (18S+ITS1+5.8S+ITS2+28S). The highly variable NTS and ETS will be discarded. It will first identify rDNAs (18S, 5.8S, and 28S) in the assembly and then extract the ITS regions in between. The output contains five fasta files `18S.fas, ITS1.fas, 5.8S.fas, ITS2.fas, and 28S.fas` in the output directory. To get rDNA sequences, add the `-rdna` flag under the `ortho` mode. 
 
 ```
-python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -rdna [optional] -sp <species list> -l <length limit> 
+python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -rdna
 ```
 
 Below is an illustration of the structure and sequence conservation of the nuclear ribosomal region.
@@ -266,7 +266,7 @@ For most plant groups, mitochondria are not phylogenetically informative because
 A list of the reference mitochondrial genes can be found [here](/database/mito_gene.list). The reference sequences themselves can be found [here](/database/mito_reference.fas).
 
 ```
-python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -l <length limit> -mito [optional] -g <gene list> -sp <species list> 
+python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -mito 
 ```
 
 7. Manual curation in Geneious
