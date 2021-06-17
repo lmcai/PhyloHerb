@@ -126,6 +126,8 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
 	
 def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 	lib_ID=sp
+	ITS1=[]
+	ITS2=[]
 	blast_txt=open(blast_file).readlines()
 	y=SeqIO.index(input_dir+'/'+lib_ID+'.assembly.fas','fasta')
 	a={}
