@@ -1,7 +1,7 @@
 # PhyloHerb		<img src="/images/logo.png" width="80" height="80">
 **Phylo**genomic Analysis Pipeline for **Herb**arium Specimens
 
-This bioinformatic tutorial provides detailed guidance to process **genome skimming** data collected from herbarium specimens. The outcomes include the plastid genome (plastome) assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+25S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
+This bioinformatic tutorial provides detailed guidance to process **genome skimming** data collected from herbarium specimens. The outcomes include the plastid genome (plastome) assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+28S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
 
 We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea hundreds of millions of years ago). 
 
@@ -246,24 +246,27 @@ python phyloherb.py -m getseq -f intergenic -i <input directory> -suffix <genban
 <img src="/images/intergenic.png" width="400" height="90">
 
 
-
 5. Nuclear ribosomal regions
 
-The nuclear ribosomal data requires a slightly different curation strategy. The highly variable sequence requires more manual curation than the plastome. The nuclear ribosomal region exists as tandem repeats on multiple chromosomes.
+PhyloHerb can extract the coding regions of the rDNA repeat (18S+ITS1+5.8S+ITS2+28S). The highly variable NTS and ETS will be discarded. It will first identify rDNAs (18S, 5.8S, and 28S) in the assembly and then extract the ITS regions in between. The output contains five fasta files `18S.fas, ITS1.fas, 5.8S.fas, ITS2.fas, and 28S.fas` in the output directory. To get rDNA sequences, add the `-rdna` flag under the `ortho` mode. 
+
+```
+python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -rdna [optional] -sp <species list> -l <length limit> 
+```
+
+Below is an illustration of the structure and sequence conservation of the nuclear ribosomal region.
 
 <img src="/images/ITS.png" width="400" height="400">
 
-Based on our experiences, NTS is not alignable even between closely related taxa. The entire rDNA region (18S+ITS1+5.8S+ITS2+25S) and some portion of ETS can be aligned at family level. 
-
-We will try to align the entire region using MAFFT first.   
 
 6. Mitochondrial regions
 
 For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So I recommend using mitochondrial genes only. If you want to use our build-in mitochondrial gene sequence database, invoke the `-mito` flag under the `ortho` mode. 
 
 A list of the reference mitochondrial genes can be found [here](/database/mito_gene.list). The reference sequences themselves can be found [here](/database/mito_reference.fas).
+
 ```
-python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -g <gene list> -sp <species list> -l <length limit> -mito
+python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -l <length limit> -mito [optional] -g <gene list> -sp <species list> 
 ```
 
 7. Manual curation in Geneious
