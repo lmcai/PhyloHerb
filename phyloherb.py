@@ -15,6 +15,7 @@ parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file co
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
 parser.add_argument('-ref',  metavar='file', help='[ortho mode] custom reference sequences')
 parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes using build-in references')
+parser.add_argument('-rdna',  help='[ortho mode] extract nuclear ribosomal regions using build-in references')
 parser.add_argument('-suffix', metavar='string', help='[conc mode] suffix of alignment files')
 parser.add_argument('-t', metavar='file', help='[order mode] newick tree file to order alignments based on phylogeny')
 parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum proportion of missing data allowed for each species')
@@ -123,6 +124,43 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
 	os.remove(lib_ID+'.nin')
 	os.remove(lib_ID+'.nsq')
 	
+def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
+	lib_ID=sp
+	blast_txt=open(blast_file).readlines()
+	y=SeqIO.index(input_dir+'/'+lib_ID+'.assembly.fas','fasta')
+	a={}
+	for g in ['18S','5.8S','28S']:
+		#print g
+		best=0
+		a[g]=[r for r in blast_txt if g+'_' in r]
+		min_evalue=1
+		length=1
+		for rec in a[g]:
+			#print rec
+			if float(rec.split('\t')[10])<=min_evalue and float(rec.split('\t')[3])>length:
+				min_evalue=float(rec.split('\t')[10])
+				length=float(rec.split('\t')[3])
+				best=rec
+		a[g]=best
+	#extract ITS1
+	if a['18S'].split('\t')[1] == a['5.8S'].split('\t')[1]:
+		ITS1.append([int(a['18S'].split('\t')[8]),int(a['18S'].split('\t')[9]),int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9])])
+		ITS1.sort()
+		start=ITS1[1]
+		end=ITS1[2]
+		seq=y.seq[(start-1):end]
+		output_handle=open(output_dir+'/ITS1.fas','a')
+		d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
+		output_handle.close()
+	if a['5.8S'].split('\t')[1] == a['28S'].split('\t')[1]:
+		ITS2.append([int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9]),int(a['28S'].split('\t')[8]),int(a['28S'].split('\t')[9])])
+		ITS2.sort()
+		start=ITS2[1]
+		end=ITS2[2]
+		seq=y.seq[(start-1):end]
+		output_handle=open(output_dir+'/ITS2.fas','a')
+		d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
+		output_handle.close()
 
 
 
@@ -260,7 +298,7 @@ def intergenic_extra(input_dir,suffix,output_dir,gene_def):
 			except KeyError:
 				print('Cannot find the following genes in the Genbank annotation: '+l)
 
-	
+
 mode=args.m
 print('############################################################\n\
 PhyloHerb v1.0\n\
@@ -309,30 +347,40 @@ elif mode =='ortho':
 			min_len=int(args.l)
 		else:min_len=60
 		print('Using length cutoff ' + str(min_len)+' bp for BLAST result filtering')
-		#get gene list
 		#genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
-		if args.g is not None:
-			genes=open(args.g).readlines()
-			genes=[j.strip() for j in genes]
-			print('Using custom gene set')
-		elif args.mito is not None:
-			genes=open(PH_path+'/database/mito_gene.list').readlines()
-			genes=[j.strip() for j in genes]
-			print('Using build-in mitochondrial gene set')
+		if args.rdna is not None:
+			#rDNA mode
+			print('Using build-in ribosomal gene set')
+			genes=['18S','5.8S','28S']
+			reference=PH_path+'/database/rDNA_reference.fas'
+			for sp in species:
+				ortho_extraction(sp,reference,args.i,args.o,genes,min_len)
+			#get ITSs
+			
 		else:
-			genes=open(PH_path+'/database/plastid_gene.list').readlines()
-			genes=[j.strip() for j in genes]
-			print('Using build-in plastid gene set')
-		#get reference sequences
-		if args.ref is not None:
-			reference=args.ref
-		elif args.mito is not None:
-			reference=PH_path+'/database/mito_reference.fas'
-		else:
-			reference=PH_path+'/database/plastid_reference.fas'
-		#extract blast hits:				
-		for sp in species:
-			ortho_extraction(sp,reference,args.i,args.o,genes,min_len)	
+			#get gene list
+			if args.g is not None:
+				genes=open(args.g).readlines()
+				genes=[j.strip() for j in genes]
+				print('Using custom gene set')
+			elif args.mito is not None:
+				genes=open(PH_path+'/database/mito_gene.list').readlines()
+				genes=[j.strip() for j in genes]
+				print('Using build-in mitochondrial gene set')
+			else:
+				genes=open(PH_path+'/database/plastid_gene.list').readlines()
+				genes=[j.strip() for j in genes]
+				print('Using build-in plastid gene set')
+			#get reference sequences
+			if args.ref is not None:
+				reference=args.ref
+			elif args.mito is not None:
+				reference=PH_path+'/database/mito_reference.fas'
+			else:
+				reference=PH_path+'/database/plastid_reference.fas'
+			#extract blast hits:				
+			for sp in species:
+				ortho_extraction(sp,reference,args.i,args.o,genes,min_len)	
 		print('Completed gene extraction for '+str(len(species))+' species.')		
 	except TypeError:
 			print('############################################################\n\
