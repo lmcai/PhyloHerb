@@ -1,0 +1,113 @@
+
+GetOrganelle v1.7.3.5
+
+get_organelle_from_reads.py assembles organelle genomes from genome skimming data.
+Find updates in https://github.com/Kinggerm/GetOrganelle and see README.md for more information.
+
+Python 3.7.3 | packaged by conda-forge | (default, Mar 27 2019, 23:01:00)  [GCC 7.3.0]
+PLATFORM: Linux holy7c26602.rc.fas.harvard.edu 3.10.0-1127.18.2.el7.x86_64 #1 SMP Sun Jul 26 15:27:06 UTC 2020 x86_64 x86_64
+PYTHON LIBS: GetOrganelleLib 1.7.3.5; numpy 1.17.0; sympy 1.8; scipy 1.5.2
+DEPENDENCIES: Bowtie2 2.4.2; SPAdes 3.13.0; Blast 2.9.0
+GETORG_PATH=/n/home08/lmcai/.GetOrganelle
+SEED  DB: embplant_nr 0.0.1
+LABEL DB: embplant_nr 0.0.1
+WORKING DIR: /n/holyscratch01/davis_lab/lmcai/herbariomics_workshop
+/n/home08/lmcai/.conda/envs/temp/bin/get_organelle_from_reads.py -1 0_fastq/SP4_R1.100m.1.fastq.gz -2 0_fastq/SP4_R2.100m.1.fastq.gz -o 1_getorg/ITS/sp4 -R 10 -k 35,85,105,115 -F embplant_nr
+
+2021-06-14 19:23:01,818 - INFO: Pre-reading fastq ...
+2021-06-14 19:23:01,819 - INFO: Estimating reads to use ... (to use all reads, set '--reduce-reads-for-coverage inf --max-reads inf')
+2021-06-14 19:23:02,294 - INFO: Estimating reads to use finished.
+2021-06-14 19:23:02,295 - INFO: Unzipping reads file: 0_fastq/SP4_R1.100m.1.fastq.gz (23528686 bytes)
+2021-06-14 19:23:03,515 - INFO: Unzipping reads file: 0_fastq/SP4_R2.100m.1.fastq.gz (23528686 bytes)
+2021-06-14 19:23:04,726 - INFO: Counting read qualities ...
+2021-06-14 19:23:04,870 - INFO: Identified quality encoding format = Sanger
+2021-06-14 19:23:04,870 - INFO: Phred offset = 33
+2021-06-14 19:23:04,871 - INFO: Trimming bases with qualities (0.00%): 33..33  !
+2021-06-14 19:23:04,900 - INFO: Mean error rate = 0.0017
+2021-06-14 19:23:04,900 - INFO: Counting read lengths ...
+2021-06-14 19:23:05,769 - INFO: Mean = 138.1 bp, maximum = 151 bp.
+2021-06-14 19:23:05,769 - INFO: Reads used = 333333+333333
+2021-06-14 19:23:05,769 - INFO: Pre-reading fastq finished.
+
+2021-06-14 19:23:05,769 - INFO: Making seed reads ...
+2021-06-14 19:23:05,786 - INFO: Seed bowtie2 index existed!
+2021-06-14 19:23:05,786 - INFO: Mapping reads to seed bowtie2 index ...
+2021-06-14 19:23:14,905 - INFO: Mapping finished.
+2021-06-14 19:23:14,907 - INFO: Seed reads made: 1_getorg/ITS/sp4/seed/embplant_nr.initial.fq (303142 bytes)
+2021-06-14 19:23:14,907 - INFO: Making seed reads finished.
+
+2021-06-14 19:23:14,907 - INFO: Checking seed reads and parameters ...
+2021-06-14 19:23:14,907 - INFO: The automatically-estimated parameter(s) do not ensure the best choice(s).
+2021-06-14 19:23:14,908 - INFO: If the result graph is not a circular organelle genome, 
+2021-06-14 19:23:14,908 - INFO:   you could adjust the value(s) of '-w'/'-R' for another new run.
+2021-06-14 19:23:16,225 - INFO: Pre-assembling mapped reads ...
+2021-06-14 19:23:25,817 - INFO: Pre-assembling mapped reads finished.
+2021-06-14 19:23:25,818 - INFO: Estimated embplant_nr-hitting base-coverage = 24.13
+2021-06-14 19:23:26,645 - INFO: Estimated word size(s): 58
+2021-06-14 19:23:26,646 - INFO: Setting '-w 58'
+2021-06-14 19:23:26,646 - INFO: Setting '--max-extending-len inf'
+2021-06-14 19:23:26,648 - INFO: Checking seed reads and parameters finished.
+
+2021-06-14 19:23:26,648 - INFO: Making read index ...
+2021-06-14 19:23:31,224 - INFO: 325739 candidates in all 666666 reads
+2021-06-14 19:23:31,226 - INFO: Pre-grouping reads ...
+2021-06-14 19:23:31,226 - INFO: Setting '--pre-w 58'
+2021-06-14 19:23:31,288 - INFO: 200000/325739 used/duplicated
+2021-06-14 19:23:58,567 - INFO: 3895 groups made.
+2021-06-14 19:23:58,591 - INFO: Making read index finished.
+
+2021-06-14 19:23:58,591 - INFO: Extending ...
+2021-06-14 19:23:58,591 - INFO: Adding initial words ...
+2021-06-14 19:23:58,625 - INFO: AW 14984
+2021-06-14 19:24:00,913 - INFO: Round 1: 325739/325739 AI 576 AW 18844
+2021-06-14 19:24:03,043 - INFO: Round 2: 325739/325739 AI 792 AW 23548
+2021-06-14 19:24:05,171 - INFO: Round 3: 325739/325739 AI 956 AW 30414
+2021-06-14 19:24:07,308 - INFO: Round 4: 325739/325739 AI 992 AW 31786
+2021-06-14 19:24:09,446 - INFO: Round 5: 325739/325739 AI 996 AW 31912
+2021-06-14 19:24:11,573 - INFO: Round 6: 325739/325739 AI 996 AW 31912
+2021-06-14 19:24:11,573 - INFO: No more reads found and terminated ...
+2021-06-14 19:24:12,584 - INFO: Extending finished.
+
+2021-06-14 19:24:12,634 - INFO: Separating filtered fastq file ... 
+2021-06-14 19:24:12,648 - INFO: Setting '-k 35,85,105,115'
+2021-06-14 19:24:12,648 - INFO: Assembling using SPAdes ...
+2021-06-14 19:24:12,735 - INFO: spades.py -t 1  --phred-offset 33 -1 1_getorg/ITS/sp4/filtered_1_paired.fq -2 1_getorg/ITS/sp4/filtered_2_paired.fq -k 35,85,105,115 -o 1_getorg/ITS/sp4/filtered_spades
+2021-06-14 19:24:19,668 - INFO: Assembling finished.
+
+2021-06-14 19:24:30,722 - INFO: Slimming 1_getorg/ITS/sp4/filtered_spades/K115/assembly_graph.fastg finished!
+2021-06-14 19:24:35,750 - INFO: Slimming 1_getorg/ITS/sp4/filtered_spades/K105/assembly_graph.fastg finished!
+2021-06-14 19:24:40,778 - INFO: Slimming 1_getorg/ITS/sp4/filtered_spades/K85/assembly_graph.fastg finished!
+2021-06-14 19:24:40,779 - INFO: Slimming assembly graphs finished.
+
+2021-06-14 19:24:40,780 - INFO: Extracting embplant_nr from the assemblies ...
+2021-06-14 19:24:40,781 - INFO: Disentangling 1_getorg/ITS/sp4/filtered_spades/K115/assembly_graph.fastg.extend-embplant_nr.fastg as a circular genome ... 
+2021-06-14 19:24:40,821 - INFO: Disentangling failed: 'Incomplete/Complicated graph: please check around EDGE_1060!'
+2021-06-14 19:24:40,821 - INFO: Disentangling 1_getorg/ITS/sp4/filtered_spades/K105/assembly_graph.fastg.extend-embplant_nr.fastg as a circular genome ... 
+2021-06-14 19:24:41,595 - INFO: Disentangling failed: 'Incomplete/Complicated graph: please check around EDGE_1206!'
+2021-06-14 19:24:41,595 - INFO: Disentangling 1_getorg/ITS/sp4/filtered_spades/K85/assembly_graph.fastg.extend-embplant_nr.fastg as a circular genome ... 
+2021-06-14 19:24:45,728 - INFO: Disentangling failed: 'Incomplete/Complicated graph: please check around EDGE_1340!'
+2021-06-14 19:24:45,728 - INFO: Scaffolding disconnected contigs using SPAdes scaffolds ... 
+2021-06-14 19:24:45,728 - WARNING: Assembly based on scaffolding may not be as accurate as the ones directly exported from the assembly graph.
+2021-06-14 19:24:45,728 - INFO: Disentangling 1_getorg/ITS/sp4/filtered_spades/K115/assembly_graph.fastg.extend-embplant_nr.fastg as a circular genome ... 
+2021-06-14 19:24:45,729 - WARNING: scaffolds.fasta and/or scaffolds.paths not found!
+2021-06-14 19:24:45,730 - INFO: Disentangling 1_getorg/ITS/sp4/filtered_spades/K115/assembly_graph.fastg.extend-embplant_nr.fastg as a/an embplant_nr-insufficient graph ... 
+2021-06-14 19:24:45,979 - WARNING: Self-loop contig detected: Vertex_1070
+2021-06-14 19:24:46,000 - INFO: Average embplant_nr kmer-coverage = 5.0
+2021-06-14 19:24:46,001 - INFO: Average embplant_nr base-coverage = 28.4
+2021-06-14 19:24:46,001 - INFO: Writing output ...
+2021-06-14 19:24:46,005 - INFO: Writing PATH1 of embplant_nr scaffold(s) to 1_getorg/ITS/sp4/embplant_nr.K115.scaffolds.graph1.1.path_sequence.fasta
+2021-06-14 19:24:46,007 - INFO: Writing GRAPH to 1_getorg/ITS/sp4/embplant_nr.K115.contigs.graph1.selected_graph.gfa
+2021-06-14 19:24:46,078 - INFO: Result status of embplant_nr: 1 scaffold(s)
+2021-06-14 19:24:46,205 - INFO: Writing output finished.
+2021-06-14 19:24:46,205 - INFO: Please ...
+2021-06-14 19:24:46,205 - INFO: load the graph file 'assembly_graph.fastg.extend-embplant_nr.fastg' in K115,K105,K85
+2021-06-14 19:24:46,205 - INFO: load the CSV file 'assembly_graph.fastg.extend-embplant_nr.csv' in K115,K105,K85
+2021-06-14 19:24:46,206 - INFO: visualize and confirm the incomplete result in Bandage.
+2021-06-14 19:24:46,206 - INFO: If the result is nearly complete, 
+2021-06-14 19:24:46,206 - INFO: you can also adjust the arguments according to https://github.com/Kinggerm/GetOrganelle/wiki/FAQ#what-should-i-do-with-incomplete-resultbroken-assembly-graph
+2021-06-14 19:24:46,206 - INFO: If you have questions for us, please provide us with the get_org.log.txt file and the post-slimming graph in the format you like!
+2021-06-14 19:24:46,206 - INFO: Extracting embplant_nr from the assemblies finished.
+
+
+Total cost 115.05 s
+Thank you!
