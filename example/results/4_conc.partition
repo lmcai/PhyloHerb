@@ -1,0 +1,7 @@
+begin sets;
+charset 4_conc_tem/atpA.aln.nex = 1-1826;
+charset 4_conc_tem/atpB.aln.nex = 1827-3602;
+charset 4_conc_tem/accD.aln.nex = 3603-5545;
+charset 4_conc_tem/atpA.aln.nex = 1-1826;
+charset 4_conc_tem/atpB.aln.nex = 1827-3602;
+charset 4_conc_tem/accD.aln.nex = 3603-5545;
