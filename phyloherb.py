@@ -150,7 +150,7 @@ def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 		ITS1.sort()
 		start=ITS1[1]
 		end=ITS1[2]
-		seq=y[a['18S'].split('\t')[1]].seq[(start-1):end]
+		seq=y[a['18S'].split('\t')[1]].seq[start:(end-1)]
 		output_handle=open(output_dir+'/ITS1.fas','a')
 		d=output_handle.write(">%s\n%s\n" % (sp,seq))
 		output_handle.close()
@@ -159,7 +159,7 @@ def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 		ITS2.sort()
 		start=ITS2[1]
 		end=ITS2[2]
-		seq=y[a['5.8S'].split('\t')[1]].seq[(start-1):end]
+		seq=y[a['5.8S'].split('\t')[1]].seq[start:(end-1)]
 		output_handle=open(output_dir+'/ITS2.fas','a')
 		d=output_handle.write(">%s\n%s\n" % (sp,seq))
 		output_handle.close()
