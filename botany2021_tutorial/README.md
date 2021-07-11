@@ -139,7 +139,7 @@ sp5	SP5_R1.100m.1.fastq.gz	SP5_R2.100m.1.fastq.gz
 Then generate a batch file using the submission function of phyloherb
 ```
 cp $DATA_DIR/sample_sheet.tsv .
-python $PH/phyloherb.py -m submision -b getorg.sh -s sample_sheet.tsv -o submitter.sh
+python $PH/phyloherb.py -m submission -b getorg.sh -s sample_sheet.tsv -o submitter.sh
 
 #submit jobs
 sh submitter.sh
