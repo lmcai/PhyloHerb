@@ -334,7 +334,7 @@ elif mode =='ortho':
 		PH_path=os.path.dirname(__file__)
 		#print(PH_path)
 		#get species list
-		if args.sp is not None:
+		if args.sp:
 			species=open(args.sp).readlines()
 			species=[j.strip() for j in species]
 			print('Using custom species set in '+args.sp+': '+', '.join(species))
@@ -348,7 +348,7 @@ elif mode =='ortho':
 			Usage:\n\
 			python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference genes>')
 		#get minimum length for blast hit
-		if args.l is not None:
+		if args.l:
 			min_len=int(args.l)
 		else:min_len=60
 		print('Using length cutoff ' + str(min_len)+' bp for BLAST result filtering')
@@ -365,11 +365,11 @@ elif mode =='ortho':
 				get_ITS(sp,sp+'.blast.out',args.i,args.o,min_len)
 		else:
 			#get gene list
-			if args.g is not None:
+			if args.g:
 				genes=open(args.g).readlines()
 				genes=[j.strip() for j in genes]
 				print('Using custom gene set')
-			elif args.mito is not None:
+			elif args.mito:
 				genes=open(PH_path+'/database/mito_gene.list').readlines()
 				genes=[j.strip() for j in genes]
 				print('Using build-in mitochondrial gene set')
@@ -378,9 +378,9 @@ elif mode =='ortho':
 				genes=[j.strip() for j in genes]
 				print('Using build-in plastid gene set')
 			#get reference sequences
-			if args.ref is not None:
+			if args.ref:
 				reference=args.ref
-			elif args.mito is not None:
+			elif args.mito:
 				reference=PH_path+'/database/mito_reference.fas'
 			else:
 				reference=PH_path+'/database/plastid_reference.fas'
@@ -396,7 +396,7 @@ elif mode =='ortho':
 	except IOError as e:print(e.errno)
 elif mode =='conc':
 	try:
-		if args.g is not None:
+		if args.g:
 			files=open(args.g).readlines()
 			files=[j.strip() for j in files]
 			print('Concatenate '+str(len(files))+' alignments based on the custom gene set')
@@ -414,7 +414,7 @@ elif mode =='conc':
 elif mode =='order':
 	try:
 		from ete3 import Tree
-		if args.missing is not None:
+		if args.missing:
 			missing=float(args.missing)
 		else:
 			missing=1
