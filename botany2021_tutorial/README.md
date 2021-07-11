@@ -216,7 +216,6 @@ In the output directory `3_alignments/chl`, orthologous genes will be written to
 I will demonstrate the use of `mafft` and `pasta`, but the installation of `pasta` can be tricky though. We may not have enough time troubleshoot it during the workshop. 
 ```
 cd 3_alignments/chl
-#cp $PH/phyloherbLib/mafft_pasta.sh .
 mafft --adjustdirection accD.fas | sed 's/_R_//g' >accD.mafft.aln.fas
 mkdir accD.pasta
 cd accD.pasta
