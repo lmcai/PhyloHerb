@@ -220,7 +220,8 @@ cd 3_alignments/chl
 mafft --adjustdirection accD.fas | sed 's/_R_//g' >accD.mafft.aln.fas
 mkdir accD.pasta
 cd accD.pasta
-run_pasta.py -i ../accD.mafft.aln.fas
+cp ../accD.mafft.aln.fas .
+run_pasta.py -i accD.mafft.aln.fas
 ```
 
 3. Nuclear ribosomal regions
