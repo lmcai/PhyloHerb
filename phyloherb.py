@@ -145,25 +145,28 @@ def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 				best=rec
 		a[g]=best
 	#extract ITS1
-	if a['18S'].split('\t')[1] == a['5.8S'].split('\t')[1]:
-		ITS1=[int(a['18S'].split('\t')[8]),int(a['18S'].split('\t')[9]),int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9])]
-		ITS1.sort()
-		start=ITS1[1]
-		end=ITS1[2]
-		seq=y[a['18S'].split('\t')[1]].seq[start:(end-1)]
-		output_handle=open(output_dir+'/ITS1.fas','a')
-		d=output_handle.write(">%s\n%s\n" % (sp,seq))
-		output_handle.close()
-	if a['5.8S'].split('\t')[1] == a['28S'].split('\t')[1]:
-		ITS2=[int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9]),int(a['28S'].split('\t')[8]),int(a['28S'].split('\t')[9])]
-		ITS2.sort()
-		start=ITS2[1]
-		end=ITS2[2]
-		seq=y[a['5.8S'].split('\t')[1]].seq[start:(end-1)]
-		output_handle=open(output_dir+'/ITS2.fas','a')
-		d=output_handle.write(">%s\n%s\n" % (sp,seq))
-		output_handle.close()
-
+	try:
+		if a['18S'].split('\t')[1] == a['5.8S'].split('\t')[1]:
+			ITS1=[int(a['18S'].split('\t')[8]),int(a['18S'].split('\t')[9]),int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9])]
+			ITS1.sort()
+			start=ITS1[1]
+			end=ITS1[2]
+			seq=y[a['18S'].split('\t')[1]].seq[start:(end-1)]
+			output_handle=open(output_dir+'/ITS1.fas','a')
+			d=output_handle.write(">%s\n%s\n" % (sp,seq))
+			output_handle.close()
+	except:pass
+	try:
+		if a['5.8S'].split('\t')[1] == a['28S'].split('\t')[1]:
+			ITS2=[int(a['5.8S'].split('\t')[8]),int(a['5.8S'].split('\t')[9]),int(a['28S'].split('\t')[8]),int(a['28S'].split('\t')[9])]
+			ITS2.sort()
+			start=ITS2[1]
+			end=ITS2[2]
+			seq=y[a['5.8S'].split('\t')[1]].seq[start:(end-1)]
+			output_handle=open(output_dir+'/ITS2.fas','a')
+			d=output_handle.write(">%s\n%s\n" % (sp,seq))
+			output_handle.close()
+	except:pass
 
 
 def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
@@ -350,8 +353,9 @@ elif mode =='ortho':
 		else:min_len=60
 		print('Using length cutoff ' + str(min_len)+' bp for BLAST result filtering')
 		#genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
-		if args.rdna is not None:
+		if args.rdna:
 			#rDNA mode
+			min_len=10
 			print('Using build-in ribosomal gene set')
 			genes=['18S','5.8S','28S']
 			reference=PH_path+'/database/rDNA_reference.fas'
