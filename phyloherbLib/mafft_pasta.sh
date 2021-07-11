@@ -10,7 +10,8 @@
 mafft --adjustdirection $1\.fas | sed 's/_R_//g' >$1\.mafft.aln.fas
 mkdir $1\.pasta
 cd $1\.pasta
-run_pasta.py -i ../$1\.mafft.aln.fas
+cp ../$1\.mafft.aln.fas .
+run_pasta.py -i $1\.mafft.aln.fas
 rm *.txt
 rm *.gz
 mv pastajob.tre ../$1\.pasta.tree
