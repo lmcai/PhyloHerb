@@ -151,7 +151,7 @@ The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mit
 
 ### 5. Assembly visualization with Bandage
 
-[Bandage](https://rrwick.github.io/Bandage/) is a program for visualising de novo assembly graphs. The assembly graph files *.fastg and *.gfa generated from our previous assembly step could be visualized in Bandage and exported into sequences. You can find a more detailed introduction about Bandage here.
+[Bandage](https://rrwick.github.io/Bandage/) is a program for visualising de novo assembly graphs. The assembly graph files *.fastg and *.gfa generated from our previous assembly step could be visualized in Bandage and exported into sequences. You can find a more detailed introduction about Bandage [here](https://github.com/rrwick/Bandage/wiki).
 
 The key output files generated from assembly include
 
