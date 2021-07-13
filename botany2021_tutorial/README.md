@@ -153,11 +153,11 @@ After the assemblies are completed, you can summarize the results using the QC f
 
 ```
 #create a new folder under the herbariomics_workshop to store assemblies
+cd herbariomics_workshop
 mkdir 2_assemblies
-cd 2_assemblies
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i ../1_getorg/chl -o chl
+python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/chl -o 2_assemblies/chl
 ```
-This command will copy all of the assemblies under the input directory `../1_getorg/chl` to a new directory `./chl` and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` that looks like this
+This command will copy all of the assemblies under the input directory `1_getorg/chl` to a new directory `2_assemblies/chl` and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` that looks like this
 ```
 sp_prefix       Total_reads     Reads_in_target_region  Average_base_coverage   Length  GC%     Circularized
 sp1     666666  30400.0 31.4    159658  0.36851895927545125     Yes
@@ -169,8 +169,8 @@ sp5     666666  20474.0 35.3    131162  0.357679815800308       No
 
 For nuclear ribosomal regions and mitochondrial assemblies:
 ```
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i ./ITS -o ../2_assemblies/ITS
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i ./mito -o ../2_assemblies/mito
+python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/ITS -o 2_assemblies/ITS
+python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/mito -o 2_assemblies/mito
 ```
 
 ### 6. Assembly visualization with Bandage
@@ -206,6 +206,9 @@ We will use the build-in references to extract plastid genes. The list of our re
 
 Makesure executable `blast` commands are loaded in your environment. In the `herbariomics_workshop` directory, type the following commands
 ```
+#create a new folder under the herbariomics_workshop to store alignments
+cd herbariomics_workshop
+mkdir 3_alignments
 python $PH/phyloherb.py -m ortho -i 2_assemblies/chl -o 3_alignments/chl/ -l 120
 ```
 
