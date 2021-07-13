@@ -47,7 +47,7 @@ export PH=$(pwd)/../PhyloHerb
 Move and rename the example dataset from PhyloHerb to the current working directory
 ```
 mkdir 0_fastq
-mv ../PhyloHerb/example/*.gz 0_fastq
+mv $PH/example/*.gz 0_fastq
 ```
 
 ### 2. How to:
@@ -138,7 +138,7 @@ sp5	SP5_R1.100m.1.fastq.gz	SP5_R2.100m.1.fastq.gz
 
 Then generate a batch file using the submission function of phyloherb
 ```
-cp $DATA_DIR/sample_sheet.tsv .
+cp $$PH/example/sample_sheet.tsv .
 python $PH/phyloherb.py -m submission -b getorg.sh -s sample_sheet.tsv -o submitter.sh
 
 #submit jobs
