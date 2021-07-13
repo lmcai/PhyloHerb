@@ -52,7 +52,7 @@ mv $PH/example/*.gz 0_fastq
 
 Load dependencies (assuming installing GetOrganelle under the conda environment named 'getorg')
 ```
-#load Anaconda and GetOrganelle
+#load Anaconda and GetOrganelle (for linux users)
 module load Anaconda
 source activate getorg
 ```
@@ -152,9 +152,12 @@ The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mit
 After the assemblies are completed, you can summarize the results using the QC function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
 
 ```
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i ./chl -o ../2_assemblies/chl
+#create a new folder under the herbariomics_workshop to store assemblies
+mkdir 2_assemblies
+cd 2_assemblies
+python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i ../1_getorg/chl -o chl
 ```
-This command will copy all of the assemblies under the input directory `./chl` to a new directory `../2_assemblies/chl` and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` that looks like this
+This command will copy all of the assemblies under the input directory `../1_getorg/chl` to a new directory `./chl` and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` that looks like this
 ```
 sp_prefix       Total_reads     Reads_in_target_region  Average_base_coverage   Length  GC%     Circularized
 sp1     666666  30400.0 31.4    159658  0.36851895927545125     Yes
