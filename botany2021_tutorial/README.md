@@ -149,28 +149,7 @@ sh submitter.sh
 
 The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes. For detailed descriptions of the output, see [Getorganellel instructions](https://github.com/Kinggerm/GetOrganelle#Instruction)
 
-### 5. Assembly visualization with Bandage
-
-[Bandage](https://rrwick.github.io/Bandage/) is a program for visualising de novo assembly graphs. The assembly graph files *.fastg and *.gfa generated from our previous assembly step could be visualized in Bandage and exported into sequences. You can find a more detailed introduction about Bandage [here](https://github.com/rrwick/Bandage/wiki).
-
-The key output files generated from assembly include
-
-•	*.path_sequence.fasta, each fasta file represents one type of genome structure 
-
-•	*.selected_graph.gfa, the assembly graph only with true contigs of organelle genome.
-
-•	extended_K*.assembly_graph.fastg, the raw assembly graph
-
-•	extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.fastg, a simplified assembly graph
-
-•	extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.csv, a tab-format contig label file for bandage visualization
-
-•	get_org.log.txt, the log file
-
-The *.path_sequence.fasta files do not always navigate the right paths for organelle genomes, especially the ones with complicated structures. [Here](https://www.youtube.com/watch?v=cXUV7k-F26w) is an video introducing how to generate complete (if possible) and accurate sequences from Bandage with different examples. We will also practice with our own data during the workshop.
-
-
-### 6. Assembly QC 
+### 5. Assembly QC 
 
 After the assemblies are completed, you can summarize the results using the QC function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
 
@@ -192,6 +171,26 @@ For nuclear ribosomal regions and mitochondrial assemblies:
 python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i ./ITS -o ../2_assemblies/ITS
 python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i ./mito -o ../2_assemblies/mito
 ```
+
+### 6. Assembly visualization with Bandage
+
+[Bandage](https://rrwick.github.io/Bandage/) is a program for visualising de novo assembly graphs. The assembly graph files *.fastg and *.gfa generated from our previous assembly step could be visualized in Bandage and exported into sequences. You can find a more detailed introduction about Bandage [here](https://github.com/rrwick/Bandage/wiki).
+
+The key output files generated from assembly include
+
+•	*.path_sequence.fasta, each fasta file represents one type of genome structure 
+
+•	*.selected_graph.gfa, the assembly graph only with true contigs of organelle genome.
+
+•	extended_K*.assembly_graph.fastg, the raw assembly graph
+
+•	extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.fastg, a simplified assembly graph
+
+•	extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.csv, a tab-format contig label file for bandage visualization
+
+•	get_org.log.txt, the log file
+
+The *.path_sequence.fasta files do not always navigate the right paths for organelle genomes, especially the ones with complicated structures. [Here](https://www.youtube.com/watch?v=cXUV7k-F26w) is an video introducing how to generate complete (if possible) and accurate sequences from Bandage with different examples. We will also practice with our own data during the workshop.
 
 ## VI. Annotation and organelle structure variations
 
