@@ -274,7 +274,7 @@ Now let's load the ordered alignments to Geneious for some fine tuning. This tim
 
 After a second manual check, your alignments is ready for re-alignment in `pasta`. This time we will use a reference tree `*.pasta_ref.tre` to guide the alignment for each gene.
 ```
-run_pasta.py -i accD.ordered.fas -a -t accD.pasta_ref.tre -o accD.pasta
+run_pasta.py -i accD.mafft.aln.ordered.fas -a -t accD.mafft.aln.pasta_ref.tre -o accD.pasta
 ```
 
 After the alignment is done, repeat VI.1 to VI.2 to get your final species tree.
