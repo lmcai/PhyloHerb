@@ -245,6 +245,7 @@ Many tools are available for concatenating alignments. I recommend the `conc` fu
 
 To concatenate all of the fasta sequences in the input directory `3_alignments/chl` with the suffix `.mafft.aln.fas`. Use the following commands:
 ```
+#now go to the herbariomics_workshop folder
 python $PH/phyloherb.py -m conc -i 3_alignments/chl -o 5sp_chl -suffix .mafft.aln.fas
 ```
 
