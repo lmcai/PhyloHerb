@@ -250,10 +250,22 @@ cd herbariomics_workshop
 mkdir genbank_ref
 cp $PH/example/*.gb genbank_ref
 ```
-Then to extract all genes
+Then to extract all genes from these genbank annotations
 ```
 python $PH/phyloherb.py -m getseq -f gene -i genbank_ref -suffix .gb -o custom_ref
 ```
+Within `custom_ref`, you will find a fasta file for each gene `*.gene.fas`. Each fasta file contains sequences from all species for that gene.
+
+After checking gene names to make sure they are consistent, we can combine them into a single file.
+```
+cat custom_ref/*.gene.fas >custom_ref.fas
+```
+
+To use this custom database for ortholog extraction, use the following command
+```
+python $PH/phyloherb.py -m ortho -i 2_assemblies/chl -o 3_alignments/chl/ -l 120 -ref custom_ref.fas
+```
+
 To extract selected intergenic regions
 
 5. Manual curation in Geneious
