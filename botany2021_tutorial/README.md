@@ -260,6 +260,8 @@ To extract **intergenic** regions, we need to define intergenic regions based on
 ```
 cp $PH/example/gene_def.txt .
 less gene_def.txt
+
+#They look like this:
 name	start	end
 INT1	psbA	matK
 INT2	rps16	atpA
