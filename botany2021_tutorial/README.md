@@ -290,7 +290,7 @@ Longer genetic block can result in higher blast accuracy, especially for interge
 python phyloherb.py -m getseq -f genetic_block -i genbank_ref -suffix .gb -o custom_ref -gene_def gene_def.txt
 ```
 
-
+This will similarly result in multiple fasta files, each containing sequences from all species for that loci.
 
 5. Manual curation in Geneious
 
