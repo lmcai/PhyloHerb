@@ -145,7 +145,7 @@ sh submitter.sh
 
 ### 4. Output
 
-The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes. For detailed descriptions of the output, see [Getorganellel instructions](https://github.com/Kinggerm/GetOrganelle#Instruction)
+The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes. For detailed descriptions of the output, see [Getorganelle instructions](https://github.com/Kinggerm/GetOrganelle#Instruction)
 
 ### 5. Assembly QC 
 
