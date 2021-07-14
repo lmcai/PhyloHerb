@@ -232,9 +232,12 @@ The nuclear ribosomal data requires a slightly different curation strategy. The 
 
 <img src="/images/ITS.png" width="400" height="400">
 
-Based on our experiences, NTS is not alignable even between closely related taxa. The entire rDNA region (18S+ITS1+5.8S+ITS2+25S) and some portion of ETS can be aligned at family level. 
+Based on our experiences, NTS is not alignable even between closely related taxa. The entire rDNA region (18S+ITS1+5.8S+ITS2+28S) and some portion of ETS can be aligned at family level. 
 
-We will try to align the entire region using MAFFT first.   
+To get 18S, ITS1, 5.8S, ITS2, and 28S as separate fasta files, use the following commands
+````
+python $PH/phyloherb.py -m ortho -i 2_assemblies/ITS -o 3_alignments/ITS -rdna
+```
 
 4. Manual curation in Geneious
 
