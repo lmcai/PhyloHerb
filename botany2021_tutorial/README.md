@@ -24,7 +24,7 @@ conda install -c etetoolkit ete3
 get_organelle_config.py --add embplant_pt,embplant_mt,embplant_nr
 ```
 
-**IMPORTANT**: GetOrgannelle does not support Windows currently :(
+**IMPORTANT**: GetOrgannelle currently does not support Windows :(
 
 2. [Bandage](https://rrwick.github.io/Bandage/): Assembly graph viewer with a graphical user interface. Can be downloaded and installed based on the instruction online.
 
@@ -54,7 +54,7 @@ cd herbariomics_workshop
 #define path to PhyloHerb, the following command is for Mac/Linux only
 export PH=$(pwd)/../PhyloHerb
 
-#For PC users, you can always call 
+#For PC users, you can always call phyloherb from its relative path.
 ```
 
 Move and rename the example dataset from PhyloHerb to the current working directory
@@ -70,6 +70,9 @@ Load dependencies (assuming installing GetOrganelle under the conda environment 
 #load Anaconda and GetOrganelle (for linux users)
 module load Anaconda
 source activate getorg
+
+#for mac
+#conda activate getorg
 ```
 Create a working directory for assembly
 
