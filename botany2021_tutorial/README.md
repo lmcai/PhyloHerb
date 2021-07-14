@@ -23,6 +23,9 @@ conda install -c etetoolkit ete3
 #get database for getorganelle
 get_organelle_config.py --add embplant_pt,embplant_mt,embplant_nr
 ```
+
+**IMPORTANT**: GetOrgannelle does not support Windows currently :(
+
 2. [Bandage](https://rrwick.github.io/Bandage/): Assembly graph viewer with a graphical user interface. Can be downloaded and installed based on the instruction online.
 
 3. Optional [Geneious](https://www.geneious.com/): the free trial version lasts for 14 days. After that some functions are restricted. Your institute may have purchased a license for you.
