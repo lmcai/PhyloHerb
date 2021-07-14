@@ -250,7 +250,7 @@ cd herbariomics_workshop
 mkdir genbank_ref
 cp $PH/example/*.gb genbank_ref
 ```
-Then to extract all genes from these genbank annotations
+Then to extract all **genes** from these genbank annotations
 ```
 python $PH/phyloherb.py -m getseq -f gene -i genbank_ref -suffix .gb -o custom_ref
 ```
