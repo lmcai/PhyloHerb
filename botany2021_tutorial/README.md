@@ -239,7 +239,18 @@ To get 18S, ITS1, 5.8S, ITS2, and 28S as separate fasta files, use the following
 python $PH/phyloherb.py -m ortho -i 2_assemblies/ITS -o 3_alignments/ITS -rdna
 ```
 
-4. Manual curation in Geneious
+4. Build a custom reference database
+
+We will use three annotated plastid genomes within the same family to build a custom reference data for gene and intergenic regions.
+
+First, go to the NCBI genome database (https://www.ncbi.nlm.nih.gov/genome/browse/#!/overview/) to search and download published plastid genome annotations in genbank format. You can use the pre-downloaded one:
+```
+#create a new folder to store reference sequences 
+cd herbariomics_workshop
+mkdir seq_ref
+```
+
+5. Manual curation in Geneious
 
 The fully functional version of Geneious (trial or subscribed version) is required to edit alignments. Alternative tools to view and edit alignments include [AliView](https://ormbunkar.se/aliview/), [Seaview](http://doua.prabi.fr/software/seaview), and many more.
 
