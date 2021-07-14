@@ -394,6 +394,8 @@ elif mode =='ortho':
 		Usage:\n\
 		python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference> -rdna <use build-in rDNA reference>')
 	except IOError as e:print(e.errno)
+	except FileNotFoundError:print('############################################################\n\
+		#ERROR:Input directory not found!\n\)
 elif mode =='conc':
 	try:
 		if args.g:
