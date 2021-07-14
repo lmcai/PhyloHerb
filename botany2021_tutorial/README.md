@@ -266,7 +266,12 @@ To use this custom database for ortholog extraction, use the following command
 python $PH/phyloherb.py -m ortho -i 2_assemblies/chl -o 3_alignments/chl/ -l 120 -ref custom_ref.fas
 ```
 
-To extract selected intergenic regions
+To extract selected intergenic regions, we need to define intergenic regions based on genbank annotations first. Here we will use three predefined intergenic regions.
+```
+cp $PH/example/gene_def.txt .
+```
+
+
 
 5. Manual curation in Geneious
 
