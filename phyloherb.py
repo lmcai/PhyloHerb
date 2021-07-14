@@ -369,6 +369,11 @@ elif mode =='ortho':
 				genes=open(args.g).readlines()
 				genes=[j.strip() for j in genes]
 				print('Using custom gene set')
+			elif args.ref:
+				genes=open(args.ref).readlines()
+				genes=[j[1:].split('_')[0] for j in genes if j.startswith('>')]
+				genes=list(set(genes))
+				print('Using custom gene set from the reference sequence: '+args.ref)
 			elif args.mito:
 				genes=open(PH_path+'/database/mito_gene.list').readlines()
 				genes=[j.strip() for j in genes]
