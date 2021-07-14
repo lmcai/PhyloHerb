@@ -248,6 +248,7 @@ First, go to the NCBI genome database (https://www.ncbi.nlm.nih.gov/genome/brows
 #create a new folder to store reference sequences 
 cd herbariomics_workshop
 mkdir seq_ref
+cp $PH/example/
 ```
 
 5. Manual curation in Geneious
