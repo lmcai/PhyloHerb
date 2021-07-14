@@ -284,12 +284,12 @@ This will similarly result in multiple fasta files, each containing sequences fr
 
 After checking gene names to make sure they are consistent, we can combine them into a single file.
 ```
-cat custom_ref/*.gene.fas | awk '/^>/{f=!d[$1];d[$1]=1}f' >custom_ref.fas
+cat custom_ref/*.fas | awk '/^>/{f=!d[$1];d[$1]=1}f' >custom_ref.fas
 ```
 
 To use this custom database for ortholog extraction, use the following command
 ```
-python $PH/phyloherb.py -m ortho -i 2_assemblies/chl -o 3_alignments/chl/ -l 120 -ref custom_ref.fas
+python $PH/phyloherb.py -m ortho -i 2_assemblies/chl -o 3_alignments/chl_custom -l 120 -ref custom_ref.fas
 ```
 
 
