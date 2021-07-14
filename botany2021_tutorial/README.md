@@ -277,10 +277,11 @@ INT3	rpoC2	rpoB
 ```
 
 Each row define the begin and end position of a genetic block. Note that they may contain multiple gene and intergenic regions. 
-<img src="/images/INT1.png" width="500" height="200">
+<img src="/images/INT1.png" width="400" height="200">
 
 INT1
-<img src="/images/INT2.png" width="500" height="200">
+
+<img src="/images/INT2.png" width="400" height="200">
 
 INT2
 
