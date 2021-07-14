@@ -235,7 +235,7 @@ The nuclear ribosomal data requires a slightly different curation strategy. The 
 Based on our experiences, NTS is not alignable even between closely related taxa. The entire rDNA region (18S+ITS1+5.8S+ITS2+28S) and some portion of ETS can be aligned at family level. 
 
 To get 18S, ITS1, 5.8S, ITS2, and 28S as separate fasta files, use the following commands
-````
+```
 python $PH/phyloherb.py -m ortho -i 2_assemblies/ITS -o 3_alignments/ITS -rdna
 ```
 
