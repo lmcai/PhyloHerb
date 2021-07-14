@@ -43,10 +43,18 @@ We will use [GetOrganelle](https://github.com/Kinggerm/GetOrganelle) to assemble
 Download PhyloHerb and example datasets from Github
 ```
 git clone https://github.com/lmcai/PhyloHerb.git
+```
+
+Alternatively, you can download PhyloHerb from GitHub directly and then unzip the folder. No installation is needed.
+
+Then let's create a working directory `herbariomics_workshop`.
+```
 mkdir herbariomics_workshop
 cd herbariomics_workshop
-#define path to PhyloHerb
+#define path to PhyloHerb, the following command is for Mac/Linux only
 export PH=$(pwd)/../PhyloHerb
+
+#For PC users, you can always call 
 ```
 
 Move and rename the example dataset from PhyloHerb to the current working directory
