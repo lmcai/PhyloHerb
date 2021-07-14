@@ -256,16 +256,6 @@ python $PH/phyloherb.py -m getseq -f gene -i genbank_ref -suffix .gb -o custom_r
 ```
 Within `custom_ref`, you will find a fasta file for each gene `*.gene.fas`. Each fasta file contains sequences from all species for that gene.
 
-After checking gene names to make sure they are consistent, we can combine them into a single file.
-```
-cat custom_ref/*.gene.fas >custom_ref.fas
-```
-
-To use this custom database for ortholog extraction, use the following command
-```
-python $PH/phyloherb.py -m ortho -i 2_assemblies/chl -o 3_alignments/chl/ -l 120 -ref custom_ref.fas
-```
-
 To extract **intergenic** regions, we need to define intergenic regions based on genbank annotations first. Here we will use three predefined intergenic regions.
 ```
 cp $PH/example/gene_def.txt .
@@ -287,10 +277,21 @@ INT2
 
 Longer genetic block can result in higher blast accuracy, especially for intergenic regions. To get these three regions and the genes on both ends, type the following commands
 ```
-python phyloherb.py -m getseq -f genetic_block -i genbank_ref -suffix .gb -o custom_ref -gene_def gene_def.txt
+python $PH/phyloherb.py -m getseq -f genetic_block -i genbank_ref -suffix .gb -o custom_ref -gene_def gene_def.txt
 ```
 
 This will similarly result in multiple fasta files, each containing sequences from all species for that loci.
+
+After checking gene names to make sure they are consistent, we can combine them into a single file.
+```
+cat custom_ref/*.gene.fas | awk '/^>/{f=!d[$1];d[$1]=1}f' >custom_ref.fas
+```
+
+To use this custom database for ortholog extraction, use the following command
+```
+python $PH/phyloherb.py -m ortho -i 2_assemblies/chl -o 3_alignments/chl/ -l 120 -ref custom_ref.fas
+```
+
 
 5. Manual curation in Geneious
 
