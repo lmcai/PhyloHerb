@@ -266,9 +266,25 @@ To use this custom database for ortholog extraction, use the following command
 python $PH/phyloherb.py -m ortho -i 2_assemblies/chl -o 3_alignments/chl/ -l 120 -ref custom_ref.fas
 ```
 
-To extract selected intergenic regions, we need to define intergenic regions based on genbank annotations first. Here we will use three predefined intergenic regions.
+To extract **intergenic** regions, we need to define intergenic regions based on genbank annotations first. Here we will use three predefined intergenic regions.
 ```
 cp $PH/example/gene_def.txt .
+less gene_def.txt
+name	start	end
+INT1	psbA	matK
+INT2	rps16	atpA
+INT3	rpoC2	rpoB
+```
+
+Each row define the begin and end position of a genetic block. Note that they may contain multiple gene and intergenic regions. 
+<img src="/images/INT1.png" width="600" height="400">
+INT1
+<img src="/images/INT2.png" width="600" height="400">
+INT2
+
+Longer genetic block can result in higher blast accuracy, especially for intergenic regions. To get these three regions and the genes on both ends, type the following commands
+```
+python phyloherb.py -m getseq -f genetic_block -i genbank_ref -suffix .gb -o custom_ref -gene_def gene_def.txt
 ```
 
 
