@@ -15,6 +15,7 @@ conda create --name getorg python=3
 #answer promt questions 
 #proceed ([y]/n)?
 #y
+conda activate getorg
 conda install -c bioconda getorganelle
 conda install -c conda-forge biopython
 conda install -c etetoolkit ete3
