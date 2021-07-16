@@ -191,6 +191,8 @@ python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/ITS -o 2_assemblie
 python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/mito -o 2_assemblies/mito
 ```
 
+The expected results can be found in [example/results/2_assemblies.tgz](/example/results/2_assemblies.tgz)
+
 ### 6. Assembly visualization with Bandage
 
 [Bandage](https://rrwick.github.io/Bandage/) is a program for visualising de novo assembly graphs. The assembly graph files *.fastg and *.gfa generated from our previous assembly step could be visualized in Bandage and exported into sequences. You can find a more detailed introduction about Bandage [here](https://github.com/rrwick/Bandage/wiki).
