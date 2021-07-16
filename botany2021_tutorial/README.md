@@ -331,6 +331,8 @@ To concatenate all of the fasta sequences in the input directory `3_alignments/c
 python $PH/phyloherb.py -m conc -i 3_alignments/chl -o 5sp_chl -suffix .mafft.aln.fas
 ```
 
+**IMPORTANT**: Make sure you are using python 3. An error will occur if python 2 is used.
+
 2. Maximum likehood phylogeny
 
 For this small dataset, we will use IQTREE to generate the maximum likelihood tree. After loading IQTREE to your environment, the example command is:
