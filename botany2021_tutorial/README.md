@@ -291,11 +291,11 @@ INT3	rpoC2	rpoB
 Each row define the begin and end position of a genetic block. Note that they may contain multiple gene and intergenic regions. 
 <img src="/images/INT1.png" width="400" height="200">
 
-INT1
+Visualization of the INT1 region in Geneious
 
 <img src="/images/INT2.png" width="400" height="200">
 
-INT2
+Visualization of the INT1 region in Geneious
 
 Longer genetic block can result in higher blast accuracy, especially for intergenic regions. To get these three regions and the genes on both ends, type the following commands
 ```
