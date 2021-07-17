@@ -362,4 +362,4 @@ After a second manual check, your alignments is ready for re-alignment in `pasta
 run_pasta.py -i accD.mafft.aln.ordered.fas -a -t accD.mafft.aln.pasta_ref.tre -o accD.pasta
 ```
 
-After the alignment is done, repeat VI.1 to VI.2 to get your final species tree.
+After the alignment is done, use the newly generated ordered alignment `*.ordered.aln` to repeat VI.1 to VI.2 to get your final species tree.
