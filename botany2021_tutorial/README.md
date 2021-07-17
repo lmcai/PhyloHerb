@@ -187,8 +187,8 @@ sp5     666666  20474.0 35.3    131162  0.357679815800308       No
 
 For nuclear ribosomal regions and mitochondrial assemblies:
 ```
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/ITS -o 2_assemblies/ITS
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/mito -o 2_assemblies/mito
+python $PH/phyloherb.py -m qc -s 1_getorg/sample_sheet.tsv -i 1_getorg/ITS -o 2_assemblies/ITS
+python $PH/phyloherb.py -m qc -s 1_getorg/sample_sheet.tsv -i 1_getorg/mito -o 2_assemblies/mito
 ```
 
 The expected results can be found in [example/results/2_assemblies.tgz](/example/results/2_assemblies.tgz)
