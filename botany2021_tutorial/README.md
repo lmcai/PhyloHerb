@@ -358,6 +358,7 @@ Now let's load the ordered alignments to Geneious for some fine tuning. This tim
 
 After a second manual check, your alignments is ready for re-alignment in `pasta`. This time we will use a reference tree `*.pasta_ref.tre` to guide the alignment for each gene.
 ```
+#go to the chl_ordered folder
 run_pasta.py -i accD.mafft.aln.ordered.fas -a -t accD.mafft.aln.pasta_ref.tre -o accD.pasta
 ```
 
