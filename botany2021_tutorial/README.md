@@ -173,7 +173,7 @@ After the assemblies are completed, you can summarize the results using the QC f
 #create a new folder under the herbariomics_workshop to store assemblies
 cd herbariomics_workshop
 mkdir 2_assemblies
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/chl -o 2_assemblies/chl
+python $PH/phyloherb.py -m qc -s 1_getorg/sample_sheet.tsv -i 1_getorg/chl -o 2_assemblies/chl
 ```
 This command will copy all of the assemblies under the input directory `1_getorg/chl` to a new directory `2_assemblies/chl` and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` that looks like this
 ```
