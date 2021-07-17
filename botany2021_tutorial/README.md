@@ -350,7 +350,7 @@ First, using a reference species tree (newick format), we will order the sequenc
 python $PH/phyloherb.py -m order -t 5sp_chl.rnd1.treefile -i 3_alignments/chl -o 3_alignments/chl_ordered -suffix .mafft.aln.fas -missing 0.5
 ```
 
-This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene. You will need this tree for the second round of pasta alignment after manual curation.
+This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene in the newly created directory `chl_ordered`. You will need this tree for the second round of pasta alignment after manual curation.
 
 Now let's load the ordered alignments to Geneious for some fine tuning. This time we will delete blocks of problematic sequences. They usually appears as a cluster of SNPs highlighted in red below. These SNPs are not conserved in their close relatives, so they are phylogenetically uninformative autapomorphies. Regardless of the causes, we can safely delete them. 
 
