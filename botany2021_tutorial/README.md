@@ -256,6 +256,7 @@ Based on our experiences, NTS is not alignable even between closely related taxa
 
 To get 18S, ITS1, 5.8S, ITS2, and 28S as separate fasta files, use the following commands
 ```
+#go to the herbariomics_workshop folder
 python $PH/phyloherb.py -m ortho -i 2_assemblies/ITS -o 3_alignments/ITS -rdna
 ```
 
