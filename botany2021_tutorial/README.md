@@ -15,7 +15,9 @@ conda create --name getorg python=3.7.0
 #answer promt questions 
 #proceed ([y]/n)?
 #y
-conda activate getorg
+#for Mac
+#conda activate getorg
+source activate getorg
 conda install -c bioconda getorganelle
 conda install -c conda-forge biopython
 conda install -c etetoolkit ete3
