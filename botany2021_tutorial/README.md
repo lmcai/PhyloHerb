@@ -25,6 +25,7 @@ conda install -c etetoolkit ete3
 #get database for getorganelle
 get_organelle_config.py --add embplant_pt,embplant_mt,embplant_nr
 ```
+#Note: If you run into an error: Bowtie2 is not available, try: conda install tbb=2020.2
 
 **IMPORTANT**: GetOrgannelle currently does not support Windows :(
 
