@@ -173,7 +173,7 @@ After the assemblies are completed, you can summarize the results using the QC f
 #create a new folder under the herbariomics_workshop to store assemblies
 cd herbariomics_workshop
 mkdir 2_assemblies
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/chl -o 2_assemblies/chl
+python $PH/phyloherb.py -m qc -s 1_getorg/sample_sheet.tsv -i 1_getorg/chl -o 2_assemblies/chl
 ```
 This command will copy all of the assemblies under the input directory `1_getorg/chl` to a new directory `2_assemblies/chl` and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` that looks like this
 ```
@@ -187,8 +187,8 @@ sp5     666666  20474.0 35.3    131162  0.357679815800308       No
 
 For nuclear ribosomal regions and mitochondrial assemblies:
 ```
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/ITS -o 2_assemblies/ITS
-python $PH/phyloherb.py -m qc -s sample_sheet.tsv -i 1_getorg/mito -o 2_assemblies/mito
+python $PH/phyloherb.py -m qc -s 1_getorg/sample_sheet.tsv -i 1_getorg/ITS -o 2_assemblies/ITS
+python $PH/phyloherb.py -m qc -s 1_getorg/sample_sheet.tsv -i 1_getorg/mito -o 2_assemblies/mito
 ```
 
 The expected results can be found in [example/results/2_assemblies.tgz](/example/results/2_assemblies.tgz)
@@ -256,6 +256,7 @@ Based on our experiences, NTS is not alignable even between closely related taxa
 
 To get 18S, ITS1, 5.8S, ITS2, and 28S as separate fasta files, use the following commands
 ```
+#go to the herbariomics_workshop folder
 python $PH/phyloherb.py -m ortho -i 2_assemblies/ITS -o 3_alignments/ITS -rdna
 ```
 
@@ -350,7 +351,7 @@ First, using a reference species tree (newick format), we will order the sequenc
 python $PH/phyloherb.py -m order -t 5sp_chl.rnd1.treefile -i 3_alignments/chl -o 3_alignments/chl_ordered -suffix .mafft.aln.fas -missing 0.5
 ```
 
-This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene. You will need this tree for the second round of pasta alignment after manual curation.
+This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene in the newly created directory `chl_ordered`. You will need this tree for the second round of pasta alignment after manual curation.
 
 Now let's load the ordered alignments to Geneious for some fine tuning. This time we will delete blocks of problematic sequences. They usually appears as a cluster of SNPs highlighted in red below. These SNPs are not conserved in their close relatives, so they are phylogenetically uninformative autapomorphies. Regardless of the causes, we can safely delete them. 
 
@@ -358,7 +359,8 @@ Now let's load the ordered alignments to Geneious for some fine tuning. This tim
 
 After a second manual check, your alignments is ready for re-alignment in `pasta`. This time we will use a reference tree `*.pasta_ref.tre` to guide the alignment for each gene.
 ```
+#go to the chl_ordered folder
 run_pasta.py -i accD.mafft.aln.ordered.fas -a -t accD.mafft.aln.pasta_ref.tre -o accD.pasta
 ```
 
-After the alignment is done, repeat VI.1 to VI.2 to get your final species tree.
+After the alignment is done, use the newly generated ordered alignment `*.ordered.aln` in each gene folder to repeat VI.1 to VI.2 to get your final species tree.
