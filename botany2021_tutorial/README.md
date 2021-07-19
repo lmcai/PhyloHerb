@@ -25,9 +25,10 @@ conda install -c etetoolkit ete3
 #get database for getorganelle
 get_organelle_config.py --add embplant_pt,embplant_mt,embplant_nr
 ```
-Note: If you run into an error: Bowtie2 is not available, try: conda install tbb=2020.2
 
-**IMPORTANT**: GetOrgannelle currently does not support Windows :(
+**IMPORTANT**: 
+  GetOrgannelle currently does not support Windows :(
+  If you run into errors associated with Bowtie2, try: `conda install tbb=2020.2`
 
 2. [Bandage](https://rrwick.github.io/Bandage/): Assembly graph viewer with a graphical user interface. Can be downloaded and installed based on the instruction online.
 
