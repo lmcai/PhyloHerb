@@ -2,6 +2,8 @@
 
 This is a step-by-step tutorial to prossess genome skimming data for phylogeny reconstruction. This tutorial will use the example dataset hosted on the PhyloHerb repository to reconstruct a plastome-based phylogeny for five species.
 
+Video recordings of the workshop can be viewed now on [Youtube](https://www.youtube.com/watch?v=XCZj-SDk7p4).
+
 ## I. Prerequisites
 Install the following software
 
