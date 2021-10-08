@@ -346,7 +346,7 @@ elif mode =='ortho':
 			print('############################################################\n\
 			#ERROR:Zero species found! Check your input!\n\
 			Usage:\n\
-			python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list file> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <use build-in mitochondrial reference genes>')
+			python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list> -sp <species list> -l <minimum length for blast hit> -ref <custom reference sequence> -mito <use build-in mitochondrial reference genes>')
 		#get minimum length for blast hit
 		if args.l:
 			min_len=int(args.l)
