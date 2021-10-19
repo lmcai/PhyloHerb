@@ -53,6 +53,13 @@ git clean -f -d
 ### Phylogeny
 7. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
 
+
+## II. Quick start
+
+****
+
+
+
 ## II. General guidelines for genome skimming data collection
 
 **For the impatient:**
