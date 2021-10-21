@@ -70,7 +70,7 @@ def qc(sample_sheet,input_dir,output_dir):
 					assem_len=assem_len+len(l)
 					GC=GC+l.count('G')+l.count('C')+l.count('g')+l.count('c')
 			out.write('\t'.join([sp,str(total_reads),str(target_reads),base_cov,str(assem_len),str(float(GC)/assem_len),circ])+'\n')
-		except IOError:
+		except (IOError, IndexError) as e:
 			try:
 				log=open(input_dir+'/'+sp+'/get_org.log.txt').readlines()
 				for l in log:
