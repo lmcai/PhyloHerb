@@ -1,5 +1,5 @@
 from Bio import AlignIO
-import os, argparse, sys, shutil
+import os, argparse, sys, shutil, textwrap
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
@@ -22,6 +22,12 @@ parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum 
 parser.add_argument('-f',  metavar='mode', help='[getseq mode] how to extract loci, choose one of the following [gene, genetic_block, intergenic]')
 parser.add_argument('-gene_def',  metavar='file', help='[getseq mode] a gene delimitation file that defines genetic blocks')
 
+print textwrap.dedent("""\
+ __                 __        ___  __   __  
+|__) |__| \ / |    /  \ |__| |__  |__) |__) 
+|    |  |  |  |___ \__/ |  | |___ |  \ |__) 
+                                            
+""")
 
 args = parser.parse_args()
 
