@@ -330,6 +330,7 @@ elif mode =='qc':
 	try:
 		print('processing '+str(len(open(args.s).readlines())-1)+' species for QC analysis...')
 		qc(args.s,args.i,args.o)
+		print('output assembly_sum.tsv and assembly fasta files to '+args.o)
 		print('Done.')
 	except TypeError:
 		print('############################################################\n\
