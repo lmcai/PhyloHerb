@@ -13,6 +13,7 @@ parser.add_argument('-s',  metavar='file', help='[submission mode] path to the t
 parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing a list of species')
 parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
+parser.add_argument('-n',  metavar='integer', help='[ortho mode] number of threads for BLAST')
 parser.add_argument('-ref',  metavar='file', help='[ortho mode] custom reference sequences')
 parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes using build-in references',action='store_true')
 parser.add_argument('-rdna',  help='[ortho mode] extract nuclear ribosomal regions using build-in references',action='store_true')
@@ -88,13 +89,13 @@ def qc(sample_sheet,input_dir,output_dir):
 	if len(failed)>0:
 		print('Cannot find GetOrganelle outputs in the directory '+input_dir+' for the following species: '+', '.join(failed))
 	
-def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len):
+def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads):
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	print('processing species '+sp)
 	lib_ID=sp
 	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +'.assembly.fas -dbtype nucl -out '+lib_ID+' &>/dev/null'
 	os.system(S)
-	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + ' -outfmt 6 -evalue 1e-20 -out '+ lib_ID +'.blast.out &>/dev/null'
+	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + '-num_threads '+threads+' -outfmt 6 -evalue 1e-20 -out '+ lib_ID +'.blast.out &>/dev/null'
 	os.system(S)
 	x=open(lib_ID+'.blast.out').readlines()
 	y=SeqIO.index(input_dir+'/'+lib_ID+'.assembly.fas','fasta')
@@ -351,6 +352,9 @@ elif mode =='ortho':
 		if args.l:
 			min_len=int(args.l)
 		else:min_len=60
+		if args.n:
+			threads=int(args.n)
+		else:threads=1
 		print('Using length cutoff ' + str(min_len)+' bp for BLAST result filtering')
 		#genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
 		if args.rdna:
@@ -360,7 +364,7 @@ elif mode =='ortho':
 			genes=['18S','5.8S','28S']
 			reference=PH_path+'/database/rDNA_reference.fas'
 			for sp in species:
-				ortho_extraction(sp,reference,args.i,args.o,genes,min_len)
+				ortho_extraction(sp,reference,args.i,args.o,genes,min_len,threads)
 				#get ITSs
 				get_ITS(sp,sp+'.blast.out',args.i,args.o,min_len)
 		else:
@@ -391,7 +395,7 @@ elif mode =='ortho':
 				reference=PH_path+'/database/plastid_reference.fas'
 			#extract blast hits:				
 			for sp in species:
-				ortho_extraction(sp,reference,args.i,args.o,genes,min_len)	
+				ortho_extraction(sp,reference,args.i,args.o,genes,min_len,threads)	
 		print('Completed gene extraction for '+str(len(species))+' species.')		
 	except TypeError:
 			print('############################################################\n\
