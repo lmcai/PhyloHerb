@@ -1,15 +1,13 @@
 from Bio import AlignIO
-import os, argparse, sys, shutil
+import os, argparse, sys, shutil, textwrap
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
 
 parser = argparse.ArgumentParser(description='PhyloHerb is a bioinfomatic utility wrappepr to process genome skimming data for phylogenomics studies.')
-parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following [submission, qc, ortho, conc, order, getseq]', required=True)
+parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following: qc, ortho, conc, order, getseq, submission', required=True)
 parser.add_argument('-i', metavar='dir', help='input directory')
 parser.add_argument('-o', metavar='dir', help='output directory')
-parser.add_argument('-b', metavar='file', help='[submission mode] path to the bash file')
-parser.add_argument('-s',  metavar='file', help='[submission mode] path to the taxon sampling sheet')
 parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing a list of species')
 parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
@@ -20,9 +18,18 @@ parser.add_argument('-rdna',  help='[ortho mode] extract nuclear ribosomal regio
 parser.add_argument('-suffix', metavar='string', help='[conc mode] suffix of alignment files')
 parser.add_argument('-t', metavar='file', help='[order mode] newick tree file to order alignments based on phylogeny')
 parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum proportion of missing data allowed for each species')
-parser.add_argument('-f',  metavar='mode', help='[getseq mode] how to extract loci, choose one of the following [gene, genetic_block, intergenic]')
+parser.add_argument('-f',  metavar='mode', help='[getseq mode] how to extract loci, choose one of the following: gene, genetic_block, intergenic')
 parser.add_argument('-gene_def',  metavar='file', help='[getseq mode] a gene delimitation file that defines genetic blocks')
+parser.add_argument('-b', metavar='file', help='[submission mode] path to the bash file')
+parser.add_argument('-s',  metavar='file', help='[submission mode] path to the taxon sampling sheet')
 
+
+print(textwrap.dedent("""\
+ __                 __        ___  __   __  
+|__) |__| \ / |    /  \ |__| |__  |__) |__) 
+|    |  |  |  |___ \__/ |  | |___ |  \ |__) 
+                                            
+"""))
 
 args = parser.parse_args()
 
@@ -324,6 +331,7 @@ elif mode =='qc':
 	try:
 		print('processing '+str(len(open(args.s).readlines())-1)+' species for QC analysis...')
 		qc(args.s,args.i,args.o)
+		print('output assembly_sum.tsv and assembly fasta files to '+args.o)
 		print('Done.')
 	except TypeError:
 		print('############################################################\n\
