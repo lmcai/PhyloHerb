@@ -102,7 +102,7 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads
 	lib_ID=sp
 	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +'.assembly.fas -dbtype nucl -out '+lib_ID+' &>/dev/null'
 	os.system(S)
-	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + '-num_threads '+threads+' -outfmt 6 -evalue 1e-20 -out '+ lib_ID +'.blast.out &>/dev/null'
+	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + ' -num_threads '+threads+' -outfmt 6 -evalue 1e-20 -out '+ lib_ID +'.blast.out &>/dev/null'
 	os.system(S)
 	x=open(lib_ID+'.blast.out').readlines()
 	y=SeqIO.index(input_dir+'/'+lib_ID+'.assembly.fas','fasta')
