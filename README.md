@@ -61,7 +61,14 @@ git clean -f -d
 
 ## II. Quick start
 
-****
+1. If you have your assemblies and want to extract genes using our curated database:
+
+
+
+2. If you need to assemble organelle genomes and rRNA regions, see Section ## below.
+
+3.
+
 
 
 
