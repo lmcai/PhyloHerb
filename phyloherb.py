@@ -405,6 +405,7 @@ elif mode =='ortho':
 #ERROR:Zero species found! It looks like your assemblies does not end with \'.assembly.fas\'. Please use the -suffix flag!\n\
 Usage:\n\
 python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -g <gene list> -sp <species list> -l <minimum length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
+			exit()
 		#get minimum length for blast hit
 		if args.l:
 			min_len=int(args.l)
@@ -453,7 +454,7 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 			#extract blast hits:				
 			for sp in species:
 				ortho_extraction(sp,reference,args.i,args.o,genes,min_len,threads)	
-		print('Completed gene extraction for '+str(len(species))+' species. Orthologous gene sequences are written to '+args.o+'.')		
+		print('Completed gene extraction for '+str(len(species))+' species. Orthologous gene sequences are written to the output directory: '+args.o+'/.')		
 	except TypeError:
 			print('############################################################\n\
 #ERROR:Insufficient arguments!\n\
