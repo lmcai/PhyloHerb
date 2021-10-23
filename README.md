@@ -63,7 +63,7 @@ git clean -f -d
 
 <img src="/images/PH_pipeline.png" width="674" height="335">
 
-Core functions of PhyloHerb
+**Core functions of PhyloHerb**
 
 1. Ortholog gene extraction using built-in database
 
