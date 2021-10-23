@@ -40,7 +40,24 @@ def submiter_gen(bash_file,sample_sheet,output):
 		d=out.write('sbatch '+bash_file+' '+l.split()[1]+' '+l.split()[2]+' '+l.split()[0]+'\n')
 	out.close()
 
-
+def qc_assemblies_only(sp_list,input_dir,output_dir):
+	if not os.path.isdir(output_dir):os.mkdir(output_dir)
+	out=open(output_dir+'/assembly_sum.tsv','a')
+	out.write('\t'.join(['sp_prefix','Length','GC%','Number_scaffolds'])+'\n')
+	for sp in sp_list:
+		try:
+			assem_seq=open(input_dir+'/'+sp).readlines()
+			assem_len=0
+			GC=0
+			scaffolds=0
+			for l in assem_seq:
+				if not l.startswith('>'):
+					assem_len=assem_len+len(l)
+					GC=GC+l.count('G')+l.count('C')+l.count('g')+l.count('c')
+				else:
+					scaffolds=scaffolds+1
+			out.write('\t'.join([sp,str(assem_len),str(float(GC)/assem_len),str(scaffolds)])+'\n')
+	
 def qc(sp_sheet,input_dir,output_dir):
 	failed=[]
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
@@ -95,7 +112,11 @@ def qc(sp_sheet,input_dir,output_dir):
 				out.write('\t'.join([sp,'NA','NA','NA','NA','NA','NA'])+'\n')
 				failed.append(sp)
 	if len(failed)>0:
-		print('Cannot find GetOrganelle outputs in the directory '+input_dir+' for the following species: '+', '.join(failed))
+		if len(failed)==len(sp_sheet):
+			print('No GetOrganelle outputs found. If you are using assembly fasta files only, be sure to add the -suffix argument.')
+		else:
+			print('Cannot find GetOrganelle outputs in the directory '+input_dir+' for the following species: '+', '.join(failed))
+	
 	
 def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads):
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
@@ -330,13 +351,18 @@ if mode =='submission':
 	except IOError as e:print(e.errno)
 elif mode =='qc':
 	try:
-		if args.s:
-			sp_list=open(args.s).readlines()
-			sp_list=[i.split()[0] for i in sp_sheet[1:]]
+		if args.suffix:
+			sp_list=[i for i in os.listdir(args.i) if i.endswith(args.suffix)]
+			print('processing '+str(len(sp_list))+' species for QC analysis...')
+			qc_assemblies_only(sp_list,args.i,args.o)
 		else:
-			sp_list=[i for i in os.listdir(args.i) if os.path.isdir(args.i+'/'+i)]
-		print('processing '+str(len(sp_list)+' species for QC analysis...')
-		qc(sp_list,args.i,args.o)
+			if args.s:
+				sp_list=open(args.s).readlines()
+				sp_list=[i.split()[0] for i in sp_sheet[1:]]
+			else:
+				sp_list=[i for i in os.listdir(args.i) if os.path.isdir(args.i+'/'+i)]
+			print('processing '+str(len(sp_list))+' species for QC analysis...')
+			qc(sp_list,args.i,args.o)
 		print('output assembly_sum.tsv and assembly fasta files to '+args.o)
 		print('Done.')
 	except TypeError:
