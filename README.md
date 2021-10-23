@@ -24,11 +24,11 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 ### PhyloHerb
 The core function of `phyloherb.py` is to extract orthologous genetic regions from preexisting assemblies. It also provides utility functions for phylogenomic data curation. 
 
-Steps:
+Installation steps:
 
-1. [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download): Make sure BLAST is callable in your current environment.
+1. Install [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download): Make sure BLAST is callable in your current environment.
 
-2. Two python modules are required: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/). They can be most easily installed using `conda`.
+2. Install two python modules: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/). They can be most easily installed using `conda`.
 
 3. To install PhyloHerb, simply download it use `git` or decompressing the zip file:
 
