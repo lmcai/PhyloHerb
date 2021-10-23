@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser(description='PhyloHerb is a bioinfomatic utilit
 parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following: qc, ortho, conc, order, getseq, submission', required=True)
 parser.add_argument('-i', metavar='dir', help='input directory')
 parser.add_argument('-o', metavar='dir', help='output directory')
+parser.add_argument('-suffix', metavar='string', help='[qc, ortho, conc mode] suffix of input files')
 parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing a list of species')
 parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
@@ -15,7 +16,6 @@ parser.add_argument('-n',  metavar='integer', help='[ortho mode] number of threa
 parser.add_argument('-ref',  metavar='file', help='[ortho mode] custom reference sequences')
 parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes using build-in references',action='store_true')
 parser.add_argument('-rdna',  help='[ortho mode] extract nuclear ribosomal regions using build-in references',action='store_true')
-parser.add_argument('-suffix', metavar='string', help='[conc mode] suffix of alignment files')
 parser.add_argument('-t', metavar='file', help='[order mode] newick tree file to order alignments based on phylogeny')
 parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum proportion of missing data allowed for each species')
 parser.add_argument('-f',  metavar='mode', help='[getseq mode] how to extract loci, choose one of the following: gene, genetic_block, intergenic')
@@ -124,12 +124,12 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	print('processing species '+sp)
 	lib_ID=sp
-	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +'.assembly.fas -dbtype nucl -out '+lib_ID+' &>/dev/null'
+	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +' -dbtype nucl -out '+lib_ID+' &>/dev/null'
 	os.system(S)
 	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + ' -num_threads '+threads+' -outfmt 6 -evalue 1e-20 -out '+ lib_ID +'.blast.out &>/dev/null'
 	os.system(S)
 	x=open(lib_ID+'.blast.out').readlines()
-	y=SeqIO.index(input_dir+'/'+lib_ID+'.assembly.fas','fasta')
+	y=SeqIO.index(input_dir+'/'+lib_ID,'fasta')
 	a={}
 	for g in genes:
 		#print g
@@ -367,12 +367,11 @@ elif mode =='qc':
 				print('############################################################\n\
 #ERROR:No GetOrganelle output folders found.\n\
 Usage:\n\
-With Getorganelle output folders:\n\
-python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
 With assemblies only:\n\
-python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
-				break
-				
+python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>\
+With Getorganelle output folders:\n\
+python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>')
+				exit()
 			print('processing '+str(len(sp_list))+' species for QC analysis...')
 			qc(sp_list,args.i,args.o)
 		print('output assembly_sum.tsv and assembly fasta files to '+args.o)
@@ -396,13 +395,16 @@ elif mode =='ortho':
 			print('Using custom species set in '+args.sp+': '+', '.join(species))
 		else:
 			species=os.listdir(args.i)
-			species=[j.split('.')[0] for j in species if j.endswith('.assembly.fas')]
+			if args.suffix:
+				species=[j.split('.')[0] for j in species if j.endswith(args.suffix)]
+			else:
+				species=[j.split('.')[0] for j in species if j.endswith('.assembly.fas')]
 			print('Using all species found in '+args.i+': '+', '.join(species))
 		if len(species)==0:
 			print('############################################################\n\
 #ERROR:Zero species found! Check your input!\n\
 Usage:\n\
-python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -g <gene list> -sp <species list> -l <minimum length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
+python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -g <gene list> -sp <species list> -l <minimum length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 		#get minimum length for blast hit
 		if args.l:
 			min_len=int(args.l)
@@ -456,7 +458,7 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -g <gene 
 			print('############################################################\n\
 #ERROR:Insufficient arguments!\n\
 Usage:\n\
-python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
+python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 	except FileNotFoundError:
 		print('############################################################\n\
 #ERROR:Input directory not found!\n')
