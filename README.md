@@ -61,9 +61,13 @@ git clean -f -d
 
 ## II. Quick start
 
+<img src="/images/PH_pipeline.png" width="674" height="335">
+
+Core functions of PhyloHerb
+
 1. Ortholog gene extraction using built-in database
 
-If you have your assemblies and want to extract genes using our curated database:
+**A.** If you have your assemblies and want to extract genes using our curated database:
 
 *Input:* Place all fasta formated assemblies in one folder. Make sure they have consistent suffix. To extract genes, use the following command:
 
@@ -75,20 +79,20 @@ python phyloherb.py -m ortho -i <input directory> -o <output directory> -suffix 
 #For mitochondrion
 python phyloherb.py -m ortho -i <input directory> -o <output directory> -suffix <suffix> -mito
 ```
-List of genes and species included in our built-in database can be found [here](https://github.com/lmcai/PhyloHerb/tree/main/database)
+List of genes and species included in our built-in database can be found [here](https://github.com/lmcai/PhyloHerb/tree/main/database).
 
-*Output:* In the output folder, 
+*Output:* In the output folder, you can find fasta sequences named after genes. The header within each fasta is consistent with the species names (file names of the input assemblies).
 
-2. If you need to assemble organelle genomes and rRNA regions, see Section ## below.
+**B.** If you need to assemble organelle genomes and rRNA regions, see Section ## below.
 
-3.
-
-
+2.
 
 
-## II. General guidelines for genome skimming data collection
 
-**For the impatient:**
+
+## III. General guidelines for genome skimming data collection
+
+**Overview**
 
 If interested in phylogeny alone, up to 384 samples (4 plates * 96 samples/plate) can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. Using the NovaSeq plastform can generate more complete genomes thanks to its larger output, but currently we cannot put more than 384 multiplexed samples due to the barcode limitation. If circularized plastid genomes are needed, >2 Gb data per species can usually get you there, which translates to ~60 samples per lane.
 
@@ -114,7 +118,7 @@ We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-soluti
 
 4. Where are the limits?
 
-About 1-6% of the reads from genome skimming are from plastomes. The base coverage is roughly half for mitochondria and 2X for nuclear ribosomal regions compared to plastids. Theoretically the base coverage vary with the size of the nuclear genome and the abundance of these genetic regions within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very rough** estimation of what you may expect for plastome from certain amount of input data.
+About 0.5-6% of the reads from genome skimming come from plastomes. The base coverage is roughly half for mitochondria and 2X for nuclear ribosomal regions compared to plastids. Theoretically the base coverage vary with the size of the nuclear genome and the abundance of these genetic regions within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very rough** estimation of what you may expect for plastome from certain amount of input data.
 
 <img src="/images/coverage.png" width="400" height="130">
 
