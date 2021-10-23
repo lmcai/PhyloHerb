@@ -396,13 +396,13 @@ elif mode =='ortho':
 		else:
 			species=os.listdir(args.i)
 			if args.suffix:
-				species=[j.split('.')[0] for j in species if j.endswith(args.suffix)]
+				species=[j for j in species if j.endswith(args.suffix)]
 			else:
-				species=[j.split('.')[0] for j in species if j.endswith('.assembly.fas')]
-			print('Using all species found in '+args.i+': '+', '.join(species))
+				species=[j for j in species if j.endswith('.assembly.fas')]
+			print('Using all '+str(len(species))+' species found in '+args.i+': '+', '.join([j.split('.')[0] for j in species]))
 		if len(species)==0:
 			print('############################################################\n\
-#ERROR:Zero species found! Check your input!\n\
+#ERROR:Zero species found! It looks like your assemblies does not end with \'.assembly.fas\'. Please use the -suffix flag!\n\
 Usage:\n\
 python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -g <gene list> -sp <species list> -l <minimum length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 		#get minimum length for blast hit
@@ -453,7 +453,7 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 			#extract blast hits:				
 			for sp in species:
 				ortho_extraction(sp,reference,args.i,args.o,genes,min_len,threads)	
-		print('Completed gene extraction for '+str(len(species))+' species.')		
+		print('Completed gene extraction for '+str(len(species))+' species. Orthologous gene sequences are written to '+args.o+'.')		
 	except TypeError:
 			print('############################################################\n\
 #ERROR:Insufficient arguments!\n\
@@ -461,7 +461,7 @@ Usage:\n\
 python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 	except FileNotFoundError:
 		print('############################################################\n\
-#ERROR:Input directory not found!\n')
+#ERROR:Input files not found!\n')
 	except IOError as e:print(e.errno)
 elif mode =='conc':
 	try:
