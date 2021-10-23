@@ -85,8 +85,16 @@ List of genes and species included in our built-in database can be found [here](
 
 **B.** If you need to assemble organelle genomes and rRNA regions, see Section ## below.
 
-**2.**
+**2. Alignment and concatenation**
 
+For small dataset in conserved regions, you can use `MAFFT` for align. For large dataset across distantly related species, we recommend `PASTA`. An example bash file to run MAFFT and PASTA can be found in [mafft_pasta.sh](phyloherbLib/mafft_pasta.sh). To concatenate sequences, place all fasta alignments in one folder and use the following command:
+
+```
+python phyloherb.py -m conc -i < input directory> -o <output prefix> -suffix <alignment suffix>
+```
+*Output:* `*.conc.fas` and `*.conc.nex` are concatenated sequences in fasta and nexus formats, respectively. `*.partition` is the gene partition file that can be used for [PartitionFinder](https://www.robertlanfear.com/partitionfinder/).
+
+**3. Reorder alignments based on phylogeny to assist manual curation**
 
 
 
