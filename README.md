@@ -65,7 +65,7 @@ git clean -f -d
 
 **Core functions of PhyloHerb**
 
-1. Ortholog gene extraction using built-in database
+**1. Ortholog gene extraction using built-in database**
 
 **A.** If you have your assemblies and want to extract genes using our curated database:
 
@@ -85,7 +85,7 @@ List of genes and species included in our built-in database can be found [here](
 
 **B.** If you need to assemble organelle genomes and rRNA regions, see Section ## below.
 
-2.
+**2.**
 
 
 
