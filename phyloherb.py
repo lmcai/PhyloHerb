@@ -347,9 +347,9 @@ if mode =='submission':
 		print('Done.\nTo submit the jobs to the cluster, type:\nsh <output file name>')
 	except TypeError:
 		print('############################################################\n\
-		#ERROR:Insufficient arguments!\n\
-		Usage:\n\
-		python phyloherb.py -m submision -b <bash file> -s <sample sheet> -o <output file name>')
+#ERROR:Insufficient arguments!\n\
+Usage:\n\
+python phyloherb.py -m submision -b <bash file> -s <sample sheet> -o <output file name>')
 	except IOError as e:print(e.errno)
 elif mode =='qc':
 	try:
@@ -365,12 +365,12 @@ elif mode =='qc':
 				sp_list=[i for i in os.listdir(args.i) if os.path.isdir(args.i+'/'+i)]
 			if len(sp_list)==0:
 				print('############################################################\n\
-		#ERROR:No GetOrganelle output folders found.\n\
-		Usage:\n\
-		With Getorganelle output folders:\n\
-		python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
-		With assemblies only:\n\
-		python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
+#ERROR:No GetOrganelle output folders found.\n\
+Usage:\n\
+With Getorganelle output folders:\n\
+python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
+With assemblies only:\n\
+python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
 				pass
 				
 			print('processing '+str(len(sp_list))+' species for QC analysis...')
@@ -379,12 +379,12 @@ elif mode =='qc':
 		print('Done.')
 	except TypeError:
 		print('############################################################\n\
-		#ERROR:Insufficient arguments!\n\
-		Usage:\n\
-		With Getorganelle output folders:\n\
-		python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
-		With assemblies only:\n\
-		python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
+#ERROR:Insufficient arguments!\n\
+Usage:\n\
+With Getorganelle output folders:\n\
+python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
+With assemblies only:\n\
+python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
 elif mode =='ortho':
 	try:
 		PH_path=os.path.dirname(__file__)
@@ -400,9 +400,9 @@ elif mode =='ortho':
 			print('Using all species found in '+args.i+': '+', '.join(species))
 		if len(species)==0:
 			print('############################################################\n\
-			#ERROR:Zero species found! Check your input!\n\
-			Usage:\n\
-			python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list> -sp <species list> -l <minimum length for blast hit> -ref <custom reference sequence> -mito <mitochondrial mode> -rdna <rDNA mode>')
+#ERROR:Zero species found! Check your input!\n\
+Usage:\n\
+python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -g <gene list> -sp <species list> -l <minimum length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 		#get minimum length for blast hit
 		if args.l:
 			min_len=int(args.l)
@@ -454,12 +454,12 @@ elif mode =='ortho':
 		print('Completed gene extraction for '+str(len(species))+' species.')		
 	except TypeError:
 			print('############################################################\n\
-		#ERROR:Insufficient arguments!\n\
-		Usage:\n\
-		python phyloherb.py -m ortho -i <input directory> -o <output directory> [optional] -g <gene list> -sp <species list> -l <minimum length for blast hit> -ref <fasta file of custom reference> -mito <mitochondrial mode> -rdna <rDNA mode>')
+#ERROR:Insufficient arguments!\n\
+Usage:\n\
+python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 	except FileNotFoundError:
 		print('############################################################\n\
-		#ERROR:Input directory not found!\n')
+#ERROR:Input directory not found!\n')
 	except IOError as e:print(e.errno)
 elif mode =='conc':
 	try:
@@ -475,9 +475,9 @@ elif mode =='conc':
 		print('Done.')
 	except TypeError:
 		print('############################################################\n\
-		#ERROR:Insufficient arguments!\n\
-		Usage:\n\
-		python phyloherb.py -m conc -i <input directory> -o <output prefix> -suffix <alignment suffix> [optional] -g <gene list file>')
+#ERROR:Insufficient arguments!\n\
+Usage:\n\
+python phyloherb.py -m conc -i <input dir> -o <output prefix> -suffix <alignment suffix> [optional] -g <gene list file>')
 elif mode =='order':
 	try:
 		from ete3 import Tree
@@ -492,13 +492,13 @@ elif mode =='order':
 		print('Done.')
 	except ModuleNotFoundError as e:
 		print('############################################################\n\
-		#ERROR:Module not correctly loaded:')
+#ERROR:Module not correctly loaded:')
 		print(e)
 	except TypeError:
 		print('############################################################\n\
-		#ERROR:Insufficient arguments!\n\
-		Usage:\n\
-		python phyloherb.py -m order -t <species tree> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -missing <missing proportion>')
+#ERROR:Insufficient arguments!\n\
+Usage:\n\
+python phyloherb.py -m order -t <species tree> -i <input dir> -o <output dir> -suffix <alignment suffix> [optional] -missing <missing proportion>')
 elif mode =='getseq':
 	try:
 		print('Extracting gene and/or intergenic regions under the '+args.f+' mode from the Genbank files in '+args.i)
@@ -513,19 +513,19 @@ elif mode =='getseq':
 			print('Done!')
 		else:
 			print('############################################################\n\
-		#ERROR:Argument error!\n\
-		Usage:\n\
-		python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -gene_def <gene definition file>')
+#ERROR:Argument error!\n\
+Usage:\n\
+python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -gene_def <gene definition file>')
 	except TypeError:
 		print('############################################################\n\
-		#ERROR:Insufficient arguments!\n\
-		Usage:\n\
-		python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -gene_def <gene definition file>')
+#ERROR:Insufficient arguments!\n\
+Usage:\n\
+python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -gene_def <gene definition file>')
 	except IOError as e:print(e)
 else:
 	print('############################################################\n\
-	#ERROR: Please choose one of the following execution mode using -m: submission, qc, ortho, conc, order, getseq\n\
-	')
+#ERROR: Please choose one of the following execution mode using -m: qc, ortho, conc, order, getseq, submission\n\
+')
 
 
 
