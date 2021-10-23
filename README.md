@@ -24,7 +24,7 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 ### PhyloHerb
 The core function of `phyloherb.py` is to extract orthologous genetic regions from preexisting assemblies. It also provides utility functions for phylogenomic data curation. 
 
-Installation steps:
+**Installation steps:**
 
 1. Install [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download): Make sure BLAST is callable in your current environment.
 
