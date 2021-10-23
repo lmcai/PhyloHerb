@@ -61,9 +61,23 @@ git clean -f -d
 
 ## II. Quick start
 
-1. If you have your assemblies and want to extract genes using our curated database:
+1. Ortholog gene extraction using built-in database
 
+If you have your assemblies and want to extract genes using our curated database:
 
+*Input:* Place all fasta formated assemblies in one folder. Make sure they have consistent suffix. To extract genes, use the following command:
+
+```
+#For plastid 
+python phyloherb.py -m ortho -i <input directory> -o <output directory> -suffix <suffix>
+#For rRNA
+python phyloherb.py -m ortho -i <input directory> -o <output directory> -suffix <suffix> -rdna
+#For mitochondrion
+python phyloherb.py -m ortho -i <input directory> -o <output directory> -suffix <suffix> -mito
+```
+List of genes and species included in our built-in database can be found [here](https://github.com/lmcai/PhyloHerb/tree/main/database)
+
+*Output:* In the output folder, 
 
 2. If you need to assemble organelle genomes and rRNA regions, see Section ## below.
 
