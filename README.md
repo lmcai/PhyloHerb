@@ -22,7 +22,7 @@ MAFFT: Katoh, Kazutaka, and Daron M. Standley. "MAFFT multiple sequence alignmen
 To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
 
 ### PhyloHerb
-The core function `phyloherb.py` is designed to extract orthologous genetic regions from preexisting assemblies. It also provides utility functions for phylogenomic data curation. 
+PhyloHerb is designed to extract orthologous genetic regions from preexisting assemblies. It also provides utility functions for phylogenomic data curation. 
 
 **Installation steps:**
 
