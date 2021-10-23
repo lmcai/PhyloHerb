@@ -57,7 +57,9 @@ def qc_assemblies_only(sp_list,input_dir,output_dir):
 				else:
 					scaffolds=scaffolds+1
 			out.write('\t'.join([sp,str(assem_len),str(float(GC)/assem_len),str(scaffolds)])+'\n')
-	
+		except:
+			out.write('\t'.join([sp,'NA','NA','NA'])+'\n')
+
 def qc(sp_sheet,input_dir,output_dir):
 	failed=[]
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
