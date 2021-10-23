@@ -371,7 +371,7 @@ With Getorganelle output folders:\n\
 python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
 With assemblies only:\n\
 python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
-				pass
+				break
 				
 			print('processing '+str(len(sp_list))+' species for QC analysis...')
 			qc(sp_list,args.i,args.o)
