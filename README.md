@@ -22,12 +22,19 @@ MAFFT: Katoh, Kazutaka, and Daron M. Standley. "MAFFT multiple sequence alignmen
 To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
 
 ### PhyloHerb
-The core function of `phyloherb.py` is to extract orthologous genetic regions from preexisting assemblies. It also provides utility functions for phylogenomic data curation.  To install PhyloHerb, you simply download it use `git` or decompressing the zip file:
+The core function of `phyloherb.py` is to extract orthologous genetic regions from preexisting assemblies. It also provides utility functions for phylogenomic data curation. 
+
+Steps:
+
+1. [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download): Make sure BLAST is callable in your current environment.
+
+2. Two python modules are required: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/). They can be most easily installed using `conda`.
+
+3. To install PhyloHerb, simply download it use `git` or decompressing the zip file:
 
 ```
 git clone https://github.com/lmcai/PhyloHerb.git
 ```
-Two python modules are required: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/). They can be most easily installed using `conda`.
 
 *IMPORTANT*: PhyloHerb is currently only compatible with **Python 3**.
 
@@ -38,22 +45,18 @@ git reset --hard origin
 git clean -f -d
 ```
 
-### Assembly
-1. Assembler: [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle), [Bowtie2 v2.2.2+](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml), and [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). If you install `GetOrganelle` via conda, all of these three programs will be installed. Otherwise you can install them one by one.
+### Optional programs
+1. Assembler: [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle). If you install `GetOrganelle` via `conda`, all of these three programs will be installed. Otherwise you can install them one by one.
 2. Assembly viewer: [Bandage](https://rrwick.github.io/Bandage/)
 3. Optional assembly viewer: [Geneious](https://www.geneious.com/) (the complementary version is sufficient)
-
-### Alignment
-4. 
-5. Aligner: 
+4. Aligner: 
 
 	[Pasta](https://github.com/smirarab/pasta) for highly variable regions such as the ITS sequences
 	
 	[MAFFT](https://mafft.cbrc.jp/alignment/software/) for less variable regions or long alignments (>5 kb) that pasta may not be able to handle when the number of species is high (>500 sp)
-6. Manual assembly examination: [Geneious](https://www.geneious.com/) (the licensed version are required)
+5. Manual assembly examination: [Geneious](https://www.geneious.com/) (the licensed version are required)
 
-### Phylogeny
-7. [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
+6. Phylogeny: [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
 
 
 ## II. Quick start
