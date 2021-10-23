@@ -363,6 +363,16 @@ elif mode =='qc':
 				sp_list=[i.split()[0] for i in sp_sheet[1:]]
 			else:
 				sp_list=[i for i in os.listdir(args.i) if os.path.isdir(args.i+'/'+i)]
+			if len(sp_list)==0:
+				print('############################################################\n\
+		#ERROR:No GetOrganelle output folders found.\n\
+		Usage:\n\
+		With Getorganelle output folders:\n\
+		python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
+		With assemblies only:\n\
+		python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
+				pass
+				
 			print('processing '+str(len(sp_list))+' species for QC analysis...')
 			qc(sp_list,args.i,args.o)
 		print('output assembly_sum.tsv and assembly fasta files to '+args.o)
@@ -371,7 +381,10 @@ elif mode =='qc':
 		print('############################################################\n\
 		#ERROR:Insufficient arguments!\n\
 		Usage:\n\
-		python phyloherb.py -m qc -s <sample sheet> -i <input directory containing Getorganelle output> -o <output directory>')
+		With Getorganelle output folders:\n\
+		python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
+		With assemblies only:\n\
+		python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
 elif mode =='ortho':
 	try:
 		PH_path=os.path.dirname(__file__)
