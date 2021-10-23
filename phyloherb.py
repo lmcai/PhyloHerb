@@ -41,13 +41,11 @@ def submiter_gen(bash_file,sample_sheet,output):
 	out.close()
 
 
-def qc(sample_sheet,input_dir,output_dir):
+def qc(sp_sheet,input_dir,output_dir):
 	failed=[]
-	sp_sheet=open(sample_sheet).readlines()
-	sp_sheet=[i.split()[0] for i in sp_sheet[1:]]
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	out=open(output_dir+'/assembly_sum.tsv','a')
-	out.write('\t'.join(['sp_prefix','Total_reads','Reads_in_target_region','Average_base_coverage','Length','GC%','Circularized'])+'\n')
+	out.write('\t'.join(['sp_prefix','Total_reads','Reads_in_target_region','Average_base_coverage','Length','GC%','Number_scaffolds','Circularized'])+'\n')
 	for sp in sp_sheet:
 		try:
 			circ='No'
@@ -73,11 +71,14 @@ def qc(sample_sheet,input_dir,output_dir):
 			assem_seq=open(input_dir+'/'+sp+'/'+assem[0]).readlines()
 			assem_len=0
 			GC=0
+			scaffolds=0
 			for l in assem_seq:
 				if not l.startswith('>'):
 					assem_len=assem_len+len(l)
 					GC=GC+l.count('G')+l.count('C')+l.count('g')+l.count('c')
-			out.write('\t'.join([sp,str(total_reads),str(target_reads),base_cov,str(assem_len),str(float(GC)/assem_len),circ])+'\n')
+				else:
+					scaffolds=scaffolds+1
+			out.write('\t'.join([sp,str(total_reads),str(target_reads),base_cov,str(assem_len),str(float(GC)/assem_len),str(scaffolds),circ])+'\n')
 		except (IOError, IndexError) as e:
 			try:
 				log=open(input_dir+'/'+sp+'/get_org.log.txt').readlines()
@@ -329,8 +330,13 @@ if mode =='submission':
 	except IOError as e:print(e.errno)
 elif mode =='qc':
 	try:
-		print('processing '+str(len(open(args.s).readlines())-1)+' species for QC analysis...')
-		qc(args.s,args.i,args.o)
+		if args.s:
+			sp_list=open(args.s).readlines()
+			sp_list=[i.split()[0] for i in sp_sheet[1:]]
+		else:
+			sp_list=[i for i in os.listdir(args.i) if os.path.isdir(args.i+'/'+i)]
+		print('processing '+str(len(sp_list)+' species for QC analysis...')
+		qc(sp_list,args.i,args.o)
 		print('output assembly_sum.tsv and assembly fasta files to '+args.o)
 		print('Done.')
 	except TypeError:
