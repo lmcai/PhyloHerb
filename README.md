@@ -1,7 +1,7 @@
 # PhyloHerb		<img src="/images/logo.png" width="80" height="80">
 **Phylo**genomic Analysis Pipeline for **Herb**arium Specimens
 
-This bioinformatic tutorial provides detailed guidance to process **genome skimming** data collected from herbarium specimens. The outcomes include the plastid genome (plastome) assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+28S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
+PhyloHerb is a wrapper program to process **genome skimming** data collected from herbarium specimens. The outcomes include the plastid genome (plastome) assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+28S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
 
 We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea hundreds of millions of years ago). 
 
@@ -22,7 +22,7 @@ MAFFT: Katoh, Kazutaka, and Daron M. Standley. "MAFFT multiple sequence alignmen
 To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
 
 ### PhyloHerb
-The main function `phyloherb.py` provides utility functions for data curation, gene extraction, and phylogenomic datasete assembly. We also include an example dataset of five species for practicing. To download PhyloHerb, you can download it as zip or use `git`:
+The core function of `phyloherb.py` is to extract orthologous genetic regions from preexisting assemblies. It also provides utility functions for phylogenomic data curation. We also include an example dataset of five species for practicing. To download PhyloHerb, you can download it as zip or use `git`:
 
 ```
 git clone https://github.com/lmcai/PhyloHerb.git
