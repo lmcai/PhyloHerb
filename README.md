@@ -27,6 +27,8 @@ The core function of `phyloherb.py` is to extract orthologous genetic regions fr
 ```
 git clone https://github.com/lmcai/PhyloHerb.git
 ```
+Two python modules are required: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/). They can be most easily installed using `conda`.
+
 *IMPORTANT*: PhyloHerb is currently only compatible with **Python 3**.
 
 To update your local version for any future updates, `cd` into the `PhyloHerb` directory then type
@@ -42,7 +44,7 @@ git clean -f -d
 3. Optional assembly viewer: [Geneious](https://www.geneious.com/) (the complementary version is sufficient)
 
 ### Alignment
-4. Python modules: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/)
+4. 
 5. Aligner: 
 
 	[Pasta](https://github.com/smirarab/pasta) for highly variable regions such as the ITS sequences
