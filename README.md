@@ -46,7 +46,7 @@ git clean -f -d
 ```
 
 ### Optional programs
-1. Assembler: [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle). If you install `GetOrganelle` via `conda`, all of these three programs will be installed. Otherwise you can install them one by one.
+1. Assembler: [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle). Most easily installed via `conda`. All of the dependancies will be installed automatically.
 2. Assembly viewer: [Bandage](https://rrwick.github.io/Bandage/)
 3. Optional assembly viewer: [Geneious](https://www.geneious.com/) (the complementary version is sufficient)
 4. Aligner: 
