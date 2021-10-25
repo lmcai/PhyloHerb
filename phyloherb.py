@@ -150,18 +150,17 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads
 			end=max(int(best.split('\t')[8]),int(best.split('\t')[9]))
 			if end-start>min_len:
 				seq=y[hit].seq[(start-1):(end-1)]
-				SeqIO.write(SeqRecord(seq,lib_ID, '', ''),open(output_dir+'/'+g+'.fas','a'),'fasta')
+				SeqIO.write(SeqRecord(seq,lib_ID.split('.')[0], '', ''),open(output_dir+'/'+g+'.fas','a'),'fasta')
 		except (NameError,AttributeError):continue
 	os.remove(lib_ID+'.nhr')
 	os.remove(lib_ID+'.nin')
 	os.remove(lib_ID+'.nsq')
 	
 def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
-	lib_ID=sp
 	ITS1=[]
 	ITS2=[]
 	blast_txt=open(blast_file).readlines()
-	y=SeqIO.index(input_dir+'/'+lib_ID+'.assembly.fas','fasta')
+	y=SeqIO.index(input_dir+'/'+sp,'fasta')
 	a={}
 	for g in ['18S','5.8S','28S']:
 		#print g
@@ -185,7 +184,7 @@ def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 			end=ITS1[2]
 			seq=y[a['18S'].split('\t')[1]].seq[start:(end-1)]
 			output_handle=open(output_dir+'/ITS1.fas','a')
-			d=output_handle.write(">%s\n%s\n" % (sp,seq))
+			d=output_handle.write(">%s\n%s\n" % (sp.split('.')[0],seq))
 			output_handle.close()
 	except:pass
 	try:
@@ -196,7 +195,7 @@ def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 			end=ITS2[2]
 			seq=y[a['5.8S'].split('\t')[1]].seq[start:(end-1)]
 			output_handle=open(output_dir+'/ITS2.fas','a')
-			d=output_handle.write(">%s\n%s\n" % (sp,seq))
+			d=output_handle.write(">%s\n%s\n" % (sp.split('.')[0],seq))
 			output_handle.close()
 	except:pass
 
@@ -279,7 +278,7 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 		except ValueError:
 			print('############################################################\n\
 #ERROR:At least one of the files with suffix '+suffix+' is not in GenBank format!\n\
-Make sure you put all your genbank reference in the input directory with correct suffix\n')
+Make sure you put all your genbank reference in the input directory with correct suffix.\n')
 			exit()
 		#get all gene positions. for genes in the IR region, this will be the position in the second IR.
 		gene_start={}
