@@ -274,7 +274,12 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	genes=open(gene_def).readlines()
 	for f in filenames:
-		gb_recs=SeqIO.read(input_dir+'/'+f,'genbank')
+		try:
+			gb_recs=SeqIO.read(input_dir+'/'+f,'genbank')
+		except ValueError:
+			print('############################################################\n\
+#ERROR:At least one of the files with suffix '+suffix+' is not in GenBank format!\n\
+Make sure you put all your genbank reference in the input directory with correct suffix\n\')
 		#get all gene positions. for genes in the IR region, this will be the position in the second IR.
 		gene_start={}
 		gene_end={}
