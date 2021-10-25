@@ -279,7 +279,7 @@ def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 		except ValueError:
 			print('############################################################\n\
 #ERROR:At least one of the files with suffix '+suffix+' is not in GenBank format!\n\
-Make sure you put all your genbank reference in the input directory with correct suffix\n\')
+Make sure you put all your genbank reference in the input directory with correct suffix\n')
 		#get all gene positions. for genes in the IR region, this will be the position in the second IR.
 		gene_start={}
 		gene_end={}
