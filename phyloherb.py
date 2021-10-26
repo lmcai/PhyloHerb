@@ -111,8 +111,10 @@ def qc(sp_sheet,input_dir,output_dir):
 				target_reads=len(target_reads)/4
 				out.write('\t'.join([sp,str(total_reads),str(target_reads),'NA','NA','NA','NA'])+'\n')
 			except IOError:
-				out.write('\t'.join([sp,'NA','NA','NA','NA','NA','NA'])+'\n')
-				failed.append(sp)
+				try:
+				except IOError:
+					out.write('\t'.join([sp,'NA','NA','NA','NA','NA','NA'])+'\n')
+					failed.append(sp)
 	if len(failed)>0:
 		if len(failed)==len(sp_sheet):
 			print('No GetOrganelle outputs found. If you are using assembly fasta files only, be sure to add the -suffix argument.')
@@ -438,7 +440,7 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 				print('Using custom gene set')
 			elif args.ref:
 				genes=open(args.ref).readlines()
-				genes=[j[1:].split('_')[0] for j in genes if j.startswith('>')]
+				genes=[j[1:].split('_')[0].strip() for j in genes if j.startswith('>')]
 				genes=list(set(genes))
 				print('Using custom gene set from the reference sequence: '+args.ref)
 			elif args.mito:
