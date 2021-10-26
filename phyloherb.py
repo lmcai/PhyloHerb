@@ -111,8 +111,6 @@ def qc(sp_sheet,input_dir,output_dir):
 				target_reads=len(target_reads)/4
 				out.write('\t'.join([sp,str(total_reads),str(target_reads),'NA','NA','NA','NA'])+'\n')
 			except IOError:
-				try:
-				except IOError:
 					out.write('\t'.join([sp,'NA','NA','NA','NA','NA','NA'])+'\n')
 					failed.append(sp)
 	if len(failed)>0:
