@@ -372,10 +372,10 @@ elif mode =='qc':
 				sp_list=[i for i in os.listdir(args.i) if os.path.isdir(args.i+'/'+i)]
 			if len(sp_list)==0:
 				print('############################################################\n\
-#ERROR:No GetOrganelle output folders found.\n\
+#ERROR:No GetOrganelle output folders found. If you are using assembly fasta files only, be sure to add the -suffix argument.\n\
 Usage:\n\
 With assemblies only:\n\
-python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>\
+python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>\n\
 With Getorganelle output folders:\n\
 python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>')
 				exit()
