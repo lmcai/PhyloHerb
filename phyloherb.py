@@ -136,7 +136,7 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads
 	for g in genes:
 		#print g
 		best=0
-		a[g]=[r for r in x if g+'_' in r]
+		a[g]=[r for r in x if g+'_' in r or g+'\t' in r]
 		min_evalue=1
 		length=1
 		for rec in a[g]:
