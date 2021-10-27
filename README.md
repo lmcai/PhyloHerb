@@ -21,13 +21,13 @@ MAFFT: Katoh, Kazutaka, and Daron M. Standley. "MAFFT multiple sequence alignmen
 
 ## Quick link
 
-	[I. Prerequisites and installation](https://github.com/lmcai/PhyloHerb#i-prerequisites-and-installation)
+[I. Prerequisites and installation](https://github.com/lmcai/PhyloHerb#i-prerequisites-and-installation)
 	
-	[II. Quick start](https://github.com/lmcai/PhyloHerb#ii-quick-start)
+[II. Quick start](https://github.com/lmcai/PhyloHerb#ii-quick-start)
 
-	[III. Complete tutorial for analyzing genome skimming data for phylogenetic analysis](https://github.com/lmcai/PhyloHerb#iii-complete-tutorial-for-analyzing-genome-skimming-data-for-phylogenetic-analysis)
+[III. Complete tutorial for analyzing genome skimming data for phylogenetic analysis](https://github.com/lmcai/PhyloHerb#iii-complete-tutorial-for-analyzing-genome-skimming-data-for-phylogenetic-analysis)
 	
-	[IV. General guidelines for genome skimming data collection](https://github.com/lmcai/PhyloHerb#iv-general-guidelines-for-genome-skimming-data-collection)
+[IV. General guidelines for genome skimming data collection](https://github.com/lmcai/PhyloHerb#iv-general-guidelines-for-genome-skimming-data-collection)
 
 ## I. Prerequisites and installation
 
