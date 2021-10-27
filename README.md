@@ -201,15 +201,18 @@ The `*.path_sequence.fasta` files do not always navigate the right paths for org
 
 #### 6). Assembly QC 
 
-After the assemblies are completed, you can summarize the results using the `qc` function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads mapped to the target region, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
+After the assemblies are completed, you can summarize the results using the `qc` function of phyloherb. 
 
 ```
 python phyloherb.py -m qc -i <parent dir containing Getorganelle output folders> -o <output dir>
 ```
-This command will copy all of the assemblies under the input directory to a new directory and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` with the following header:
+*Output:* `*.assembly.fas` is the fasta files of all assemblies. `assembly_sum.tsv` is the summary spreadsheet with the following information: 
 ```
-sp_prefix|Total_reads|Reads_in_target_region|Average_base_coverage|Length|GC%|Number_scaffolds|Circularized
--------- | --------- |--------------------- |-------------------- |----- |-- |--------------- |------------ 
+sp_prefix	Total_reads	Reads_in_target_region	Average_base_coverage	Length	GC%	Number_scaffolds	Circularized
+```
+**Important:** If your input directory contains fasta assemblies alone, only the following information will be included:
+```
+sp_prefix	Length	GC%	Number_scaffolds
 ```
 
 ### 2. Annotation and organellar structure variations
