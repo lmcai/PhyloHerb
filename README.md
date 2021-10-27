@@ -65,6 +65,36 @@ git clean -f -d
 
 **Core functions of PhyloHerb**
 
+###Usage:###
+
+```
+phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
+                    [-g file] [-l integer] [-n integer] [-ref file] [-mito]
+                    [-rdna] [-t file] [-missing float 0-1] [-f mode]
+                    [-gene_def file] [-b file] [-s file]
+```
+
+###Options:###
+```
+		-i dir				input directory
+		-o dir				output directory
+		-m str				execution mode, choose one of the following: qc, ortho, conc, order, getseq, submission
+		-suffix str			[qc, ortho, conc mode] suffix of input files
+  		-sp	file			[ortho mode] a file containing a list of species
+  		-g file				[ortho and conc mode] a file containing a list of loci
+  		-l int				[ortho mode] minimum length of blast hits
+  		-n int				[ortho mode] number of threads for BLAST
+  		-ref file			[ortho mode] custom reference sequences
+  		-mito				[ortho mode] extract mitochondrial genes using build-in references
+  		-rdna           	[ortho mode] extract nuclear ribosomal regions using build-in references
+        -t file				[order mode] newick tree file to order alignments based on phylogeny
+        -missing float 0-1  [order mode] maximum proportion of missing data allowed for each species
+        -f mode				[getseq mode] choose one of the following: gene, genetic_block, intergenic
+        -gene_def file      [getseq mode] a gene delimitation file that defines genetic blocks
+        -b file             [submission mode] path to the bash file
+        -s file             [submission mode] path to the taxon sampling sheet
+```
+
 **1. Ortholog gene extraction using built-in database**
 
 **A.** If you have your assemblies and want to extract genes using our curated database:
@@ -96,7 +126,14 @@ python phyloherb.py -m conc -i < input directory> -o <output prefix> -suffix <al
 
 **3. Reorder alignments based on phylogeny to assist manual curation**
 
+Reorder sequences based on phylogeny can help distinguish analytical errors versus shared mutations. 
 
+*Input:* One species tree in newick format; multiple FASTA alignments in one folder.
+
+```
+python phyloherb.py -m order -t <tree> -i <input dir> -o <output dir> -suffix <alignment suffix>
+```
+*Output:* `*.ordered.fas` is the reordered alignment for each gene. `*.pasta_ref.tre` is the pruned species tree that can be used as the reference tree in the second PASTA alignment.
 
 ## III. General guidelines for genome skimming data collection
 
