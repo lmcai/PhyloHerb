@@ -140,7 +140,7 @@ python phyloherb.py -m order -t <tree> -i <input dir> -o <output dir> -suffix <a
 
 ***
 
-## III. Complete tutorial for analyzing genome skimming -- from reads to phylogeny
+## III. Complete tutorial for analyzing genome skimming data for phylogenetic analysis
 
 ### 1. Assembly
 
