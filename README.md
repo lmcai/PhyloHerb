@@ -17,6 +17,8 @@ pasta: Mirarab, Siavash, Nam Nguyen, Sheng Guo, Li-San Wang, Junhyong Kim, and T
 
 MAFFT: Katoh, Kazutaka, and Daron M. Standley. "MAFFT multiple sequence alignment software version 7: improvements in performance and usability." Molecular biology and evolution 30, no. 4 (2013): 772-780.
 
+***
+
 ## I. Prerequisites and installation
 
 To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
@@ -58,6 +60,7 @@ git clean -f -d
 
 6. Phylogeny: [IQ-TREE](http://www.iqtree.org/) or [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) or [ExaML](https://cme.h-its.org/exelixis/web/software/examl/index.html)
 
+***
 
 ## II. Quick start
 
@@ -78,7 +81,7 @@ phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
 ```
 	-i dir			input directory
 	-o dir			output directory
-	-m str			execution mode, choose one of the following: qc, ortho, conc, order, getseq, submission
+	-m str			execution mode: qc, ortho, conc, order, getseq, submission
 	-suffix str		[qc, ortho, conc mode] suffix of input files
 	-sp file		[ortho mode] a file containing a list of species
 	-g file			[ortho and conc mode] a file containing a list of loci
@@ -89,7 +92,7 @@ phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
   	-rdna           	[ortho mode] extract nuclear ribosomal regions using build-in references
   	-t file			[order mode] newick tree file to order alignments based on phylogeny
   	-missing float 0-1  	[order mode] maximum proportion of missing data allowed for each species
-  	-f mode			[getseq mode] choose one of the following: gene, genetic_block, intergenic
+  	-f mode			[getseq mode] one of the following: gene, genetic_block, intergenic
   	-gene_def file		[getseq mode] a gene delimitation file that defines genetic blocks
   	-b file			[submission mode] path to the bash file
   	-s file			[submission mode] path to the taxon sampling sheet
@@ -113,7 +116,7 @@ List of genes and species included in our built-in database can be found [here](
 
 *Output:* In the output folder, you can find fasta sequences named after genes. The header within each fasta is consistent with the species names (file names of the input assemblies).
 
-**B.** If you need to assemble organelle genomes and rRNA regions, see Section ## below.
+**B.** If you need to assemble organelle genomes and rRNA regions, see [Section III.a Assembly](https://github.com/lmcai/PhyloHerb/##) below.
 
 **2. Alignment and concatenation**
 
@@ -135,47 +138,19 @@ python phyloherb.py -m order -t <tree> -i <input dir> -o <output dir> -suffix <a
 ```
 *Output:* `*.ordered.fas` is the reordered alignment for each gene. `*.pasta_ref.tre` is the pruned species tree that can be used as the reference tree in the second PASTA alignment.
 
-## III. General guidelines for genome skimming data collection
+***
 
-**Overview**
+## III. Complete tutorial for analyzing genome skimming -- from reads to phylogeny
 
-If interested in phylogeny alone, up to 384 samples (4 plates * 96 samples/plate) can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. Using the NovaSeq plastform can generate more complete genomes thanks to its larger output, but currently we cannot put more than 384 multiplexed samples due to the barcode limitation. If circularized plastid genomes are needed, >2 Gb data per species can usually get you there, which translates to ~60 samples per lane.
-
-*IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genomes, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected base coverage of plastid genome:
-
-<img src="/images/plastid_perc.png" width="600" height="100">
-
-Minimally, you want the plastid coverage to be larger than 10X.
-
-**FAQ**
-
-1. DNA extraction from herbarium specimens? How?!
-
-We have successfully extracted DNAs from 200-year-old specimens. Age matters less than the preservation methods (see [this paper](https://www.frontiersin.org/articles/10.3389/fevo.2019.00439/full)). Standard commercial DNA extraction kits are frequently used to obtain DNA (e.g, Tiangen DNAsecure Plant Kit, Qiagen DNeasy Plant Mini Kit). We used a [Promega Maxwell](https://www.promega.com/products/lab-automation/maxwell-instruments/maxwell-rsc-instrument/?catNum=AS4500) instrument that can extract DNA from 16 samples simultaneously within an hour. This automatic approach is certainly more labour efficient, but manual extractions have more guaranteed yields for delicate samples.
-
-2. Where can I find the genome sizes of my species?
-
-In addition to searching through the literature or conducting your own flow cytometry experiments, you could also check the [Plant DNA C-value database](https://cvalues.science.kew.org/) organized by Kew.
-
-3. NGS library preparation and multiplexing
-
-We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-solutions/products/sample-preparation/dna-reagents/library-preparation/kapa-hyperplus.html) for NGS library. Many institutes provided services for NGS library preparation with robots. We have used quarter reaction (1/4 of all reagents) for our NGS libraries, and it works just fine.
-
-4. Where are the limits?
-
-About 0.5-6% of the reads from genome skimming come from plastomes. The base coverage is roughly half for mitochondria and 2X for nuclear ribosomal regions compared to plastids. Theoretically the base coverage vary with the size of the nuclear genome and the abundance of these genetic regions within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very rough** estimation of what you may expect for plastome from certain amount of input data.
-
-<img src="/images/coverage.png" width="400" height="130">
-
-## III. Assembly
+### III.1 Assembly
 
 We will use [GetOrganelle](https://github.com/Kinggerm/GetOrganelle) to assemble the plastome, mitochondrial genome, and ribosomal regions. It requires minimal tweak for various types of data. I highly recommend [installing it using conda](https://github.com/Kinggerm/GetOrganelle#installation--initialization) so that all its dependencies are in your environment.
 
-### 1. Input:
+#### 1). Input:
 
-Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unzipped. Do not filter the reads or trim adapters, GetOrganelle will take care of it.
+Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unzipped. Do not filter the reads or trim adapters.
 
-### 2. How to:
+#### 2). How to:
 
 After loading GetOrganelle to your environment, the basic commands for running assembly with pair end data is as follows:
 
@@ -192,7 +167,7 @@ get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 
 
 If you want to use your own reference sequences for assembly, you can provide the seed fasta file by adding `-s <reference.fas>`.
 
-### 3. Large dataset and batch submission to cluster
+#### 3). Large dataset and batch submission to cluster
 
 If you are working with a high performance computing cluster with **slurm workload manager**, you can submit individual assembly tasks to the cluster and run them simultaneously. An example bash file is provided in `/phyloherbLib/getorg.sh`. You can submit your job by typing
 
@@ -204,7 +179,7 @@ For more details using this bash file, see the [botany2021 tutorial](/botany2021
 
 *IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data if they are not in the current directory by modifying relavant variables in `getorg.sh`. Instructions for single-end data can also be found in `getorg.sh`.
 
-### 4. Output
+#### 4). Output
 
 The key output files from Getorganelle include
 ```
@@ -217,32 +192,32 @@ extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.csv, a tab-forma
 get_org.log.txt, the log file
 ```
 
-### 5. Assembly visualization with Bandage
+#### 5). Assembly visualization with Bandage
 
 [Bandage](https://rrwick.github.io/Bandage/) is a program for visualising de novo assembly graphs. The assembly graph files *.fastg and *.gfa generated from GetOrganelle be visualized in Bandage and exported into sequences. 
 
-The *.path_sequence.fasta files do not always navigate the right paths for organelle genomes, especially the ones with complicated structures. The authors of GetOrganelle put together a nice [video](https://www.youtube.com/watch?v=cXUV7k-F26w)  introducing how to generate complete (if possible) and accurate sequences from Bandage with different examples.
+The `*.path_sequence.fasta` files do not always navigate the right paths for organelle genomes, especially the ones with complicated structures. The authors of GetOrganelle put together a nice [video](https://www.youtube.com/watch?v=cXUV7k-F26w)  introducing how to generate complete (if possible) and accurate sequences from Bandage with different examples.
 
 
-### 6. Assembly QC 
+#### 6). Assembly QC 
 
 After the assemblies are completed, you can summarize the results using the `qc` function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads mapped to the target region, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
 
 ```
-python phyloherb.py -m qc -s sample_sheet.tsv -i <directory with Getorganelle output folders> -o <output directory>
+python phyloherb.py -m qc -i <parent dir containing Getorganelle output folders> -o <output dir>
 ```
 This command will copy all of the assemblies under the input directory to a new directory and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` with the following header:
 ```
 sp_prefix	Total_reads	Reads_in_target_region	Average_base_coverage	Length	GC%	Circularized
 ```
 
-## IV. Annotation and organellar structure variations
+### III.2 Annotation and organellar structure variations
 
 Annotation is **not necessary** if you are interested in phylogeny alone, but if you want to submit your circularized assemblies to GenBank or extract intergenic regions from your spcecies, it is a must.
 
 The most convenient tool I have used is the web-based tool [GeSeq](https://chlorobox.mpimp-golm.mpg.de/geseq.html). I have concatenated 100 plastomes into a single fasta file and annotated them all at once on GeSeq. But if you are annotating hundreds of plastomes, the command-line based tool [PGA](https://github.com/quxiaojian/PGA) might be a better option.
 
-## V. Ortholog identification and alignment
+### III.3 Ortholog identification and alignment
 
 Phyloherb will identify the best-matching region of each gene/intergenic region in the assemblly using BLAST. We provide a build-in database of plastid genes from 355 seed plant families. This database is sufficient for getting genes from species that are not too distantly related to our reference species. You can also supply your own reference in a fasta file following the instructions below. The list of reference species is [here](/phyloherbLib/reference_sp.list). The list of the genes in the database is [here](/phyloherbLib/gene.list). 
 
@@ -408,3 +383,39 @@ run_pasta.py -i <input sequence> -a -t <reference tree> -o <output directory>
 To submit batch job to the cluster, you can modify [this](phyloherbLib/pasta_rnd2.sh) batch file. Make sure you have loaded the correct environment.
 
 When the alignment is done, you can use them to produce your final species tree.
+
+***
+
+## III. General guidelines for genome skimming data collection
+
+**Overview**
+
+If interested in phylogeny alone, up to 384 samples (4 plates * 96 samples/plate) can be multiplexed on a single Illumina HiSeq 2500 lane for most flowering plants. Using the NovaSeq plastform can generate more complete genomes thanks to its larger output, but currently we cannot put more than 384 multiplexed samples due to the barcode limitation. If circularized plastid genomes are needed, >2 Gb data per species can usually get you there, which translates to ~60 samples per lane.
+
+*IMPORTANT*: If your species have fewer-than-usual plastids per cell or exceptionally large genomes, you need to reduce the number of multiplexed species per sequencing lane. Use the following equation to calculate the expected base coverage of plastid genome:
+
+<img src="/images/plastid_perc.png" width="600" height="100">
+
+Minimally, you want the plastid coverage to be larger than 10X.
+
+**FAQ**
+
+1. DNA extraction from herbarium specimens? How?!
+
+We have successfully extracted DNAs from 200-year-old specimens. Age matters less than the preservation methods (see [this paper](https://www.frontiersin.org/articles/10.3389/fevo.2019.00439/full)). Standard commercial DNA extraction kits are frequently used to obtain DNA (e.g, Tiangen DNAsecure Plant Kit, Qiagen DNeasy Plant Mini Kit). We used a [Promega Maxwell](https://www.promega.com/products/lab-automation/maxwell-instruments/maxwell-rsc-instrument/?catNum=AS4500) instrument that can extract DNA from 16 samples simultaneously within an hour. This automatic approach is certainly more labour efficient, but manual extractions have more guaranteed yields for delicate samples.
+
+2. Where can I find the genome sizes of my species?
+
+In addition to searching through the literature or conducting your own flow cytometry experiments, you could also check the [Plant DNA C-value database](https://cvalues.science.kew.org/) organized by Kew.
+
+3. NGS library preparation and multiplexing
+
+We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-solutions/products/sample-preparation/dna-reagents/library-preparation/kapa-hyperplus.html) for NGS library. Many institutes provided services for NGS library preparation with robots. We have used quarter reaction (1/4 of all reagents) for our NGS libraries, and it works just fine.
+
+4. Where are the limits?
+
+About 0.5-6% of the reads from genome skimming come from plastomes. The base coverage is roughly half for mitochondria and 2X for nuclear ribosomal regions compared to plastids. Theoretically the base coverage vary with the size of the nuclear genome and the abundance of these genetic regions within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very rough** estimation of what you may expect for plastome from certain amount of input data.
+
+<img src="/images/coverage.png" width="400" height="130">
+
+
