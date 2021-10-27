@@ -88,9 +88,9 @@ phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
   	-mito			[ortho mode] extract mitochondrial genes using build-in references
   	-rdna           	[ortho mode] extract nuclear ribosomal regions using build-in references
   	-t file			[order mode] newick tree file to order alignments based on phylogeny
-  	-missing float 0-1  [order mode] maximum proportion of missing data allowed for each species
+  	-missing float 0-1  	[order mode] maximum proportion of missing data allowed for each species
   	-f mode			[getseq mode] choose one of the following: gene, genetic_block, intergenic
-  	-gene_def file	[getseq mode] a gene delimitation file that defines genetic blocks
+  	-gene_def file		[getseq mode] a gene delimitation file that defines genetic blocks
   	-b file			[submission mode] path to the bash file
   	-s file			[submission mode] path to the taxon sampling sheet
 ```
