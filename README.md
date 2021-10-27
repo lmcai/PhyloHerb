@@ -17,8 +17,6 @@ pasta: Mirarab, Siavash, Nam Nguyen, Sheng Guo, Li-San Wang, Junhyong Kim, and T
 
 MAFFT: Katoh, Kazutaka, and Daron M. Standley. "MAFFT multiple sequence alignment software version 7: improvements in performance and usability." Molecular biology and evolution 30, no. 4 (2013): 772-780.
 
-***
-
 ## Quick link
 
 [I. Prerequisites and installation](https://github.com/lmcai/PhyloHerb#i-prerequisites-and-installation)
