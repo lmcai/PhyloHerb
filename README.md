@@ -175,22 +175,22 @@ If you are working with a high performance computing cluster with **slurm worklo
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ```
 
-For more details using this bash file, see the [botany2021 tutorial](/botany2021_tutorial/README.md).
+For more details using this bash file, see the [botany2021 tutorial](https://github.com/lmcai/PhyloHerb/blob/main/botany2021_tutorial/README.md#3-large-dataset-and-batch-submission-to-cluster).
 
 *IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data if they are not in the current directory by modifying relavant variables in `getorg.sh`. Instructions for single-end data can also be found in `getorg.sh`.
 
 #### 4). Output
 
 The key output files from Getorganelle include
-```
-*.path_sequence.fasta, the assembly in fasta format 
 
-extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.fastg, a simplified assembly graph
+`*.path_sequence.fasta`: the assembly in fasta format 
 
-extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.csv, a tab-format contig label file for bandage visualization
+`extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.fastg`: a simplified assembly graph
 
-get_org.log.txt, the log file
-```
+`extended_K*.assembly_graph.fastg.extend_embplant_pt-embplant_mt.csv`: a tab-format contig label file for bandage visualization
+
+`get_org.log.txt`: the log file
+
 
 #### 5). Assembly visualization with Bandage
 
@@ -209,7 +209,7 @@ python phyloherb.py -m qc -i <parent dir containing Getorganelle output folders>
 This command will copy all of the assemblies under the input directory to a new directory and rename the files based on their species prefixes. In the output directory, you will also find a summary spreadsheet `assembly_sum.tsv` with the following header:
 ```
 sp_prefix|Total_reads|Reads_in_target_region|Average_base_coverage|Length|GC%|Number_scaffolds|Circularized
------ |----- |----- |----- |----- |----- |----- |----- 
+-------- | --------- |--------------------- |-------------------- |----- |-- |--------------- |------------ 
 ```
 
 ### 2. Annotation and organellar structure variations
