@@ -243,7 +243,7 @@ atcg...
 >gene2_sp2
 ```
 
-*IMPORTANT*: If you have annotated plastid assemblies (e.g., from GeqSeq) in genbank format, you can use the `getseq` function of PhyloHerb to obtain gene and intergenic regions (see section 3) below).
+*IMPORTANT*: If you have annotated plastid assemblies (e.g., from GeqSeq) in genbank format, you can use the `getseq` function of PhyloHerb to obtain gene and intergenic regions.
 
 #### 2). Extract orthologous loci from the assembly
 
@@ -259,7 +259,30 @@ You can choose to use a subset of genes and species by supplying a `-g gene_subs
 python phyloherb.py -m ortho -i <input dir containing assemblies> -o <output directory> -g <gene list> -sp <species list> -l <length limit> -ref <ref seq>
 ```
 
-#### 3). Intergenic regions and building custom reference
+#### 3). Nuclear ribosomal regions
+
+PhyloHerb can extract the coding regions of the rDNA repeat (18S+ITS1+5.8S+ITS2+28S), but not NTS or ETS. The output contains five fasta files `18S.fas, ITS1.fas, 5.8S.fas, ITS2.fas, and 28S.fas` in the output directory. To get rDNA sequences, add the `-rdna` flag under the `ortho` mode. 
+
+```
+python phyloherb.py -m ortho -i <input dir> -o <output dir> -rdna
+```
+
+Below is an illustration of the structure and sequence conservation of the nuclear ribosomal region.
+
+<img src="/images/ITS.png" width="400" height="400">
+
+
+#### 4). Mitochondrial genes
+
+Mitochondrial genes are highly conserved in plants and are not phylogenetically informative. If you want to use our build-in mitochondrial gene sequence database, invoke the `-mito` flag under the `ortho` mode. 
+
+A list of the reference mitochondrial genes can be found [here](/database/mito_gene.list). The reference sequences themselves can be found [here](/database/mito_reference.fas).
+
+```
+python phyloherb.py -m ortho -i <input dir> -o <output dir> -mito 
+```
+
+#### 5). Intergenic regions and building custom reference
 
 Intergenic regions are mostly useful for phylogenetic research among closely related species. In addition, combining short genes and intergenic regions into longer genetic blocks can reduce false positive BLAST hit. Make sure there are **no structural variations** in the target region. 
 
@@ -290,7 +313,7 @@ python phyloherb.py -m getseq -f genetic_block -i <input directory> -suffix <gen
 
 <img src="/images/genetic_block.png" width="400" height="90">
 
-Finally, the `-f intergenic` mode generates similar outcomes, but does not include the genes on both ends. It is good for extracting longer intergenic regions.
+Finally, the `-f intergenic` mode generates similar outcomes, but does not include the genes on both ends. It is good for extracting long intergenic regions.
 ```
 python phyloherb.py -m getseq -f intergenic -i <input directory> -suffix <genbank suffix> -o <output directory> -gene_def <gene definition file>
 ```
@@ -298,30 +321,7 @@ python phyloherb.py -m getseq -f intergenic -i <input directory> -suffix <genban
 <img src="/images/intergenic.png" width="400" height="90">
 
 
-#### 5). Nuclear ribosomal regions
-
-PhyloHerb can extract the coding regions of the rDNA repeat (18S+ITS1+5.8S+ITS2+28S). The highly variable NTS and ETS will be discarded. It will first identify rDNAs (18S, 5.8S, and 28S) in the assembly and then extract the ITS regions in between. The output contains five fasta files `18S.fas, ITS1.fas, 5.8S.fas, ITS2.fas, and 28S.fas` in the output directory. To get rDNA sequences, add the `-rdna` flag under the `ortho` mode. 
-
-```
-python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -rdna
-```
-
-Below is an illustration of the structure and sequence conservation of the nuclear ribosomal region.
-
-<img src="/images/ITS.png" width="400" height="400">
-
-
-#### 6). Mitochondrial regions
-
-For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So I recommend using mitochondrial genes only. If you want to use our build-in mitochondrial gene sequence database, invoke the `-mito` flag under the `ortho` mode. 
-
-A list of the reference mitochondrial genes can be found [here](/database/mito_gene.list). The reference sequences themselves can be found [here](/database/mito_reference.fas).
-
-```
-python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -mito 
-```
-
-#### 3). Alignment
+#### 6). Alignment
 
 I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. `pasta` first generates a guidance tree, then align among closely-related species, finally merge the alignments to produce the output.
 
@@ -333,10 +333,9 @@ sbatch mafft_pasta.sh <gene_1>
 sbatch mafft_pasta.sh <gene_2>
 ```
 
-
 #### 7). Manual curation in Geneious
 
-At this point, it is recommended that you take a initial look at your alignments. **Initial** means be prepared to complete the "alignment-manual check-phylogeny" cycle for at least two rounds to get publication quality data.
+At this point, it is recommended that you take a initial look at your alignments. Be prepared to complete the "alignment-manual check-phylogeny" cycle for at least two rounds to get publication quality data.
 
 The purpose of the initial check is to remove obvious low-quality sequences. Do not conduct any site-based filtering yet! For example, the two sequences highlighted in red below contain too many SNPs (marked in black). They should be removed.
 
