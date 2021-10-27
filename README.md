@@ -116,7 +116,7 @@ List of genes and species included in our built-in database can be found [here](
 
 *Output:* In the output folder, you can find fasta sequences named after genes. The header within each fasta is consistent with the species names (file names of the input assemblies).
 
-**B.** If you need to assemble organelle genomes and rRNA regions, see [Section III.1 Assembly](##III. ) below.
+**B.** If you need to assemble organelle genomes and rRNA regions, see [Section III.1 Assembly](#1-assembly) below.
 
 **2. Alignment and concatenation**
 
