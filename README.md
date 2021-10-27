@@ -206,7 +206,9 @@ After the assemblies are completed, you can summarize the results using the `qc`
 ```
 python phyloherb.py -m qc -i <parent dir containing Getorganelle output folders> -o <output dir>
 ```
-*Output:* `*.assembly.fas` is the fasta files of all assemblies. `assembly_sum.tsv` is the summary spreadsheet with the following information: 
+*Output:* 
+
+`*.assembly.fas` is the fasta files of all assemblies. `assembly_sum.tsv` is the summary spreadsheet with the following information: 
 ```
 sp_prefix	Total_reads	Reads_in_target_region	Average_base_coverage	Length	GC%	Number_scaffolds	Circularized
 ```
