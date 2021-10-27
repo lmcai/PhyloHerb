@@ -19,6 +19,16 @@ MAFFT: Katoh, Kazutaka, and Daron M. Standley. "MAFFT multiple sequence alignmen
 
 ***
 
+## Quick link
+
+	[I. Prerequisites and installation](https://github.com/lmcai/PhyloHerb#i-prerequisites-and-installation)
+	
+	[II. Quick start](https://github.com/lmcai/PhyloHerb#ii-quick-start)
+
+	[III. Complete tutorial for analyzing genome skimming data for phylogenetic analysis](https://github.com/lmcai/PhyloHerb#iii-complete-tutorial-for-analyzing-genome-skimming-data-for-phylogenetic-analysis)
+	
+	[IV. General guidelines for genome skimming data collection](https://github.com/lmcai/PhyloHerb#iv-general-guidelines-for-genome-skimming-data-collection)
+
 ## I. Prerequisites and installation
 
 To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
@@ -350,11 +360,11 @@ Geneious provides a nice interface to work with alignments. You can view alignme
 
 Many tools are available for concatenating alignments. I recommend the `conc` function of phyloherb or Geneious. I have applied both tools to dataset with 1000 sp x 100 genes. The `conc` function of phyloherb will also output a gene delineation file required by `PartitionFinder`.
 
-To use the `conc` function of phyloherb, use the following commands
+To use the `conc` function of phyloherb, use the following command:
 ```
 python phyloherb.py -m conc -i <directory containing alignments> -o <output prefix> -suffix <suffix>
 ```
-This command will concatenate all of the fasta sequences in the input directory with the specified suffix. Again, if you only want to use a subset of the genes or want the genes to appear in a specific order, you can supply a gene order file by adding `-g gene_subset.txt`.
+This command will concatenate all of the fasta sequences in the input directory with the specified suffix. If you only want to use a subset of the genes or want the genes to appear in a specific order, you can supply a gene order file by adding `-g gene_subset.txt`.
 
 #### 2). Maximum likehood phylogeny
 
@@ -374,7 +384,7 @@ First, using a reference ExaML species tree (newick format), we will order the s
 
 The `order` function of phyloherb takes a reference tree and reorders all alignments in the input directory based on the phylogeny. If you want to additionally filter sequences based on missing data, using the optional `-missing` flag. A float number from 0 to 1 is required for `-missing` to indicate the maximum proportion of ambiguous sites allowed for each sequence.
 ```
-python phyloherb.py -m order -t <reference.tre> -i <directory containing alignments> -o <output directory> -suffix <suffix> [optional] -missing <float number 0 to 1>
+python phyloherb.py -m order -t <reference.tre> -i <directory containing alignments> -o <output directory> -suffix <suffix> [optional] -missing <float 0 to 1>
 ```
 
 This will generate an ordered alignment `*.ordered.fas` and a companion tree file `*.pasta_ref.tre` for each gene. You will need this tree for the second round of pasta alignment after manual curation.
