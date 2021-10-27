@@ -65,7 +65,7 @@ git clean -f -d
 
 **Core functions of PhyloHerb**
 
-###Usage:###
+### Usage:
 
 ```
 phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
@@ -74,7 +74,7 @@ phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
                     [-gene_def file] [-b file] [-s file]
 ```
 
-###Options:###
+### Options:
 ```
 		-i dir				input directory
 		-o dir				output directory
