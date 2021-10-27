@@ -247,14 +247,14 @@ We can  extract the target gene regions using the `ortho` function of phyloherb.
 In the output directory, orthologous genes will be written to separate fasta files and the headers will be the species prefixes.
 
 ```
-python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory>
+python phyloherb.py -m ortho -i <input dir containing assemblies> -o <output directory>
 ```
 You can choose to extract a subset of genes from a subset of the species by supplying a `-g gene_subset.txt` and `-sp species_subset.txt`. Example files can be found in [gene_subset.txt](/example/gene_subset.txt) and [species_subset.txt](/example/species_subset.txt). You can also set a minimum length limit for gene region extraction via `-l <lower limit>`. Blast hits shorter than this will not be use.
 ```
-python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -g <gene list> -sp <species list> -l <length limit>
+python phyloherb.py -m ortho -i <input dir containing assemblies> -o <output directory> -g <gene list> -sp <species list> -l <length limit>
 ```
 
-3. Alignment
+#### 3). Alignment
 
 I like to use the `--adjustdirection` function from `MAFFT` to correct reverse complimentary sequences. Then I will use `pasta` to more accurately align high variable sequences such as the intergenic regions and the ITS regions. `pasta` first generates a guidance tree, then align among closely-related species, finally merge the alignments to produce the output.
 
@@ -266,7 +266,7 @@ sbatch mafft_pasta.sh <gene_1>
 sbatch mafft_pasta.sh <gene_2>
 ```
 
-4. Intergenic regions
+#### 4). Intergenic regions
 
 Intergenic regions are mostly useful for phylogenetic research among closely related species. In addition, some plastid genes are very short, we can combine several adjacent gene and intergenic region to produce a longer genetic block for downstream analyses. Combining short genetic blocks into long ones has the benefit of higher blast accuracy, but you should make sure the target regions **do not have structural variations** among different species. `PhyloHerb` offers three modes for genetic region extraction **from Genbank annotations**. The results can be used as reference sequences for ortholog extraction using the `ortho` function of PhyloHerb.
 
@@ -303,7 +303,7 @@ python phyloherb.py -m getseq -f intergenic -i <input directory> -suffix <genban
 <img src="/images/intergenic.png" width="400" height="90">
 
 
-5. Nuclear ribosomal regions
+#### 5). Nuclear ribosomal regions
 
 PhyloHerb can extract the coding regions of the rDNA repeat (18S+ITS1+5.8S+ITS2+28S). The highly variable NTS and ETS will be discarded. It will first identify rDNAs (18S, 5.8S, and 28S) in the assembly and then extract the ITS regions in between. The output contains five fasta files `18S.fas, ITS1.fas, 5.8S.fas, ITS2.fas, and 28S.fas` in the output directory. To get rDNA sequences, add the `-rdna` flag under the `ortho` mode. 
 
@@ -316,7 +316,7 @@ Below is an illustration of the structure and sequence conservation of the nucle
 <img src="/images/ITS.png" width="400" height="400">
 
 
-6. Mitochondrial regions
+#### 6). Mitochondrial regions
 
 For most plant groups, mitochondria are not phylogenetically informative because the genes evolve too slowly, but the intergenic regions are highly variable. Moreover, the qualities of mitochondrial genomes are usually not as good as plastomes. So I recommend using mitochondrial genes only. If you want to use our build-in mitochondrial gene sequence database, invoke the `-mito` flag under the `ortho` mode. 
 
@@ -326,7 +326,7 @@ A list of the reference mitochondrial genes can be found [here](/database/mito_g
 python phyloherb.py -m ortho -i <directory containing assemblies> -o <output directory> -mito 
 ```
 
-7. Manual curation in Geneious
+#### 7). Manual curation in Geneious
 
 At this point, it is recommended that you take a initial look at your alignments. **Initial** means be prepared to complete the "alignment-manual check-phylogeny" cycle for at least two rounds to get publication quality data.
 
@@ -337,9 +337,9 @@ The purpose of the initial check is to remove obvious low-quality sequences. Do 
 Geneious provides a nice interface to work with alignments. You can view alignment statistics, edit sequences, and concatenate alignments. Alternative automatic tools include [trimAL](http://trimal.cgenomics.org/getting_started_with_trimal_v1.2) and [Seaview](http://doua.prabi.fr/software/seaview).
 
 
-## VI. Phylogeny reconstruction
+### 4. Phylogeny reconstruction
 
-1. Concatenation
+#### 1). Concatenation
 
 Many tools are available for concatenating alignments. I recommend the `conc` function of phyloherb or Geneious. I have applied both tools to dataset with 1000 sp x 100 genes. The `conc` function of phyloherb will also output a gene delineation file required by `PartitionFinder`.
 
@@ -349,7 +349,7 @@ python phyloherb.py -m conc -i <directory containing alignments> -o <output pref
 ```
 This command will concatenate all of the fasta sequences in the input directory with the specified suffix. Again, if you only want to use a subset of the genes or want the genes to appear in a specific order, you can supply a gene order file by adding `-g gene_subset.txt`.
 
-2. Maximum likehood phylogeny
+#### 2). Maximum likehood phylogeny
 
 For an initial quick and dirty analysis, I recommend ExaML with unpartitioned alignment. IQTREE or RAxML generates more accurate estimations of the phylogeny and substitution paramters, but may not accomodate thousands of species with millions of sites. The commands I use for ExaML analysis is as follows.
 ```
@@ -359,7 +359,7 @@ parse-examl -s DNA_aln.phy -n test -m GTRGAMMA
 examl-AVX -S -s test.binary -m GAMMA -n testML -t RAxML_parsimonyTree.test
 ```
 
-3. Second round of manual alignment curation
+#### 3). Second round of manual alignment curation
 
 It can be a quite satisfying experience when you browse through a well-curated alignment. To get us there, we need to conduct a second round of alignment curation and remove spurious regions arising from assembly errors or false positive BLAST hits. 
 
@@ -387,7 +387,7 @@ When the alignment is done, you can use them to produce your final species tree.
 
 ***
 
-## III. General guidelines for genome skimming data collection
+## IV. General guidelines for genome skimming data collection
 
 **Overview**
 
