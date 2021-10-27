@@ -80,19 +80,19 @@ phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
 	-o dir			output directory
 	-m str			execution mode, choose one of the following: qc, ortho, conc, order, getseq, submission
 	-suffix str		[qc, ortho, conc mode] suffix of input files
-	-sp	file		[ortho mode] a file containing a list of species
+	-sp file		[ortho mode] a file containing a list of species
 	-g file			[ortho and conc mode] a file containing a list of loci
 	-l int			[ortho mode] minimum length of blast hits
 	-n int			[ortho mode] number of threads for BLAST
 	-ref file		[ortho mode] custom reference sequences
   	-mito			[ortho mode] extract mitochondrial genes using build-in references
   	-rdna           	[ortho mode] extract nuclear ribosomal regions using build-in references
-  	-t file				[order mode] newick tree file to order alignments based on phylogeny
+  	-t file			[order mode] newick tree file to order alignments based on phylogeny
   	-missing float 0-1  [order mode] maximum proportion of missing data allowed for each species
-  	-f mode				[getseq mode] choose one of the following: gene, genetic_block, intergenic
-  	-gene_def file      [getseq mode] a gene delimitation file that defines genetic blocks
-  	-b file             [submission mode] path to the bash file
-  	-s file             [submission mode] path to the taxon sampling sheet
+  	-f mode			[getseq mode] choose one of the following: gene, genetic_block, intergenic
+  	-gene_def file	[getseq mode] a gene delimitation file that defines genetic blocks
+  	-b file			[submission mode] path to the bash file
+  	-s file			[submission mode] path to the taxon sampling sheet
 ```
 
 **1. Ortholog gene extraction using built-in database**
