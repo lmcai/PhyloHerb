@@ -432,7 +432,7 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 			genes=['18S','5.8S','28S']
 			reference=PH_path+'/database/rDNA_reference.fas'
 			for sp in species:
-				ortho_extraction(sp,reference,args.i,args.o,genes,min_len,threads)
+				ortho_extraction(sp,reference,args.i,args.o,genes,min_len,threads,evalue)
 				#get ITSs
 				get_ITS(sp,sp+'.blast.out',args.i,args.o,min_len)
 		else:
@@ -463,7 +463,7 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 				reference=PH_path+'/database/plastid_reference.fas'
 			#extract blast hits:				
 			for sp in species:
-				ortho_extraction(sp,reference,args.i,args.o,genes,min_len,threads)	
+				ortho_extraction(sp,reference,args.i,args.o,genes,min_len,threads,evalue)	
 		print('Completed gene extraction for '+str(len(species))+' species. Orthologous gene sequences are written to the output directory: '+args.o+'/.')		
 	except TypeError:
 			print('############################################################\n\
