@@ -12,6 +12,7 @@ parser.add_argument('-suffix', metavar='string', help='[qc, ortho, conc mode] su
 parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing a list of species')
 parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
+parser.add_argument('-e',  metavar='float', help='[ortho mode] evalue threshold for BLAST')
 parser.add_argument('-n',  metavar='integer', help='[ortho mode] number of threads for BLAST')
 parser.add_argument('-ref',  metavar='file', help='[ortho mode] custom reference sequences')
 parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes using build-in references',action='store_true')
@@ -120,13 +121,13 @@ def qc(sp_sheet,input_dir,output_dir):
 			print('Cannot find GetOrganelle outputs in the directory '+input_dir+' for the following species: '+', '.join(failed))
 	
 	
-def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads):
+def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads,evalue):
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	print('processing species '+sp)
 	lib_ID=sp
 	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +' -dbtype nucl -out '+lib_ID+' &>/dev/null'
 	os.system(S)
-	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + ' -num_threads '+threads+' -outfmt 6 -evalue 1e-20 -out '+ lib_ID +'.blast.out &>/dev/null'
+	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + ' -num_threads '+threads+' -outfmt 6 -evalue '+evalue+' -out '+ lib_ID +'.blast.out &>/dev/null'
 	os.system(S)
 	x=open(lib_ID+'.blast.out').readlines()
 	y=SeqIO.index(input_dir+'/'+lib_ID,'fasta')
@@ -409,7 +410,7 @@ elif mode =='ortho':
 			print('############################################################\n\
 #ERROR:Zero species found! It looks like your assemblies does not end with \'.assembly.fas\'. Please use the -suffix flag!\n\
 Usage:\n\
-python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -g <gene list> -sp <species list> -l <minimum length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
+python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <minimum length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 			exit()
 		#get minimum length for blast hit
 		if args.l:
@@ -418,6 +419,10 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 		if args.n:
 			threads=args.n
 		else:threads='1'
+		if args.evalue:
+			evalue=args.evalue
+		else:
+			evalue='1e-20'
 		print('Using length cutoff ' + str(min_len)+' bp for BLAST result filtering')
 		#genes=["ycf2","ycf1","rpoC2","rpoB","rpoC1","rrn23","ndhF","ndhB","psaB","ndhA","clpP","ycf3","psbB","atpA","matK","rpl2","ndhD","atpB","rrn16","accD","rbcL","psbC","atpF","psaA","rps16","ndhH","psbA","psbD","rpoA","trnE-UUC","ccsA","petA","trnS-CGA","atpI","ndhK","rps2","cemA","rps3","petB","rps4","ycf4","ndhG","petD","ndhI","ndhJ","rps7","rps11","rpl22","rps8","atpE","rpl14","ndhC","rpl16","rpl20","rps18","ndhE","rps14","rps19","rpl23","rps15","psbE","atpH","psaC","psbH","rpl33","ycf15","psbZ","psbK","psaJ","pbf1","psbJ","rrn5","psbF","psbL","rpl32","psaI","petG","rpl36","psbI","psbT","psbM","petL","petN"]
 		if args.rdna:
@@ -464,7 +469,7 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 			print('############################################################\n\
 #ERROR:Insufficient arguments!\n\
 Usage:\n\
-python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
+python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 	except FileNotFoundError:
 		print('############################################################\n\
 #ERROR:Input files not found!\n')
