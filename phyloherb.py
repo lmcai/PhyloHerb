@@ -12,7 +12,7 @@ parser.add_argument('-suffix', metavar='string', help='[qc, ortho, conc mode] su
 parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing a list of species')
 parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
-parser.add_argument('-e',  metavar='float', help='[ortho mode] evalue threshold for BLAST')
+parser.add_argument('-evalue',  metavar='float', help='[ortho mode] evalue threshold for BLAST')
 parser.add_argument('-n',  metavar='integer', help='[ortho mode] number of threads for BLAST')
 parser.add_argument('-ref',  metavar='file', help='[ortho mode] custom reference sequences')
 parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes using build-in references',action='store_true')
