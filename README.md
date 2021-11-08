@@ -74,8 +74,8 @@ git clean -f -d
 
 ```
 phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
-                    [-g file] [-l integer] [-n integer] [-ref file] [-mito]
-                    [-rdna] [-t file] [-missing float 0-1] [-f mode]
+                    [-g file] [-l integer] [-evalue float] [-n integer] [-ref file] 
+                    [-mito] [-rdna] [-t file] [-missing float 0-1] [-f mode]
                     [-gene_def file] [-b file] [-s file]
 ```
 
@@ -88,7 +88,8 @@ phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
 	-sp file		[ortho mode] a file containing a list of species
 	-g file			[ortho and conc mode] a file containing a list of loci
 	-l int			[ortho mode] minimum length of blast hits
-	-n int			[ortho mode] number of threads for BLAST
+	-evalue float		[ortho mode] evalue threshold of blast
+	-n int			[ortho mode] number of threads for blast
 	-ref file		[ortho mode] custom reference sequences
   	-mito			[ortho mode] extract mitochondrial genes using build-in references
   	-rdna           	[ortho mode] extract nuclear ribosomal regions using build-in references
