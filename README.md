@@ -8,7 +8,6 @@ We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusia
 **License**: GNU General Public License
 
 **Citation**: 
-https://www.biorxiv.org/content/10.1101/2021.11.29.470431v1
 
 Liming Cai, Hongrui Zhang, Charles C Davis. PhyloHerb: A phylogenomic pipeline for processing genome skimming data for plants. biorxiv, https://www.biorxiv.org/content/10.1101/2021.11.29.470431v1. 
 
