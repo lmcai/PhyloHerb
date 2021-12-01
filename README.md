@@ -7,9 +7,16 @@ We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusia
 
 **License**: GNU General Public License
 
-**Citation**: TBD; PhyloHerb relies on various dependancies, please cite these works as well.
+**Citation**: 
+https://www.biorxiv.org/content/10.1101/2021.11.29.470431v1
 
-GetOrganelle: Jin, Jian-Jun, Wen-Bin Yu, Jun-Bo Yang, Yu Song, Claude W. Depamphilis, Ting-Shuang Yi, and De-Zhu Li. "GetOrganelle: a fast and versatile toolkit for accurate de novo assembly of organelle genomes." Genome biology 21, no. 1 (2020): 1-31. 
+Liming Cai, Hongrui Zhang, Charles C Davis. PhyloHerb: A phylogenomic pipeline for processing genome skimming data for plants. biorxiv, https://www.biorxiv.org/content/10.1101/2021.11.29.470431v1. 
+
+PhyloHerb relies on various dependancies, please cite these works as well.
+
+Jin, Jian-Jun, Wen-Bin Yu, Jun-Bo Yang, Yu Song, Claude W. Depamphilis, Ting-Shuang Yi, and De-Zhu Li. "GetOrganelle: a fast and versatile toolkit for accurate de novo assembly of organelle genomes." Genome biology 21, no. 1 (2020): 1-31. 
+
+Johnson, M., Zaretskaya, I., Raytselis, Y., Merezhuk, Y., McGinnis, S., & Madden, T. L. (2008). NCBI BLAST: a better web interface. Nucleic acids research, 36(suppl_2), W5-W9.
 
 ## Quick link
 
