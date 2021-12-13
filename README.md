@@ -111,7 +111,7 @@ phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
 
 **A.** If you have your assemblies and want to extract genes using our curated database:
 
-*Input:* Place all fasta formated assemblies in one folder. Make sure they have consistent suffix. To extract genes, use the following command:
+*Input:* Place all fasta formated assemblies in one folder. Make sure they have consistent suffix (e.g., '.fas','.fasta'). To extract genes, use the following command:
 
 ```
 #For plastid 
