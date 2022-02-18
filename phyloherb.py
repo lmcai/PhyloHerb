@@ -258,7 +258,7 @@ def gene_extra(input_dir,suffix,output_dir):
 	filenames=os.listdir(input_dir)
 	filenames=[j for j in filenames if j.endswith(suffix)]
 	if len(filenames)==0:
-		print('No file ends with '+suffix+' found in the input directory. PhyloHerb quitting...')
+		print('No file ends with '+suffix+' found in the input directory. PhyloHerb quit...')
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
 	for f in filenames:
 		gb_recs=SeqIO.read(input_dir+'/'+f,'genbank')
