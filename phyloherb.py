@@ -528,12 +528,12 @@ elif mode =='getseq':
 			print('############################################################\n\
 #ERROR:Argument error!\n\
 Usage:\n\
-python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input dir> -o <output dir> -suffix <alignment suffix> [optional] -gene_def <gene definition file>')
+python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input dir> -o <output dir> -suffix <genbank file suffix> [optional] -gene_def <gene definition file>')
 	except TypeError:
 		print('############################################################\n\
 #ERROR:Insufficient arguments!\n\
 Usage:\n\
-python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input directory> -o <output directory> -suffix <alignment suffix> [optional] -gene_def <gene definition file>')
+python phyloherb.py -m getseq -f <gene|genetic_block|intergenic> -i <input directory> -o <output directory> -suffix <genbank file suffix> [optional] -gene_def <gene definition file>')
 	except IOError as e:print(e)
 else:
 	print('############################################################\n\
