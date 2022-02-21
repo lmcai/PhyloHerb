@@ -341,7 +341,7 @@ def intergenic_extra(input_dir,suffix,output_dir,gene_def):
 				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
 				output_handle.close()
 			except KeyError:
-				print('Cannot find the following genes in the Genbank annotation: '+l)
+				print('Cannot find the following gene: '+l.strip()+' in the GenBank file: '+f)
 
 
 mode=args.m
