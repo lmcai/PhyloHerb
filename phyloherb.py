@@ -308,7 +308,7 @@ Make sure you put all your genbank reference in the input directory with correct
 				d=output_handle.write(">%s\n%s\n" % (loci+'_'+f.split('.')[0],seq))
 				output_handle.close()
 			except KeyError:
-				print('Cannot find the following genes in the Genbank annotation: '+l)
+				print('Cannot find the following genes in the Genbank annotation: '+l.strip()+' in species '+f)
 
 def intergenic_extra(input_dir,suffix,output_dir,gene_def):
 	filenames=os.listdir(input_dir)
