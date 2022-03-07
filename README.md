@@ -29,7 +29,7 @@ Johnson, M., Zaretskaya, I., Raytselis, Y., Merezhuk, Y., McGinnis, S., & Madden
 
 ## I. Prerequisites and installation
 
-To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Detailed installation instructions for dependencies can be found [here](/botanymeeting_tutorial/README.md). If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
+To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Detailed installation instructions for dependencies can be found [here](/tutorial/README.md). If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
 
 ### PhyloHerb
 PhyloHerb is designed to extract orthologous genetic regions from preexisting assemblies. It requires BLAST and two python modules.
@@ -206,7 +206,7 @@ If you are working with a high performance computing cluster with **slurm worklo
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ```
 
-For more details using this bash file, see the [botany meeting tutorial](https://github.com/lmcai/PhyloHerb/blob/main/botanymeeting_tutorial/README.md#3-large-dataset-and-batch-submission-to-cluster).
+For more details using this bash file, see the [tutorial](https://github.com/lmcai/PhyloHerb/blob/main/tutorial/README.md#3-large-dataset-and-batch-submission-to-cluster).
 
 *IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data if they are not in the current directory by modifying relavant variables in `getorg.sh`. Instructions for single-end data can also be found in `getorg.sh`.
 
