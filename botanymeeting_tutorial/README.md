@@ -1,8 +1,11 @@
-# Botany 2021 workshop tutorial
+# Botany meeting workshop tutorial
 
 This is a step-by-step tutorial to prossess genome skimming data for phylogeny reconstruction. This tutorial will use the example dataset hosted on the PhyloHerb repository to reconstruct a plastome-based phylogeny for five species.
 
-Video recordings of the workshop can be viewed now on [Youtube](https://www.youtube.com/watch?v=XCZj-SDk7p4).
+## Events:
+Upcoming:
+Botany 2021: Abstract on the [BSA website](https://2021.botanyconference.org/engine/search/index.php?func=detail&aid=20) and archived [here]().
+Video recordings of the 2021 workshop can be viewed now on [Youtube](https://www.youtube.com/watch?v=XCZj-SDk7p4). The abstract for the workshop can be viewed on the BSA website
 
 ## I. Prerequisites
 Install the following software

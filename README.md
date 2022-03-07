@@ -64,7 +64,7 @@ Or download and decompress the source package:
 wget 
 ```
 
-To update your local version for any future updates, `cd` into the `PhyloHerb` directory then type
+To update your local version for any future releases, `cd` into the `PhyloHerb` directory then type
 ```
 git fetch --prune origin
 git reset --hard origin
