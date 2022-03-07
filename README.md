@@ -64,18 +64,18 @@ Or download and decompress the source package:
 wget 
 ```
 
-**Alternative: Install dependencies separately from source** 
-
-Make sure all dependencies are callable in your current environment. Installation instruction for BLAST+ is hosted on NCBI website  [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). Installation instructions for the two python modules [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/) are available on their websites as well.
-
-Then download and decompress the PhyloHerb python package.
-
 To update your local version for any future updates, `cd` into the `PhyloHerb` directory then type
 ```
 git fetch --prune origin
 git reset --hard origin
 git clean -f -d
 ```
+
+**Alternative: Install dependencies separately from source** 
+
+Make sure all dependencies are callable in your current environment. Installation instruction for BLAST+ is hosted on NCBI website  [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). Installation instructions for the two python modules [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/) are available on their websites as well.
+
+Then download and decompress the PhyloHerb python package.
 
 ### Optional programs
 1. Assembler: [GetOrganelle v1.7.0+](https://github.com/Kinggerm/GetOrganelle). Most easily installed via `conda`. All of the dependancies will be installed automatically.
