@@ -34,6 +34,8 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 ### PhyloHerb
 PhyloHerb is designed to extract orthologous genetic regions from preexisting assemblies. It requires BLAST and two python modules.
 
+*IMPORTANT*: PhyloHerb is currently only compatible with **Python 3**.
+
 **Installation via conda**
 
 Install Anaconda or miniconda for Linux, Mac, or PC (see https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
@@ -57,22 +59,16 @@ To install PhyloHerb, simply download it use `git`:
 ```
 git clone https://github.com/lmcai/PhyloHerb.git
 ```
-Or from release sources and decompressing the zip file, e.g.:
+Or download and decompress the source package:
 ```
 wget 
 ```
 
 **Alternative: Install dependencies separately from source** 
 
-Make sure all dependencies are callable in your current environment.
-
-Installation instruction for BLAST+ is hosted on NCBI website  [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download).
-
-Installation instructions for the two python modules [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/) are available on their websites as well.
+Make sure all dependencies are callable in your current environment. Installation instruction for BLAST+ is hosted on NCBI website  [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). Installation instructions for the two python modules [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/) are available on their websites as well.
 
 Then download and decompress the PhyloHerb python package.
-
-*IMPORTANT*: PhyloHerb is currently only compatible with **Python 3**.
 
 To update your local version for any future updates, `cd` into the `PhyloHerb` directory then type
 ```
