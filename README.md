@@ -29,14 +29,36 @@ Johnson, M., Zaretskaya, I., Raytselis, Y., Merezhuk, Y., McGinnis, S., & Madden
 
 ## I. Prerequisites and installation
 
-To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Detailed installation instructions for dependencies can be found [here](/botanymeeting_tutorial/README.md).
+To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Detailed installation instructions for dependencies can be found [here](/botanymeeting_tutorial/README.md). If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
 
 ### PhyloHerb
-PhyloHerb is designed to extract orthologous genetic regions from preexisting assemblies. It also provides utility functions to assist assembly and phylogenomic data curation. 
+PhyloHerb is designed to extract orthologous genetic regions from preexisting assemblies. It requires BLAST and two python modules.
 
-**Installation steps:**
+**Installation instructions:**
 
-1. Install [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download): Make sure BLAST is callable in your current environment.
+1. Option 1: Install via conda
+
+Install Anaconda or miniconda for Linux, Mac, or PC (see https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+Create a conda environment under Python 3 and activate the environment
+```
+conda create --name phyloherb python=3.7.0
+
+#for Mac
+#conda activate phyloherb
+
+#for linux
+source activate phyloherb
+
+#install blast, biopython, and ete3
+conda install -c bioconda blast
+conda install -c conda-forge biopython
+conda install -c etetoolkit ete3
+```
+
+2. Option 2: Install BLAST and python modules separately from source 
+
+[BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download): Make sure BLAST is callable in your current environment.
 
 2. Install two python modules: [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/). They can be most easily installed using `conda`.
 
