@@ -59,7 +59,7 @@ To install PhyloHerb, simply download it use `git`:
 ```
 git clone https://github.com/lmcai/PhyloHerb.git
 ```
-Or download and decompress the source package:
+Or from the source package:
 ```
 wget 
 ```
