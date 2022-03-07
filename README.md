@@ -29,7 +29,7 @@ Johnson, M., Zaretskaya, I., Raytselis, Y., Merezhuk, Y., McGinnis, S., & Madden
 
 ## I. Prerequisites and installation
 
-To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Installation instructions for some of the following software can be found [here](/botany2021_tutorial/README.md).
+To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Detailed installation instructions for dependencies can be found [here](/botanymeeting_tutorial/README.md).
 
 ### PhyloHerb
 PhyloHerb is designed to extract orthologous genetic regions from preexisting assemblies. It also provides utility functions to assist assembly and phylogenomic data curation. 
@@ -184,7 +184,7 @@ If you are working with a high performance computing cluster with **slurm worklo
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ```
 
-For more details using this bash file, see the [botany2021 tutorial](https://github.com/lmcai/PhyloHerb/blob/main/botany2021_tutorial/README.md#3-large-dataset-and-batch-submission-to-cluster).
+For more details using this bash file, see the [botany meeting tutorial](https://github.com/lmcai/PhyloHerb/blob/main/botanymeeting_tutorial/README.md#3-large-dataset-and-batch-submission-to-cluster).
 
 *IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data if they are not in the current directory by modifying relavant variables in `getorg.sh`. Instructions for single-end data can also be found in `getorg.sh`.
 
