@@ -19,6 +19,8 @@ conda create --name getorg python=3.7.0
 #y
 #for Mac
 #conda activate getorg
+
+#for linux
 source activate getorg
 conda install -c bioconda getorganelle
 conda install -c conda-forge biopython
