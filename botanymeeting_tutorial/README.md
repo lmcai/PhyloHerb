@@ -4,7 +4,7 @@ This is a step-by-step tutorial to prossess genome skimming data for phylogeny r
 
 ## Events:
 Upcoming:
-Botany 2021: Abstract on the [BSA website](https://2021.botanyconference.org/engine/search/index.php?func=detail&aid=20) and archived [here]().
+Botany 2021: Abstract on the [BSA website](https://2021.botanyconference.org/engine/search/index.php?func=detail&aid=20) and archived [here](Botany2021_abstract.pdf).
 Video recordings of the 2021 workshop can be viewed now on [Youtube](https://www.youtube.com/watch?v=XCZj-SDk7p4). The abstract for the workshop can be viewed on the BSA website
 
 ## I. Prerequisites
