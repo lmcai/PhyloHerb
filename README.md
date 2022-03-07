@@ -11,7 +11,7 @@ We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusia
 
 Liming Cai, Hongrui Zhang, Charles C Davis. PhyloHerb: A phylogenomic pipeline for processing genome skimming data for plants. biorxiv, https://www.biorxiv.org/content/10.1101/2021.11.29.470431v1. 
 
-PhyloHerb relies on various dependancies, please cite these works as well.
+PhyloHerb relies on the following dependancies:
 
 Jin, Jian-Jun, Wen-Bin Yu, Jun-Bo Yang, Yu Song, Claude W. Depamphilis, Ting-Shuang Yi, and De-Zhu Li. "GetOrganelle: a fast and versatile toolkit for accurate de novo assembly of organelle genomes." Genome biology 21, no. 1 (2020): 1-31. 
 
