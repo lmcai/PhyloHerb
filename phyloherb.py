@@ -1,5 +1,20 @@
+import sys
+print(textwrap.dedent("""\
+ __                 __        ___  __   __  
+|__) |__| \ / |    /  \ |__| |__  |__) |__) 
+|    |  |  |  |___ \__/ |  | |___ |  \ |__) 
+                                            
+"""))
+print('############################################################\n\
+PhyloHerb v1.0.0\n\
+A bioinformatic pipeline for herbariomics based biodiversity research\n')
+
+if sys.version_info.major==2:
+	print('You are using Python 2. Please upgrade to Python 3. PhyloHerb quit now...')
+	quit()
+
 from Bio import AlignIO
-import os, argparse, sys, shutil, textwrap
+import os, argparse, shutil, textwrap
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
@@ -25,12 +40,6 @@ parser.add_argument('-b', metavar='file', help='[submission mode] path to the ba
 parser.add_argument('-s',  metavar='file', help='[submission mode] path to the taxon sampling sheet')
 
 
-print(textwrap.dedent("""\
- __                 __        ___  __   __  
-|__) |__| \ / |    /  \ |__| |__  |__) |__) 
-|    |  |  |  |___ \__/ |  | |___ |  \ |__) 
-                                            
-"""))
 
 args = parser.parse_args()
 
@@ -345,9 +354,6 @@ def intergenic_extra(input_dir,suffix,output_dir,gene_def):
 
 
 mode=args.m
-print('############################################################\n\
-PhyloHerb v1.0\n\
-A bioinformatic pipeline for herbariomics based biodiversity research\n')
 if mode =='submission':
 	try:
 		print('Generating submission commands for '+str(len(open(args.s).readlines())-1)+' species...')
