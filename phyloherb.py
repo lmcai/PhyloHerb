@@ -1,4 +1,4 @@
-import sys
+import sys, textwrap
 print(textwrap.dedent("""\
  __                 __        ___  __   __  
 |__) |__| \ / |    /  \ |__| |__  |__) |__) 
@@ -14,7 +14,7 @@ if sys.version_info.major==2:
 	quit()
 
 from Bio import AlignIO
-import os, argparse, shutil, textwrap
+import os, argparse, shutil
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
