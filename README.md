@@ -461,7 +461,7 @@ When the alignment is done, you can use them to produce your final species tree.
 
 ## IV. Retrieve low-copy nuclear genes
 
-
+PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of low-copy nuclear loci. It can be interpreted as a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper).
 
 ## V. General guidelines for genome skimming data collection
 
