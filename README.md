@@ -472,7 +472,8 @@ a. PhyloHerb will remove the flanking 'splash zone' that is not included in the 
 b. PhyloHerb will output no more than ONE sequence per gene per species. The combination of paralogs and missing data can generate chimeric assembly. It is thus advised to use stringent BLAST evalue threshold. 
 
 **Pipeline:**
-<img src="/images/lowcopy_nuc.jpeg" width="254" height="190">
+
+<img src="/images/lowcopy_nuc.jpeg" width="500" height="380">
 
 ## V. General guidelines for genome skimming data collection
 
