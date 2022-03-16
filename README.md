@@ -462,12 +462,17 @@ When the alignment is done, you can use them to produce your final species tree.
 ## IV. Retrieve low-copy nuclear genes
 
 **When to use this function:** 
-PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of low-copy nuclear loci. It can be interpreted as a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper). It has the advantage of rapidly pulling candidate regions with very low computational cost
+
+PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of low-copy nuclear loci. It can be interpreted as a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper). It has the advantage of rapidly pulling candidate regions with very low computational cost.
 
 **Limitations:** 
-but it is also important to recognize the following limitations:
 
-a. PhyloHerb 
+a. PhyloHerb will remove the flanking 'splash zone' that is not included in the reference region.
+
+b. PhyloHerb will output no more than ONE sequence per gene per species. The combination of paralogs and missing data can generate chimeric assembly. It is thus advised to use stringent BLAST evalue threshold. 
+
+**Pipeline:**
+<img src="/images/lowcopy_nuc.jpeg" width="254" height="190">
 
 ## V. General guidelines for genome skimming data collection
 
