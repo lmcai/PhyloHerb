@@ -465,16 +465,17 @@ When the alignment is done, you can use them to produce your final species tree.
 
 PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of low-copy nuclear loci. It can be interpreted as a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper). It has the advantage of rapidly pulling out target regions with low computational cost. The references sequences can be **genes or CDS** (e.g., Angiosperm 353 or 1kp data), but it has to be DNA seqs.
 
+**Pipeline:**
+
+<img src="/images/lowcopy_nuc.jpeg" width="500" height="380">
+
 **Limitations:** 
 
 - PhyloHerb will remove the flanking 'splash zone' that is not included in the reference region.
 - PhyloHerb will output no more than ONE sequence per gene per species. The combination of paralogs and missing data can generate chimeric assembly (see the illustration below). It is thus advised to use stringent BLAST evalue threshold. 
 - Given the non-enrichment nature of genome skimming, missing data is expected.
 
-**Pipeline:**
-
-<img src="/images/lowcopy_nuc.jpeg" width="500" height="380">
-
+### How to
 
 
 ## V. General guidelines for genome skimming data collection
