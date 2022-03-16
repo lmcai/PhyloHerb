@@ -168,9 +168,9 @@ List of genes and species included in our built-in database can be found [here](
 
 **2. Ortholog gene extraction for low-copy nuclear genes with custom references**
 
-*Input:* One fasta file of reference genes, formatted following the [custom reference guidance](https://github.com/lmcai/PhyloHerb#1-format-of-custom-reference-sequences-optional). Raw reads of target species, pair-end or single-end. This function is similar to a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper) and involve two-steps: spades assembly and ortholog extraction.
+*Input:* One fasta file of reference genes, formatted following the [custom reference guidance](https://github.com/lmcai/PhyloHerb#1-format-of-custom-reference-sequences-optional). Raw reads of target species, pair-end or single-end. This function is similar to a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper) and involves two-steps: spades assembly and ortholog extraction.
 
-To assemble reference regions, use the following command for each species:
+To assemble target regions, use the following command for each species:
 ```
 python phyloherb.py -m assemb -1 <Forward.fq> -2 <Reverse.fq> -s <Single_end.fq> -ref 
 <reference fasta> -prefix <species ID/name>
@@ -461,7 +461,13 @@ When the alignment is done, you can use them to produce your final species tree.
 
 ## IV. Retrieve low-copy nuclear genes
 
-PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of low-copy nuclear loci. It can be interpreted as a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper).
+**When to use this function:** 
+PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of low-copy nuclear loci. It can be interpreted as a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper). It has the advantage of rapidly pulling candidate regions with very low computational cost
+
+**Limitations:** 
+but it is also important to recognize the following limitations:
+
+a. PhyloHerb 
 
 ## V. General guidelines for genome skimming data collection
 
