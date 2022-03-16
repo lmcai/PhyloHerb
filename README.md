@@ -259,7 +259,7 @@ The most convenient tool I have used is the web-based tool [GeSeq](https://chlor
 
 ### 3. Ortholog identification and alignment
 
-Phyloherb will identify the best-matching region of each locus in the assemblly using BLAST. We provide a build-in database of plastid genes from 355 seed plant families. You can also supply your own reference in a fasta file following the instructions below. The list of reference species is [here](/phyloherbLib/reference_sp.list). The list of the genes in the database is [here](/phyloherbLib/gene.list). 
+Phyloherb will identify the best-matching region of each locus in the assemblly using BLAST. We provide a build-in database of plastid genes from 355 seed plant families. You can also supply your own reference in a fasta file following the instructions below. The list of reference species is [here](/database/reference_sp.list). The list of the genes in the database is [here](/database/gene.list). 
 
 #### 1). Format of custom reference sequences **(optional)**
 
