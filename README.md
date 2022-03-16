@@ -483,6 +483,8 @@ PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of lo
 
 #### 3. Generate ortholog sequences
 
+***
+
 ## V. General guidelines for genome skimming data collection
 
 **Overview**
