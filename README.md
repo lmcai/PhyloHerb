@@ -209,7 +209,7 @@ If you are working with a high performance computing cluster with **slurm worklo
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ```
 
-For more details using this bash file, see the [tutorial](https://github.com/lmcai/PhyloHerb/blob/main/tutorial/README.md#3-large-dataset-and-batch-submission-to-cluster).
+For more details using this bash file, see the [tutorial](/tutorial/README.md#3-large-dataset-and-batch-submission-to-cluster).
 
 *IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data if they are not in the current directory by modifying relavant variables in `getorg.sh`. Instructions for single-end data can also be found in `getorg.sh`.
 
