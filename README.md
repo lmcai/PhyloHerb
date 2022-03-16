@@ -24,7 +24,7 @@ Combined with the morphological and distribution data from herbarium specimens, 
 
 **New workshop July 24, 2022:** We will hold an in-person workshop (with remote options) at Botany 2022 in Anchorage. See the BSA website for [abstract](https://www.botanyconference.org/engine/search/index.php?func=detail&aid=16). Workshop materials can be found [here](/tutorial).
 
-**New features released:** Since PhyloHerb v1.1+, you can pull low-copy nuclear genes (e.g., Angiosperm 353) from your genome skimming data. All you need is the reference sequences and raw reads. PhyloHerb will output fasta files that are ready for alignment. Check the [low-copy nuclear gene tutorial](https://github.com/lmcai/PhyloHerb/tree/v1.1#iv-retrieve-low-copy-nuclear-genes) below.
+**New features released:** Since PhyloHerb v1.1+, you can pull low-copy nuclear genes (e.g., Angiosperm 353) from your genome skimming data. All you need is the reference sequences and raw reads. PhyloHerb will output fasta files that are ready for alignment. Check the [low-copy nuclear gene tutorial](https://github.com/lmcai/PhyloHerb/tree/develop#iv-retrieve-low-copy-nuclear-genes) below.
 
 **New publication:** Initial PhyloHerb release accepted at APPS! Stay tuned for the early view! :tada:
 
@@ -36,13 +36,13 @@ Combined with the morphological and distribution data from herbarium specimens, 
 
 [III. Complete tutorial for analyzing genome skimming data for phylogenetic analysis](https://github.com/lmcai/PhyloHerb#iii-complete-tutorial-for-analyzing-genome-skimming-data-for-phylogenetic-analysis)
 
-[IV. Retrieve low-copy nuclear genes](https://github.com/lmcai/PhyloHerb/tree/v1.1#iv-retrieve-low-copy-nuclear-genes)
+[IV. Retrieve low-copy nuclear genes](https://github.com/lmcai/PhyloHerb/tree/develop#iv-retrieve-low-copy-nuclear-genes)
 
 [V. General guidelines for genome skimming data collection](https://github.com/lmcai/PhyloHerb#v-general-guidelines-for-genome-skimming-data-collection)
 
 ## I. Prerequisites and installation
 
-To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Detailed installation instructions for dependencies can be found [here](https://github.com/lmcai/PhyloHerb/tree/main/tutorial). If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
+To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Detailed installation instructions for dependencies can be found [here](/tutorial). If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
 
 ### PhyloHerb
 PhyloHerb is designed to extract orthologous genetic regions from preexisting assemblies. It requires BLAST and two python modules.
