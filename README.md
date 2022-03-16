@@ -467,15 +467,15 @@ PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of lo
 
 **Limitations:** 
 
-a. PhyloHerb will remove the flanking 'splash zone' that is not included in the reference region.
-
-b. PhyloHerb will output no more than ONE sequence per gene per species. The combination of paralogs and missing data can generate chimeric assembly (see the illustration below). It is thus advised to use stringent BLAST evalue threshold. 
-
-c. Given the non-enrichment nature of genome skimming, missing data is expected.
+	a. PhyloHerb will remove the flanking 'splash zone' that is not included in the reference region.
+	b. PhyloHerb will output no more than ONE sequence per gene per species. The combination of paralogs and missing data can generate chimeric assembly (see the illustration below). It is thus advised to use stringent BLAST evalue threshold. 
+	c. Given the non-enrichment nature of genome skimming, missing data is expected.
 
 **Pipeline:**
 
 <img src="/images/lowcopy_nuc.jpeg" width="500" height="380">
+
+
 
 ## V. General guidelines for genome skimming data collection
 
