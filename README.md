@@ -340,13 +340,13 @@ atcg...
 We can  extract the target gene regions using the `ortho` function of phyloherb. This function will conduct BLAST search in the assembly, extract the best matching regions, and output the fasta files to a directory.
 
 ```
-python phyloherb.py -m ortho -i <input dir with fasta files> -o <output directory>
+python phyloherb.py -m ortho -i <input dir with fasta files> -o <output dir>
 ```
 *Output:* `*.fas` files named after genes. Within each fasta file, the headers will be the species prefixes.
 
 You can choose to use a subset of genes and species by supplying a `-g gene_subset.txt` and `-sp species_subset.txt`. Example files can be found in [gene_subset.txt](/example/gene_subset.txt) and [species_subset.txt](/example/species_subset.txt). You can also set a minimum length limit for gene region extraction via `-l <lower limit>`. Blast hits shorter than this will not be use.
 ```
-python phyloherb.py -m ortho -i <input dir containing assemblies> -o <output directory> -g <gene list> -sp <species list> -l <length limit> -ref <ref seq>
+python phyloherb.py -m ortho -i <input dir with fasta files> -o <output dir> -g <gene list> -sp <species list> -l <length limit> -ref <ref seq>
 ```
 
 #### 3). Nuclear ribosomal regions
