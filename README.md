@@ -255,7 +255,7 @@ get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <nr_output> -R 10
 get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
 ```
 
-If you want to use your own reference sequences for assembly, you can provide the seed fasta file by adding `-s <reference.fas>`.
+If you want to use your own reference sequences for assembly, you can provide the seed fasta file by adding `-ref <reference.fas>`.
 
 #### 3). Large dataset and batch submission to cluster
 
