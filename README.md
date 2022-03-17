@@ -44,10 +44,9 @@ Combined with the morphological and distribution data from herbarium specimens, 
 
 ## I. Prerequisites and installation
 
-To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Detailed installation instructions for dependencies can be found [here](/tutorial). If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
+To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC may suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
 
 ### PhyloHerb
-PhyloHerb is designed to extract orthologous genetic regions from preexisting assemblies. It requires BLAST and two python modules.
 
 *IMPORTANT*: PhyloHerb is currently only compatible with **Python 3**.
 
@@ -57,7 +56,7 @@ Install Anaconda or miniconda for Linux, Mac, or PC (see https://conda.io/projec
 
 Create a conda environment under Python 3 and activate the environment
 ```
-conda create --name phyloherb python=3.7.0
+conda create --name phyloherb python=3.7
 
 #for Mac
 #conda activate phyloherb
@@ -94,7 +93,7 @@ git clean -f -d
 
 **Alternative: Install dependencies separately from source** 
 
-Make sure all dependencies are callable in your current environment. If you are using computer clusters, some dependencies might be installed and can be called via `module load`. Installation instruction for BLAST+ is hosted on NCBI website  [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). Installation instructions for the other python modules [Biopython](https://biopython.org/), [ete3](http://etetoolkit.org/), [spades](https://github.com/ablab/spades), and [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) are available on their websites as well.
+If you are using computer clusters, some dependencies might be installed and can be called via `module load`. Make sure all dependencies are callable in your current environment. Installation instruction for BLAST+ is hosted on NCBI website  [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). Installation instructions for the other python modules [Biopython](https://biopython.org/), [ete3](http://etetoolkit.org/), [spades](https://github.com/ablab/spades), and [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) are available on their websites as well.
 
 Then download and decompress the PhyloHerb python package.
 
