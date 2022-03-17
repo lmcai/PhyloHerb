@@ -391,8 +391,8 @@ python phyloherb.py -m getseq -f gene -i <input directory> -suffix <genbank suff
 Both the `-f genetic_block` and `-f intergenic` mode will take a genetic block definition file supplied by `-gene_def`, and extract corresponding regions. This tab-delimited file have three columns: genetic region name, start gene, and end gene. An example can be found [here](/example/gene_def.txt).
 ```
 name	start	end
-INT1	G1	G2
-INT2	G3	G7
+LOC1	G1	G2
+LOC2	G3	G7
 ...
 ```
 
