@@ -32,7 +32,7 @@ parser.add_argument('-n',  metavar='integer', help='[ortho mode] number of threa
 parser.add_argument('-ref',  metavar='file', help='[ortho mode] custom reference sequences')
 parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes using build-in references',action='store_true')
 parser.add_argument('-rdna',  help='[ortho mode] extract nuclear ribosomal regions using build-in references',action='store_true')
-parser.add_argument('-t', metavar='file', help='[order mode] newick tree file to order alignments based on phylogeny')
+parser.add_argument('-t', metavar='file', help='[order mode] newick tree file for ordering alignments')
 parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum proportion of missing data allowed for each species')
 parser.add_argument('-f',  metavar='mode', help='[getseq mode] how to extract loci, choose one of the following: gene, genetic_block, intergenic')
 parser.add_argument('-gene_def',  metavar='file', help='[getseq mode] a gene delimitation file that defines genetic blocks')
