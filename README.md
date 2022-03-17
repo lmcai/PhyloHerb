@@ -520,7 +520,35 @@ atcg...
 
 Make sure `bowtie2`, `spades.py`, and `samtools` are callable in the current environment.
 
+To assemble sequences in the target region, use the following command:
+```
+#Pair-end reads
+python phyloherb.py -m assemb -r1 <Forward.fq> -r2 <Reverse.fq> -ref <reference fasta> -prefix <species ID> -n <threads>
+
+#Single-end reads
+python phyloherb.py -m assemb -rs <Single.fq> -ref <reference fasta> -prefix <species ID> -n <threads>
+
+#Pair-end and Single-end, multiple libraries
+python phyloherb.py -m assemb -r1 <Forward.fq> -r2 <Reverse.fq> -rs <Single1.fq,Single2.fq> -ref <reference fasta> -prefix <species ID> -n <threads>
+```
+
+*Ouput:* In the working directory, PhyloHerb will generate `prefix_spades` folder, within which assembly scaffolds can be found.
+
+Repeat this step for all species. The assembly step may run simultaneous and distributed to multiple jobs on a cluster.
+
 #### 3. Generate ortholog sequences
+
+Once the assembly is completed for all species, ortholog sequences can be scaffolded using the following command. The `input dir` should be the parent directory where all spades output folders are located. Make sure add the `-nuc` flag.
+```
+python phyloherb.py -m ortho -i <input dir> -o <output dir> -ref <reference.fasta> -nuc [optional] -n <threads> -evalue <evalue>
+```
+The default BLAST `evalue` is `1e-40`. You can set more stringent values, but it is not recommended to use values larger than 1e-30.
+
+If the assemblies are in one folder, add the `-suffix` flag to indicate file suffix:
+```
+python phyloherb.py -m ortho -i <input dir> -suffix <suffix> -o <output dir> -ref <reference.fasta> -nuc [optional] -n <threads> -evalue <evalue>
+```  
+*Ouput:* In the output directory, there will be multiple `*.fas` files named after genes. Within each fasta file, the headers will be the species prefixes..
 
 ***
 
