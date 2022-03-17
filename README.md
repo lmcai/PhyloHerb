@@ -126,32 +126,49 @@ Then download and decompress the PhyloHerb python package.
 ### Usage:
 
 ```
-phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
-                    [-g file] [-l integer] [-evalue float] [-n integer] [-ref file] 
-                    [-mito] [-rdna] [-t file] [-missing float 0-1] [-f mode]
-                    [-gene_def file] [-b file] [-s file]
+phyloherb.py	[-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
+            	[-g file] [-l integer] [-evalue float] [-n integer]
+            	[-ref file] [-mito] [-rdna] [-nuc] [-r1 read file]
+                [-r2 read file] [-rs read file] [-prefix string] [-t file]
+                [-missing float 0-1] [-f mode] [-gene_def file] [-b file]
+                [-s file]
+
 ```
 
 ### Options:
 ```
-	-i dir			input directory
-	-o dir			output directory
-	-m str			execution mode: qc, ortho, conc, order, getseq, submission
-	-suffix str		[qc, ortho, conc mode] suffix of input files
-	-sp file		[ortho mode] a file containing a list of species
-	-g file			[ortho and conc mode] a file containing a list of loci
-	-l int			[ortho mode] minimum length of blast hits
-	-evalue float		[ortho mode] evalue threshold of blast
-	-n int			[ortho mode] number of threads for blast
-	-ref file		[ortho mode] custom reference sequences
-  	-mito			[ortho mode] extract mitochondrial genes using build-in references
-  	-rdna           	[ortho mode] extract nuclear ribosomal regions using build-in references
-  	-t file			[order mode] newick tree file to order alignments based on phylogeny
-  	-missing float 0-1  	[order mode] maximum proportion of missing data allowed for each species
-  	-f mode			[getseq mode] one of the following: gene, genetic_block, intergenic
-  	-gene_def file		[getseq mode] a gene delimitation file that defines genetic blocks
-  	-b file			[submission mode] path to the bash file
-  	-s file			[submission mode] path to the taxon sampling sheet
+  -h, --help          show this help message and exit
+  -m mode             execution mode, choose one of the following: qc, ortho,
+                      conc, order, getseq, assemb, submission
+  -i dir              input directory
+  -o dir              output directory
+  -suffix string      [qc, ortho, conc mode] suffix of input files
+  -sp file            [ortho mode] a file containing a list of species
+  -g file             [ortho and conc mode] a file containing a list of loci
+  -l integer          [ortho mode] minimum length of blast hits
+  -evalue float       [ortho mode] evalue threshold for BLAST
+  -n integer          [ortho, assemb mode] number of threads
+  -ref file           [ortho mode] custom reference sequences
+  -mito               [ortho mode] extract mitochondrial genes using build-in
+                      references
+  -rdna               [ortho mode] extract nuclear ribosomal regions using
+                      build-in references
+  -nuc                [ortho mode] extract low-copy nuclear loci
+  -r1 reads file      [assemb mode] forward reads
+  -r2 reads file      [assemb mode] reverse reads
+  -rs reads file      [assemb mode] single-end or unpaired reads, separate
+                      mulitple file by ','
+  -prefix string      [assemb mode] assembly output prefix
+  -t file             [order mode] newick tree file to order alignments based
+                      on phylogeny
+  -missing float 0-1  [order mode] maximum proportion of missing data allowed
+                      for each species
+  -f mode             [getseq mode] how to extract loci, choose one of the
+                      following: gene, genetic_block, intergenic
+  -gene_def file      [getseq mode] a gene delimitation file that defines
+                      genetic blocks
+  -b file             [submission mode] path to the bash file
+  -s file             [submission mode] path to the taxon sampling sheet
 ```
 
 **1. Ortholog gene extraction (cpDNA, rDNA, mtDNA) using built-in database**
