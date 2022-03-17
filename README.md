@@ -340,7 +340,7 @@ atcg...
 We can  extract the target gene regions using the `ortho` function of phyloherb. This function will conduct BLAST search in the assembly, extract the best matching regions, and output the fasta files to a directory.
 
 ```
-python phyloherb.py -m ortho -i <input dir containing assemblies> -o <output directory>
+python phyloherb.py -m ortho -i <input dir with fasta files> -o <output directory>
 ```
 *Output:* `*.fas` files named after genes. Within each fasta file, the headers will be the species prefixes.
 
