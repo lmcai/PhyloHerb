@@ -18,7 +18,9 @@ Johnson, M., Zaretskaya, I., Raytselis, Y., Merezhuk, Y., McGinnis, S., & Madden
 
 **Recent application examples**:
 
-Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study taxonomy, biogeography, and macroevolution. This pipeline has been tested in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., red algea at hundreds of millions of years ago). 
+Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study taxonomy, biogeography, and macroevolution. This pipeline has been tested in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. PhyloHerb extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., red algea at hundreds of millions of years ago). 
+
+- Marinho, Lucas C., et al. "Plastomes resolve generic limits within tribe Clusieae (Clusiaceae) and reveal the new genus Arawakia." Molecular phylogenetics and evolution 134 (2019): 142-151.
 
 ## Announcement :mega: :mega: :mega:
 
