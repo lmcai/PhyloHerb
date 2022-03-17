@@ -63,12 +63,14 @@ conda create --name phyloherb python=3.7.0
 #for linux
 source activate phyloherb
 
-#install blast, biopython, bowtie2, spades, and ete3
+#install blast, biopython, bowtie2, spades, samtools, pandas, and ete3
 conda install -c bioconda blast
 conda install -c conda-forge biopython
 conda install -c etetoolkit ete3
 conda install -c bioconda bowtie2
 conda install -c bioconda spades
+conda install -c bioconda samtools
+conda install pandas
 ```
 To install PhyloHerb, simply download it use `git`:
 ```
@@ -90,7 +92,7 @@ git clean -f -d
 
 **Alternative: Install dependencies separately from source** 
 
-Make sure all dependencies are callable in your current environment. Installation instruction for BLAST+ is hosted on NCBI website  [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). Installation instructions for the other python modules [Biopython](https://biopython.org/), [ete3](http://etetoolkit.org/), [spades](https://github.com/ablab/spades), and [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) are available on their websites as well.
+Make sure all dependencies are callable in your current environment. If you are using computer clusters, some dependencies might be installed and can be called via `module load`. Installation instruction for BLAST+ is hosted on NCBI website  [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). Installation instructions for the other python modules [Biopython](https://biopython.org/), [ete3](http://etetoolkit.org/), [spades](https://github.com/ablab/spades), and [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) are available on their websites as well.
 
 Then download and decompress the PhyloHerb python package.
 
@@ -172,8 +174,8 @@ List of genes and species included in our built-in database can be found [here](
 
 To assemble target regions, use the following command for each species:
 ```
-python phyloherb.py -m assemb -1 <Forward.fq> -2 <Reverse.fq> -s <Single_end.fq> -ref 
-<reference fasta> -prefix <species ID/name>
+python phyloherb.py -m assemb -r1 <Forward.fq> -r2 <Reverse.fq> -rs <Single1.fq,Single2.fq> -ref 
+<reference fasta> -prefix <species ID/name> -n <threads>
 ```
 Once the assemblies are completed for all species, generate ortholog fasta files:
 ```
@@ -472,14 +474,28 @@ PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of lo
 ### Limitations
 
 - PhyloHerb will remove the flanking 'splash zone' that is not included in the reference region.
-- PhyloHerb will output no more than ONE sequence per gene per species. The combination of paralogs and missing data can generate chimeric assembly (see the illustration below). It is thus advised to use stringent BLAST evalue threshold. 
-- Given the non-enrichment nature of genome skimming, missing data is expected.
+- PhyloHerb will output no more than ONE sequence per gene per species. The combination of paralogs and missing data can generate chimeric assembly (see the illustration above). It is thus advised to use stringent BLAST evalue threshold (default 1e-40). 
+- Given the low coverage and on-enrichment nature of genome skimming, missing data is expected.
 
 ### How to
 
 #### 1. Prepare reference DNA fasta
 
+It is recommended to use more than one species per gene. All reference sequences should be in a single fasta file. In this files, the headers should begin by the gene name then followed by an underscore and a species name (which will be ignored):
+
+```
+>gene1_sp1
+atcg...
+>gene1_sp2
+atcg...
+>gene2_sp1
+atcg...
+>gene2_sp2
+```
+
 #### 2. Assembly
+
+Make sure `bowtie2`, `spades.py`, and `samtools` are callable in the current environment.
 
 #### 3. Generate ortholog sequences
 
