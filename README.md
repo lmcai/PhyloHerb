@@ -93,7 +93,7 @@ git clean -f -d
 
 **Alternative: Install dependencies separately from source** 
 
-If you are using computer clusters, some dependencies might be installed and can be called via `module load`. Make sure all dependencies are callable in your current environment. A list of PhyloHerb dependencies:
+You could also want to install these dependencies from source. If you are using computer clusters, some dependencies might also be installed and can be called via `module load`. Make sure all dependencies are callable in your current environment. A list of PhyloHerb dependencies:
  - [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
  - [spades](https://github.com/ablab/spades)
  - [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) 
