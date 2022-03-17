@@ -6,7 +6,7 @@ print(textwrap.dedent("""\
                                             
 """))
 print('############################################################\n\
-PhyloHerb v1.0.0\n\
+PhyloHerb v1.1.0\n\
 A bioinformatic pipeline for herbariomics based biodiversity research\n')
 
 if sys.version_info.major==2:
@@ -20,7 +20,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
 
 parser = argparse.ArgumentParser(description='PhyloHerb is a bioinfomatic utility wrappepr to process genome skimming data for phylogenomics studies.')
-parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following: qc, ortho, conc, order, getseq, submission', required=True)
+parser.add_argument('-m', metavar='mode', help='execution mode, choose one of the following: qc, ortho, conc, order, getseq, assemb, submission', required=True)
 parser.add_argument('-i', metavar='dir', help='input directory')
 parser.add_argument('-o', metavar='dir', help='output directory')
 parser.add_argument('-suffix', metavar='string', help='[qc, ortho, conc mode] suffix of input files')
@@ -28,10 +28,15 @@ parser.add_argument('-sp',  metavar='file', help='[ortho mode] a file containing
 parser.add_argument('-g',  metavar='file', help='[ortho and conc mode] a file containing a list of loci')
 parser.add_argument('-l',  metavar='integer', help='[ortho mode] minimum length of blast hits')
 parser.add_argument('-evalue',  metavar='float', help='[ortho mode] evalue threshold for BLAST')
-parser.add_argument('-n',  metavar='integer', help='[ortho mode] number of threads for BLAST')
+parser.add_argument('-n',  metavar='integer', help='[ortho, assemb mode] number of threads')
 parser.add_argument('-ref',  metavar='file', help='[ortho mode] custom reference sequences')
 parser.add_argument('-mito',  help='[ortho mode] extract mitochondrial genes using build-in references',action='store_true')
 parser.add_argument('-rdna',  help='[ortho mode] extract nuclear ribosomal regions using build-in references',action='store_true')
+parser.add_argument('-nuc',  help='[ortho mode] extract low-copy nuclear loci',action='store_true')
+parser.add_argument('-r1',  metavar='read file', help='[assemb mode] forward reads')
+parser.add_argument('-r2',  metavar='read file', help='[assemb mode] reverse reads')
+parser.add_argument('-rs',  metavar='read file', help='[assemb mode] single-end or unpaired reads, separate mulitple file by \',\'')
+parser.add_argument('-prefix',  metavar='string', help='[assemb mode] assembly output prefix')
 parser.add_argument('-t', metavar='file', help='[order mode] newick tree file to order alignments based on phylogeny')
 parser.add_argument('-missing', metavar='float 0-1', help='[order mode] maximum proportion of missing data allowed for each species')
 parser.add_argument('-f',  metavar='mode', help='[getseq mode] how to extract loci, choose one of the following: gene, genetic_block, intergenic')
@@ -398,7 +403,7 @@ With Getorganelle output folders:\n\
 python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
 With assemblies only:\n\
 python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
-elif mode =='ortho':
+elif mode =='ortho' and (args.nuc is None):
 	try:
 		PH_path=os.path.dirname(__file__)
 		#print(PH_path)
@@ -482,6 +487,30 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 		print('############################################################\n\
 #ERROR:Input files not found!\n')
 	except IOError as e:print(e.errno)
+elif mode =='ortho' and args.nuc:
+	try:
+		####
+	except TypeError:
+		print('############################################################\n\
+#ERROR:Insufficient arguments!\n\
+Usage:\n\
+python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode> -nuc <nuclear gene mode>')
+elif mode =='assemb':
+	#check dependencies
+	if not shutil.which('bowtie2'):
+		print('ERROR: Bowtie2 not in the environment. Please add its path or reinstall!')
+		quit()
+	if not shutil.which('spades.py'):
+		print('ERROR: Spades not in the environment. Please add its path or reinstall!')
+		quit()
+	if not shutil.which('samtools'):
+		print('ERROR: samtools not in the environment. Please add its path or reinstall!')
+		quit()
+	try:
+		#python phyloherb.py -m assemb -1 <Forward.fq> -2 <Reverse.fq> -u <Single_end.fq> -ref <reference fasta> -prefix <species ID/name>
+		
+	except TypeError:
+	
 elif mode =='conc':
 	try:
 		if args.g:
