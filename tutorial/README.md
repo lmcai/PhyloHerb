@@ -17,15 +17,15 @@ Install Anaconda or miniconda for Linux, Mac, or PC (see https://conda.io/projec
 
 Create a conda environment and install GetOrganelle and its dependencies (may take a while)
 ```
-conda create --name getorg python=3.7.0
+conda create --name phyloherb python=3.7.0
 #answer promt questions 
 #proceed ([y]/n)?
 #y
 #for Mac
-#conda activate getorg
+#conda activate phyloherb
 
 #for linux
-source activate getorg
+source activate phyloherb
 conda install -c bioconda getorganelle
 conda install -c conda-forge biopython
 conda install -c etetoolkit ete3
