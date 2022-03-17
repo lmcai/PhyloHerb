@@ -357,6 +357,118 @@ def intergenic_extra(input_dir,suffix,output_dir,gene_def):
 			except KeyError:
 				print('Cannot find the following gene: '+l.strip()+' in the GenBank file: '+f)
 
+def assembly(r1,r2,rs,threads,prefix,reference):
+	reference_ID=reference.split('/')[-1]
+	reference_ID=reference_ID.split('.')[0]
+	#bowtie
+	if os.path.exists(reference_ID+'.rev.1.bt2'):
+		print('Bowtie database found.')
+	else:
+		print('Building Bowtie database using '+ reference)
+		bowtieCommand='bowtie2-build '+reference+' '+reference_ID+' > /dev/null'
+		print('Bowtie command: '+bowtieCommand)
+		os.system(bowtieCommand)
+		print('Bowtie database completed.')
+	#reads mapping
+	print('Mapping reads using '+threads+' threads. This may take a while...')
+	if r1!='NA' and rs=='NA':
+		#PE only
+		bowtieCommand='bowtie2 --very-sensitive-local -p '+threads+' -x '+reference_ID+' -1 '+r1+' -2 '+r2+' -S '+prefix+'.'+reference_ID+'.sam'
+	elif r1!='NA' and rs!='NA':
+		#PE+SE
+		bowtieCommand='bowtie2 --very-sensitive-local -p '+threads+' -x '+reference_ID+' -1 '+r1+' -2 '+r2+' -U '+rs+' -S '+prefix+'.'+reference_ID+'.sam'
+	elif r1=='NA':
+		#SE
+		bowtieCommand='bowtie2 --very-sensitive-local -p '+threads+' -x '+reference_ID+' -U '+rs+' -S '+prefix+'.'+reference_ID+'.sam'
+	print('Bowtie command: '+bowtieCommand)	
+	os.system(bowtieCommand)
+	print('Bowtie reads mapping completed.')
+	#get mapped reads
+	samCommand='samtools bam2fq -F 4 -1 '+prefix+'.filtered.R1.fq -2 '+prefix+'.filtered.R2.fq -s '+prefix+'.filtered.unpaired.fq '+prefix+'.'+reference_ID+'.sam > /dev/null'
+	print('Extracting mapped reads.\nSamtools command: '+samCommand)
+	os.system(samCommand)
+	print('Reads extraction completed.\nStart spades assembly.')
+	spadesCommand='spades.py -t '+threads+' --phred-offset 33 -1 '+prefix+'.filtered.R1.fq -2 '+prefix+'.filtered.R2.fq -s '+prefix+'.filtered.unpaired.fq -k 21,55,85,115 -o '+prefix+'_spades'
+	print('Assembling reads using '+threads+' threads in Spades. This might take a while.\nSpades command: '+spadesCommand)
+	os.system(spadesCommand+' >/dev/null')
+	print('Assembly completed. Output can be found in the folder: '+prefix+'_spades')
+
+
+def retain_one_rec_pergene(blast_results):
+        pergene_rec={}
+        filtered_hits=[]
+        #sort blast hits by gene
+        for l in blast_results:
+                try:pergene_rec[l.split()[0]].append(l)
+                except KeyError:pergene_rec[l.split()[0]]=[l]
+        #get one best rec per gene
+        for g in pergene_rec.keys():
+                blast_lst=[l.strip().split() for l in pergene_rec[g]]
+                blast_table= pd.DataFrame(blast_lst, columns =['V'+str(i) for i in list(range(12))]) 
+                #sort dataframe
+                blast_table["V2"] = pd.to_numeric(blast_table["V2"])
+                blast_table=blast_table.sort_values(by='V2', ascending=False)
+                blast_table = blast_table.applymap(str)
+                filtered_hits.append('\t'.join(blast_table.iloc[0]))
+        #return list of strings as best hits
+        return(filtered_hits)
+
+
+
+def gene_assem(blast_results,assemb,species_name,outdir):
+	#initiate values
+	cur_gene=blast_results[0].split('\t')[1].split('_')[0]
+	if '_old' in blast_results[0]:cur_gene=cur_gene+'_old'
+	blast_syntax={}
+	blast_syntax[cur_gene]=[blast_results[0]]
+	for l in blast_results:
+		gene=l.split('\t')[1].split('_')[0]
+		if '_old' in l:
+			gene=gene+'_old'
+		if gene==cur_gene:
+			blast_syntax[gene].append(l)
+		else:
+			#the blast syntax for last gene is complete, process them to extract sequences
+			hits=retain_one_rec_pergene(blast_syntax[cur_gene])
+			hits=[l.split() for l in hits]
+			hit_table=pd.DataFrame(hits, columns =['V'+str(i) for i in list(range(12))]) 
+			hit_table["V2"] = pd.to_numeric(hit_table["V2"])
+			hit_table["V10"] = pd.to_numeric(hit_table["V10"])
+			hit_table['ref_start'] = [0] *len(hit_table)
+			hit_table['ref_end'] = [0] *len(hit_table)
+			for i in range(0,len(hit_table)):
+				hit_table.iloc[i,12]=min(int(hit_table.iloc[i,8]),int(hit_table.iloc[i,9]))
+				hit_table.iloc[i,13]=max(int(hit_table.iloc[i,8]),int(hit_table.iloc[i,9]))
+			hit_table=hit_table.sort_values(by='ref_start')
+			#print(hit_table)
+			#examine if the boundaries of exon hits are overlapping
+			ALL_exons=1
+			for i in range(1,len(hit_table)):
+				if int(hit_table.iloc[i,12])-int(hit_table.iloc[i-1,13])<-10:ALL_exons=0
+			#output to sequences
+			if ALL_exons:
+				#write multiple exons in one sequence
+				seq_str=''
+				for i in range(0,len(hit_table)):
+					#reverse compliment the sequence if needed
+					if int(hit_table.iloc[i,8])>int(hit_table.iloc[i,9]):
+						seq_str=seq_str+'NNNNN'+str(assemb[hit_table.iloc[i,0]].seq[(int(hit_table.iloc[i,6])-1):int(hit_table.iloc[i,7])].reverse_complement())
+					else:
+						seq_str=seq_str+'NNNNN'+str(assemb[hit_table.iloc[i,0]].seq[(int(hit_table.iloc[i,6])-1):int(hit_table.iloc[i,7])])
+			else:
+				#overlapping blast result, difficult to determine synteny, only output best hit
+				#print('synteny error: '+cur_gene)
+				hit_table=hit_table.sort_values(by='V10')
+				#print(hit_table)
+				seq_str = str(assemb[hit_table.iloc[0,0]].seq)
+			#write sequence to output file
+			out=open(outdir+'/'+cur_gene+'.fas','a')
+			out.write('>'+species_name+'\n'+seq_str+'\n')
+			out.close()
+			#update the name of the working gene
+			cur_gene=gene
+			blast_syntax[gene]=[l]
+
 
 mode=args.m
 if mode =='submission':
@@ -487,30 +599,125 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 		print('############################################################\n\
 #ERROR:Input files not found!\n')
 	except IOError as e:print(e.errno)
-elif mode =='ortho' and args.nuc:
+elif mode =='assemb':
+	#check dependencies
+	exit_now=0
+	if not shutil.which('bowtie2'):
+		print('############################################################\n\
+#ERROR: Bowtie2 not in the environment. Please add its path or reinstall!')
+		exit_now=1
+	if not shutil.which('spades.py'):
+		print('############################################################\n\
+#ERROR: Spades not in the environment. Please add its path or reinstall!')
+		exit_now=1
+	if not shutil.which('samtools'):
+		print('############################################################\n\
+#ERROR: samtools not in the environment. Please add its path or reinstall!')
+		exit_now=1
+	if exit_now==1:quit()
 	try:
-		####
+		threads='1'
+		if args.n:threads=args.n
+		prefix=args.prefix
+		reference=args.ref
+		rs='NA'
+		r1='NA'
+		r2='NA'
+		if args.rs:rs=args.rs
+		else:
+			r1=args.r1
+			r2=args.r2
+			if r1==r2:
+				print('############################################################\n\
+#ERROR: The forward and reverse reads must be different!')
+				quit()
+		if not (rs=='NA' and r1=='NA' and r2=='NA'):
+			assembly(r1,r2,rs,threads,prefix,reference)
+		else:
+			print('############################################################\n\
+#ERROR:Supply at least the pair-end reads or single-end reads\n\
+Usage:\n\
+python phyloherb.py -m assemb -ref <reference fasta> -prefix <prefix> [optional] -r1 <R1.fq> -r2 <R2.fq> -rs <Single1.fq,Single2.fq> -n <threads>')
 	except TypeError:
 		print('############################################################\n\
 #ERROR:Insufficient arguments!\n\
 Usage:\n\
-python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode> -nuc <nuclear gene mode>')
-elif mode =='assemb':
-	#check dependencies
-	if not shutil.which('bowtie2'):
-		print('ERROR: Bowtie2 not in the environment. Please add its path or reinstall!')
-		quit()
-	if not shutil.which('spades.py'):
-		print('ERROR: Spades not in the environment. Please add its path or reinstall!')
-		quit()
-	if not shutil.which('samtools'):
-		print('ERROR: samtools not in the environment. Please add its path or reinstall!')
+python phyloherb.py -m assemb -ref <reference fasta> -prefix <prefix> [optional] -r1 <R1.fq> -r2 <R2.fq> -rs <Single1.fq,Single2.fq> -n <threads>')
+elif mode =='ortho' and args.nuc:
+	try:
+		import pandas as pd
+	except ModuleNotFoundError:
+		print('Module pandas not found. Please install.')
 		quit()
 	try:
-		#python phyloherb.py -m assemb -1 <Forward.fq> -2 <Reverse.fq> -u <Single_end.fq> -ref <reference fasta> -prefix <species ID/name>
-		
+		reference_ID=args.ref
+		reference_ID=reference_ID.split('/')[-1]
+		reference_ID=reference_ID.split('.')[0]
+		threads=1
+		if args.n:threads=args.n
+		evalue='1e-40'
+		if args.evalue:evalue=args.evalue
+		if os.path.exists(reference_ID+'.nhr'):
+			print('Use exsisting BLAST database.\nBLAST evalue threashold: '+evalue)				
+		else:
+			print('Building BLAST database.\nBLAST evalue threashold: '+evalue)
+			blastCommand='makeblastdb -in '+args.ref+' -dbtype nucl -out '+reference_ID+' >/dev/null'
+			os.system(blastCommand)
+		if not os.path.isdir(args.o):os.mkdir(args.o)
+		#get assemblies
+		if args.suffix:
+			assemb_list=os.listdir(args.i)
+			assemb_list=[j for j in assemb_list if j.endswith(args.suffix)]
+			if len(assemb_list)>0:
+				print('Using '+str(len(assemb_list)) +' species with suffix '+args.suffix+' in the directory: '+args.i)
+				for sp in assemb_list:
+					spID=sp.split(args.suffix)[0]
+					print('Processing '+spID)
+					#blast
+					blastCommand='blastn -task dc-megablast -db '+reference_ID+' -num_threads '+threads+' -query '+args.i+'/'+sp+' \
+-outfmt 6 -evalue '+evalue+' | sort -k2,2 -k12,12gr -k11,11g -k3,3gr - >'+spID+'.blast'
+					os.system(blastCommand)
+					#gene assembly
+					blast_results=open(spID+'.blast').readlines()
+					#add a dummy ending line
+					blast_results=blast_results+['end\tend\t86.111\t324\t37\t2\t60\t383\t1315\t1000\t4.70e-106\t379\n']
+					assemb=SeqIO.index(args.i+'/'+sp,'fasta')
+					gene_assem(blast_results,assemb,spID,args.o)
+			else:
+				print('############################################################\n\
+#ERROR:Zero species found! It looks like your assemblies does not end with '+args.suffix+'. Please Check!\n\
+Usage:\n\
+python phyloherb.py -m ortho -i <input dir> -o <output dir> -ref <custom ref seq> -nuc [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue>')
+		else:
+			print('No assembly suffix supplied. PhyloHerb is searching Spades outputs in the input directory: '+args.i)
+			spades_list=[i for i in os.listdir(args.i) if os.path.isdir(args.i+'/'+i)]
+			spades_list=[i.split('_spades')[0] for i in spades_list if os.path.exists(args.i+'/'+i+'/scaffolds.fasta')]
+			if len(spades_list)>0:
+				print('Using '+str(len(spades_list)) +' spades assemblies found in the input directory: '+args.i)
+				for sp in spades_list:
+					print('Processing '+sp)
+					blastCommand='blastn -task dc-megablast -db '+reference_ID+' -num_threads '+threads+' -query '+args.i+'/'+sp+'_spades/scaffolds.fasta \
+-outfmt 6 -evalue '+evalue+' | sort -k2,2 -k12,12gr -k11,11g -k3,3gr - >'+sp+'.blast'
+					os.system(blastCommand)
+					blast_results=open(sp+'.blast').readlines()
+					blast_results=blast_results+['end\tend\t86.111\t324\t37\t2\t60\t383\t1315\t1000\t4.70e-106\t379\n']
+					assemb=SeqIO.index(args.i+'/'+sp+'_spades/scaffolds.fasta','fasta')
+					gene_assem(blast_results,assemb,sp,args.o)
+			else:
+				print('############################################################\n\
+#ERROR:Zero species found! Please make sure this is the parent directory of SPADES outputs. If you have assemblies in FASTA, please use the -suffix flag.\n\
+Usage:\n\
+python phyloherb.py -m ortho -i <input dir> -o <output dir> -ref <custom ref seq> -nuc [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue>')
 	except TypeError:
-	
+		print('############################################################\n\
+#ERROR:Insufficient arguments!\n\
+Usage:\n\
+python phyloherb.py -m ortho -i <input dir> -o <output dir> -ref <custom ref seq> -nuc [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue>')
+	except AttributeError:
+		print('############################################################\n\
+#ERROR:Insufficient arguments!\n\
+Usage:\n\
+python phyloherb.py -m ortho -i <input dir> -o <output dir> -ref <custom ref seq> -nuc [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue>')
 elif mode =='conc':
 	try:
 		if args.g:
