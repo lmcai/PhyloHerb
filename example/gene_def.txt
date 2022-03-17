@@ -1,4 +1,4 @@
 name	start	end
-INT1	psbA	matK
-INT2	rps16	atpA
-INT3	rpoC2	rpoB
+LOC1	psbA	matK
+LOC2	rps16	atpA
+LOC3	rpoC2	rpoB

@@ -1,9 +1,7 @@
 # PhyloHerb		<img src="/images/logo.png" width="80" height="80">
 **Phylo**genomic Analysis Pipeline for **Herb**arium Specimens
 
-PhyloHerb is a wrapper program to process **genome skimming** data collected from herbarium specimens. The outcomes include the plastid genome (plastome) assemblies, mitochondrial genome assemblies, nuclear 35S ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+28S), alignments of gene and intergenic regions, and a species tree. Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study **taxonomy, biogeography, and macroevolution with nearly complete taxon sampling**.
-
-We have tested this pipeline in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. Each of these datasets contains hundreds to thousands of species and our pipeline extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., the divergence of red algea hundreds of millions of years ago). 
+**What is PhyloHerb**: PhyloHerb is a wrapper program to process **genome skimming** data collected from plant materials. The outcomes include the plastid genome (plastome) assemblies, mitochondrial genome assemblies, nuclear ribosomal DNAs (NTS+ETS+18S+ITS1+5.8S+ITS2+28S), alignments of gene and intergenic regions, and a species tree. It is designed to be a high throughput program dealing with lower quality data. Examples include **low-coverage (5x cpDNA) plastome phylogeny, recycling plastid genes from target enrichment data, retrieving low-copy nuclear genes from medium coverage (5x nucDNA) genome skimming**.
 
 **License**: GNU General Public License
 
@@ -14,9 +12,23 @@ Zenodo DOI: 10.5281/zenodo.6335675
 
 PhyloHerb relies on the following dependancies:
 
-Jin, Jian-Jun, Wen-Bin Yu, Jun-Bo Yang, Yu Song, Claude W. Depamphilis, Ting-Shuang Yi, and De-Zhu Li. "GetOrganelle: a fast and versatile toolkit for accurate de novo assembly of organelle genomes." Genome biology 21, no. 1 (2020): 1-31. 
+- Jin, Jian-Jun, Wen-Bin Yu, Jun-Bo Yang, Yu Song, Claude W. Depamphilis, Ting-Shuang Yi, and De-Zhu Li. "GetOrganelle: a fast and versatile toolkit for accurate de novo assembly of organelle genomes." Genome biology 21, no. 1 (2020): 1-31. 
 
-Johnson, M., Zaretskaya, I., Raytselis, Y., Merezhuk, Y., McGinnis, S., & Madden, T. L. (2008). NCBI BLAST: a better web interface. Nucleic acids research, 36(suppl_2), W5-W9.
+- Johnson, M., Zaretskaya, I., Raytselis, Y., Merezhuk, Y., McGinnis, S., & Madden, T. L. (2008). NCBI BLAST: a better web interface. Nucleic acids research, 36(suppl_2), W5-W9.
+
+**Recent application examples**:
+
+Combined with the morphological and distribution data from herbarium specimens, this approach provides an unparalleled opportunity to study taxonomy, biogeography, and macroevolution. This pipeline has been tested in the Barbados Cherry family Malpighiaceae, Clusiaceae, and several groups of algae. PhyloHerb extracts ample data to resolve both recent radiations (e.g., *Bunchosia*, Malpighiaceae >135 sp within 10 Myr) and ancient divergences (e.g., red algea at hundreds of millions of years ago). 
+
+- Marinho, Lucas C., et al. "Plastomes resolve generic limits within tribe Clusieae (Clusiaceae) and reveal the new genus Arawakia." Molecular phylogenetics and evolution 134 (2019): 142-151.
+
+## Announcement :mega: :mega: :mega:
+
+**New workshop July 24, 2022:** We will hold an in-person workshop (with remote options) at Botany 2022 in Anchorage. See the BSA website for [abstract](https://www.botanyconference.org/engine/search/index.php?func=detail&aid=16). Workshop materials can be found [here](/tutorial).
+
+**New features released:** Since PhyloHerb v1.1+, you can pull low-copy nuclear genes (e.g., Angiosperm 353) from your genome skimming data. All you need is the reference sequences and raw reads. PhyloHerb will output fasta files that are ready for alignment. Check the [low-copy nuclear gene tutorial](https://github.com/lmcai/PhyloHerb/tree/develop#iv-retrieve-low-copy-nuclear-genes) below.
+
+**New publication:** Initial PhyloHerb release accepted at APPS! Stay tuned for the early view! :tada:
 
 ## Quick link
 
@@ -25,15 +37,16 @@ Johnson, M., Zaretskaya, I., Raytselis, Y., Merezhuk, Y., McGinnis, S., & Madden
 [II. Quick start](https://github.com/lmcai/PhyloHerb#ii-quick-start)
 
 [III. Complete tutorial for analyzing genome skimming data for phylogenetic analysis](https://github.com/lmcai/PhyloHerb#iii-complete-tutorial-for-analyzing-genome-skimming-data-for-phylogenetic-analysis)
-	
-[IV. General guidelines for genome skimming data collection](https://github.com/lmcai/PhyloHerb#iv-general-guidelines-for-genome-skimming-data-collection)
+
+[IV. Retrieve low-copy nuclear genes](https://github.com/lmcai/PhyloHerb/tree/develop#iv-retrieve-low-copy-nuclear-genes)
+
+[V. General guidelines for genome skimming data collection](https://github.com/lmcai/PhyloHerb#v-general-guidelines-for-genome-skimming-data-collection)
 
 ## I. Prerequisites and installation
 
-To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC can suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. Detailed installation instructions for dependencies can be found [here](https://github.com/lmcai/PhyloHerb/tree/main/tutorial). If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
+To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC may suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
 
 ### PhyloHerb
-PhyloHerb is designed to extract orthologous genetic regions from preexisting assemblies. It requires BLAST and two python modules.
 
 *IMPORTANT*: PhyloHerb is currently only compatible with **Python 3**.
 
@@ -43,7 +56,7 @@ Install Anaconda or miniconda for Linux, Mac, or PC (see https://conda.io/projec
 
 Create a conda environment under Python 3 and activate the environment
 ```
-conda create --name phyloherb python=3.7.0
+conda create --name phyloherb python=3.7
 
 #for Mac
 #conda activate phyloherb
@@ -51,10 +64,14 @@ conda create --name phyloherb python=3.7.0
 #for linux
 source activate phyloherb
 
-#install blast, biopython, and ete3
+#install blast, biopython, bowtie2, spades, samtools, pandas, and ete3
 conda install -c bioconda blast
 conda install -c conda-forge biopython
 conda install -c etetoolkit ete3
+conda install -c bioconda bowtie2
+conda install -c bioconda spades
+conda install -c bioconda samtools
+conda install pandas
 ```
 To install PhyloHerb, simply download it use `git`:
 ```
@@ -76,7 +93,12 @@ git clean -f -d
 
 **Alternative: Install dependencies separately from source** 
 
-Make sure all dependencies are callable in your current environment. Installation instruction for BLAST+ is hosted on NCBI website  [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download). Installation instructions for the two python modules [Biopython](https://biopython.org/) and [ete3](http://etetoolkit.org/) are available on their websites as well.
+You could also want to install these dependencies from source. If you are using computer clusters, some dependencies might also be installed and can be called via `module load`. Make sure all dependencies are callable in your current environment. A list of PhyloHerb dependencies:
+ - [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
+ - [spades](https://github.com/ablab/spades)
+ - [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) 
+ - [samtools](http://www.htslib.org/)
+ - python modules: [Biopython](https://biopython.org/), [ete3](http://etetoolkit.org/), [pandas](https://pandas.pydata.org/docs/index.html)
 
 Then download and decompress the PhyloHerb python package.
 
@@ -104,55 +126,89 @@ Then download and decompress the PhyloHerb python package.
 ### Usage:
 
 ```
-phyloherb.py [-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
-                    [-g file] [-l integer] [-evalue float] [-n integer] [-ref file] 
-                    [-mito] [-rdna] [-t file] [-missing float 0-1] [-f mode]
-                    [-gene_def file] [-b file] [-s file]
+phyloherb.py	[-h] -m mode [-i dir] [-o dir] [-suffix string] [-sp file]
+            	[-g file] [-l integer] [-evalue float] [-n integer]
+            	[-ref file] [-mito] [-rdna] [-nuc] [-r1 read file]
+                [-r2 read file] [-rs read file] [-prefix string] [-t file]
+                [-missing float 0-1] [-f mode] [-gene_def file] [-b file]
+                [-s file]
+
 ```
 
 ### Options:
 ```
-	-i dir			input directory
-	-o dir			output directory
-	-m str			execution mode: qc, ortho, conc, order, getseq, submission
-	-suffix str		[qc, ortho, conc mode] suffix of input files
-	-sp file		[ortho mode] a file containing a list of species
-	-g file			[ortho and conc mode] a file containing a list of loci
-	-l int			[ortho mode] minimum length of blast hits
-	-evalue float		[ortho mode] evalue threshold of blast
-	-n int			[ortho mode] number of threads for blast
-	-ref file		[ortho mode] custom reference sequences
-  	-mito			[ortho mode] extract mitochondrial genes using build-in references
-  	-rdna           	[ortho mode] extract nuclear ribosomal regions using build-in references
-  	-t file			[order mode] newick tree file to order alignments based on phylogeny
-  	-missing float 0-1  	[order mode] maximum proportion of missing data allowed for each species
-  	-f mode			[getseq mode] one of the following: gene, genetic_block, intergenic
-  	-gene_def file		[getseq mode] a gene delimitation file that defines genetic blocks
-  	-b file			[submission mode] path to the bash file
-  	-s file			[submission mode] path to the taxon sampling sheet
+  -h, --help          show this help message and exit
+  -m mode             execution mode, choose one of the following: qc, ortho,
+                      conc, order, getseq, assemb, submission
+  -i dir              input directory
+  -o dir              output directory
+  -suffix string      [qc, ortho, conc mode] suffix of input files
+  -sp file            [ortho mode] a file containing a list of species
+  -g file             [ortho and conc mode] a file containing a list of loci
+  -l integer          [ortho mode] minimum length of blast hits
+  -evalue float       [ortho mode] evalue threshold for BLAST
+  -n integer          [ortho, assemb mode] number of threads
+  -ref file           [ortho mode] custom reference sequences
+  -mito               [ortho mode] extract mitochondrial genes using build-in
+                      references
+  -rdna               [ortho mode] extract nuclear ribosomal regions using
+                      build-in references
+  -nuc                [ortho mode] extract low-copy nuclear loci
+  -r1 reads file      [assemb mode] forward reads
+  -r2 reads file      [assemb mode] reverse reads
+  -rs reads file      [assemb mode] single-end or unpaired reads, separate
+                      mulitple file by ','
+  -prefix string      [assemb mode] assembly output prefix
+  -t file             [order mode] newick tree file to order alignments based
+                      on phylogeny
+  -missing float 0-1  [order mode] maximum proportion of missing data allowed
+                      for each species
+  -f mode             [getseq mode] how to extract loci, choose one of the
+                      following: gene, genetic_block, intergenic
+  -gene_def file      [getseq mode] a gene delimitation file that defines
+                      genetic blocks
+  -b file             [submission mode] path to the bash file
+  -s file             [submission mode] path to the taxon sampling sheet
 ```
 
-**1. Ortholog gene extraction using built-in database**
+**1. Ortholog gene extraction (cpDNA, rDNA, mtDNA) using built-in database**
 
-**A.** If you have your assemblies and want to extract genes using our curated database:
+**A.** If you have your organellar or rDNA assemblies and want to extract genes using our curated database:
 
 *Input:* Place all fasta formated assemblies in one folder. Make sure they have consistent suffix (e.g., `.fas`, `.fasta`). To extract genes, use the following command:
 
 ```
 #For plastid 
 python phyloherb.py -m ortho -i <input directory> -o <output directory> -suffix <suffix>
-#For rRNA
+#For rDNA
 python phyloherb.py -m ortho -i <input directory> -o <output directory> -suffix <suffix> -rdna
 #For mitochondrion
 python phyloherb.py -m ortho -i <input directory> -o <output directory> -suffix <suffix> -mito
 ```
-List of genes and species included in our built-in database can be found [here](https://github.com/lmcai/PhyloHerb/tree/main/database).
+List of genes and species included in our built-in database can be found [here](/database).
 
 *Output:* In the output folder, you can find fasta sequences named after genes. The header within each fasta is consistent with the species names (file names of the input assemblies).
 
-**B.** If you need to assemble organelle genomes and rRNA regions, see [Section III.1 Assembly](#1-assembly) below.
+**B.** If you need to assemble organelle genomes and rDNA regions, see [Section III.1 Assembly](#1-assembly) below.
 
-**2. Alignment and concatenation**
+**2. Ortholog gene extraction for low-copy nuclear genes with custom references**
+
+*Input:* One fasta file of reference genes, formatted following the [custom reference guidance](https://github.com/lmcai/PhyloHerb#1-format-of-custom-reference-sequences-optional). Raw reads of target species, pair-end or single-end. This function is similar to a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper) and involves two-steps: spades assembly and ortholog extraction.
+
+To assemble target regions, use the following command for each species:
+```
+python phyloherb.py -m assemb -r1 <Forward.fq> -r2 <Reverse.fq> -rs <Single1.fq,Single2.fq> -ref 
+<reference fasta> -prefix <species ID/name> -n <threads>
+```
+Once the assemblies are completed for all species, generate ortholog fasta files:
+```
+python phyloherb.py -m ortho -i <input directory> -o <output directory> -suffix <suffix> -ref reference.fasta -nuc
+```
+The `input directory` should be the parent directory containing all spades output folders.
+
+*Output:* In the output folder, you will find fasta sequences named after genes. The header within each fasta is consistent with the species IDs/names in the assembly step (file names of the spades output folder).
+
+**3. Alignment and concatenation**
 
 For small dataset in conserved regions, you can use `MAFFT` for align. For large dataset across distantly related species, we recommend `PASTA`. An example bash file to run MAFFT and PASTA can be found in [mafft_pasta.sh](phyloherbLib/mafft_pasta.sh). To concatenate sequences, place all fasta alignments in one folder and use the following command:
 
@@ -161,7 +217,7 @@ python phyloherb.py -m conc -i < input directory> -o <output prefix> -suffix <al
 ```
 *Output:* `*.conc.fas` and `*.conc.nex` are concatenated sequences in fasta and nexus formats, respectively. `*.partition` is the gene partition file that can be used for [PartitionFinder](https://www.robertlanfear.com/partitionfinder/).
 
-**3. Reorder alignments based on phylogeny to assist manual curation**
+**4. Reorder alignments based on phylogeny to assist manual curation**
 
 Reorder sequences based on phylogeny can help distinguish analytical errors versus shared mutations. 
 
@@ -199,7 +255,7 @@ get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <nr_output> -R 10
 get_organelle_from_reads.py -1 <forward.fq> -2 <reverse.fq> -o <mito_output> -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
 ```
 
-If you want to use your own reference sequences for assembly, you can provide the seed fasta file by adding `-s <reference.fas>`.
+If you want to use your own reference sequences for assembly, you can provide the seed fasta file by adding `-ref <reference.fas>`.
 
 #### 3). Large dataset and batch submission to cluster
 
@@ -209,7 +265,7 @@ If you are working with a high performance computing cluster with **slurm worklo
 sbatch getorg.sh <forward.fq> <backward.fq> <output prefix>
 ```
 
-For more details using this bash file, see the [tutorial](https://github.com/lmcai/PhyloHerb/blob/main/tutorial/README.md#3-large-dataset-and-batch-submission-to-cluster).
+For more details using this bash file, see the [tutorial](/tutorial/README.md#3-large-dataset-and-batch-submission-to-cluster).
 
 *IMPORTANT*: Make sure you load the correct environment and provide absolute path to the input data if they are not in the current directory by modifying relavant variables in `getorg.sh`. Instructions for single-end data can also be found in `getorg.sh`.
 
@@ -284,13 +340,13 @@ atcg...
 We can  extract the target gene regions using the `ortho` function of phyloherb. This function will conduct BLAST search in the assembly, extract the best matching regions, and output the fasta files to a directory.
 
 ```
-python phyloherb.py -m ortho -i <input dir containing assemblies> -o <output directory>
+python phyloherb.py -m ortho -i <input dir with fasta files> -o <output dir>
 ```
 *Output:* `*.fas` files named after genes. Within each fasta file, the headers will be the species prefixes.
 
 You can choose to use a subset of genes and species by supplying a `-g gene_subset.txt` and `-sp species_subset.txt`. Example files can be found in [gene_subset.txt](/example/gene_subset.txt) and [species_subset.txt](/example/species_subset.txt). You can also set a minimum length limit for gene region extraction via `-l <lower limit>`. Blast hits shorter than this will not be use.
 ```
-python phyloherb.py -m ortho -i <input dir containing assemblies> -o <output directory> -g <gene list> -sp <species list> -l <length limit> -ref <ref seq>
+python phyloherb.py -m ortho -i <input dir with fasta files> -o <output dir> -g <gene list> -sp <species list> -l <length limit> -ref <ref seq>
 ```
 
 #### 3). Nuclear ribosomal regions
@@ -326,7 +382,7 @@ Let's assume that there are seven genes G1-7 on a scaffold.
 
 <img src="/images/seven_genes_black.png" width="400" height="80">
 
-The `-f gene` mode will extract all annotated gene features from all genbank files in the input directory
+- The `-f gene` mode will extract all annotated gene features from all genbank files in the input directory
 ```
 python phyloherb.py -m getseq -f gene -i <input directory> -suffix <genbank suffix> -o <output directory>
 ```
@@ -335,19 +391,19 @@ python phyloherb.py -m getseq -f gene -i <input directory> -suffix <genbank suff
 Both the `-f genetic_block` and `-f intergenic` mode will take a genetic block definition file supplied by `-gene_def`, and extract corresponding regions. This tab-delimited file have three columns: genetic region name, start gene, and end gene. An example can be found [here](/example/gene_def.txt).
 ```
 name	start	end
-INT1	G1	G2
-INT2	G3	G7
+LOC1	G1	G2
+LOC2	G3	G7
 ...
 ```
 
-The `-f genetic_block` mode will extract the coding regions of the start and end genes as well as everything in between. It is good for combining multiple short genes.
+- The `-f genetic_block` mode will extract the coding regions of the start and end genes as well as everything in between. It is good for combining multiple short genes.
 ```
 python phyloherb.py -m getseq -f genetic_block -i <input directory> -suffix <genbank suffix> -o <output directory> -gene_def <gene definition file>
 ```
 
 <img src="/images/genetic_block.png" width="400" height="90">
 
-Finally, the `-f intergenic` mode generates similar outcomes, but does not include the genes on both ends. It is good for extracting long intergenic regions.
+- Finally, the `-f intergenic` mode generates similar outcomes, but does not include the genes on both ends. It is good for extracting long intergenic regions.
 ```
 python phyloherb.py -m getseq -f intergenic -i <input directory> -suffix <genbank suffix> -o <output directory> -gene_def <gene definition file>
 ```
@@ -428,7 +484,75 @@ When the alignment is done, you can use them to produce your final species tree.
 
 ***
 
-## IV. General guidelines for genome skimming data collection
+## IV. Retrieve low-copy nuclear genes
+
+### When to use this function
+
+PhyloHerb uses an mapping-assembly-scaffold approach to generate sequences of low-copy nuclear loci. It can be interpreted as a quick-and-dirty version of [HybPiper](https://github.com/mossmatters/HybPiper). It has the advantage of rapidly pulling out target regions with low computational cost. The references sequences can be **genes or CDS** (e.g., Angiosperm 353 or 1kp data), but it has to be DNA seqs.
+
+### Pipeline
+
+<img src="/images/lowcopy_nuc.jpeg" width="500" height="380">
+
+### Limitations
+
+- PhyloHerb will remove the flanking 'splash zone' that is not included in the reference region.
+- PhyloHerb will output no more than ONE sequence per gene per species. The combination of paralogs and missing data can generate chimeric assembly (see the illustration above). It is thus advised to use stringent BLAST evalue threshold (default 1e-40). 
+- Given the low coverage and on-enrichment nature of genome skimming, missing data is expected.
+
+### How to
+
+#### 1. Prepare reference DNA fasta
+
+It is recommended to use more than one species per gene. All reference sequences should be in a single fasta file. In this files, the headers should begin by the gene name then followed by an underscore and a species name (which will be ignored):
+
+```
+>gene1_sp1
+atcg...
+>gene1_sp2
+atcg...
+>gene2_sp1
+atcg...
+>gene2_sp2
+```
+
+#### 2. Assembly
+
+Make sure `bowtie2`, `spades.py`, and `samtools` are callable in the current environment.
+
+To assemble sequences in the target region, use the following command:
+```
+#Pair-end reads
+python phyloherb.py -m assemb -r1 <Forward.fq> -r2 <Reverse.fq> -ref <reference fasta> -prefix <species ID> -n <threads>
+
+#Single-end reads
+python phyloherb.py -m assemb -rs <Single.fq> -ref <reference fasta> -prefix <species ID> -n <threads>
+
+#Pair-end and Single-end, multiple libraries
+python phyloherb.py -m assemb -r1 <Forward.fq> -r2 <Reverse.fq> -rs <Single1.fq,Single2.fq> -ref <reference fasta> -prefix <species ID> -n <threads>
+```
+
+*Ouput:* In the working directory, PhyloHerb will generate `prefix_spades` folder, within which assembly scaffolds can be found.
+
+Repeat this step for all species. The assembly step may run simultaneous and distributed to multiple jobs on a cluster.
+
+#### 3. Generate ortholog sequences
+
+Once the assembly is completed for all species, ortholog sequences can be scaffolded using the following command. The `input dir` should be the parent directory where all spades output folders are located. Make sure add the `-nuc` flag.
+```
+python phyloherb.py -m ortho -i <input dir> -o <output dir> -ref <reference.fasta> -nuc [optional] -n <threads> -evalue <evalue>
+```
+The default BLAST `evalue` is `1e-40`. You can set more stringent values, but it is not recommended to use values larger than 1e-30.
+
+If the assemblies are in one folder, add the `-suffix` flag to indicate file suffix:
+```
+python phyloherb.py -m ortho -i <input dir> -suffix <suffix> -o <output dir> -ref <reference.fasta> -nuc [optional] -n <threads> -evalue <evalue>
+```  
+*Ouput:* In the output directory, there will be multiple `*.fas` files named after genes. Within each fasta file, the headers will be the species prefixes..
+
+***
+
+## V. General guidelines for genome skimming data collection
 
 **Overview**
 
@@ -459,5 +583,4 @@ We used the [KAPA HyperPlus Kit](https://sequencing.roche.com/en/products-soluti
 About 0.5-6% of the reads from genome skimming come from plastomes. The base coverage is roughly half for mitochondria and 2X for nuclear ribosomal regions compared to plastids. Theoretically the base coverage vary with the size of the nuclear genome and the abundance of these genetic regions within a cell, but we found it to be relatively consistent across flowering plant species despite the dramatic difference in their genome sizes (200 Mb to 3Gb). Below is a **very rough** estimation of what you may expect for plastome from certain amount of input data.
 
 <img src="/images/coverage.png" width="400" height="130">
-
 
