@@ -52,18 +52,8 @@ To process large datasets (>20 sp), high performance cluster is recommended. Mac
 
 **Installation via conda**
 
-Install Anaconda or miniconda for Linux, Mac, or PC (see https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
-
 Create a conda environment under Python 3 and activate the environment
 ```
-conda create --name phyloherb python=3.7
-
-#for Mac
-#conda activate phyloherb
-
-#for linux
-source activate phyloherb
-
 #install blast, biopython, bowtie2, spades, samtools, pandas, and ete3
 conda install -c bioconda blast
 conda install -c conda-forge biopython
