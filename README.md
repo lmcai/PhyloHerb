@@ -534,9 +534,9 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> -ref <reference.fast
 ```
 The default BLAST `evalue` is `1e-40`. You can set more stringent values, but it is not recommended to use values larger than 1e-30.
 
-If the assemblies are in one folder, add the `-suffix` flag to indicate file suffix:
+If you have the assembly fasta files in one folder, add the `-suffix` flag to indicate file suffix:
 ```
-python phyloherb.py -m ortho -i <input dir> -suffix <suffix> -o <output dir> -ref <reference.fasta> -nuc [optional] -n <threads> -evalue <evalue>
+python phyloherb.py -m ortho -i <input dir> -suffix <.fas/.fasta/etc> -o <output dir> -ref <reference.fasta> -nuc [optional] -n <threads> -evalue <evalue>
 ```  
 *Ouput:* In the output directory, there will be multiple `*.fas` files named after genes. Within each fasta file, the headers will be the species prefixes..
 
