@@ -227,7 +227,7 @@ We will use [GetOrganelle](https://github.com/Kinggerm/GetOrganelle) to assemble
 
 #### 1). Input:
 
-Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unzipped. Do not filter the reads or trim adapters.
+Illumina FASTQ reads for each species, single-ended or pair-ended, zipped or unzipped. We recommend trimming the adapters, but not filtering the reads based on quality.
 
 #### 2). How to:
 
