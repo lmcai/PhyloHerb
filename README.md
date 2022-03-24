@@ -539,8 +539,33 @@ python phyloherb.py -m ortho -i <input dir> -suffix <.fas/.fasta/etc> -o <output
 ```  
 *Ouput:* In the output directory, there will be multiple `*.fas` files named after genes. Within each fasta file, the headers will be the species prefixes..
 
-#### 4. Assembly explained
+#### 4. Assembly algorithm explained
 
+PhyloHerb will filter, select, and order BLAST hits for each reference genes. Below is an example from Cai et al (2022, unpublished), where a genome skimming assembly was mapping to a CDS reference, thus all BLAST hits were fragmented (likely exons). PhyloHerb will remove duplicate hits and select the optimum hits for each 'exon' based on evalues.
+
+Raw BLAST result:
+```
+NODE_355_length_1022_cov_3.180816	R8408_Apios_americana_ge	91.246	297	23	1	616	912	754	1047	4.91e-117	417
+NODE_79_length_1491_cov_2.984012	R8408_Apios_americana_ge	94.068	236	14	0	392	627	2171	2406	1.39e-100	363
+NODE_2463_length_448_cov_3.594595	R8408_Apios_americana_ge	94.760	229	12	0	114	342	1283	1511	4.92e-100	360
+NODE_4190_length_321_cov_2.393204	R8408_Apios_americana_ge	93.013	229	13	2	10	235	1511	1283	1.37e-92	334
+NODE_355_length_1022_cov_3.180816	R8408_Apios_americana_ge	95.960	198	7	1	329	525	557	754	3.54e-87	318
+NODE_2913_length_406_cov_2.250859	R8408_Apios_americana_ge	93.659	205	13	0	95	299	415	211	2.02e-85	311
+NODE_2910_length_406_cov_3.487973	R8408_Apios_americana_ge	91.262	206	18	0	107	312	1508	1713	1.89e-79	291
+NODE_2654_length_430_cov_4.333333	R8408_Apios_americana_ge	88.789	223	16	2	98	320	214	1	7.00e-79	289
+NODE_1220_length_639_cov_2.805344	R8408_Apios_americana_ge	94.340	159	9	0	88	246	3256	3098	1.13e-65	246
+NODE_79_length_1491_cov_2.984012	R8408_Apios_americana_ge	93.631	157	10	0	712	868	2399	2555	3.99e-63	239
+NODE_3575_length_355_cov_2.200000	R8408_Apios_americana_ge	91.515	165	12	1	98	260	2047	1883	1.34e-61	232
+NODE_79_length_1491_cov_2.984012	R8408_Apios_americana_ge	96.454	141	5	0	107	247	2032	2172	5.93e-61	232
+NODE_4797_length_299_cov_1.750000	R8408_Apios_americana_ge	88.701	177	20	0	43	219	1712	1888	3.90e-61	230
+NODE_1844_length_517_cov_3.522388	R8408_Apios_americana_ge	96.825	126	4	0	111	236	2794	2919	6.54e-55	210
+NODE_3788_length_342_cov_1.295154	R8408_Apios_americana_ge	91.429	140	12	0	109	248	1287	1148	7.64e-52	199
+NODE_79_length_1491_cov_2.984012	R8408_Apios_americana_ge	90.769	130	12	0	1058	1187	2554	2683	9.40e-46	181
+NODE_355_length_1022_cov_3.180816	R8408_Apios_americana_ge	94.737	114	6	0	108	221	455	568	2.24e-45	179
+NODE_1220_length_639_cov_2.805344	R8408_Apios_americana_ge	97.115	104	3	0	437	540	3100	2997	5.86e-44	174
+```
+
+Ordered and filtered BLAST hits by PhyloHerb:
 ```
                                    V0                        V1      V2   V3  V4 V5    V6    V7    V8    V9            V10  V11   V12   V13
 11  NODE_2654_length_430_cov_4.333333  R8408_Apios_americana_ge  88.789  223  16  2    98   320   214     1   7.000000e-79  289     1   214
