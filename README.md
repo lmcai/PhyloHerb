@@ -543,7 +543,7 @@ python phyloherb.py -m ortho -i <input dir> -suffix <.fas/.fasta/etc> -o <output
 
 PhyloHerb will filter, select, and order BLAST hits for each reference gene. Below is an example from Cai et al (2022, unpublished), where a genome skimming assembly was mapped to a CDS reference, thus all BLAST hits were fragmented (likely exons). PhyloHerb will remove duplicates and select the optimum hit for each 'exon' based on evalues.
 
-Raw BLAST result:
+Raw BLAST result for loci R8408:
 ```
 NODE_355_length_1022_cov_3.180816	R8408_Apios_americana_ge	91.246	297	23	1	616	912	754	1047	4.91e-117	417
 NODE_79_length_1491_cov_2.984012	R8408_Apios_americana_ge	94.068	236	14	0	392	627	2171	2406	1.39e-100	363
