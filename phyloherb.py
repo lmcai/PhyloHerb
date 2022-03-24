@@ -681,7 +681,7 @@ elif mode =='ortho' and args.nuc:
 					#gene assembly
 					blast_results=open(spID+'.blast').readlines()
 					#add a dummy ending line
-					blast_results=blast_results+['end\tend\t86.111\t324\t37\t2\t60\t383\t1315\t1000\t4.70e-106\t379\n']
+					blast_results=blast_results+['end\tend\tdummy\tline\t37\t2\t60\t383\t1315\t1000\t4.70e-106\t379\n']
 					assemb=SeqIO.index(args.i+'/'+sp,'fasta')
 					gene_assem(blast_results,assemb,spID,args.o)
 			else:
