@@ -541,7 +541,7 @@ python phyloherb.py -m ortho -i <input dir> -suffix <.fas/.fasta/etc> -o <output
 
 #### 4. Assembly algorithm explained
 
-PhyloHerb will filter, select, and order BLAST hits for each reference gene. Below is an example from Cai et al (2022, unpublished), where a genome skimming assembly was mapped to a CDS reference, thus all BLAST hits were fragmented (likely exons). PhyloHerb will remove duplicate hits and select the optimum hits for each 'exon' based on evalues.
+PhyloHerb will filter, select, and order BLAST hits for each reference gene. Below is an example from Cai et al (2022, unpublished), where a genome skimming assembly was mapped to a CDS reference, thus all BLAST hits were fragmented (likely exons). PhyloHerb will remove duplicates and select the optimum hit for each 'exon' based on evalues.
 
 Raw BLAST result:
 ```
