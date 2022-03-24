@@ -565,7 +565,7 @@ NODE_355_length_1022_cov_3.180816	R8408_Apios_americana_ge	94.737	114	6	0	108	22
 NODE_1220_length_639_cov_2.805344	R8408_Apios_americana_ge	97.115	104	3	0	437	540	3100	2997	5.86e-44	174
 ```
 
-Ordered and filtered BLAST hits by PhyloHerb:
+Ordered and filtered BLAST hits by PhyloHerb, which will be used to assemble the full-length sequence of R8408 in the target species:
 ```
                                    V0                        V1      V2   V3  V4 V5    V6    V7    V8    V9            V10  V11   V12   V13
 11  NODE_2654_length_430_cov_4.333333  R8408_Apios_americana_ge  88.789  223  16  2    98   320   214     1   7.000000e-79  289     1   214
