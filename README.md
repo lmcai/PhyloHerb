@@ -571,7 +571,7 @@ Ordered and filtered BLAST hits by PhyloHerb, which will be used to assemble the
 11  NODE_2654_length_430_cov_4.333333  R8408_Apios_americana_ge  88.789  223  	16  	  2    98   320   214     1   7.000000e-79  	289  	    1   214
 9   NODE_2913_length_406_cov_2.250859  R8408_Apios_americana_ge  93.659  205  	13	  0    95   299   415   211   2.020000e-85 	311 	  211   415
 1   NODE_355_length_1022_cov_3.180816  R8408_Apios_americana_ge  95.960  198   	 7	  1   329   525   557   754   3.540000e-87 	318  	  557   754
-    NODE_355_length_1022_cov_3.180816  R8408_Apios_americana_ge  91.246  297  	23	  1   616   912   754  1047  4.910000e-117 	417 	  754  1047
+18  NODE_355_length_1022_cov_3.180816  R8408_Apios_americana_ge  91.246  297  	23	  1   616   912   754  1047  4.910000e-117 	417 	  754  1047
 17  NODE_3788_length_342_cov_1.295154  R8408_Apios_americana_ge  91.429  140  	12        0   109   248  1287  1148   7.640000e-52 	199 	 1148  1287
 7   NODE_2463_length_448_cov_3.594595  R8408_Apios_americana_ge  94.760  229  	12	  0   114   342  1283  1511  4.920000e-100 	360 	 1283  1511
 10  NODE_2910_length_406_cov_3.487973  R8408_Apios_americana_ge  91.262  206  	18	  0   107   312  1508  1713   1.890000e-79 	291 	 1508  1713
