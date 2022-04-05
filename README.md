@@ -567,21 +567,21 @@ NODE_1220_length_639_cov_2.805344	R8408_Apios_americana_ge	97.115	104	3	0	437	54
 
 Ordered and filtered BLAST hits by PhyloHerb, which will be used to assemble the full-length sequence of R8408 in the target species:
 ```
-                                   V0                        V1      V2   V3  V4 V5    V6    V7    V8    V9            V10  V11   V12   V13
-11  NODE_2654_length_430_cov_4.333333  R8408_Apios_americana_ge  88.789  223  16  2    98   320   214     1   7.000000e-79  289     1   214
-9   NODE_2913_length_406_cov_2.250859  R8408_Apios_americana_ge  93.659  205  13  0    95   299   415   211   2.020000e-85  311   211   415
-1   NODE_355_length_1022_cov_3.180816  R8408_Apios_americana_ge  95.960  198   7  1   329   525   557   754   3.540000e-87  318   557   754
-2   NODE_355_length_1022_cov_3.180816  R8408_Apios_americana_ge  91.246  297  23  1   616   912   754  1047  4.910000e-117  417   754  1047
-17  NODE_3788_length_342_cov_1.295154  R8408_Apios_americana_ge  91.429  140  12  0   109   248  1287  1148   7.640000e-52  199  1148  1287
-7   NODE_2463_length_448_cov_3.594595  R8408_Apios_americana_ge  94.760  229  12  0   114   342  1283  1511  4.920000e-100  360  1283  1511
-10  NODE_2910_length_406_cov_3.487973  R8408_Apios_americana_ge  91.262  206  18  0   107   312  1508  1713   1.890000e-79  291  1508  1713
-15  NODE_4797_length_299_cov_1.750000  R8408_Apios_americana_ge  88.701  177  20  0    43   219  1712  1888   3.900000e-61  230  1712  1888
-14  NODE_3575_length_355_cov_2.200000  R8408_Apios_americana_ge  91.515  165  12  1    98   260  2047  1883   1.340000e-61  232  1883  2047
-4    NODE_79_length_1491_cov_2.984012  R8408_Apios_americana_ge  94.068  236  14  0   392   631  2171  2406  1.390000e-100  363  2171  2409
-6    NODE_79_length_1491_cov_2.984012  R8408_Apios_americana_ge  90.769  130  12  0  1058  1187  2554  2683   9.400000e-46  181  2554  2683
-16  NODE_1844_length_517_cov_3.522388  R8408_Apios_americana_ge  96.825  126   4  0   111   236  2794  2919   6.540000e-55  210  2794  2919
-13  NODE_1220_length_639_cov_2.805344  R8408_Apios_americana_ge  97.115  104   3  0   437   540  3100  2997   5.860000e-44  174  2997  3100
-12  NODE_1220_length_639_cov_2.805344  R8408_Apios_americana_ge  94.340  159   9  0    88   246  3256  3098   1.130000e-65  246  3098  3256
+                               qseqid                    sseqid  pident length mismatch gapopen qstart qend  sstart send        evalue  bitscore refstart refend
+11  NODE_2654_length_430_cov_4.333333  R8408_Apios_americana_ge  88.789  223  		16  	  2    98 	320   214     1   7.000000e-79  	 289  	  	1   214
+9   NODE_2913_length_406_cov_2.250859  R8408_Apios_americana_ge  93.659  205  		13		  0    95   299   415   211   2.020000e-85 		 311 	  211   415
+1   NODE_355_length_1022_cov_3.180816  R8408_Apios_americana_ge  95.960  198   		 7		  1   329   525   557   754   3.540000e-87 		 318  	  557   754
+2   NODE_355_length_1022_cov_3.180816  R8408_Apios_americana_ge  91.246  297  		23		  1   616   912   754  1047  4.910000e-117 		 417 	  754  1047
+17  NODE_3788_length_342_cov_1.295154  R8408_Apios_americana_ge  91.429  140  		12		  0   109   248  1287  1148   7.640000e-52 		 199 	 1148  1287
+7   NODE_2463_length_448_cov_3.594595  R8408_Apios_americana_ge  94.760  229  		12		  0   114   342  1283  1511  4.920000e-100 		 360 	 1283  1511
+10  NODE_2910_length_406_cov_3.487973  R8408_Apios_americana_ge  91.262  206  		18		  0   107   312  1508  1713   1.890000e-79 		 291 	 1508  1713
+15  NODE_4797_length_299_cov_1.750000  R8408_Apios_americana_ge  88.701  177 		20		  0    43   219  1712  1888   3.900000e-61 		 230 	 1712  1888
+14  NODE_3575_length_355_cov_2.200000  R8408_Apios_americana_ge  91.515  165  		12		  1    98   260  2047  1883   1.340000e-61 		 232 	 1883  2047
+4   NODE_79_length_1491_cov_2.984012   R8408_Apios_americana_ge  94.068  236  		14		  0   392   631  2171  2406  1.390000e-100 		 363 	 2171  2409
+6   NODE_79_length_1491_cov_2.984012   R8408_Apios_americana_ge  90.769  130  		12		  0  1058  1187  2554  2683   9.400000e-46 		 181 	 2554  2683
+16  NODE_1844_length_517_cov_3.522388  R8408_Apios_americana_ge  96.825  126  		 4		  0   111   236  2794  2919   6.540000e-55 		 210 	 2794  2919
+13  NODE_1220_length_639_cov_2.805344  R8408_Apios_americana_ge  97.115  104  		 3		  0   437   540  3100  2997   5.860000e-44 		 174 	 2997  3100
+12  NODE_1220_length_639_cov_2.805344  R8408_Apios_americana_ge  94.340  159  		 9		  0    88   246  3256  3098   1.130000e-65 		 246 	 3098  3256
 ```
 
 The final output sequence aligned to the reference is as follows:
