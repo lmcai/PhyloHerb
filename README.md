@@ -68,9 +68,9 @@ git clone https://github.com/lmcai/PhyloHerb.git
 ```
 Or from the source package:
 ```
-#for v1.1.0
-wget https://github.com/lmcai/PhyloHerb/archive/refs/tags/phyloherb_v1.1.0.tar.gz
-tar xzvf phyloherb_v1.1.0.tar.gz
+#for v1.1.1
+wget https://github.com/lmcai/PhyloHerb/archive/refs/tags/phyloherb_v1.1.1.tar.gz
+tar xzvf phyloherb_v1.1.1.tar.gz
 ```
 
 To update your local version for any future releases, `cd` into the `PhyloHerb` directory then type
