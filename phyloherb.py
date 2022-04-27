@@ -555,7 +555,7 @@ With Getorganelle output folders:\n\
 python phyloherb.py -m qc -i <input dir> -o <output dir> [optional] -s <sample sheet>\n\
 With assemblies only:\n\
 python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
-elif mode =='ortho' and (args.nuc is None):
+elif mode =='ortho' and not args.nuc:
 	try:
 		PH_path=os.path.dirname(__file__)
 		#print(PH_path)
