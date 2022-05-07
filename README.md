@@ -178,6 +178,10 @@ List of genes and species included in our built-in database can be found [here](
 
 *Output:* In the output folder, you can find fasta sequences named after genes. The header within each fasta is consistent with the species names (file names of the input assemblies).
 
+The 30-second gif image below shows the time and CPU to extract all plastid genes for 100 species —— it only takes half a minute.
+
+<img src="/images/ortho_ref.gif">
+
 **B.** If you need to assemble organelle genomes and rDNA regions, see [Section III.1 Assembly](#1-assembly) below.
 
 **2. Ortholog gene extraction for low-copy nuclear genes with custom references**
