@@ -7,7 +7,7 @@
 
 **Citation**: 
 
-- Liming Cai, Hongrui Zhang, Charles C Davis. PhyloHerb: A phylogenomic pipeline for processing genome skimming data for plants. APPS, DOI: 10.1002/aps3.11475
+- Cai, Liming, Hongrui Zhang, and Charles C. Davis. 2022. PhyloHerb: A high‐throughput phylogenomic pipeline for processing genome‐skimming data. Applications in Plant Sciences 10(3): 1–9. https://doi.org/10.1002/aps3.11475
 
 PhyloHerb relies on the following dependancies:
 
