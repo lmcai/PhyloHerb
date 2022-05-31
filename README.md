@@ -26,12 +26,11 @@ Combined with the morphological and distribution data from herbarium specimens, 
 **See you in Evolution June 24-28, 2022**: Liming will be presenting a in-person talk and poster on PhyloHerb at Evolution. See you in Cleveland! The poster is deposited online [here](https://figshare.com/articles/poster/PhyloHerb_poster/19729756).
 
 **New workshop July 24, 2022:** We will hold an in-person workshop (with remote options) at Botany 2022 in Anchorage. See the BSA website for [abstract](https://www.botanyconference.org/engine/search/index.php?func=detail&aid=16). Workshop materials can be found [here](/tutorial).
+<img align="right" src="/images/aps3_Cover.jpg" width="189" height="240">
 
 **New features released:** Since PhyloHerb v1.1+, you can pull low-copy nuclear genes (e.g., Angiosperm 353) from your genome skimming data. All you need is the reference sequences and raw reads. PhyloHerb will output fasta files that are ready for alignment. Check the [low-copy nuclear gene tutorial](https://github.com/lmcai/PhyloHerb/#iv-retrieve-low-copy-nuclear-genes) below.
 
 **New publication:** Initial PhyloHerb release accepted at APPS and we are selected as the cover! Stay tuned for the early view! :tada:
-
-<img align="right" src="/images/aps3_Cover.jpg" width="189" height="240">
 
 ## Quick link
 
