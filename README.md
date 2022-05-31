@@ -31,7 +31,7 @@ Combined with the morphological and distribution data from herbarium specimens, 
 
 **New publication:** Initial PhyloHerb release accepted at APPS and we are selected as the cover! Stay tuned for the early view! :tada:
 
-<img src="/images/aps3_Cover.jpg" width="189" height="240">
+<img align="right" src="/images/aps3_Cover.jpg" width="189" height="240">
 
 ## Quick link
 
