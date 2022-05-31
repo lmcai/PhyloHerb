@@ -29,7 +29,8 @@ Combined with the morphological and distribution data from herbarium specimens, 
 
 **New features released:** Since PhyloHerb v1.1+, you can pull low-copy nuclear genes (e.g., Angiosperm 353) from your genome skimming data. All you need is the reference sequences and raw reads. PhyloHerb will output fasta files that are ready for alignment. Check the [low-copy nuclear gene tutorial](https://github.com/lmcai/PhyloHerb/#iv-retrieve-low-copy-nuclear-genes) below.
 
-**New publication:** Initial PhyloHerb release accepted at APPS! Stay tuned for the early view! :tada:
+**New publication:** Initial PhyloHerb release accepted at APPS and we are selected as the cover! Stay tuned for the early view! :tada:
+<img src="/images/aps3_Cover.jpg" width="189" height="240">
 
 ## Quick link
 
