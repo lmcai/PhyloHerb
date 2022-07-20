@@ -77,14 +77,14 @@ mv $PH/example/*.gz 0_fastq
 
 ### 2. How to:
 
-Load dependencies (assuming installing GetOrganelle under the conda environment named 'getorg')
+Load dependencies (assuming installing GetOrganelle under the conda environment named 'phyloherb')
 ```
 #load Anaconda and GetOrganelle (for linux users)
 module load Anaconda
-source activate getorg
+source activate phyloherb
 
 #for mac
-#conda activate getorg
+#conda activate phyloherb
 ```
 Create a working directory for assembly
 
