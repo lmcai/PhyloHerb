@@ -196,6 +196,14 @@ sh submitter.sh
 
 The batch submission will generate three subdirectories `chl/`, `ITS/`, and `mito/`, each containing Getorganelle output directories named after sample-specific prefixes. The expected output can be found in [example/results/1_getorg.tgz](/example/results/1_getorg.tgz). For detailed descriptions of the output, see [Getorganelle instructions](https://github.com/Kinggerm/GetOrganelle#Instruction)
 
+To view these resulting files:
+
+```
+cp $PH/example/results/1_getorg.tgz .
+tar xzvf 1_getorg.tgz
+rm 1_getorg.tgz
+```
+
 ### 5. Assembly QC 
 
 After the assemblies are completed, you can summarize the results using the QC function of phyloherb. For each species, it will extract the following information: the number of total input reads, the number of reads used for assembly, average base coverage, the total length of the assembly, GC%, and whether the assembly is circularized. 
