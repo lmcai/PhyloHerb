@@ -531,7 +531,7 @@ elif mode =='qc':
 		else:
 			if args.s:
 				sp_list=open(args.s).readlines()
-				sp_list=[i.split()[0] for i in sp_sheet[1:]]
+				sp_list=[i.split()[0] for i in sp_list[1:]]
 			else:
 				sp_list=[i for i in os.listdir(args.i) if os.path.isdir(args.i+'/'+i)]
 			if len(sp_list)==0:
