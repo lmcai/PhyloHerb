@@ -335,7 +335,7 @@ Visualization of the INT1 region in Geneious
 
 <img src="/images/INT2.png" width="400" height="200">
 
-Visualization of the INT1 region in Geneious
+Visualization of the INT2 region in Geneious
 
 Longer genetic block can result in higher blast accuracy, especially for intergenic regions. To get these three regions and the genes on both ends, type the following commands
 ```
