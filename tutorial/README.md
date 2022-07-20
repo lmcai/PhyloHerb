@@ -111,6 +111,9 @@ get_organelle_from_reads.py -1 $DATA_DIR/SP1_R1.100m.1.fastq.gz -2 $DATA_DIR/SP1
 get_organelle_from_reads.py -1 $DATA_DIR/SP1_R1.100m.1.fastq.gz -2 $DATA_DIR/SP1_R2.100m.1.fastq.gz -o mito/sp1 -R 50 -k 21,45,65,85,105 -P 1000000 -F embplant_mt
 ```
 
+For this dataset, each plastome assembly takes ~5GB memory, and ~120s CPU time.
+
+
 If your GetOrganelle is complaining about not finding the seed database
 
 ```
@@ -129,9 +132,6 @@ cd ~/.GetOrganelle/SeedDatabase
 curl -L https://github.com/Kinggerm/GetOrganelleDB/releases/download/0.0.1/v0.0.1.tar.gz | tar zx
 get_organelle_config.py -a embplant_pt,embplant_mt,embplant_nr --use-local ./0.0.1
 ```
-
-For this dataset, each plastome assembly takes ~5GB memory, and ~120s CPU time.
-
 
 ### 3. Large dataset and batch submission to cluster
 
