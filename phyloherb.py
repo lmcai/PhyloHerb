@@ -364,9 +364,9 @@ def assembly(r1,r2,rs,threads,prefix,reference):
 	reference_ID=reference.split('/')[-1]
 	reference_ID=reference_ID.split('.')[0]
 	#bowtie
-	if os.path.exists(reference_ID+'.rev.1.bt2'):
-		print('Bowtie database found.')
-	else:
+	#if os.path.exists(reference_ID+'.rev.1.bt2'):
+	#	print('Bowtie database found.')
+	if True:
 		print('Building Bowtie database using '+ reference)
 		bowtieCommand='bowtie2-build '+reference+' '+reference_ID+' > /dev/null'
 		print('Bowtie command: '+bowtieCommand)
