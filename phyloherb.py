@@ -6,7 +6,7 @@ print(textwrap.dedent("""\
                                             
 """))
 print('############################################################\n\
-PhyloHerb v1.1.1\n\
+PhyloHerb v1.1.2\n\
 A bioinformatic pipeline for herbariomics based biodiversity research\n')
 
 if sys.version_info.major==2:
