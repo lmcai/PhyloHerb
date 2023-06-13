@@ -19,6 +19,7 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Nexus import Nexus
 import warnings
+import glob
 warnings.filterwarnings("ignore")
 
 
@@ -140,11 +141,11 @@ def qc(sp_sheet,input_dir,output_dir):
 	
 def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads,evalue):
 	if not os.path.isdir(output_dir):os.mkdir(output_dir)
+	print('input directory: '+input_dir)
 	print('processing species '+sp)
 	lib_ID=sp
-	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +' -dbtype nucl -out '+lib_ID+' &>/dev/null'
-	os.system(S)
-	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + ' -num_threads '+threads+' -outfmt 6 -evalue '+evalue+' -out '+ lib_ID +'.blast.out &>/dev/null'
+	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +' -dbtype nucl -out '+lib_ID+' \
+	&& blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + ' -num_threads '+threads+' -outfmt 6 -evalue '+evalue+' -out '+ lib_ID +'.blast.out '
 	os.system(S)
 	x=open(lib_ID+'.blast.out').readlines()
 	y=SeqIO.index(input_dir+'/'+lib_ID,'fasta')
@@ -170,9 +171,8 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads
 				seq=y[hit].seq[(start-1):(end-1)]
 				SeqIO.write(SeqRecord(seq,lib_ID.split('.')[0], '', ''),open(output_dir+'/'+g+'.fas','a'),'fasta')
 		except (NameError,AttributeError):continue
-	os.remove(lib_ID+'.nhr')
-	os.remove(lib_ID+'.nin')
-	os.remove(lib_ID+'.nsq')
+	for f in glob.glob(lib_ID+'*.*n'):
+		os.remove(f)
 	
 def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 	ITS1=[]
@@ -557,8 +557,8 @@ With assemblies only:\n\
 python phyloherb.py -m qc -i <input dir> -o <output dir> -suffix <suffix>')
 elif mode =='ortho' and not args.nuc:
 	try:
-		PH_path=os.path.dirname(__file__)
-		#print(PH_path)
+		PH_path=os.path.dirname(os.path.abspath(__file__))
+		print(PH_path)
 		#get species list
 		if args.sp:
 			species=open(args.sp).readlines()
@@ -637,7 +637,7 @@ Usage:\n\
 python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 	except FileNotFoundError:
 		print('############################################################\n\
-#ERROR:Input files not found!\n')
+#ERROR:Input files not found! Please check the input dir, the PH_path var and other input file of ortho_extraction function\n')
 	except IOError as e:print(e.errno)
 elif mode =='assemb':
 	#check dependencies
