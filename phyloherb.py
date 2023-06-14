@@ -637,7 +637,7 @@ Usage:\n\
 python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
 	except FileNotFoundError:
 		print('############################################################\n\
-#ERROR:Input files not found!\n')
+#ERROR:Input files not found or not in FASTA format!\n')
 	except IOError as e:print(e.errno)
 elif mode =='assemb':
 	#check dependencies
