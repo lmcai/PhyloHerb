@@ -6,7 +6,7 @@ print(textwrap.dedent("""\
                                             
 """))
 print('############################################################\n\
-PhyloHerb v1.1.2\n\
+PhyloHerb v1.1.3\n\
 A bioinformatic pipeline for herbariomics based biodiversity research\n')
 
 if sys.version_info.major==2:
@@ -241,35 +241,31 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 		t.write(format=1, outfile=output_dir+'/'+'.'.join(g.split('.')[:-1])+".pasta_ref.tre")
 
 def concatenation(input_dir,files,output):
-	nexus_filenames=[]
-	if not os.path.isdir(output+'_tem'):os.mkdir(output+'_tem')
-	for fn in files:
-		#the alphabet argument will not be used, but not including it will trigger an error
-		#x=AlignIO.read(input_dir+'/'+fn,'fasta',alphabet=Gapped(IUPAC.protein))
-		new_filename=output+'_tem'+'/'+'.'.join(fn.split('.')[:-1])+'.nex'
-		nexus_filenames.append(new_filename)
-		#g = open(new_filename, "w")
-		#d=g.write(x.format("nexus"))
-		#g.close()
-		AlignIO.convert(input_dir+'/'+fn, 'fasta', new_filename, 'nexus', molecule_type='DNA')
-	nexi =  [(fname, Nexus.Nexus(fname)) for fname in nexus_filenames]
-	combined = Nexus.combine(nexi)
-	out=open(output+'.conc.nex', 'w')
-	combined.write_nexus_data(out)
-	out.close()
-	d=AlignIO.convert(output+'.conc.nex', 'nexus', output+'.conc.fas', 'fasta', molecule_type='DNA')
-	#os.rmdir(output+'_tem')
-	shutil.rmtree(output+'_tem', ignore_errors=True)
-	out=open(output+'.partition','a')
-	x=open(output+'.conc.nex').readlines()
-	begin_write=0
-	for l in x:
-		if l.startswith('charset'):
-			begin_write=1
-		elif l.startswith('charpartition'):
-			begin_write=0
-		if begin_write==1:out.write(l)
-	out.close()
+    total_sp=[]
+    for fn in files:
+        seq_name=open(input_dir+'/'+fn).readlines()
+        seq_name=[j[1:].strip() for j in seq_name if j.startswith('>')]
+        total_sp=total_sp+seq_name
+    total_sp=list(set(total_sp))
+    seq={}
+    for i in total_sp:
+        seq[i]=''
+    b=1
+    out1=open(output+'.conc.fas','a')
+    out2=open(output+'.partition','a')
+    for fn in files:
+        recs=SeqIO.index(input_dir+'/'+fn,'fasta')
+        for rec in recs:
+            seq_len=len(recs[rec].seq)
+            break
+        for j in total_sp:
+            try:seq[j]=seq[j]+str(recs[j].seq)
+            except KeyError:seq[j]=seq[j]+'-'*seq_len
+        out2.write(fn + '='+str(b)+'-'+str(b+seq_len-1)+';\n')
+        b=b+seq_len
+    for sp in total_sp:
+        out1.write('>'+sp+'\n'+seq[sp]+'\n')
+
 
 def gene_extra(input_dir,suffix,output_dir):
 	filenames=os.listdir(input_dir)
@@ -769,7 +765,7 @@ elif mode =='conc':
 		else:
 			files=os.listdir(args.i)
 			files=[j for j in files if j.endswith(args.suffix)]
-			print('Concatenate '+str(len(files))+' alignments in the directory '+args.i + ' with suffix '+args.suffix)
+			print('Concatenate '+str(len(files))+' alignments in the directory '+args.i + ' with suffix '+args.suffix + ':'+', '.join(files))
 		concatenation(args.i,files,args.o)
 		print('Done.')
 	except TypeError:
