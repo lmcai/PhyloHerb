@@ -229,13 +229,15 @@ def order_aln(sptree,input_dir,suffix,output_dir,max_missing):
 	for g in genes:
 		sp2preserve=[]
 		t=Tree(sptree)
-		y=SeqIO.parse(input_dir+'/'+g,'fasta')
+		y=SeqIO.index(input_dir+'/'+g,'fasta')
 		out=open(output_dir+'/'+'.'.join(g.split('.')[:-1])+'.ordered.fas','a')
-		for rec in y:
-			missing=float(rec.seq.count('-')+rec.seq.count('N'))/len(rec.seq)
-			if rec.id in total_taxa and missing<max_missing:
-				SeqIO.write(rec,out,'fasta')
-				sp2preserve.append(rec.id)
+		for sp in total_taxa:
+			try:
+				missing=float(rec.seq.count('-')+rec.seq.count('N'))/len(rec.seq)
+				if missing<max_missing:
+					SeqIO.write(y[sp],out,'fasta')
+					sp2preserve.append(sp)
+			except KeyError:pass
 		out.close()
 		t.prune(list(set(total_taxa) & set(sp2preserve))) 
 		t.write(format=1, outfile=output_dir+'/'+'.'.join(g.split('.')[:-1])+".pasta_ref.tre")
