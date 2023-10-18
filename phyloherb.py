@@ -573,7 +573,7 @@ elif mode =='ortho' and not args.nuc:
 			print('############################################################\n\
 #ERROR:Zero species found! It looks like your assemblies does not end with \'.assembly.fas\'. Please use the -suffix flag!\n\
 Usage:\n\
-python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <minimum length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
+python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <minimum length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode> -nuc <nuclear mode>')
 			exit()
 		#get minimum length for blast hit
 		if args.l:
@@ -632,7 +632,7 @@ python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <
 			print('############################################################\n\
 #ERROR:Insufficient arguments!\n\
 Usage:\n\
-python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode>')
+python phyloherb.py -m ortho -i <input dir> -o <output dir> [optional] -suffix <assembly suffix> -n <number of threads> -evalue <evalue> -g <gene list> -sp <species list> -l <min length for blast> -ref <custom ref seq> -mito <mito mode> -rdna <rDNA mode> -nuc <nuclear mode>')
 	except FileNotFoundError:
 		print('############################################################\n\
 #ERROR:Input files not found or not in FASTA format!\n')
