@@ -520,7 +520,7 @@ python phyloherb.py -m assemb -r1 <Forward.fq> -r2 <Reverse.fq> -ref <reference 
 python phyloherb.py -m assemb -rs <Single.fq> -ref <reference fasta> -prefix <species ID> -n <threads>
 
 #Pair-end and Single-end, multiple libraries
-python phyloherb.py -m assemb -r1 <Forward.fq> -r2 <Reverse.fq> -rs <Single1.fq,Single2.fq> -ref <reference fasta> -prefix <species ID> -n <threads>
+python phyloherb.py -m assemb -r1 <lib1.R1.fq,lib2.R1.fq> -r2 <lib1.R2.fq,lib2.R2.fq> -rs <Single1.fq,Single2.fq> -ref <reference fasta> -prefix <species ID> -n <threads>
 ```
 
 *Ouput:* In the working directory, PhyloHerb will generate `prefix_spades` folder, within which assembly scaffolds can be found.
