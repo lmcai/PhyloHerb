@@ -697,9 +697,9 @@ elif mode =='ortho' and args.nuc:
 		if args.n:threads=args.n
 		evalue='1e-40'
 		if args.evalue:evalue=args.evalue
-		if os.path.exists(reference_ID+'.nhr'):
-			print('Use exsisting BLAST database.\nBLAST evalue threashold: '+evalue)				
-		else:
+		#if os.path.exists(reference_ID+'.nhr'):
+		#	print('Use exsisting BLAST database.\nBLAST evalue threashold: '+evalue)				
+		while True:
 			print('Building BLAST database.\nBLAST evalue threashold: '+evalue)
 			blastCommand='makeblastdb -in '+args.ref+' -dbtype nucl -out '+reference_ID+' >/dev/null'
 			os.system(blastCommand)
