@@ -17,7 +17,7 @@ from Bio import AlignIO
 import os, argparse, shutil
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
-from Bio.Nexus import Nexus
+#from Bio.Nexus import Nexus
 import warnings
 warnings.filterwarnings("ignore")
 
