@@ -283,7 +283,7 @@ def gene_extra(input_dir,suffix,output_dir):
 					output_handle=open(output_dir+'/'+feature.qualifiers['gene'][0]+'.gene.fas','a')
 					d=output_handle.write(">%s\n%s\n" % (feature.qualifiers['gene'][0]+'_'+f.split('.')[0],feature.extract(gb_recs).seq))
 					output_handle.close()
-				except KeyError:pass
+				except (KeyError, AttributeError, ValueError):pass
 
 def geneblock_extra(input_dir,suffix,output_dir,gene_def):
 	filenames=os.listdir(input_dir)
