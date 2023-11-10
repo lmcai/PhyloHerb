@@ -699,10 +699,9 @@ elif mode =='ortho' and args.nuc:
 		if args.evalue:evalue=args.evalue
 		#if os.path.exists(reference_ID+'.nhr'):
 		#	print('Use exsisting BLAST database.\nBLAST evalue threashold: '+evalue)				
-		while True:
-			print('Building BLAST database.\nBLAST evalue threashold: '+evalue)
-			blastCommand='makeblastdb -in '+args.ref+' -dbtype nucl -out '+reference_ID+' >/dev/null'
-			os.system(blastCommand)
+		print('Building BLAST database.\nBLAST evalue threashold: '+evalue)
+		blastCommand='makeblastdb -in '+args.ref+' -dbtype nucl -out '+reference_ID+' >/dev/null'
+		os.system(blastCommand)
 		if not os.path.isdir(args.o):os.mkdir(args.o)
 		#get assemblies
 		if args.suffix:
