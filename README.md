@@ -58,7 +58,8 @@ conda install -c etetoolkit ete3
 conda install -c bioconda bowtie2
 conda install -c bioconda spades
 conda install -c bioconda samtools
-conda install pandas
+#please make sure panads is <2.0
+conda install pandas=1.5.3
 ```
 To install PhyloHerb, simply download it use `git`:
 ```
