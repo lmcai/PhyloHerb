@@ -1,10 +1,11 @@
 import sys, textwrap
-print(textwrap.dedent("""\
+ascii_art = r"""
  __                 __        ___  __   __  
 |__) |__| \ / |    /  \ |__| |__  |__) |__) 
 |    |  |  |  |___ \__/ |  | |___ |  \ |__) 
                                             
-"""))
+"""
+print(ascii_art)
 print('############################################################\n\
 PhyloHerb v1.1.3\n\
 A bioinformatic pipeline for herbariomics based biodiversity research\n')
