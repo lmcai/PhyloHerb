@@ -41,7 +41,7 @@ PhyloHerb relies on the following dependancies:
 
 ## I. Prerequisites and installation
 
-To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC may suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. If you have difficulties installing PhyloHerb, please contact Liming Cai (lmcai@utexas.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
+To process large datasets (>20 sp), high performance cluster is recommended. Mac and PC may suffer from insufficient memory during the assembly, alignment, or phylogenetic reconstruction. If you have difficulties installing PhyloHerb, please contact Liming Cai (cail@ufl.edu) or open an [Issue](https://github.com/lmcai/PhyloHerb/issues).
 
 ### PhyloHerb
 
