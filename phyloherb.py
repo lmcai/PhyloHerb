@@ -144,7 +144,9 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads
 	print('processing species '+sp)
 	lib_ID=sp
 	S= 'makeblastdb -in ' +input_dir+'/'+ lib_ID +' -dbtype nucl -out '+lib_ID+' &>/dev/null'
-	os.system(S)
+	ret = os.system(S)
+	if ret != 0:
+		print('WARNING: makeblastdb failed for '+lib_ID+' (exit code '+str(ret))
 	S = 'blastn -task dc-megablast -db '+lib_ID+' -query ' + reference_seq + ' -num_threads '+threads+' -outfmt 6 -evalue '+evalue+' -out '+ lib_ID +'.blast.out &>/dev/null'
 	os.system(S)
 	x=open(lib_ID+'.blast.out').readlines()
@@ -174,6 +176,11 @@ def ortho_extraction(sp,reference_seq,input_dir,output_dir,genes,min_len,threads
 	os.remove(lib_ID+'.nhr')
 	os.remove(lib_ID+'.nin')
 	os.remove(lib_ID+'.nsq')
+	os.remove(lib_ID+'.njs')
+	os.remove(lib_ID+'.ndb')
+	os.remove(lib_ID+'.ntf')
+	os.remove(lib_ID+'.not')
+	os.remove(lib_ID+'.nto')
 	
 def get_ITS(sp,blast_file,input_dir,output_dir,min_len):
 	ITS1=[]
